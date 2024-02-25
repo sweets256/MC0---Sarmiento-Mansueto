@@ -34,7 +34,7 @@ public class Navigation {
         switch (choice){
             case 1 -> System.out.println("Name");
             case 2 -> System.out.println("Selected Job Class");
-            case 3 -> System.out.println("Character confirmed! Welcome to Elden Rogue!");
+            case 3 -> System.out.println("Character created, welcome to Elden Rogue");
             case 4 -> System.out.println("You have returned to the title screen");
             default -> System.out.println("Please choose a valid option");
         }
