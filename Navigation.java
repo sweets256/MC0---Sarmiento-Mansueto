@@ -17,8 +17,8 @@ public class Navigation {
         obj.close(); // scanner closer
 
         switch (choice){
-            case 1 -> System.out.println("Welcome to the Game Lobby");
-            case 2 -> System.out.println("Goodbye");
+            case 1 -> characterCreation();
+            case 2 -> System.exit(0);
             default -> System.out.println("Please choose a valid option");
         }
 
