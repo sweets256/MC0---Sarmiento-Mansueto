@@ -28,6 +28,25 @@ public class Navigation {
 
     }
 
+    public void gameLobby(){
+        Scanner obj = new Scanner(System.in);
+        System.out.println("[1] Fast Travel");
+        System.out.println("[2] Level Up");
+        System.out.println("[3] Quit Game");
+
+        int choice = readChoice(obj.nextLine());
+
+        obj.close(); // scanner closer
+
+        switch (choice){
+            case 1 -> System.out.println("AREA 1: Stormveil Castle");
+            case 2 -> System.out.println("Level up screen");
+            case 3 -> System.out.println("Quit to TITLE");
+            default -> System.out.println("Please choose a valid option");
+        }
+
+    }
+
     public int readChoice(String choice){
         return Integer.parseInt(choice);
     }
