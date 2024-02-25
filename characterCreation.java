@@ -24,9 +24,9 @@ public class CharacterCreation {
     public void createCharacter(){
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("========== Character Creation ==========");
-            System.out.println("Enter character name: ");
+            System.out.printf("Enter character name: ");
             characterName = input.nextLine();
-
+            System.out.println("");
             System.out.println("Select a job class: ");
 
             int i;
