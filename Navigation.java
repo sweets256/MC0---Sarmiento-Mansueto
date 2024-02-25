@@ -7,12 +7,12 @@ public class Navigation {
     }
 
     public void titleScreen(){
-        Scanner obj = new Scanner(System.in);
         System.out.println("Please choose your option");
         System.out.println("[1] Start");
         System.out.println("[2] Exit");
 
-        int choice = readChoice(obj.nextLine());
+        Scanner obj = new Scanner(System.in);
+        int choice = obj.nextInt();
 
         obj.close(); // scanner closer
 
@@ -25,13 +25,13 @@ public class Navigation {
     }
 
     public void characterCreation(){
-        Scanner obj = new Scanner(System.in);
         System.out.println("[1] Please input your name");
         System.out.println("[2] Select Job Class");
         System.out.println("[3] Confirm");
         System.out.println("[4] Back");
 
-        int choice = readChoice(obj.nextLine());
+        Scanner obj = new Scanner(System.in);
+        int choice = obj.nextInt();
 
         obj.close(); // scanner closer
 
@@ -46,12 +46,12 @@ public class Navigation {
     }
 
     public void gameLobby(){
-        Scanner obj = new Scanner(System.in);
         System.out.println("[1] Fast Travel");
         System.out.println("[2] Level Up");
         System.out.println("[3] Quit Game");
 
-        int choice = readChoice(obj.nextLine());
+        Scanner obj = new Scanner(System.in);
+        int choice = obj.nextInt();
 
         obj.close(); // scanner closer
 
@@ -64,7 +64,4 @@ public class Navigation {
 
     }
 
-    public int readChoice(String choice){
-        return Integer.parseInt(choice);
-    }
 }
