@@ -10,13 +10,14 @@ public class Navigation {
 
         int choice = readChoice(obj.nextLine());
 
+        obj.close(); // scanner closer
+
         switch (choice){
             case 1 -> System.out.println("Welcome to the Game Lobby");
             case 2 -> System.out.println("Goodbye");
             default -> System.out.println("Please choose a valid option");
         }
 
-        obj.close(); // scanner closer
     }
 
     public void characterCreation(){
@@ -25,6 +26,18 @@ public class Navigation {
         System.out.println("[2] Select Job Class");
         System.out.println("[3] Confirm");
         System.out.println("[4] Back");
+
+        int choice = readChoice(obj.nextLine());
+
+        obj.close(); // scanner closer
+
+        switch (choice){
+            case 1 -> System.out.println("Name");
+            case 2 -> System.out.println("Selected Job Class");
+            case 3 -> System.out.println("Character confirmed! Welcome to Elden Rogue!");
+            case 4 -> System.out.println("You have returned to the title screen");
+            default -> System.out.println("Please choose a valid option");
+        }
 
     }
 
