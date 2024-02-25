@@ -2,6 +2,10 @@ import java.util.Scanner;
 
 public class Navigation {
 
+    public Navigation(){
+        titleScreen();
+    }
+
     public void titleScreen(){
         Scanner obj = new Scanner(System.in);
         System.out.println("Please choose your option");
