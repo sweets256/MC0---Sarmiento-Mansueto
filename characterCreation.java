@@ -1,8 +1,12 @@
 import java.util.Scanner;
 
-public class characterCreation {
+public class CharacterCreation {
     private String characterName;
     private String jobClass;
+
+    public CharacterCreation(){
+        createCharacter();
+    }
 
     private String[] characterClasses = {
         "Vagabond", "Samurai", "Warrior", "Hero", "Astrologer", "Prophet"
@@ -27,7 +31,7 @@ public class characterCreation {
 
             int i;
             for (i = 0; i < characterClasses.length && i < classStats.length; i++){
-                System.out.println((i + 1) + ". " + characterClasses[i] + " [Level: " + classStats[i][1] 
+                System.out.println("[" + (i + 1) + "] " + characterClasses[i] + " [Level: " + classStats[i][1] 
                 + ", HP: " + classStats[i][2] + ", Dexterity: " + classStats[i][3] + ", Intelligence: " + classStats[i][4] 
                 + ", Endurance: " + classStats[i][5] + ", Strength: " + classStats[i][6] + ", Faith: " + classStats[i][7] + "]");
             }
@@ -41,7 +45,7 @@ public class characterCreation {
 
             System.out.println("Character created successfully!");
             System.out.println("Character name: " + characterName);
-            System.out.println("Job class " + jobClass);
+            System.out.println("Job class: " + jobClass);
 
             input.close();
         }
