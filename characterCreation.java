@@ -46,7 +46,6 @@ public class CharacterCreation {
             System.out.println("Character created successfully!");
             System.out.println("Character name: " + characterName);
             System.out.println("Job class: " + jobClass);
-            System.out.println("Hello");
             input.close();
         }
     }
