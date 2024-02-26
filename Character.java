@@ -22,6 +22,8 @@ public class Character {
     };
 
     public void createCharacter() {
+        System.out.println("hello");
+
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("========== Character Creation ==========");
 
@@ -60,7 +62,7 @@ public class Character {
                         break;
                     } else if (confirmation.equals("N")) {
                         System.out.println("Character creation cancelled.");
-                        break;
+                        //continue; // Continue the loop to get a new name
                     } else {
                         System.out.println("Invalid input. Please enter 'Y' or 'N'.");
                     }
