@@ -40,11 +40,6 @@ public class Navigation {
             obj.close();
         }
     }
-    
-    public void characterCreation() {
-        
-        new Character();
-    }
 
     public void gameLobby(){
         Scanner obj = new Scanner(System.in);
