@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-public class CharacterCreation {
+public class Character {
     private String characterName;
     private String jobClass;
 
-    public CharacterCreation(){
+    public Character(){
         createCharacter();
     }
 

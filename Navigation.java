@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Navigation {
-
     public Navigation(){
         titleScreen();
     }
@@ -20,7 +19,7 @@ public class Navigation {
     
                     switch (choice) {
                         case 1:
-                            characterCreation();
+                            new Character();
                             break;
                         case 2:
                             System.exit(0);
@@ -40,7 +39,7 @@ public class Navigation {
     
     public void characterCreation() {
         
-        new CharacterCreation();
+        new Character();
     }
 
     public void gameLobby(){
