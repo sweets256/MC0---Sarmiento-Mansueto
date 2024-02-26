@@ -1,11 +1,15 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Character {
     private String characterName;
     private String jobClass;
-    private String[] characterClasses = {
-        "Vagabond", "Samurai", "Warrior", "Hero", "Astrologer", "Prophet"
+    private String[][] characterClasses = {
+        {"Vagabond", "9", "15", "13", "9", "11", "14", "9"},
+        {"Samurai", "9", "12", "15", "9", "13", "12", "8"},
+        {"Warrior", "8", "11", "16", "10", "11", "10", "8"},
+        {"Hero", "7", "14", "9", "7", "12", "16", "8"},
+        {"Astrologer", "6", "9", "12", "16", "9", "8", "7"},
+        {"Prophet", "7", "10", "10", "7", "8", "11", "16"}
     };
     private int runes = 0;
 
@@ -42,16 +46,15 @@ public class Character {
                 }
 
                 System.out.println("Are you sure you want to create this character? (Y/N)");
-                String confirmation = input.next();
-                if (confirmation.trim().equalsIgnoreCase("Y")) {
+                if (input.next().trim().equalsIgnoreCase("Y")) {
                     System.out.println("Character created successfully!");
                     System.out.println("Character name: " + characterName);
                     System.out.println("Job class: " + jobClass);
                     break; // Exit the loop after character creation
                 } else {
                     System.out.println("Character creation cancelled. Starting over.");
-                    // Loop continues for another attempt
                 }
+                input.nextLine(); // Consume any leftover newline characters
             }
         } finally {
             input.close(); // Close the scanner when done with character creation
@@ -60,26 +63,29 @@ public class Character {
 
     private void enterCharacterName(Scanner input) {
         System.out.print("Enter character name: ");
-        characterName = input.next();
-        input.nextLine(); // Consume the newline left-over
+        characterName = input.nextLine();
 
         if (characterName.length() > 25) {
             characterName = characterName.substring(0, 25);
-            System.out.println("Character name cannot be longer than 25 characters. Name truncated.");
+            System.out.println("Character name cannot be longer than 25 characters. Name cut short.");
         }
     }
 
     private void enterJobClass(Scanner input) {
         System.out.println("Select a job class:");
         for (int i = 0; i < characterClasses.length; i++) {
-            System.out.println("[" + (i + 1) + "] " + characterClasses[i]);
+            System.out.println("[" + (i + 1) + "] " + characterClasses[i][0] + " - Level: " + characterClasses[i][1] + 
+                               ", Health: " + characterClasses[i][2] + ", Dexterity: " + characterClasses[i][3] +
+                               ", Intelligence: " + characterClasses[i][4] + ", Endurance: " + characterClasses[i][5] +
+                               ", Strength: " + characterClasses[i][6] + ", Faith: " + characterClasses[i][7]);
         }
 
-        while (true) {
-            int classChoice = getValidIntegerInput(input);
+        int classChoice = 0;
+        while (classChoice < 1 || classChoice > characterClasses.length) {
+            System.out.print("Enter your choice: ");
+            classChoice = getValidIntegerInput(input);
             if (classChoice >= 1 && classChoice <= characterClasses.length) {
-                jobClass = characterClasses[classChoice - 1];
-                break;
+                jobClass = characterClasses[classChoice - 1][0];
             } else {
                 System.out.println("Invalid choice. Please pick from 1 to " + characterClasses.length + ".");
             }
@@ -87,17 +93,12 @@ public class Character {
     }
 
     private int getValidIntegerInput(Scanner input) {
-        while (true) {
-            try {
-                return input.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid integer.");
-                input.next(); // Consume the invalid input
-            }
+        while (!input.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+            input.next(); // Consume the non-integer input
         }
-    }
-
-    public static void main(String[] args) {
-        new Character();
+        int number = input.nextInt();
+        input.nextLine(); // Consume newline left after number input
+        return number;
     }
 }
