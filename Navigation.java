@@ -31,7 +31,7 @@ public class Navigation {
                     }
                     break; // Exit the loop if a valid choice is made
                 } else {
-                    System.out.println("Please enter aninteger.");
+                    System.out.println("Please enter an integer.");
                     obj.nextLine(); // Clear the input buffer
                 }
             }
