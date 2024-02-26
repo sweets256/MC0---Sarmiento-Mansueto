@@ -24,6 +24,7 @@ public class Navigation {
                             player = new Character();
                             break;
                         case 2:
+                            System.out.println("You have exited the game");
                             System.exit(0);
                         default:
                             System.out.println("Please choose a valid option.");
