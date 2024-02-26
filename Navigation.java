@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Navigation {
+    Character player;
+
     public Navigation(){
         titleScreen();
     }
@@ -19,7 +21,7 @@ public class Navigation {
     
                     switch (choice) {
                         case 1:
-                            new Character();
+                            player = new Character();
                             break;
                         case 2:
                             System.exit(0);

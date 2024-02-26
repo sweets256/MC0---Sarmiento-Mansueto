@@ -25,7 +25,13 @@ public class Character {
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("========== Character Creation ==========");
             System.out.printf("Enter character name: ");
+
             characterName = input.nextLine();
+
+            if (characterName.length() > 25){
+            characterName = characterName.substring(0, 25);
+            }
+
             System.out.println("");
             System.out.println("Select a job class: ");
 
