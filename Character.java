@@ -26,6 +26,7 @@ public class Character {
             System.out.println("========== Character Creation ==========");
 
             do {
+                // Get name first
                 System.out.printf("Enter character name: ");
                 characterName = input.nextLine();
 
@@ -34,6 +35,7 @@ public class Character {
                     System.out.println("Character name cannot be longer than 25 characters. Please try again.");
                 }
 
+                // Then proceed with job class selection
                 System.out.println("");
                 System.out.println("Select a job class: ");
 
@@ -58,6 +60,7 @@ public class Character {
                         break;
                     } else if (confirmation.equals("N")) {
                         System.out.println("Character creation cancelled.");
+                        //continue; // Continue the loop to get a new name
                     } else {
                         System.out.println("Invalid input. Please enter 'Y' or 'N'.");
                     }
@@ -65,7 +68,7 @@ public class Character {
                     System.out.println("Invalid choice. Please pick from 1 to 6.");
                 }
             } while (true); // loop until character is confirmed
-            
+
             input.close();
         }
     }
