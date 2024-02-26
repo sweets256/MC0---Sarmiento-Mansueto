@@ -7,16 +7,16 @@ public class Character {
     private String[] characterClasses = {
         "Vagabond", "Samurai", "Warrior", "Hero", "Astrologer", "Prophet"
     };
+    private int runes = 0;
 
     public Character() {
         createCharacter();
     }
 
-    private int runes = 0;
-
     public void createCharacter() {
         System.out.println("========== Character Creation ==========");
-        try (Scanner input = new Scanner(System.in)) {
+        Scanner input = new Scanner(System.in);
+        try {
             while (true) {
                 System.out.println("What is your choice?");
                 System.out.println("[1] Character Name");
@@ -24,7 +24,6 @@ public class Character {
                 System.out.println("[3] Go back to the Main Menu");
                 System.out.print("Enter choice: ");
                 int choice = getValidIntegerInput(input);
-                input.nextLine(); // Consume the newline left-over
 
                 switch (choice) {
                     case 1:
@@ -36,30 +35,34 @@ public class Character {
                         enterCharacterName(input);
                         break;
                     case 3:
-                        break;
+                        return; // Exit the method to go back to the main menu
                     default:
-                        System.out.println("Invalid choice. Please enter 1, 2 or 3.");
+                        System.out.println("Invalid choice. Please enter 1, 2, or 3.");
                         continue;
                 }
 
                 System.out.println("Are you sure you want to create this character? (Y/N)");
-                input.nextLine(); // Consume the newline left-over
-                if (input.nextLine().trim().equalsIgnoreCase("Y")) {
+                String confirmation = input.next();
+                if (confirmation.trim().equalsIgnoreCase("Y")) {
                     System.out.println("Character created successfully!");
                     System.out.println("Character name: " + characterName);
                     System.out.println("Job class: " + jobClass);
-                    break;
+                    break; // Exit the loop after character creation
                 } else {
                     System.out.println("Character creation cancelled. Starting over.");
+                    // Loop continues for another attempt
                 }
             }
+        } finally {
+            input.close(); // Close the scanner when done with character creation
         }
     }
 
     private void enterCharacterName(Scanner input) {
         System.out.print("Enter character name: ");
-        characterName = input.nextLine();
-        
+        characterName = input.next();
+        input.nextLine(); // Consume the newline left-over
+
         if (characterName.length() > 25) {
             characterName = characterName.substring(0, 25);
             System.out.println("Character name cannot be longer than 25 characters. Name truncated.");
