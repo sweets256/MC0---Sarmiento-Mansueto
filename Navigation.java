@@ -1,71 +1,78 @@
 import java.util.Scanner;
 
 public class Navigation {
-    Character player;
-    private Scanner obj; // Declare Scanner object at class level to reuse it
+    private Character player;
+    private Scanner obj;
+    private enum GameState { TITLE_SCREEN, GAME_LOBBY, EXIT }
+    private GameState currentState;
 
     public Navigation() {
-        obj = new Scanner(System.in); // Initialize Scanner object here
-        titleScreen();
-        gameLobby();
-        obj.close(); // Close the Scanner at the end of the game
+        obj = new Scanner(System.in);
+        currentState = GameState.TITLE_SCREEN; // Start at the title screen
+        runGameLoop();
     }
 
-    public void titleScreen() {
-        while (true) {
-            System.out.println("Please choose your option:");
-            System.out.println("[1] Start");
-            System.out.println("[2] Exit");
-
-            if (obj.hasNextInt()) {
-                int choice = obj.nextInt();
-                obj.nextLine(); // Consume newline after integer input
-
-                switch (choice) {
-                    case 1:
-                        player = new Character(obj); // Pass Scanner object to Character
-                        return; // Return to proceed to gameLobby
-                    case 2:
-                        System.out.println("You have exited the game");
-                        System.exit(0);
-                    default:
-                        System.out.println("Please choose a valid option.");
-                }
-            } else {
-                System.out.println("Please enter an integer.");
-                obj.nextLine(); // Clear the input buffer
+    private void runGameLoop() {
+        while (currentState != GameState.EXIT) {
+            switch (currentState) {
+                case TITLE_SCREEN:
+                    titleScreen();
+                    break;
+                case GAME_LOBBY:
+                    gameLobby();
+                    break;
+                case EXIT:
+                    break;
             }
+        }
+        System.out.println("You have exited the game.");
+        obj.close(); // Close the scanner before exiting the game
+    }
+
+    private void titleScreen() {
+        System.out.println("========== Elden Rogue ==========");
+        System.out.println("Please choose your option:");
+        System.out.println("[1] Start");
+        System.out.println("[2] Exit");
+
+        int choice = obj.hasNextInt() ? obj.nextInt() : -1;
+        obj.nextLine(); // Consume newline regardless of input to clear the buffer
+
+        if (choice == 1) {
+            player = new Character();
+            if (player.createCharacter(obj)) {
+                currentState = GameState.GAME_LOBBY;
+            } 
+        } else if (choice == 2) {
+            currentState = GameState.EXIT;
+        } else {
+            System.out.println("Invalid choice. Please choose 1 or 2.");
         }
     }
 
-    public void gameLobby() {
-        while (true) {
-            System.out.println("[1] Fast Travel");
-            System.out.println("[2] Level Up");
-            System.out.println("[3] Quit Game");
+    private void gameLobby() {
+        System.out.println("Welcome to the Game Lobby!");
+        System.out.println("[1] Fast Travel");
+        System.out.println("[2] Level Up");
+        System.out.println("[3] Quit Game");
 
-            if (obj.hasNextInt()) {
-                int choice = obj.nextInt();
-                obj.nextLine(); // Consume newline after integer input
+        int choice = obj.hasNextInt() ? obj.nextInt() : -1;
+        obj.nextLine(); // Consume newline regardless of input to clear the buffer
 
-                switch (choice) {
-                    case 1:
-                        System.out.println("AREA 1: Stormveil Castle");
-                        return; // Assuming you want to proceed to another method or return to a menu
-                    case 2:
-                        System.out.println("Level up screen");
-                        return; // Same assumption as above
-                    case 3:
-                        System.out.println("Quit to TITLE");
-                        titleScreen(); // Return to the title screen
-                        return;
-                    default:
-                        System.out.println("Please choose a valid option");
-                }
-            } else {
-                System.out.println("Please enter an integer.");
-                obj.nextLine(); // Clear the input buffer
-            }
+        switch (choice) {
+            case 1:
+                System.out.println("AREA 1: Stormveil Castle");
+                // Implement fast travel functionality
+                break;
+            case 2:
+                System.out.println("Level up screen");
+                // Implement level up functionality
+                break;
+            case 3:
+                currentState = GameState.TITLE_SCREEN; // Return to title screen
+                break;
+            default:
+                System.out.println("Please choose a valid option");
         }
     }
 }
