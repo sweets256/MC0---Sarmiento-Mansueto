@@ -22,7 +22,6 @@ public class Navigation {
                     switch (choice) {
                         case 1:
                             player = new Character();
-                            System.out.println("Returned to Nav Class");
                             break;
                         case 2:
                             System.out.println("You have exited the game");
