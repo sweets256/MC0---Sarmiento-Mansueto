@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Character {
@@ -13,13 +12,8 @@ public class Character {
         {"Prophet", "7", "10", "10", "7", "8", "11", "16"}
     };
 
-    public Character() {
-        Scanner input = new Scanner(System.in);
-        try {
-            createCharacter(input);
-        } finally {
-            input.close(); // Close the scanner after the character creation process is done.
-        }
+    public Character(Scanner input) {
+        createCharacter(input);
     }
 
     public void createCharacter(Scanner input) {
@@ -52,18 +46,18 @@ public class Character {
                 System.out.println("Character created successfully!");
                 System.out.println("Character name: " + characterName);
                 System.out.println("Job class: " + jobClass);
+                input.nextLine(); // Consume newline left after the confirmation
                 break; // Exit the loop after character creation
             } else {
                 System.out.println("Character creation cancelled. Starting over.");
+                input.nextLine(); // Consume newline left after the confirmation
             }
-            input.nextLine(); // Consume any leftover newline characters
         }
     }
 
     private void enterCharacterName(Scanner input) {
         System.out.print("Enter character name: ");
         characterName = input.nextLine();
-
         if (characterName.length() > 25) {
             characterName = characterName.substring(0, 25);
             System.out.println("Character name cannot be longer than 25 characters. Name truncated.");
@@ -71,13 +65,14 @@ public class Character {
     }
 
     private void enterJobClass(Scanner input) {
+        System.out.println("Select a job class:");
+        for (int i = 0; i < characterClasses.length; i++) {
+            System.out.printf("[%d] %s - Level: %s, Health: %s, Dexterity: %s, Intelligence: %s, Endurance: %s, Strength: %s, Faith: %s%n", 
+                              i + 1, characterClasses[i][0], characterClasses[i][1], characterClasses[i][2], characterClasses[i][3],
+                              characterClasses[i][4], characterClasses[i][5], characterClasses[i][6], characterClasses[i][7]);
+        }
+
         while (true) {
-            System.out.println("Select a job class:");
-            for (int i = 0; i < characterClasses.length; i++) {
-                System.out.printf("[%d] %s - Level: %s, Health: %s, Dexterity: %s, Intelligence: %s, Endurance: %s, Strength: %s, Faith: %s%n", 
-                                  i + 1, characterClasses[i][0], characterClasses[i][1], characterClasses[i][2], characterClasses[i][3],
-                                  characterClasses[i][4], characterClasses[i][5], characterClasses[i][6], characterClasses[i][7]);
-            }
             System.out.print("Enter your choice: ");
             int classChoice = getValidIntegerInput(input);
             if (classChoice >= 1 && classChoice <= characterClasses.length) {
@@ -90,13 +85,22 @@ public class Character {
     }
 
     private int getValidIntegerInput(Scanner input) {
-        while (!input.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a valid integer.");
-            input.next(); // Consume the non-integer input
-            input.nextLine(); // Ensure the entire line is consumed to prevent infinite loops
+        while (true) {
+            try {
+                int number = Integer.parseInt(input.nextLine());
+                return number;
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. Please enter a valid integer: ");
+            }
         }
-        int number = input.nextInt();
-        input.nextLine(); // Consume newline left after number input
-        return number;
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        try {
+            new Character(input);
+        } finally {
+            input.close(); // Close the scanner after the character creation process is done.
+        }
     }
 }
