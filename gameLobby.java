@@ -31,6 +31,8 @@ public class GameLobby{
                 System.out.println("Invalid area. Please choose a valid option.");
             }
         } while (!validChoice);
+
+        input.close();
     }
     
 
@@ -53,12 +55,12 @@ public class GameLobby{
         System.out.println("[5] Strength (Current Level: " + strength + ")");
         System.out.println("[6] Dexterity (Current Level: " + faith + ")");
 
-        int statChoice = obj.nextInt();
+        int statChoice = input.nextInt();
 
         String confirmation; //checks if player confirms their stat choice
         do{
             System.out.println("Are you sure you want to level up " + (statChoice) + "? (Y/N)");
-            confirmation = obj.nextLine().toUpperCase();
+            confirmation = input.nextLine().toUpperCase();
         } while (!confirmation.equals("Y") && !confirmation.equals("N"));
 
         if (confirmation.equals("Y")){
@@ -94,6 +96,8 @@ public class GameLobby{
                 System.out.println("New player level: " + player.getLevel());
             }
         }
+
+        input.close();
     }
 
     public void quitGame(){
