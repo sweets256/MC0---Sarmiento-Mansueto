@@ -60,7 +60,7 @@ public class Character {
                         break;
                     } else if (confirmation.equals("N")) {
                         System.out.println("Character creation cancelled.");
-                        //continue; // Continue the loop to get a new name
+                        break;
                     } else {
                         System.out.println("Invalid input. Please enter 'Y' or 'N'.");
                     }
