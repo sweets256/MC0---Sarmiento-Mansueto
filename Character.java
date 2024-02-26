@@ -12,6 +12,8 @@ public class Character {
         createCharacter();
     }
 
+    private int runes = 0;
+
     public void createCharacter() {
         System.out.println("========== Character Creation ==========");
         try (Scanner input = new Scanner(System.in)) {
