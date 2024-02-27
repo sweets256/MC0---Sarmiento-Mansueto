@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class Area1Grid {
     private static Character character;
@@ -106,6 +107,22 @@ public class Area1Grid {
             currentFloor[playerRow][playerCol] = "|     |";
         } else {
             System.out.println("There's nothing to interact with here.");
+        }
+
+        Random rand = new Random();
+
+        if ("|  ?  |".equals(currentTile)) {
+            double encounterChance = rand.nextDouble(); // Generates a random number between 0 and 1
+
+            if (encounterChance < 0.75) { // 75% chance to encounter a monster
+                System.out.println("You encounter a monster!");
+                // Handle monster encounter...
+            } else {
+                int runesGained = (currentFloorIndex + 1) * (rand.nextInt(101) + 50); // Formula for runes gained
+                character.addRunes(runesGained);
+                System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
+                currentFloor[playerRow][playerCol] = "|     |"; // Update tile to empty
+            }
         }
     }
 

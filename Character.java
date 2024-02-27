@@ -4,7 +4,7 @@ public class Character {
     private String characterName;
     private String jobClass;
     private int level = 1; // Default starting level
-    private int runes = 1000; // Default starting runes
+    private int runes = 0; // Default starting runes
     private int[] stats = new int[6]; // Array to hold stats: Health, Dexterity, Intelligence, Endurance, Strength, Faith
     private static final String[][] characterClasses = {
         // JobClass, Level, Health, Dexterity, Intelligence, Endurance, Strength, Faith
