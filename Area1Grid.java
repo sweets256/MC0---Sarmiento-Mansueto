@@ -116,6 +116,7 @@ public class Area1Grid {
 
             if (encounterChance < 0.75) { // 75% chance to encounter a monster
                 System.out.println("You encounter a monster!");
+                System.out.println("test");
                 // Handle monster encounter...
             } else {
                 int runesGained = (currentFloorIndex + 1) * (rand.nextInt(101) + 50); // Formula for runes gained
