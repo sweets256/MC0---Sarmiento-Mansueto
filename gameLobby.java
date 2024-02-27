@@ -11,6 +11,7 @@ public class GameLobby {
     }
 
     public void fastTravel() {
+        System.out.print("\033\143");
         String currentArea = navigation.getCurrentArea();
         System.out.println("========== Fast Travel ==========");
         System.out.println("Available areas:");
@@ -24,6 +25,7 @@ public class GameLobby {
             String inputChoice = input.nextLine().trim();
     
             if ("back".equalsIgnoreCase(inputChoice)) {
+                System.out.print("\033\143");
                 System.out.println("Teleportation cancelled. Staying in " + currentArea + ".");
                 break;
             }
@@ -32,6 +34,7 @@ public class GameLobby {
                 int areaChoice = Integer.parseInt(inputChoice);
                 switch (areaChoice) {
                     case 1:
+                        System.out.print("\033\143");
                         navigation.setCurrentArea("Stormveil Castle");
                         System.out.println("Teleporting to Stormveil Castle...");
                         navigation.enterArea(); // Directly call enterArea() after setting the area.
@@ -72,6 +75,7 @@ public class GameLobby {
             String inputChoice = input.nextLine().trim();
     
             if ("back".equalsIgnoreCase(inputChoice)) {
+                System.out.print("\033\143");
                 System.out.println("Level up cancelled...");
                 break; // Exit the loop if player chooses to go back
             }
@@ -79,6 +83,7 @@ public class GameLobby {
             try {
                 int statChoice = Integer.parseInt(inputChoice);
                 if (statChoice < 1 || statChoice > 6) { // Assuming there are 6 stats
+                    System.out.print("\033\143");
                     throw new IllegalArgumentException("Invalid stat choice. Please select a number between 1 and 6.");
                 }
     
@@ -86,6 +91,7 @@ public class GameLobby {
                 String confirmation = input.nextLine().toUpperCase();
     
                 if ("Y".equals(confirmation)) {
+                    System.out.print("\033\143");
                     player.setRunes(player.getRunes() - runeCost);
                     player.increaseStat(statChoice);
                     player.setLevel(player.getLevel() + 1);
@@ -95,6 +101,7 @@ public class GameLobby {
                     displayStats();
                     break; // Exit the loop after successful level up
                 } else {
+                    System.out.print("\033\143");
                     System.out.println("Level up cancelled.");
                 }
             } catch (NumberFormatException e) {
@@ -115,6 +122,6 @@ public class GameLobby {
         System.out.println("[3] Intelligence: " + player.getStatValue(3));
         System.out.println("[4] Endurance: " + player.getStatValue(4));
         System.out.println("[5] Strength: " + player.getStatValue(5));
-        System.out.println("[6] Faith: " + player.getStatValue(6));
+        System.out.println("[6] Faith: " + player.getStatValue(6) + "\n");
     }
 }

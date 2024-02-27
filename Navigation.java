@@ -47,6 +47,7 @@ public class Navigation implements AreaInteractionListener {
         obj.nextLine();
 
         if (choice == 1) {
+            clearScreen();
             player = new Character();
             if (player.createCharacter(obj)) {
                 gameLobby = new GameLobby(this, player);
@@ -57,6 +58,11 @@ public class Navigation implements AreaInteractionListener {
         } else {
             System.out.println("Invalid choice. Please choose 1 or 2.");
         }
+    }
+
+    private void clearScreen() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'clearScreen'");
     }
 
     private void gameLobby() {
@@ -72,13 +78,16 @@ public class Navigation implements AreaInteractionListener {
     
             switch (choice) {
                 case 1:
+                    System.out.print("\033\143");
                     gameLobby.fastTravel();
                     break;
                 case 2:
+                    System.out.print("\033\143");
                     gameLobby.levelUp();
                     // Don't break; after leveling up, show the game lobby menu again.
                     break;
                 case 3:
+                    System.out.print("\033\143");
                     System.out.println("Going back to the Main Menu...");
                     inGameLobby = false; // Exit the loop and go back to the main menu
                     currentState = GameState.TITLE_SCREEN;

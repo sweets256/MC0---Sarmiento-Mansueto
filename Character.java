@@ -24,9 +24,12 @@ public class Character {
         System.out.print("Enter character name (or type 'back' to return to the main menu): ");
         String nameInput = input.nextLine();
         if ("back".equalsIgnoreCase(nameInput.trim())) {
+            System.out.print("\033\143");
             return false; // User chose to go back
         }
         this.characterName = nameInput;
+
+        System.out.print("\033\143");
     
         System.out.println("Select a job class (or type 'back' to return to the main menu)");
         for (int i = 0; i < characterClasses.length; i++) {
@@ -44,7 +47,8 @@ public class Character {
                 if (classChoice >= 0 && classChoice < characterClasses.length) {
                     this.jobClass = characterClasses[classChoice][0];
                     setInitialStats(classChoice); // Initialize stats based on the chosen job class
-                    System.out.println("Character summary:");
+                    System.out.print("\033\143");
+                    System.out.println("========== Character summary ==========");
                     System.out.println("Character name: " + characterName);
                     System.out.println("Job class: " + jobClass);
                     // Confirmation step with improved input validation
@@ -55,9 +59,11 @@ public class Character {
                         confirmation = input.nextLine().trim().toUpperCase();
                     }
                     if ("Y".equals(confirmation)) {
+                        System.out.print("\033\143");
                         System.out.println("Character created successfully!");
                         return true; // proceed to game lobby
                     } else {
+                        System.out.print("\033\143");
                         return false; // Restart character creation
                     }
                 } else {

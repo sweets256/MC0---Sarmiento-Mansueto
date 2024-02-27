@@ -62,18 +62,20 @@ public class Area1Grid {
             System.out.println("Enter action (WASD to move, E to interact, Q to quit): ");
             String action = scanner.nextLine().toUpperCase();
             switch (action) {
-                case "W": movePlayer(-1, 0); break;
-                case "A": movePlayer(0, -1); break;
-                case "S": movePlayer(1, 0); break;
-                case "D": movePlayer(0, 1); break;
+                case "W": movePlayer(-1, 0); System.out.print("\033\143"); break;
+                case "A": movePlayer(0, -1); System.out.print("\033\143"); break;
+                case "S": movePlayer(1, 0); System.out.print("\033\143"); break;
+                case "D": movePlayer(0, 1); System.out.print("\033\143"); break;
                 case "E": interact(); break;
                 case "Q": exitArea = true; break;
                 default: System.out.println("Invalid action."); break;
             }
         }
         if (shouldExitArea) {
+            System.out.print("\033\143");
             System.out.println("Returning to the game lobby...");
         } else {
+            System.out.print("\033\143");
             System.out.println("Exiting Area 1...");
         }
     }
@@ -119,10 +121,12 @@ public class Area1Grid {
             double encounterChance = rand.nextDouble();
     
             if (encounterChance < 0.75) {
+                System.out.print("\033\143");
                 System.out.println("You encounter a monster!");
             } else {
                 int runesGained = (currentFloorIndex + 1) * (rand.nextInt(101) + 50);
                 character.addRunes(runesGained);
+                System.out.print("\033\143");
                 System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
             }
             currentFloor[playerRow][playerCol] = "|     |";
