@@ -95,12 +95,15 @@ public class Navigation implements AreaInteractionListener {
     }
 
     public void enterArea() {
-       currentState = GameState.IN_AREA;
+        Area1Grid.setCharacter(player);
+        Area1Grid.setAreaInteractionListener(this); // 'this' refers to the Navigation instance
+        Area1Grid.startArea();
     }
 
     @Override
     public void onFastTravel() {
         currentState = GameState.GAME_LOBBY;
+        setCurrentArea("Game Lobby");
     }
 
     @Override

@@ -7,6 +7,7 @@ public class Area1Grid {
     private static int playerRow = 6;
     private static int playerCol = 2;
     private static final Scanner scanner = new Scanner(System.in);
+    private static boolean shouldExitArea = false;
     private static String[][] floor1Data = {
         {"W", "|     |", "|  D  |", "|     |", "W"},
         {"W", "|  ?  |", "|     |", "|  ?  |", "W"},
@@ -38,11 +39,12 @@ public class Area1Grid {
     private static int currentFloorIndex = 0;
 
     public static void startArea() {
+        shouldExitArea = false;
         currentFloor = floors[currentFloorIndex];
         System.out.println("Entering Area 1...");
 
         boolean exitArea = false;
-        while (!exitArea) {
+        while (!exitArea && !shouldExitArea) {
             displayFloor();
             System.out.println("Enter action (WASD to move, E to interact, Q to quit): ");
             String action = scanner.nextLine().toUpperCase();
@@ -56,7 +58,11 @@ public class Area1Grid {
                 default: System.out.println("Invalid action."); break;
             }
         }
-        System.out.println("Exiting Area 1...");
+        if (shouldExitArea) {
+            System.out.println("Returning to the game lobby...");
+        } else {
+            System.out.println("Exiting Area 1...");
+        }
     }
 
     private static void displayFloor() {
@@ -87,7 +93,10 @@ public class Area1Grid {
         String currentTile = currentFloor[playerRow][playerCol].trim();
 
         if ("|  F  |".equals(currentTile)) {
-            if (listener != null) listener.onFastTravel();
+            if (listener != null) {
+                listener.onFastTravel();
+                shouldExitArea = true;
+            }
         } else if ("|  D  |".equals(currentTile)) {
             moveToNextFloor();
         } else if ("|  ?  |".equals(currentTile)) {
@@ -104,7 +113,7 @@ public class Area1Grid {
         if (currentFloorIndex < floors.length - 1) {
             currentFloorIndex++;
             currentFloor = floors[currentFloorIndex];
-            playerRow = 6; 
+            playerRow = 6;
             playerCol = 2;
             System.out.println("Moved to the next floor.");
         } else {
