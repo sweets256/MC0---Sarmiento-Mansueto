@@ -92,7 +92,7 @@ public class Area1Grid {
 
     private static void interact() {
         String currentTile = currentFloor[playerRow][playerCol].trim();
-
+    
         if ("|  F  |".equals(currentTile)) {
             if (listener != null) {
                 listener.onFastTravel();
@@ -101,31 +101,22 @@ public class Area1Grid {
         } else if ("|  D  |".equals(currentTile)) {
             moveToNextFloor();
         } else if ("|  ?  |".equals(currentTile)) {
-            int runesGained = (int) (50 + Math.random() * 101);
-            character.addRunes(runesGained);
-            System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
-            currentFloor[playerRow][playerCol] = "|     |";
-        } else {
-            System.out.println("There's nothing to interact with here.");
-        }
-
-        Random rand = new Random();
-
-        if ("|  ?  |".equals(currentTile)) {
-            double encounterChance = rand.nextDouble(); // Generates a random number between 0 and 1
-
-            if (encounterChance <= 0.75) { // 75% chance to encounter a monster
+            Random rand = new Random();
+            double encounterChance = rand.nextDouble(); // Generates a random number between 0.0 and 1.0
+    
+            if (encounterChance < 0.75) { // 75% chance to encounter a monster
                 System.out.println("You encounter a monster!");
-                System.out.println("test");
                 // Handle monster encounter...
-            } else {
+            } else { // 25% chance to find runes
                 int runesGained = (currentFloorIndex + 1) * (rand.nextInt(101) + 50); // Formula for runes gained
                 character.addRunes(runesGained);
                 System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
-                currentFloor[playerRow][playerCol] = "|     |"; // Update tile to empty
             }
+            currentFloor[playerRow][playerCol] = "|     |"; // Update tile to empty after interaction
+        } else {
+            System.out.println("There's nothing to interact with here.");
         }
-    }
+    }    
 
     private static void moveToNextFloor() {
         if (currentFloorIndex < floors.length - 1) {
