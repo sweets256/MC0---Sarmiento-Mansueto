@@ -15,7 +15,7 @@ public class GameLobby {
         System.out.println("========== Fast Travel ==========");
         System.out.println("Available areas:");
         System.out.println("[1] Stormveil Castle");
-        System.out.println("[2] Raya Lucaria Academy");
+        System.out.println("[2] Raya Lucaria Academy [LOCKED]");
         System.out.println("[3] The Elden Throne [LOCKED]");
         System.out.println("Type 'back' to cancel teleportation and remain in " + currentArea + ".");
     
@@ -36,11 +36,11 @@ public class GameLobby {
                         System.out.println("Teleporting to Stormveil Castle...");
                         navigation.enterArea(); // Directly call enterArea() after setting the area.
                         return; // Exiting the method to avoid falling back to the game lobby loop.
-                    case 2:
-                        navigation.setCurrentArea("Raya Lucaria Academy");
-                        System.out.println("Teleporting to Raya Lucaria Academy...");
-                        navigation.enterArea(); // Adjust accordingly for other areas.
-                        return;
+                    // case 2:
+                    //     navigation.setCurrentArea("Raya Lucaria Academy");
+                    //     System.out.println("Teleporting to Raya Lucaria Academy...");
+                    //     navigation.enterArea(); // Adjust accordingly for other areas.
+                    //     return;
                     default:
                         System.out.println("Area is locked! Please choose another location or type 'back'.");
                         break;
@@ -50,7 +50,7 @@ public class GameLobby {
             }
         }
     }
-    
+
     public void levelUp() {
         // Calculate rune cost for leveling up based on the player's current level
         int runeCost = (player.getLevel() * 100) / 2;
