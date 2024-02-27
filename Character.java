@@ -42,7 +42,18 @@ public class Character {
                     System.out.println("Character created successfully!");
                     System.out.println("Character name: " + characterName);
                     System.out.println("Job class: " + jobClass);
-                    return true;
+                    System.out.println("Confirm this character? (Y/N)");
+                    while (true){
+                        String confirmation = input.nextLine().trim().toUpperCase();
+                        if ("Y".equals(confirmation)) {
+                            System.out.println("Character created successfully!");
+                            return true; // proceed to game lobby
+                        } else if ("N".equals(confirmation)){
+                            return false;
+                        } else {
+                            System.out.println("Invalid input. Please enter 'Y' to confirm or 'N' to redo character creation.");
+                        }
+                    }
                 } else {
                     System.out.println("Invalid choice. Please select a valid job class or type 'back'.");
                 }

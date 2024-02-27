@@ -51,7 +51,7 @@ public class Navigation {
     }
 
     private void gameLobby() {
-        System.out.println("Welcome to the Game Lobby!");
+        System.out.println("========== Game Lobby ==========");
         System.out.println("[1] Fast Travel");
         System.out.println("[2] Level Up");
         System.out.println("[3] Quit Game");

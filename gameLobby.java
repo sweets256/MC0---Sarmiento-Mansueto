@@ -100,8 +100,4 @@ public class GameLobby{
         input.close();
     }
 
-    public void quitGame(){
-        System.out.println("Quitting to title screen..."); //idk how to quit to title :''')
-
-    }
 }
