@@ -48,9 +48,9 @@ public class Navigation implements AreaInteractionListener {
         System.out.println("(_______/(_______/(______/ (_______/|/    )_)  |/   \\__/(_______)(_______)(_______)(_______/");
         
         
-        System.out.println("Please choose your option:");
-        System.out.println("[1] Start");
-        System.out.println("[2] Exit");
+        System.out.println("\n\t\t\t\tPlease choose your option:");
+        System.out.println("\n\t\t\t\t[1] Start");
+        System.out.println("\t\t\t\t[2] Exit");
 
         int choice = obj.hasNextInt() ? obj.nextInt() : -1;
         obj.nextLine();
