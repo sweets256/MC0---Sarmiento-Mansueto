@@ -70,6 +70,7 @@ public class Navigation {
                 gameLobby.levelUp();
                 break;
             case 3:
+                System.out.println("Going back to the Main Menu...");
                 currentState = GameState.TITLE_SCREEN;
                 currentArea = "Game Lobby";
                 break;
