@@ -7,8 +7,8 @@ public class GameLobby {
         this.player = player;
     }
 
-    public void fastTravel() {
-        Scanner input = new Scanner(System.in);
+    public String fastTravel() {
+        Scanner input = new Scanner(System.in); // Consider reusing the Scanner from Navigation if possible
 
         System.out.println("Available areas:");
         System.out.println("[1] Stormveil Castle");
@@ -17,6 +17,7 @@ public class GameLobby {
 
         boolean validChoice = false;
         int areaChoice;
+        String selectedAreaName = "Game Lobby"; // Default area name
 
         // Checking if user inputted
         do {
@@ -30,12 +31,15 @@ public class GameLobby {
 
             if (areaChoice == 1) {
                 validChoice = true;
-                System.out.println("Teleporting to Stormveil Castle...");
+                selectedAreaName = "Stormveil Castle"; // Update area name based on selection
+                System.out.println("Teleporting to " + selectedAreaName + "...");
                 // Insert calling of area here (when area 1 is made na)
             } else {
                 System.out.println("Invalid area. Please choose a valid option.");
             }
         } while (!validChoice);
+
+        return selectedAreaName; // Return the selected area name
     }
 
     public void levelUp() {

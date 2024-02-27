@@ -6,6 +6,7 @@ public class Navigation {
     private Scanner obj;
     private enum GameState { TITLE_SCREEN, GAME_LOBBY, EXIT }
     private GameState currentState;
+    private String currentArea = "Game Lobby"; // default area is game lobby
 
     public Navigation() {
         obj = new Scanner(System.in);
@@ -20,7 +21,7 @@ public class Navigation {
                     titleScreen();
                     break;
                 case GAME_LOBBY:
-                    gameLobby();
+                    gameLobby(); // This is called as part of the loop, ensuring continuous update
                     break;
                 case EXIT:
                     break;
@@ -28,7 +29,7 @@ public class Navigation {
         }
         System.out.println("You have exited the game.");
         obj.close(); // Close the scanner before exiting the game
-    }
+    }    
 
     private void titleScreen() {
         System.out.println("========== Elden Rogue ==========");
@@ -53,28 +54,31 @@ public class Navigation {
     }
 
     private void gameLobby() {
-        System.out.println("========== Game Lobby ==========");
+        
+        System.out.println("========== " + currentArea + " ==========");
         System.out.println("[1] Fast Travel");
         System.out.println("[2] Level Up");
         System.out.println("[3] Quit Game");
-
+    
         int choice = obj.hasNextInt() ? obj.nextInt() : -1;
         obj.nextLine(); // Consume newline regardless of input to clear the buffer
-
+    
         if (gameLobby != null) { // Ensure gameLobby has been initialized
             switch (choice) {
                 case 1:
-                    gameLobby.fastTravel(); // Invoke fastTravel method
+                    currentArea = gameLobby.fastTravel(); // Update the area name based on fast travel selection
+                    gameLobby(); // Recall gameLobby to refresh the display with the new area name
                     break;
                 case 2:
                     gameLobby.levelUp(); // Invoke levelUp method
                     break;
                 case 3:
                     currentState = GameState.TITLE_SCREEN; // Return to title screen
+                    currentArea = "Game Lobby";
                     break;
                 default:
                     System.out.println("Please choose a valid option");
             }
         }
-    }
+    }    
 }
