@@ -2,12 +2,11 @@ import java.util.Scanner;
 
 public class Area1Grid {
     private static Character character;
+    private static AreaInteractionListener listener;
     private static String[][] currentFloor;
-    private static int playerRow = 6; // Starting row position for the player
-    private static int playerCol = 2; // Starting column position for the player
+    private static int playerRow = 6;
+    private static int playerCol = 2;
     private static final Scanner scanner = new Scanner(System.in);
-
-    // Define map data for each floor using descriptive variable names
     private static String[][] floor1Data = {
         {"W", "|     |", "|  D  |", "|     |", "W"},
         {"W", "|  ?  |", "|     |", "|  ?  |", "W"},
@@ -17,7 +16,6 @@ public class Area1Grid {
         {"W", "|     |", "|     |", "|     |", "W"},
         {"W", "|     |", "|  F  |", "|     |", "W"}
     };
-
     private static String[][] floor2Data = {
         {"W", "|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |", "W"},
         {"W", "|     |", "|     |", "|     |", "|  ?  |", "|     |", "|     |", "|     |", "W"},
@@ -27,7 +25,6 @@ public class Area1Grid {
         {"W", "|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |", "|     |", "W"},
         {"W", "|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |", "W"}
     };
-
     private static String[][] floor3Data = {
         {"W", "|     |", "|     |", "|  F  |", "|     |", "|     |", "W"},
         {"W", "|     |", "|     |", "|     |", "|     |", "|     |", "W"},
@@ -37,9 +34,11 @@ public class Area1Grid {
         {"W", "|     |", "|     |", "|     |", "|     |", "|     |", "W"},
         {"W", "|     |", "|     |", "|  D  |", "|     |", "|     |", "W"}
     };
+    private static String[][][] floors = {floor1Data, floor2Data, floor3Data};
+    private static int currentFloorIndex = 0;
 
     public static void startArea() {
-        currentFloor = floor1Data; // Set the starting floor as floor1
+        currentFloor = floors[currentFloorIndex];
         System.out.println("Entering Area 1...");
 
         boolean exitArea = false;
@@ -64,7 +63,7 @@ public class Area1Grid {
         for (int i = 0; i < currentFloor.length; i++) {
             for (int j = 0; j < currentFloor[i].length; j++) {
                 if (i == playerRow && j == playerCol) {
-                    System.out.print("|  P  | "); // Represent the player with 'P'
+                    System.out.print("|  P  | ");
                 } else {
                     System.out.print(currentFloor[i][j] + " ");
                 }
@@ -85,42 +84,27 @@ public class Area1Grid {
     }
 
     private static void interact() {
-        // Determine the tile type at the player's current position
         String currentTile = currentFloor[playerRow][playerCol].trim();
-    
+
         if ("|  F  |".equals(currentTile)) {
-            // Handle Fast Travel tile interaction
-            System.out.println("Teleporting back to the game lobby...");
-            // Signal to return to the lobby (the actual mechanism will depend on your game's architecture)
+            if (listener != null) listener.onFastTravel();
+        } else if ("|  D  |".equals(currentTile)) {
+            moveToNextFloor();
         } else if ("|  ?  |".equals(currentTile)) {
-            // Handle Spawn tile interaction
-            int runesGained = (int) (50 + Math.random() * 101); // Random number between 50 and 150
+            int runesGained = (int) (50 + Math.random() * 101);
             character.addRunes(runesGained);
             System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
-        } else if ("|  D  |".equals(currentTile)) {
-            // Handle Door tile interaction (move to the next floor)
-            moveToNextFloor();
+            currentFloor[playerRow][playerCol] = "|     |";
         } else {
             System.out.println("There's nothing to interact with here.");
         }
     }
-    
 
     private static void moveToNextFloor() {
-        // Assuming floor1Data, floor2Data, and floor3Data are part of an array or list...
-        String[][][] floors = {floor1Data, floor2Data, floor3Data};
-        int currentFloorIndex = -1;
-
-        for (int i = 0; i < floors.length; i++) {
-            if (floors[i] == currentFloor) {
-                currentFloorIndex = i;
-                break;
-            }
-        }
-
-        if (currentFloorIndex >= 0 && currentFloorIndex < floors.length - 1) {
-            currentFloor = floors[currentFloorIndex + 1];
-            playerRow = 6; // Adjust based on new floor's starting position
+        if (currentFloorIndex < floors.length - 1) {
+            currentFloorIndex++;
+            currentFloor = floors[currentFloorIndex];
+            playerRow = 6; 
             playerCol = 2;
             System.out.println("Moved to the next floor.");
         } else {
@@ -131,5 +115,8 @@ public class Area1Grid {
     public static void setCharacter(Character characterInstance) {
         character = characterInstance;
     }
-    
+
+    public static void setAreaInteractionListener(AreaInteractionListener listenerInstance) {
+        listener = listenerInstance;
+    }
 }

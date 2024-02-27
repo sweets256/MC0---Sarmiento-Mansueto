@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Navigation {
+public class Navigation implements AreaInteractionListener {
     private Character player;
     private GameLobby gameLobby;
     private Scanner obj;
@@ -24,10 +24,10 @@ public class Navigation {
                     gameLobby();
                     break;
                 case IN_AREA:
-                    // Ensure Area1Grid has access to the Character instance.
                     Area1Grid.setCharacter(player);
+                    Area1Grid.setAreaInteractionListener(this);
                     Area1Grid.startArea();
-                    currentState = GameState.GAME_LOBBY; // Return to lobby after gameplay.
+                    currentState = GameState.GAME_LOBBY;
                     break;
                 case EXIT:
                     System.out.println("You have exited the game.");
@@ -44,18 +44,16 @@ public class Navigation {
         System.out.println("[2] Exit");
 
         int choice = obj.hasNextInt() ? obj.nextInt() : -1;
-        obj.nextLine(); // Consume the newline character after number input.
+        obj.nextLine();
 
         if (choice == 1) {
-            // Create a new character and enter the game lobby if character creation is successful.
-            player = new Character(); // Ensure you have a Character class that can handle character creation.
+            player = new Character();
             if (player.createCharacter(obj)) {
-                // Pass this Navigation instance to GameLobby to allow for back navigation.
                 gameLobby = new GameLobby(this, player);
                 currentState = GameState.GAME_LOBBY;
             }
         } else if (choice == 2) {
-            currentState = GameState.EXIT; // Exit the game.
+            currentState = GameState.EXIT;
         } else {
             System.out.println("Invalid choice. Please choose 1 or 2.");
         }
@@ -68,37 +66,44 @@ public class Navigation {
         System.out.println("[3] Quit Game");
 
         int choice = obj.hasNextInt() ? obj.nextInt() : -1;
-        obj.nextLine(); // Consume the newline character after number input.
+        obj.nextLine();
 
         switch (choice) {
             case 1:
-                // Assuming fastTravel method doesn't automatically change currentState.
-                gameLobby.fastTravel(); // Present fast travel options.
+                gameLobby.fastTravel();
                 break;
             case 2:
-                gameLobby.levelUp(); // Allow the player to level up.
+                gameLobby.levelUp();
                 break;
             case 3:
                 System.out.println("Going back to the Main Menu...");
-                currentState = GameState.TITLE_SCREEN; // Return to the title screen.
-                currentArea = "Game Lobby"; // Reset the current area to the game lobby.
+                currentState = GameState.TITLE_SCREEN;
+                currentArea = "Game Lobby";
                 break;
             default:
                 System.out.println("Please choose a valid option.");
                 break;
         }
     }
-    
+
     public void setCurrentArea(String area) {
-        this.currentArea = area; // Update the current area based on game actions.
-    }
-    
-    public String getCurrentArea() {
-        return this.currentArea; // Retrieve the current area.
+        this.currentArea = area;
     }
 
-    // Method to trigger entering an area like Area1Grid from the game lobby.
+    public String getCurrentArea() {
+        return this.currentArea;
+    }
+
     public void enterArea() {
        currentState = GameState.IN_AREA;
+    }
+
+    @Override
+    public void onFastTravel() {
+        currentState = GameState.GAME_LOBBY;
+    }
+
+    @Override
+    public void onChangeArea(String newArea) {
     }
 }
