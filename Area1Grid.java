@@ -185,6 +185,8 @@ public class Area1Grid {
             int previousFloorIndex = currentFloorIndex;
             currentFloorIndex = targetFloorIndex;
             currentFloor = floors[currentFloorIndex];
+
+            System.out.print("\033\143");
     
             // Determine the player's new position based on the floor transition
             if (previousFloorIndex < currentFloorIndex) {
