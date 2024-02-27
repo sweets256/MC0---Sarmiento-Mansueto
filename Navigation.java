@@ -47,7 +47,6 @@ public class Navigation implements AreaInteractionListener {
         obj.nextLine();
 
         if (choice == 1) {
-            clearScreen();
             player = new Character();
             if (player.createCharacter(obj)) {
                 gameLobby = new GameLobby(this, player);
@@ -58,11 +57,6 @@ public class Navigation implements AreaInteractionListener {
         } else {
             System.out.println("Invalid choice. Please choose 1 or 2.");
         }
-    }
-
-    private void clearScreen() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clearScreen'");
     }
 
     private void gameLobby() {

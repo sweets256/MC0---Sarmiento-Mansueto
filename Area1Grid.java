@@ -81,12 +81,38 @@ public class Area1Grid {
     }
 
     private static void displayFloor() {
+        // Calculate the width of the grid in characters. Assuming each cell is 7 characters wide.
+        int gridWidth = currentFloor[0].length * 7;
+        
+        // Prepare the title string including the space padding around "Floor: X"
+        String title = " Floor " + (currentFloorIndex + 1) + " ";
+        int titleLength = title.length();
+        
+        // Calculate how many '=' characters are needed before and after the title to center it
+        int totalPadding = gridWidth - titleLength; // Total amount of '=' to distribute
+        int paddingBefore = totalPadding / 2; // Half the padding goes before the title
+        int paddingAfter = totalPadding / 2; // Start with an equal split for after the title
+        
+        // Adjust for an odd total padding by adding one more '=' to paddingAfter if necessary
+        if (totalPadding % 2 != 0) {
+            paddingAfter += 1;
+        }
+        
+        // Construct the centered title with '=' padding
+        String centeredTitle = new String(new char[paddingBefore]).replace('\0', '=') 
+            + title 
+            + new String(new char[paddingAfter]).replace('\0', '=');
+        
+        // Print the centered title
+        System.out.println(centeredTitle);
+        
+        // Print the grid
         for (int i = 0; i < currentFloor.length; i++) {
             for (int j = 0; j < currentFloor[i].length; j++) {
                 if (i == playerRow && j == playerCol) {
-                    System.out.print("|  P  | ");
+                    System.out.print("|  P  |");
                 } else {
-                    System.out.print(currentFloor[i][j] + " ");
+                    System.out.print(currentFloor[i][j]);
                 }
             }
             System.out.println();
