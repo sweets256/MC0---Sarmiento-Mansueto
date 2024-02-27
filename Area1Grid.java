@@ -114,7 +114,7 @@ public class Area1Grid {
         if ("|  ?  |".equals(currentTile)) {
             double encounterChance = rand.nextDouble(); // Generates a random number between 0 and 1
 
-            if (encounterChance < 0.75) { // 75% chance to encounter a monster
+            if (encounterChance <= 0.75) { // 75% chance to encounter a monster
                 System.out.println("You encounter a monster!");
                 System.out.println("test");
                 // Handle monster encounter...
