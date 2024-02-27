@@ -16,21 +16,87 @@ public class Character {
         {"Prophet", "7", "10", "10", "7", "8", "11", "16"}
     };
 
-    public Character() {
-    }
-
-    public boolean createCharacter(Scanner input) {
-        System.out.println("========== Character Creation ==========");
-        System.out.print("Enter character name (or type 'back' to return to the main menu): ");
-        String nameInput = input.nextLine();
-        if ("back".equalsIgnoreCase(nameInput.trim())) {
-            System.out.print("\033\143");
-            return false; // User chose to go back
+    private void pause(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
-        this.characterName = nameInput;
-
-        System.out.print("\033\143");
+    }
     
+    public boolean createCharacter(Scanner input) {
+        boolean nameSet = false, classSet = false;
+    
+        while (!nameSet || !classSet) {
+            System.out.print("\033\143"); // Clear the screen at the start of each loop iteration
+            System.out.println("========== Character Creation ==========");
+            System.out.println("Select the field you want to input:");
+            System.out.println("[1] Character Name");
+            System.out.println("[2] Job Class");
+            System.out.println("Type 'back' at any time to return to the title screen.");
+            System.out.print("Enter your choice: ");
+    
+            String choice = input.nextLine().trim();
+            
+            if ("back".equalsIgnoreCase(choice)) {
+                System.out.print("\033\143"); // Clear the screen before returning to the title screen
+                return false; // Exit character creation and return to the title screen
+            }
+    
+            switch (choice) {
+                case "1":
+                    inputCharacterName(input); // Call a method to handle name input
+                    nameSet = this.characterName != null && !this.characterName.isEmpty();
+                    break;
+                case "2":
+                    selectJobClass(input); // Call a method to handle job class selection
+                    classSet = this.jobClass != null && !this.jobClass.isEmpty();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select 1 or 2.");
+                    pause(2000); // Pause for 2 seconds to let the user read the error message
+                    break;
+            }
+        }
+    
+        // At this point, both fields are filled out, ask for confirmation
+        System.out.print("\033\143");
+        System.out.println("========== Character Summary ==========");
+        System.out.println("Character name: " + characterName);
+        System.out.println("Job class: " + jobClass);
+        System.out.println("Confirm this character? (Y/N): ");
+    
+        String confirmation = input.nextLine().trim().toUpperCase();
+        while (!"Y".equals(confirmation) && !"N".equals(confirmation)) {
+            System.out.println("Invalid input. Please enter 'Y' to confirm or 'N' to redo character creation.");
+            confirmation = input.nextLine().trim().toUpperCase();
+        }
+        if ("Y".equals(confirmation)) {
+            System.out.print("\033\143");
+            System.out.println("Character created successfully!");
+            return true; // proceed to game lobby
+        } else {
+            System.out.print("\033\143");
+            // Restart character creation process
+            return createCharacter(input); // Optionally, you might want to reset nameSet and classSet instead of recursion
+        }
+    }
+    
+    private void inputCharacterName(Scanner input) {
+        System.out.print("\033\143"); // Clear the screen before showing the name input prompt
+        System.out.println("========== Character Creation ==========");
+        System.out.println("Enter character name (or type 'back' to return to the main menu): ");
+        String nameInput = input.nextLine();
+        if (!"back".equalsIgnoreCase(nameInput.trim())) {
+            this.characterName = nameInput;
+        } else {
+            System.out.print("\033\143"); // Clear the screen if 'back' is chosen
+        }
+    }
+    
+    private void selectJobClass(Scanner input) {
+        System.out.print("\033\143"); // Clear the screen before showing the job class selection
+        System.out.println("========== Character Creation ==========");
         System.out.println("Select a job class (or type 'back' to return to the main menu)");
         for (int i = 0; i < characterClasses.length; i++) {
             System.out.printf("[%d] %s - Level: %s, Health: %s, Dexterity: %s, Intelligence: %s, Endurance: %s, Strength: %s, Faith: %s%n",
@@ -40,32 +106,14 @@ public class Character {
         while (true) {
             String classInput = input.nextLine();
             if ("back".equalsIgnoreCase(classInput.trim())) {
-                return false; // User chose to go back
+                return; // User chose to go back without setting the job class
             }
             try {
                 int classChoice = Integer.parseInt(classInput) - 1;
                 if (classChoice >= 0 && classChoice < characterClasses.length) {
                     this.jobClass = characterClasses[classChoice][0];
                     setInitialStats(classChoice); // Initialize stats based on the chosen job class
-                    System.out.print("\033\143");
-                    System.out.println("========== Character summary ==========");
-                    System.out.println("Character name: " + characterName);
-                    System.out.println("Job class: " + jobClass);
-                    // Confirmation step with improved input validation
-                    System.out.println("Confirm this character? (Y/N): ");
-                    String confirmation = input.nextLine().trim().toUpperCase();
-                    while (!confirmation.equals("Y") && !confirmation.equals("N")) {
-                        System.out.println("Invalid input. Please enter 'Y' to confirm or 'N' to redo character creation.");
-                        confirmation = input.nextLine().trim().toUpperCase();
-                    }
-                    if ("Y".equals(confirmation)) {
-                        System.out.print("\033\143");
-                        System.out.println("Character created successfully!");
-                        return true; // proceed to game lobby
-                    } else {
-                        System.out.print("\033\143");
-                        return false; // Restart character creation
-                    }
+                    return; // Job class set successfully
                 } else {
                     System.out.println("Invalid choice. Please select a valid job class or type 'back'.");
                 }
@@ -74,8 +122,8 @@ public class Character {
             }
         }
     }
+        
     
-
     private void setInitialStats(int classIndex) {
         // Set the character's level based on the job class selected
         this.level = Integer.parseInt(characterClasses[classIndex][1]); // Update this line to set the level
