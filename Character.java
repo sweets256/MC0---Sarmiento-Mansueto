@@ -66,7 +66,7 @@ public class Character {
         System.out.println("Job class: " + jobClass);
         // Display stats including the starting level of the chosen job class
         System.out.println("Starting Level: " + level);
-        System.out.println("===Stats===");
+        System.out.println("\n===Stats===");
         System.out.println("Health: " + stats[0]);
         System.out.println("Dexterity: " + stats[1]);
         System.out.println("Intelligence: " + stats[2]);
@@ -74,7 +74,7 @@ public class Character {
         System.out.println("Strength: " + stats[4]);
         System.out.println("Faith: " + stats[5]);
         
-        System.out.println("Confirm this character? (Y/N): ");
+        System.out.print("\nConfirm this character? (Y/N): ");
     
         String confirmation = input.nextLine().trim().toUpperCase();
         while (!"Y".equals(confirmation) && !"N".equals(confirmation)) {

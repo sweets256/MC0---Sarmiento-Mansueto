@@ -48,9 +48,10 @@ public class Navigation implements AreaInteractionListener {
         System.out.println("(_______/(_______/(______/ (_______/|/    )_)  |/   \\__/(_______)(_______)(_______)(_______/");
         
         
-        System.out.println("\n\t\t\t\tPlease choose your option:");
-        System.out.println("\n\t\t\t\t[1] Start");
-        System.out.println("\t\t\t\t[2] Exit");
+        System.out.println("\n\t\t\t\t[Please choose your option]");
+        System.out.println("\n\t\t\t\t\t[1] Start");
+        System.out.println("\t\t\t\t\t[2] Exit");
+        System.out.print("\n\t\t\t\t\t    ");
 
         int choice = obj.hasNextInt() ? obj.nextInt() : -1;
         obj.nextLine();
@@ -65,9 +66,19 @@ public class Navigation implements AreaInteractionListener {
             currentState = GameState.EXIT;
         } else {
             System.out.println("Invalid choice. Please choose 1 or 2.");
+            pauseBeforeCleaningScreen(); // Pause before clearing screen
+            System.out.print("\033\143");
         }
     }
 
+    private void pauseBeforeCleaningScreen() {
+        try {
+            Thread.sleep(3000); // pause for 3 seconds
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // handle InterruptedException
+        }
+    }
+ 
     private void gameLobby() {
         boolean inGameLobby = true;
         while (inGameLobby) {

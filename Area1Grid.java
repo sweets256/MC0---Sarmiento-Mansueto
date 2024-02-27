@@ -145,21 +145,31 @@ public class Area1Grid {
         } else if ("|  ?  |".equals(currentTile)) {
             Random rand = new Random();
             double encounterChance = rand.nextDouble();
+            String[] enemies = {"Godrick Soldier", "Godrick Archer", "Godrick Knight"};
+            String encounteredEnemy = enemies[rand.nextInt(enemies.length)]; // Randomly select an enemy
     
             if (encounterChance < 0.75) {
                 System.out.print("\033\143");
-                System.out.println("You encounter a monster!");
+                System.out.println("You encounter an enemy! [ " + encounteredEnemy + " ]");
+                pauseForMessage(); // Pause to allow reading the message
             } else {
                 int runesGained = (currentFloorIndex + 1) * (rand.nextInt(101) + 50);
                 character.addRunes(runesGained);
                 System.out.print("\033\143");
                 System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
+                pauseForMessage(); // Pause to allow reading the message
             }
             currentFloor[playerRow][playerCol] = "|     |";
+        } else if ("|  B  |".equals(currentTile)) {
+            System.out.print("\033\143");
+            System.out.println("You have encountered the Boss !!! [ Godrick The Grafted ]");
+            pauseForMessage(); // Assuming you have a pauseForMessage method to pause the output
         } else {
             System.out.println("There's nothing to interact with here.");
         }
     }
+    
+    
 
     private static boolean isDoorToAnotherFloor() {
         return (currentFloorIndex == 0 && playerRow == 0 && playerCol == 1) ||
@@ -239,4 +249,13 @@ public class Area1Grid {
     public static void setAreaInteractionListener(AreaInteractionListener listenerInstance) {
         listener = listenerInstance;
     }
+
+    private static void pauseForMessage() {
+        try {
+            Thread.sleep(3000); // Pause for 3 seconds
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Handle the InterruptedException
+        }
+    }
+    
 }
