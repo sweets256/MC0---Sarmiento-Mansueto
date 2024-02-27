@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Navigation {
     private Character player;
+    private GameLobby gameLobby; // Add a GameLobby attribute
     private Scanner obj;
     private enum GameState { TITLE_SCREEN, GAME_LOBBY, EXIT }
     private GameState currentState;
@@ -41,6 +42,7 @@ public class Navigation {
         if (choice == 1) {
             player = new Character();
             if (player.createCharacter(obj)) {
+                gameLobby = new GameLobby(player); // Initialize GameLobby with the created character
                 currentState = GameState.GAME_LOBBY;
             } 
         } else if (choice == 2) {
@@ -59,20 +61,20 @@ public class Navigation {
         int choice = obj.hasNextInt() ? obj.nextInt() : -1;
         obj.nextLine(); // Consume newline regardless of input to clear the buffer
 
-        switch (choice) {
-            case 1:
-                System.out.println("AREA 1: Stormveil Castle");
-                // Implement fast travel functionality
-                break;
-            case 2:
-                System.out.println("Level up screen");
-                // Implement level up functionality
-                break;
-            case 3:
-                currentState = GameState.TITLE_SCREEN; // Return to title screen
-                break;
-            default:
-                System.out.println("Please choose a valid option");
+        if (gameLobby != null) { // Ensure gameLobby has been initialized
+            switch (choice) {
+                case 1:
+                    gameLobby.fastTravel(); // Invoke fastTravel method
+                    break;
+                case 2:
+                    gameLobby.levelUp(); // Invoke levelUp method
+                    break;
+                case 3:
+                    currentState = GameState.TITLE_SCREEN; // Return to title screen
+                    break;
+                default:
+                    System.out.println("Please choose a valid option");
+            }
         }
     }
 }
