@@ -95,8 +95,13 @@ public class Character {
         }
     }
 
+    public void addRunes(int additionalRunes) {
+        this.runes += additionalRunes;
+        System.out.println("Gained " + additionalRunes + " runes. Total now: " + this.runes);
+    }
+
     public int getRunes() {
-        return runes;
+        return this.runes;
     }
 
     public void setRunes(int newRunes) {
