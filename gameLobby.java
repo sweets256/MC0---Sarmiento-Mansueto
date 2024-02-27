@@ -40,7 +40,7 @@ public class GameLobby {
                         System.out.println("Teleporting to Raya Lucaria Academy...");
                         return;
                     default:
-                        System.out.println("Area is locked or invalid choice! Please choose another location or type 'back'.");
+                        System.out.println("Area is locked! Please choose another location or type 'back'.");
                         break;
                 }
             } catch (NumberFormatException e) {
