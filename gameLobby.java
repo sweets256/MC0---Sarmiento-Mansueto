@@ -2,115 +2,112 @@ import java.util.Scanner;
 
 public class GameLobby {
     private Character player;
+    private Scanner input = new Scanner(System.in);
+    private Navigation navigation; // Reference to Navigation for area management
 
-    public GameLobby(Character player) {
+    public GameLobby(Navigation navigation, Character player) {
+        this.navigation = navigation;
         this.player = player;
     }
 
-    public String fastTravel() {
-        Scanner input = new Scanner(System.in); // Consider reusing the Scanner from Navigation if possible
-
+    public void fastTravel() {
+        String currentArea = navigation.getCurrentArea();
+        System.out.println("========== Fast Travel ==========");
         System.out.println("Available areas:");
         System.out.println("[1] Stormveil Castle");
-        System.out.println("[2] **Locked**");
-        System.out.println("[3] **Locked**");
+        System.out.println("[2] Raya Lucaria Academy");
+        System.out.println("[3] The Elden Throne [LOCKED]");
+        System.out.println("Type 'back' to cancel teleportation and remain in " + currentArea + ".");
 
-        boolean validChoice = false;
-        int areaChoice;
-        String selectedAreaName = "Game Lobby"; // Default area name
+        while (true) {
+            System.out.print("Enter your choice or 'back' to cancel: ");
+            String inputChoice = input.nextLine().trim();
 
-        // Checking if user inputted
-        do {
-            System.out.print("Enter your choice (1): ");
-            while (!input.hasNextInt()) {
-                input.next(); // Consume the non-integer input
-                System.out.println("Invalid input. Please enter a number.");
-                System.out.print("Enter your choice (1): ");
+            if ("back".equalsIgnoreCase(inputChoice)) {
+                System.out.println("Teleportation cancelled. Staying in " + currentArea + ".");
+                break;
             }
-            areaChoice = input.nextInt();
 
-            if (areaChoice == 1) {
-                validChoice = true;
-                selectedAreaName = "Stormveil Castle"; // Update area name based on selection
-                System.out.println("Teleporting to " + selectedAreaName + "...");
-                // Insert calling of area here (when area 1 is made na)
-            } else {
-                System.out.println("Invalid area. Please choose a valid option.");
-            }
-        } while (!validChoice);
-
-        return selectedAreaName; // Return the selected area name
-    }
-
-    public void levelUp() {
-        Scanner input = new Scanner(System.in);
-
-        // Get stats from Character class
-        int health = player.getStatValue(1);
-        int dexterity = player.getStatValue(2);
-        int intelligence = player.getStatValue(3);
-        int endurance = player.getStatValue(4);
-        int strength = player.getStatValue(5);
-        int faith = player.getStatValue(6);
-
-        System.out.println("Available stats to level up:");
-        System.out.println("[1] Health (Current Level: " + health + ")");
-        System.out.println("[2] Dexterity (Current Level: " + dexterity + ")");
-        System.out.println("[3] Intelligence (Current Level: " + intelligence + ")");
-        System.out.println("[4] Endurance (Current Level: " + endurance + ")");
-        System.out.println("[5] Strength (Current Level: " + strength + ")");
-        System.out.println("[6] Faith (Current Level: " + faith + ")");
-
-        System.out.print("Enter the number of the stat you wish to level up: ");
-        while (!input.hasNextInt()) {
-            input.next(); // Consume the non-integer input
-            System.out.println("Invalid input. Please enter a number.");
-            System.out.print("Enter the number of the stat you wish to level up: ");
-        }
-        int statChoice = input.nextInt();
-
-        // Consume newline left-over
-        input.nextLine();
-
-        System.out.println("Are you sure you want to level up this stat? (Y/N)");
-        String confirmation = input.nextLine().toUpperCase();
-
-        if (confirmation.equals("Y")) {
-            int levelUpCost = (player.getLevel() * 100) / 2;
-
-            if (player.getRunes() >= levelUpCost) {
-                player.setRunes(player.getRunes() - levelUpCost);
-
-                switch (statChoice) {
+            try {
+                int areaChoice = Integer.parseInt(inputChoice);
+                switch (areaChoice) {
                     case 1:
-                        player.increaseStat(1);
-                        break;
+                        navigation.setCurrentArea("Stormveil Castle");
+                        System.out.println("Teleporting to Stormveil Castle...");
+                        return;
                     case 2:
-                        player.increaseStat(2);
-                        break;
-                    case 3:
-                        player.increaseStat(3);
-                        break;
-                    case 4:
-                        player.increaseStat(4);
-                        break;
-                    case 5:
-                        player.increaseStat(5);
-                        break;
-                    case 6:
-                        player.increaseStat(6);
+                        navigation.setCurrentArea("Raya Lucaria Academy");
+                        System.out.println("Teleporting to Raya Lucaria Academy...");
+                        return;
+                    default:
+                        System.out.println("Area is locked or invalid choice! Please choose another location or type 'back'.");
                         break;
                 }
-
-                player.setLevel(player.getLevel() + 1); // Levels up player level
-
-                System.out.println("Stat increased successfully!");
-                System.out.println("New player level: " + player.getLevel());
-            } else {
-                System.out.println("Not enough runes to level up.");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number for your choice or 'back' to cancel.");
             }
+        }
+    }
+    
+
+    public void levelUp() {
+        // Calculate rune cost for leveling up based on the player's current level
+        int runeCost = (player.getLevel() * 100) / 2;
+    
+        // Display current level, rune cost, and stats
+        System.out.println("========== Level Up ==========");
+        System.out.println("Current Level: " + player.getLevel());
+        System.out.println("You have " + player.getRunes() + " runes.");
+        System.out.println("Rune cost to level up: " + runeCost);
+        displayStats(); // Helper method to display current stats
+    
+        // Check if the player has enough runes
+        if (player.getRunes() < runeCost) {
+            System.out.println("Not enough runes. You have " + player.getRunes() + " runes, but need " + runeCost + ".");
+            return; // Exit the method if not enough runes
+        }
+    
+        System.out.println("Choose a stat to level up or type 'back' to cancel leveling up:");
+        String inputChoice = input.nextLine().trim();
+    
+        // Check for 'back' input to return to the Game Lobby
+        if ("back".equalsIgnoreCase(inputChoice)) {
+            System.out.println("Level up cancelled...");
+            return; // Exit the method and return to the game lobby
+        }
+    
+        // Convert the string input to an integer for stat choice, handling invalid inputs
+        int statChoice;
+        try {
+            statChoice = Integer.parseInt(inputChoice);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid stat number or 'back' to return to the Game Lobby.");
+            return; // Exit the method due to invalid input
+        }
+    
+        System.out.println("Leveling up stat. This will cost " + runeCost + " runes. Proceed? (Y/N)");
+        String confirmation = input.nextLine().toUpperCase();
+    
+        if ("Y".equals(confirmation)) {
+            player.setRunes(player.getRunes() - runeCost); // Deduct the rune cost
+            player.increaseStat(statChoice); // Increase the chosen stat
+            player.setLevel(player.getLevel() + 1); // Increase player level
+    
+            System.out.println("Stat increased successfully!");
+            System.out.println("New player level: " + player.getLevel());
+            displayStats(); // Display updated stats
         } else {
             System.out.println("Level up cancelled.");
         }
+    }    
+
+    private void displayStats() {
+        System.out.println("Current stats:");
+        System.out.println("[1] Health: " + player.getStatValue(1));
+        System.out.println("[2] Dexterity: " + player.getStatValue(2));
+        System.out.println("[3] Intelligence: " + player.getStatValue(3));
+        System.out.println("[4] Endurance: " + player.getStatValue(4));
+        System.out.println("[5] Strength: " + player.getStatValue(5));
+        System.out.println("[6] Faith: " + player.getStatValue(6));
     }
 }

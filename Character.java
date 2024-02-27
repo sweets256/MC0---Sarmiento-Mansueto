@@ -4,7 +4,7 @@ public class Character {
     private String characterName;
     private String jobClass;
     private int level = 1; // Default starting level
-    private int runes = 0; // Default starting runes
+    private int runes = 1000; // Default starting runes
     private int[] stats = new int[6]; // Array to hold stats: Health, Dexterity, Intelligence, Endurance, Strength, Faith
     private static final String[][] characterClasses = {
         // JobClass, Level, Health, Dexterity, Intelligence, Endurance, Strength, Faith
@@ -28,7 +28,7 @@ public class Character {
         }
         this.characterName = nameInput;
 
-        System.out.println("Select a job class (or type 'back' to return to the main menu):");
+        System.out.println("Select a job class (or type 'back' to return to the main menu)");
         for (int i = 0; i < characterClasses.length; i++) {
             System.out.printf("[%d] %s - Level: %s, Health: %s, Dexterity: %s, Intelligence: %s, Endurance: %s, Strength: %s, Faith: %s%n",
                               i + 1, characterClasses[i][0], characterClasses[i][1], characterClasses[i][2], characterClasses[i][3],
@@ -67,13 +67,32 @@ public class Character {
     }
 
     private void setInitialStats(int classIndex) {
+        // Set the character's level based on the job class selected
+        this.level = Integer.parseInt(characterClasses[classIndex][1]); // Update this line to set the level
+    
+        // Update the character's stats based on the job class selected
         for (int i = 0; i < stats.length; i++) {
-            stats[i] = Integer.parseInt(characterClasses[classIndex][i + 1]);
+            // The stats array starts from index 2 in the characterClasses definition,
+            // so we add 2 to the index when fetching stat values.
+            stats[i] = Integer.parseInt(characterClasses[classIndex][i + 2]);
+        }
+    }
+    
+    public void increaseStat(int statIndex) {
+        if (statIndex >= 1 && statIndex <= stats.length) {
+            stats[statIndex - 1]++; // Increase the specified stat
+        } else {
+            System.out.println("Invalid stat choice."); // Handle invalid stat choice
         }
     }
 
     public int getStatValue(int statIndex) {
-        return stats[statIndex - 1];
+        if (statIndex >= 1 && statIndex <= stats.length) {
+            return stats[statIndex - 1]; // Return the value of the specified stat
+        } else {
+            System.out.println("Invalid stat index."); // Handle invalid stat index
+            return -1; // Indicate an error
+        }
     }
 
     public int getRunes() {
@@ -82,10 +101,6 @@ public class Character {
 
     public void setRunes(int newRunes) {
         this.runes = newRunes;
-    }
-
-    public void increaseStat(int statIndex) {
-        stats[statIndex - 1]++;
     }
 
     public int getLevel() {

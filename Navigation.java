@@ -2,15 +2,15 @@ import java.util.Scanner;
 
 public class Navigation {
     private Character player;
-    private GameLobby gameLobby; // Add a GameLobby attribute
+    private GameLobby gameLobby;
     private Scanner obj;
     private enum GameState { TITLE_SCREEN, GAME_LOBBY, EXIT }
     private GameState currentState;
-    private String currentArea = "Game Lobby"; // default area is game lobby
+    private String currentArea = "Game Lobby";
 
     public Navigation() {
         obj = new Scanner(System.in);
-        currentState = GameState.TITLE_SCREEN; // Start at the title screen
+        currentState = GameState.TITLE_SCREEN;
         runGameLoop();
     }
 
@@ -21,15 +21,15 @@ public class Navigation {
                     titleScreen();
                     break;
                 case GAME_LOBBY:
-                    gameLobby(); // This is called as part of the loop, ensuring continuous update
+                    gameLobby();
                     break;
                 case EXIT:
+                    System.out.println("You have exited the game.");
                     break;
             }
         }
-        System.out.println("You have exited the game.");
-        obj.close(); // Close the scanner before exiting the game
-    }    
+        obj.close();
+    }
 
     private void titleScreen() {
         System.out.println("========== Elden Rogue ==========");
@@ -38,14 +38,14 @@ public class Navigation {
         System.out.println("[2] Exit");
 
         int choice = obj.hasNextInt() ? obj.nextInt() : -1;
-        obj.nextLine(); // Consume newline regardless of input to clear the buffer
+        obj.nextLine();
 
         if (choice == 1) {
-            player = new Character();
+            player = new Character(); // Assume Character creation logic is implemented
             if (player.createCharacter(obj)) {
-                gameLobby = new GameLobby(player); // Initialize GameLobby with the created character
+                gameLobby = new GameLobby(this, player);
                 currentState = GameState.GAME_LOBBY;
-            } 
+            }
         } else if (choice == 2) {
             currentState = GameState.EXIT;
         } else {
@@ -54,31 +54,36 @@ public class Navigation {
     }
 
     private void gameLobby() {
-        
         System.out.println("========== " + currentArea + " ==========");
         System.out.println("[1] Fast Travel");
         System.out.println("[2] Level Up");
         System.out.println("[3] Quit Game");
-    
+
         int choice = obj.hasNextInt() ? obj.nextInt() : -1;
-        obj.nextLine(); // Consume newline regardless of input to clear the buffer
-    
-        if (gameLobby != null) { // Ensure gameLobby has been initialized
-            switch (choice) {
-                case 1:
-                    currentArea = gameLobby.fastTravel(); // Update the area name based on fast travel selection
-                    gameLobby(); // Recall gameLobby to refresh the display with the new area name
-                    break;
-                case 2:
-                    gameLobby.levelUp(); // Invoke levelUp method
-                    break;
-                case 3:
-                    currentState = GameState.TITLE_SCREEN; // Return to title screen
-                    currentArea = "Game Lobby";
-                    break;
-                default:
-                    System.out.println("Please choose a valid option");
-            }
+        obj.nextLine();
+
+        switch (choice) {
+            case 1:
+                gameLobby.fastTravel();
+                break;
+            case 2:
+                gameLobby.levelUp();
+                break;
+            case 3:
+                currentState = GameState.TITLE_SCREEN;
+                currentArea = "Game Lobby";
+                break;
+            default:
+                System.out.println("Please choose a valid option");
+                break;
         }
-    }    
+    }
+    
+    public void setCurrentArea(String area) {
+        this.currentArea = area;
+    }
+    
+    public String getCurrentArea() {
+        return this.currentArea;
+    }
 }
