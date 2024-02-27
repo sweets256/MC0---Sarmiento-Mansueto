@@ -10,40 +10,40 @@ public class Area1Grid {
     private static final Scanner scanner = new Scanner(System.in);
     private static boolean shouldExitArea = false;
     private static String[][] floor1Data = {
-        {"W", "|     |", "|  D  |", "|     |", "W"},
-        {"W", "|  ?  |", "|     |", "|  ?  |", "W"},
-        {"W", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|  F  |", "|     |", "W"}
+        {"|     |", "|  D  |", "|     |"},
+        {"|  ?  |", "|     |", "|  ?  |"},
+        {"|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |"},
+        {"|     |", "|  F  |", "|     |"}
     };
     private static String[][] floor2Data = {
-        {"W", "|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "|  ?  |", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "W"},
-        {"W", "|  ?  |", "|     |", "|  ?  |", "|  ?  |", "|  ?  |", "|     |", "|  ?  |", "W"},
-        {"W", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |", "W"}
+        {"|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|  ?  |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|  ?  |", "|     |", "|  ?  |", "|  ?  |", "|  ?  |", "|     |", "|  ?  |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |"}
     };
     private static String[][] floor3Data = {
-        {"W", "|     |", "|     |", "|  F  |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|  B  |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|     |", "|     |", "|     |", "W"},
-        {"W", "|     |", "|     |", "|  D  |", "|     |", "|     |", "W"}
+        {"|     |", "|     |", "|  F  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  B  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  D  |", "|     |", "|     |"}
     };
     private static String[][][] floors = {floor1Data, floor2Data, floor3Data};
     private static int currentFloorIndex = 0;
 
     // Define starting positions for each floor
     private static final int[][] startingPositions = {
-        {6, 2}, // Starting position on Floor 1
-        {6, 4}, // Starting position on Floor 2
-        {6, 3}  // Starting position on Floor 3
+        {6, 1}, // Starting position on Floor 1
+        {6, 3}, // Starting position on Floor 2
+        {6, 2}  // Starting position on Floor 3
     };
 
     public static void startArea() {
@@ -132,20 +132,20 @@ public class Area1Grid {
     }
 
     private static boolean isDoorToAnotherFloor() {
-        return (currentFloorIndex == 0 && playerRow == 0 && playerCol == 2) ||
-               (currentFloorIndex == 1 && playerRow == 0 && playerCol == 4) ||
-               (currentFloorIndex == 1 && playerRow == 6 && playerCol == 4) ||
-               (currentFloorIndex == 2 && playerRow == 6 && playerCol == 3);
+        return (currentFloorIndex == 0 && playerRow == 0 && playerCol == 1) ||
+               (currentFloorIndex == 1 && playerRow == 0 && playerCol == 3) ||
+               (currentFloorIndex == 1 && playerRow == 6 && playerCol == 3) ||
+               (currentFloorIndex == 2 && playerRow == 6 && playerCol == 2);
     }
     
     private static void handleDoorInteraction() {
-        if (currentFloorIndex == 0 && playerRow == 0 && playerCol == 2) {
+        if (currentFloorIndex == 0 && playerRow == 0 && playerCol == 1) {
             moveToFloor(1); // Floor 1 to Floor 2
-        } else if (currentFloorIndex == 1 && playerRow == 0 && playerCol == 4) {
+        } else if (currentFloorIndex == 1 && playerRow == 0 && playerCol == 3) {
             moveToFloor(2); // Floor 2 to Floor 3
-        } else if (currentFloorIndex == 1 && playerRow == 6 && playerCol == 4) {
+        } else if (currentFloorIndex == 1 && playerRow == 6 && playerCol == 3) {
             moveToFloor(0); // Floor 2 to Floor 1
-        } else if (currentFloorIndex == 2 && playerRow == 6 && playerCol == 3) {
+        } else if (currentFloorIndex == 2 && playerRow == 6 && playerCol == 2) {
             moveToFloor(1); // Floor 3 to Floor 2
         }
     }
@@ -176,11 +176,11 @@ public class Area1Grid {
         switch (currentFloorIndex) {
             case 1: // Moved up to Floor 2 from Floor 1
                 playerRow = 6; // Position of door on Floor 2 going down to Floor 1
-                playerCol = 4;
+                playerCol = 3;
                 break;
             case 2: // Moved up to Floor 3 from Floor 2
                 playerRow = 6; // Position of door on Floor 3 going down to Floor 2
-                playerCol = 3;
+                playerCol = 2;
                 break;
         }
     }
@@ -190,11 +190,11 @@ public class Area1Grid {
         switch (currentFloorIndex) {
             case 0: // Moved down to Floor 1 from Floor 2
                 playerRow = 0; // Position of door on Floor 1 going up to Floor 2
-                playerCol = 2;
+                playerCol = 1;
                 break;
             case 1: // Moved down to Floor 2 from Floor 3
                 playerRow = 0; // Position of door on Floor 2 going up to Floor 3
-                playerCol = 4;
+                playerCol = 3;
                 break;
         }
     }
