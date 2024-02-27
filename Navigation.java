@@ -60,31 +60,37 @@ public class Navigation implements AreaInteractionListener {
     }
 
     private void gameLobby() {
-        System.out.println("========== " + currentArea + " ==========");
-        System.out.println("[1] Fast Travel");
-        System.out.println("[2] Level Up");
-        System.out.println("[3] Quit Game");
-
-        int choice = obj.hasNextInt() ? obj.nextInt() : -1;
-        obj.nextLine();
-
-        switch (choice) {
-            case 1:
-                gameLobby.fastTravel();
-                break;
-            case 2:
-                gameLobby.levelUp();
-                break;
-            case 3:
-                System.out.println("Going back to the Main Menu...");
-                currentState = GameState.TITLE_SCREEN;
-                currentArea = "Game Lobby";
-                break;
-            default:
-                System.out.println("Please choose a valid option.");
-                break;
+        boolean inGameLobby = true;
+        while (inGameLobby) {
+            System.out.println("========== " + currentArea + " ==========");
+            System.out.println("[1] Fast Travel");
+            System.out.println("[2] Level Up");
+            System.out.println("[3] Quit Game");
+    
+            int choice = obj.hasNextInt() ? obj.nextInt() : -1;
+            obj.nextLine(); // Consume newline
+    
+            switch (choice) {
+                case 1:
+                    gameLobby.fastTravel();
+                    break;
+                case 2:
+                    gameLobby.levelUp();
+                    // Don't break; after leveling up, show the game lobby menu again.
+                    break;
+                case 3:
+                    System.out.println("Going back to the Main Menu...");
+                    inGameLobby = false; // Exit the loop and go back to the main menu
+                    currentState = GameState.TITLE_SCREEN;
+                    currentArea = "Game Lobby";
+                    break;
+                default:
+                    System.out.println("Please choose a valid option.");
+                    break;
+            }
         }
     }
+    
 
     public void setCurrentArea(String area) {
         this.currentArea = area;

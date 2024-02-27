@@ -4,7 +4,7 @@ public class Character {
     private String characterName;
     private String jobClass;
     private int level = 1; // Default starting level
-    private int runes = 0; // Default starting runes
+    private int runes = 1000; // Default starting runes
     private int[] stats = new int[6]; // Array to hold stats: Health, Dexterity, Intelligence, Endurance, Strength, Faith
     private static final String[][] characterClasses = {
         // JobClass, Level, Health, Dexterity, Intelligence, Endurance, Strength, Faith
@@ -27,7 +27,7 @@ public class Character {
             return false; // User chose to go back
         }
         this.characterName = nameInput;
-
+    
         System.out.println("Select a job class (or type 'back' to return to the main menu)");
         for (int i = 0; i < characterClasses.length; i++) {
             System.out.printf("[%d] %s - Level: %s, Health: %s, Dexterity: %s, Intelligence: %s, Endurance: %s, Strength: %s, Faith: %s%n",
@@ -47,15 +47,18 @@ public class Character {
                     System.out.println("Character summary:");
                     System.out.println("Character name: " + characterName);
                     System.out.println("Job class: " + jobClass);
+                    // Confirmation step with improved input validation
                     System.out.println("Confirm this character? (Y/N): ");
                     String confirmation = input.nextLine().trim().toUpperCase();
+                    while (!confirmation.equals("Y") && !confirmation.equals("N")) {
+                        System.out.println("Invalid input. Please enter 'Y' to confirm or 'N' to redo character creation.");
+                        confirmation = input.nextLine().trim().toUpperCase();
+                    }
                     if ("Y".equals(confirmation)) {
                         System.out.println("Character created successfully!");
                         return true; // proceed to game lobby
-                    } else if ("N".equals(confirmation)) {
-                        return false; // Restart character creation
                     } else {
-                        System.out.println("Invalid input. Please enter 'Y' to confirm or 'N' to redo character creation.");
+                        return false; // Restart character creation
                     }
                 } else {
                     System.out.println("Invalid choice. Please select a valid job class or type 'back'.");
@@ -65,6 +68,7 @@ public class Character {
             }
         }
     }
+    
 
     private void setInitialStats(int classIndex) {
         // Set the character's level based on the job class selected

@@ -52,55 +52,61 @@ public class GameLobby {
     }
 
     public void levelUp() {
-        // Calculate rune cost for leveling up based on the player's current level
-        int runeCost = (player.getLevel() * 100) / 2;
+        boolean leveling = true;
     
-        // Display current level, rune cost, and stats
-        System.out.println("========== Level Up ==========");
-        System.out.println("Current Level: " + player.getLevel());
-        System.out.println("You have " + player.getRunes() + " runes.");
-        System.out.println("Rune cost to level up: " + runeCost);
-        displayStats(); // Helper method to display current stats
+        while (leveling) {
+            int runeCost = (player.getLevel() * 100) / 2;
     
-        // Check if the player has enough runes
-        if (player.getRunes() < runeCost) {
-            System.out.println("Not enough runes. You have " + player.getRunes() + " runes, but need " + runeCost + ".");
-            return; // Exit the method if not enough runes
+            System.out.println("========== Level Up ==========");
+            System.out.println("Current Level: " + player.getLevel());
+            System.out.println("You have " + player.getRunes() + " runes.");
+            System.out.println("Rune cost to level up: " + runeCost);
+            displayStats();
+    
+            if (player.getRunes() < runeCost) {
+                System.out.println("Not enough runes. You have " + player.getRunes() + " runes, but need " + runeCost + ".");
+                break; // Exit the loop if not enough runes
+            }
+    
+            System.out.println("Choose a stat to level up or type 'back' to cancel leveling up:");
+            String inputChoice = input.nextLine().trim();
+    
+            if ("back".equalsIgnoreCase(inputChoice)) {
+                System.out.println("Level up cancelled...");
+                break; // Exit the loop if player chooses to go back
+            }
+    
+            try {
+                int statChoice = Integer.parseInt(inputChoice);
+                if (statChoice < 1 || statChoice > 6) { // Assuming there are 6 stats
+                    throw new IllegalArgumentException("Invalid stat choice. Please select a number between 1 and 6.");
+                }
+    
+                System.out.println("Leveling up stat. This will cost " + runeCost + " runes. Proceed? (Y/N)");
+                String confirmation = input.nextLine().toUpperCase();
+    
+                if ("Y".equals(confirmation)) {
+                    player.setRunes(player.getRunes() - runeCost);
+                    player.increaseStat(statChoice);
+                    player.setLevel(player.getLevel() + 1);
+    
+                    System.out.println("Stat increased successfully!");
+                    System.out.println("New player level: " + player.getLevel());
+                    displayStats();
+                    break; // Exit the loop after successful level up
+                } else {
+                    System.out.println("Level up cancelled.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid stat number.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+            // The loop will continue if the input was invalid, allowing the player to try again.
         }
+    }
     
-        System.out.println("Choose a stat to level up or type 'back' to cancel leveling up:");
-        String inputChoice = input.nextLine().trim();
     
-        // Check for 'back' input to return to the Game Lobby
-        if ("back".equalsIgnoreCase(inputChoice)) {
-            System.out.println("Level up cancelled...");
-            return; // Exit the method and return to the game lobby
-        }
-    
-        // Convert the string input to an integer for stat choice, handling invalid inputs
-        int statChoice;
-        try {
-            statChoice = Integer.parseInt(inputChoice);
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid stat number or 'back' to return to the Game Lobby.");
-            return; // Exit the method due to invalid input
-        }
-    
-        System.out.println("Leveling up stat. This will cost " + runeCost + " runes. Proceed? (Y/N)");
-        String confirmation = input.nextLine().toUpperCase();
-    
-        if ("Y".equals(confirmation)) {
-            player.setRunes(player.getRunes() - runeCost); // Deduct the rune cost
-            player.increaseStat(statChoice); // Increase the chosen stat
-            player.setLevel(player.getLevel() + 1); // Increase player level
-    
-            System.out.println("Stat increased successfully!");
-            System.out.println("New player level: " + player.getLevel());
-            displayStats(); // Display updated stats
-        } else {
-            System.out.println("Level up cancelled.");
-        }
-    }    
 
     private void displayStats() {
         System.out.println("Current stats:");
