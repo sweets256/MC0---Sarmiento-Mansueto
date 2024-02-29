@@ -4,7 +4,7 @@ public class Character {
     private String characterName;
     private String jobClass;
     private int level = 1; // Default starting level
-    private int runes = 1000; // Default starting runes
+    private int runes = 0; // Default starting runes
     private int[] stats = new int[6]; // Array to hold stats: Health, Dexterity, Intelligence, Endurance, Strength, Faith
     private static final String[][] characterClasses = {
         // JobClass, Level, Health, Dexterity, Intelligence, Endurance, Strength, Faith
@@ -84,6 +84,8 @@ public class Character {
         if ("Y".equals(confirmation)) {
             System.out.print("\033\143");
             System.out.println("Character created successfully!");
+            pauseForMessage();
+            System.out.print("\033\143");
             return true; // proceed to game lobby
         } else {
             System.out.print("\033\143");
@@ -146,6 +148,15 @@ public class Character {
         }
     }
     
+    public void displayStats() {
+        System.out.println("\n========== Character Stats ==========");
+        System.out.println("Name: " + characterName);
+        System.out.println("Job Class: " + jobClass);
+        System.out.println("Level: " + level);
+        System.out.println("Runes: " + runes);
+        System.out.println("=====================================");
+    }
+    
     public void increaseStat(int statIndex) {
         if (statIndex >= 1 && statIndex <= stats.length) {
             stats[statIndex - 1]++; // Increase the specified stat
@@ -182,5 +193,17 @@ public class Character {
 
     public void setLevel(int newLevel) {
         this.level = newLevel;
+    }
+
+    public int getCurrentHealth() {
+        return 100 + (5 * stats[0]); // Calculate health as base 100 + (5 * level)
+    }
+
+    private static void pauseForMessage() {
+        try {
+            Thread.sleep(2000); // Pause for 2 seconds
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Handle the InterruptedException
+        }
     }
 }

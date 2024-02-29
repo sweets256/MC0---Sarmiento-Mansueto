@@ -82,37 +82,46 @@ public class Navigation implements AreaInteractionListener {
     private void gameLobby() {
         boolean inGameLobby = true;
         while (inGameLobby) {
-            System.out.println("========== " + currentArea + " ==========");
+            
+            System.out.println("============ " + currentArea + " =============");
             System.out.println("[1] Fast Travel");
             System.out.println("[2] Level Up");
             System.out.println("[3] Quit Game");
+            // Display player stats at the start of the game lobby loop
+            player.displayStats();
+            System.out.print("\nPlease choose an option: ");
     
             int choice = obj.hasNextInt() ? obj.nextInt() : -1;
-            obj.nextLine(); // Consume newline
+            obj.nextLine(); // Consume newline after input
     
             switch (choice) {
                 case 1:
-                    System.out.print("\033\143");
+                    System.out.print("\033\143"); // Clear the screen
                     gameLobby.fastTravel();
                     break;
                 case 2:
-                    System.out.print("\033\143");
+                    System.out.print("\033\143"); // Clear the screen
                     gameLobby.levelUp();
-                    // Don't break; after leveling up, show the game lobby menu again.
                     break;
                 case 3:
-                    System.out.print("\033\143");
+                    System.out.print("\033\143"); // Clear the screen
                     System.out.println("Going back to the Main Menu...");
+                    pauseForMessage();
+                    System.out.print("\033\143");
                     inGameLobby = false; // Exit the loop and go back to the main menu
                     currentState = GameState.TITLE_SCREEN;
                     currentArea = "Game Lobby";
                     break;
                 default:
+                    System.out.print("\033\143"); // Clear the screen
                     System.out.println("Please choose a valid option.");
+                    pauseForMessage();
+                    System.out.print("\033\143"); // Clear the screen
                     break;
             }
         }
     }
+    
     
 
     public void setCurrentArea(String area) {
@@ -137,5 +146,13 @@ public class Navigation implements AreaInteractionListener {
 
     @Override
     public void onChangeArea(String newArea) {
+    }
+    
+    private static void pauseForMessage() {
+        try {
+            Thread.sleep(2000); // Pause for 2 seconds
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Handle the InterruptedException
+        }
     }
 }

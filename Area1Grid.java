@@ -54,12 +54,14 @@ public class Area1Grid {
         playerRow = startingPositions[currentFloorIndex][0];
         playerCol = startingPositions[currentFloorIndex][1];
     
-        System.out.println("Entering Area 1...");
+        System.out.println("[ Stormveil Castle ]");
+        pauseForMessage();
+        System.out.print("\033\143");
     
         boolean exitArea = false;
         while (!exitArea && !shouldExitArea) {
             displayFloor();
-            System.out.println("Enter action (WASD to move, E to interact, Q to quit): ");
+            System.out.println("Enter action (WASD to move, E to interact): ");
             String action = scanner.nextLine().toUpperCase();
             switch (action) {
                 case "W": movePlayer(-1, 0); System.out.print("\033\143"); break;
@@ -67,16 +69,19 @@ public class Area1Grid {
                 case "S": movePlayer(1, 0); System.out.print("\033\143"); break;
                 case "D": movePlayer(0, 1); System.out.print("\033\143"); break;
                 case "E": interact(); break;
-                case "Q": exitArea = true; break;
-                default: System.out.println("Invalid action."); break;
+                default: System.out.println("Invalid action."); pauseForMessage(); System.out.print("\033\143"); break;
             }
         }
         if (shouldExitArea) {
             System.out.print("\033\143");
             System.out.println("Returning to the game lobby...");
+            pauseForMessage();
+            System.out.print("\033\143");
         } else {
             System.out.print("\033\143");
-            System.out.println("Exiting Area 1...");
+            System.out.println("Exiting Stormveil Castle...");
+            pauseForMessage();
+            System.out.print("\033\143");
         }
     }
 
@@ -117,6 +122,13 @@ public class Area1Grid {
             }
             System.out.println();
         }
+
+        // Display player stats (calculated current health, level, runes) at the bottom
+        System.out.println("\n========== Player Stats ==========");
+        System.out.println("Health: " + character.getCurrentHealth()); // Use the new method
+        System.out.println("Level: " + character.getLevel());           // Display level
+        System.out.println("Runes: " + character.getRunes());           // Display runes
+        System.out.println("==================================\n");
     }
 
     private static void movePlayer(int rowChange, int colChange) {
@@ -126,7 +138,10 @@ public class Area1Grid {
             playerRow = newRow;
             playerCol = newCol;
         } else {
+            System.out.print("\033\143");
             System.out.println("Cannot move there.");
+            pauseForMessage();
+            System.out.print("\033\143");
         }
     }
 
@@ -148,29 +163,55 @@ public class Area1Grid {
             String[] enemies = {"Godrick Soldier", "Godrick Archer", "Godrick Knight"};
             String encounteredEnemy = enemies[rand.nextInt(enemies.length)]; // Randomly select an enemy
     
+            // Determine if it's a low or high type (50/50 chance)
+            boolean isHighType = rand.nextBoolean(); // true for high, false for low
+    
+            // Assign health based on enemy type and whether it's high or low
+            int enemyHealth;
+            switch (encounteredEnemy) {
+                case "Godrick Soldier":
+                    enemyHealth = isHighType ? 30 : 20;
+                    break;
+                case "Godrick Archer":
+                    enemyHealth = isHighType ? 35 : 25;
+                    break;
+                case "Godrick Knight":
+                    enemyHealth = isHighType ? 80 : 70;
+                    break;
+                default:
+                    enemyHealth = 0; // Default case, should not happen
+            }
+    
             if (encounterChance < 0.75) {
                 System.out.print("\033\143");
-                System.out.println("You encounter an enemy! [ " + encounteredEnemy + " ]");
+                // Display enemy with its health but not specifying the type (low/high)
+                System.out.println("You encounter an enemy!");
+                System.out.println("\n[ " + encounteredEnemy + " ]");
+                System.out.println("HP: "+ enemyHealth);
                 pauseForMessage(); // Pause to allow reading the message
+                System.out.print("\033\143");
             } else {
                 int runesGained = (currentFloorIndex + 1) * (rand.nextInt(101) + 50);
                 character.addRunes(runesGained);
                 System.out.print("\033\143");
                 System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
                 pauseForMessage(); // Pause to allow reading the message
+                System.out.print("\033\143");
             }
             currentFloor[playerRow][playerCol] = "|     |";
         } else if ("|  B  |".equals(currentTile)) {
             System.out.print("\033\143");
-            System.out.println("You have encountered the Boss !!! [ Godrick The Grafted ]");
-            pauseForMessage(); // Assuming you have a pauseForMessage method to pause the output
+            // Display boss health when encountered
+            System.out.println("You have found the Boss of Stormveil Castle !!! [ Godrick The Grafted ] with 200 HP");
+            System.out.println("\n[ Godrick The Grafted ]");
+            System.out.println("HP: 200");
+            pauseForMessage(); // pauseForMessage method to pause the output
+            System.out.print("\033\143");
         } else {
             System.out.println("There's nothing to interact with here.");
         }
     }
     
-    
-
     private static boolean isDoorToAnotherFloor() {
         return (currentFloorIndex == 0 && playerRow == 0 && playerCol == 1) ||
                (currentFloorIndex == 1 && playerRow == 0 && playerCol == 3) ||
@@ -207,7 +248,9 @@ public class Area1Grid {
                 setPlayerPositionForAscending();
             }
     
-            System.out.println("Moved to Floor " + (currentFloorIndex + 1) + ".");
+            System.out.println("Moving to Floor " + (currentFloorIndex + 1) + "...");
+            pauseForMessage();
+            System.out.print("\033\143");
         } else {
             System.out.println("Invalid floor index.");
         }
@@ -252,10 +295,11 @@ public class Area1Grid {
 
     private static void pauseForMessage() {
         try {
-            Thread.sleep(3000); // Pause for 3 seconds
+            Thread.sleep(2000); // Pause for 2 seconds
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Handle the InterruptedException
         }
     }
+    
     
 }

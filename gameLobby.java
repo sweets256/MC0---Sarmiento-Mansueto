@@ -13,20 +13,23 @@ public class GameLobby {
     public void fastTravel() {
         System.out.print("\033\143");
         String currentArea = navigation.getCurrentArea();
-        System.out.println("========== Fast Travel ==========");
-        System.out.println("Available areas:");
-        System.out.println("[1] Stormveil Castle");
-        System.out.println("[2] Raya Lucaria Academy [LOCKED]");
-        System.out.println("[3] The Elden Throne [LOCKED]");
-        System.out.println("Type 'back' to cancel teleportation and remain in " + currentArea + ".");
     
         while (true) {
-            System.out.print("Enter your choice or 'back' to cancel: ");
+            // Move the display of options inside the loop so they are reprinted each time
+            System.out.println("========== Fast Travel ==========");
+            System.out.println("Available areas:");
+            System.out.println("[1] Stormveil Castle");
+            System.out.println("[2] Raya Lucaria Academy [LOCKED]");
+            System.out.println("[3] The Elden Throne [LOCKED]");
+            System.out.print("\nEnter your choice or 'back' to cancel: ");
+    
             String inputChoice = input.nextLine().trim();
     
             if ("back".equalsIgnoreCase(inputChoice)) {
                 System.out.print("\033\143");
                 System.out.println("Teleportation cancelled. Staying in " + currentArea + ".");
+                pauseForMessage();
+                System.out.print("\033\143");
                 break;
             }
     
@@ -37,23 +40,38 @@ public class GameLobby {
                         System.out.print("\033\143");
                         navigation.setCurrentArea("Stormveil Castle");
                         System.out.println("Teleporting to Stormveil Castle...");
+                        pauseForMessage();
+                        System.out.print("\033\143");
                         navigation.enterArea(); // Directly call enterArea() after setting the area.
                         return; // Exiting the method to avoid falling back to the game lobby loop.
-                    // case 2:
-                    //     navigation.setCurrentArea("Raya Lucaria Academy");
-                    //     System.out.println("Teleporting to Raya Lucaria Academy...");
-                    //     navigation.enterArea(); // Adjust accordingly for other areas.
-                    //     return;
+                    case 2:
+                        System.out.print("\033\143");
+                        System.out.println("Raya Lucaria Academy is LOCKED!");
+                        pauseForMessage();
+                        System.out.print("\033\143");
+                        break;
+                    case 3:
+                        System.out.print("\033\143");
+                        System.out.println("Elden Throne is LOCKED!");
+                        pauseForMessage();
+                        System.out.print("\033\143");
+                        break;
                     default:
-                        System.out.println("Area is locked! Please choose another location or type 'back'.");
+                        System.out.print("\033\143");
+                        System.out.println("Invalid choice! Choose an available location or type 'back'.");
+                        pauseForMessage();
+                        System.out.print("\033\143");
                         break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number for your choice or 'back' to cancel.");
+                System.out.print("\033\143");
+                System.out.println("Invalid input! Choose an available location or type 'back'.");
+                pauseForMessage();
+                System.out.print("\033\143");
             }
         }
     }
-
+    
     public void levelUp() {
         boolean leveling = true;
     
@@ -67,7 +85,10 @@ public class GameLobby {
             displayStats();
     
             if (player.getRunes() < runeCost) {
+                System.out.print("\033\143");
                 System.out.println("Not enough runes. You have " + player.getRunes() + " runes, but need " + runeCost + ".");
+                pauseForMessage();
+                System.out.print("\033\143");
                 break; // Exit the loop if not enough runes
             }
     
@@ -99,6 +120,8 @@ public class GameLobby {
                     System.out.println("Stat increased successfully!");
                     System.out.println("New player level: " + player.getLevel());
                     displayStats();
+                    pauseForMessage();
+                    System.out.print("\033\143");
                     break; // Exit the loop after successful level up
                 } else {
                     System.out.print("\033\143");
@@ -112,8 +135,6 @@ public class GameLobby {
             // The loop will continue if the input was invalid, allowing the player to try again.
         }
     }
-    
-    
 
     private void displayStats() {
         System.out.println("Current stats:");
@@ -123,5 +144,13 @@ public class GameLobby {
         System.out.println("[4] Endurance: " + player.getStatValue(4));
         System.out.println("[5] Strength: " + player.getStatValue(5));
         System.out.println("[6] Faith: " + player.getStatValue(6) + "\n");
+    }
+
+    private static void pauseForMessage() {
+        try {
+            Thread.sleep(2000); // Pause for 2 seconds
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Handle the InterruptedException
+        }
     }
 }
