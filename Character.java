@@ -3,11 +3,11 @@ import java.util.Scanner;
 public class Character {
     private String characterName;
     private String jobClass;
-    private int level = 1; // Default starting level
-    private int runes = 0; // Default starting runes
-    private int[] stats = new int[6]; // Array to hold stats: Health, Dexterity, Intelligence, Endurance, Strength, Faith
+    private int level = 1;
+    private int runes = 0;
+    private int[] stats = new int[6];
     private static final String[][] characterClasses = {
-        // JobClass, Level, Health, Dexterity, Intelligence, Endurance, Strength, Faith
+        
         {"Vagabond", "9", "15", "13", "9", "11", "14", "9"},
         {"Samurai", "9", "12", "15", "9", "13", "12", "8"},
         {"Warrior", "8", "11", "16", "10", "11", "10", "8"},
@@ -28,7 +28,7 @@ public class Character {
         boolean nameSet = false, classSet = false;
     
         while (!nameSet || !classSet) {
-            System.out.print("\033\143"); // Clear the screen at the start of each loop iteration
+            System.out.print("\033\143");
             System.out.println("========== Character Creation ==========");
             System.out.println("Select the field you want to input:");
             System.out.println("[1] Character Name");
@@ -39,32 +39,30 @@ public class Character {
             String choice = input.nextLine().trim();
             
             if ("back".equalsIgnoreCase(choice)) {
-                System.out.print("\033\143"); // Clear the screen before returning to the title screen
-                return false; // Exit character creation and return to the title screen
+                System.out.print("\033\143");
+                return false;
             }
     
             switch (choice) {
                 case "1":
-                    inputCharacterName(input); // Call a method to handle name input
+                    inputCharacterName(input);
                     nameSet = this.characterName != null && !this.characterName.isEmpty();
                     break;
                 case "2":
-                    selectJobClass(input); // Call a method to handle job class selection
+                    selectJobClass(input);
                     classSet = this.jobClass != null && !this.jobClass.isEmpty();
                     break;
                 default:
                     System.out.println("Invalid choice. Please select 1 or 2.");
-                    pause(2000); // Pause for 2 seconds to let the user read the error message
+                    pause(2000);
                     break;
             }
         }
-    
-        // At this point, both fields are filled out, ask for confirmation
+        
         System.out.print("\033\143");
         System.out.println("========== Character Summary ==========");
         System.out.println("Character name: " + characterName);
         System.out.println("Job class: " + jobClass);
-        // Display stats including the starting level of the chosen job class
         System.out.println("Starting Level: " + level);
         System.out.println("\n===Stats===");
         System.out.println("Health: " + stats[0]);
@@ -86,28 +84,27 @@ public class Character {
             System.out.println("Character created successfully!");
             pauseForMessage();
             System.out.print("\033\143");
-            return true; // proceed to game lobby
+            return true;
         } else {
             System.out.print("\033\143");
-            // Restart character creation process
-            return createCharacter(input); // Optionally, you might want to reset nameSet and classSet instead of recursion
+            return createCharacter(input);
         }
     }    
     
     private void inputCharacterName(Scanner input) {
-        System.out.print("\033\143"); // Clear the screen before showing the name input prompt
+        System.out.print("\033\143");
         System.out.println("========== Character Creation ==========");
         System.out.println("Enter character name (or type 'back' to return to the main menu): ");
         String nameInput = input.nextLine();
         if (!"back".equalsIgnoreCase(nameInput.trim())) {
             this.characterName = nameInput;
         } else {
-            System.out.print("\033\143"); // Clear the screen if 'back' is chosen
+            System.out.print("\033\143");
         }
     }
     
     private void selectJobClass(Scanner input) {
-        System.out.print("\033\143"); // Clear the screen before showing the job class selection
+        System.out.print("\033\143");
         System.out.println("========== Character Creation ==========");
         System.out.println("Select a job class (or type 'back' to return to the main menu)");
         for (int i = 0; i < characterClasses.length; i++) {
@@ -118,14 +115,14 @@ public class Character {
         while (true) {
             String classInput = input.nextLine();
             if ("back".equalsIgnoreCase(classInput.trim())) {
-                return; // User chose to go back without setting the job class
+                return;
             }
             try {
                 int classChoice = Integer.parseInt(classInput) - 1;
                 if (classChoice >= 0 && classChoice < characterClasses.length) {
                     this.jobClass = characterClasses[classChoice][0];
-                    setInitialStats(classChoice); // Initialize stats based on the chosen job class
-                    return; // Job class set successfully
+                    setInitialStats(classChoice);
+                    return;
                 } else {
                     System.out.println("Invalid choice. Please select a valid job class or type 'back'.");
                     pauseForMessage();
@@ -141,13 +138,8 @@ public class Character {
         
     
     private void setInitialStats(int classIndex) {
-        // Set the character's level based on the job class selected
-        this.level = Integer.parseInt(characterClasses[classIndex][1]); // Update this line to set the level
-    
-        // Update the character's stats based on the job class selected
+        this.level = Integer.parseInt(characterClasses[classIndex][1]);
         for (int i = 0; i < stats.length; i++) {
-            // The stats array starts from index 2 in the characterClasses definition,
-            // so we add 2 to the index when fetching stat values.
             stats[i] = Integer.parseInt(characterClasses[classIndex][i + 2]);
         }
     }
@@ -163,18 +155,18 @@ public class Character {
     
     public void increaseStat(int statIndex) {
         if (statIndex >= 1 && statIndex <= stats.length) {
-            stats[statIndex - 1]++; // Increase the specified stat
+            stats[statIndex - 1]++;
         } else {
-            System.out.println("Invalid stat choice."); // Handle invalid stat choice
+            System.out.println("Invalid stat choice.");
         }
     }
 
     public int getStatValue(int statIndex) {
         if (statIndex >= 1 && statIndex <= stats.length) {
-            return stats[statIndex - 1]; // Return the value of the specified stat
+            return stats[statIndex - 1];
         } else {
-            System.out.println("Invalid stat index."); // Handle invalid stat index
-            return -1; // Indicate an error
+            System.out.println("Invalid stat index.");
+            return -1;
         }
     }
 
@@ -200,14 +192,14 @@ public class Character {
     }
 
     public int getCurrentHealth() {
-        return 100 + (5 * stats[0]); // Calculate health as base 100 + (5 * level)
+        return 100 + (5 * stats[0]);
     }
 
     private static void pauseForMessage() {
         try {
-            Thread.sleep(2000); // Pause for 2 seconds
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Handle the InterruptedException
+            Thread.currentThread().interrupt();
         }
     }
 }

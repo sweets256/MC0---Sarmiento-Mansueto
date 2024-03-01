@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class GameLobby {
     private Character player;
     private Scanner input = new Scanner(System.in);
-    private Navigation navigation; // Reference to Navigation for area management
+    private Navigation navigation;
 
     public GameLobby(Navigation navigation, Character player) {
         this.navigation = navigation;
@@ -15,7 +15,6 @@ public class GameLobby {
         String currentArea = navigation.getCurrentArea();
     
         while (true) {
-            // Move the display of options inside the loop so they are reprinted each time
             System.out.println("========== Fast Travel ==========");
             System.out.println("Available areas:");
             System.out.println("[1] Stormveil Castle");
@@ -42,8 +41,8 @@ public class GameLobby {
                         System.out.println("Teleporting to Stormveil Castle...");
                         pauseForMessage();
                         System.out.print("\033\143");
-                        navigation.enterArea(); // Directly call enterArea() after setting the area.
-                        return; // Exiting the method to avoid falling back to the game lobby loop.
+                        navigation.enterArea();
+                        return;
                     case 2:
                         System.out.print("\033\143");
                         System.out.println("Raya Lucaria Academy is LOCKED!");
@@ -89,7 +88,7 @@ public class GameLobby {
                 System.out.println("Not enough runes. You have " + player.getRunes() + " runes, but need " + runeCost + ".");
                 pauseForMessage();
                 System.out.print("\033\143");
-                break; // Exit the loop if not enough runes
+                break;
             }
     
             System.out.println("Choose a stat to level up or type 'back' to cancel leveling up:");
@@ -98,12 +97,12 @@ public class GameLobby {
             if ("back".equalsIgnoreCase(inputChoice)) {
                 System.out.print("\033\143");
                 System.out.println("Level up cancelled...");
-                break; // Exit the loop if player chooses to go back
+                break;
             }
     
             try {
                 int statChoice = Integer.parseInt(inputChoice);
-                if (statChoice < 1 || statChoice > 6) { // Assuming there are 6 stats
+                if (statChoice < 1 || statChoice > 6) {
                     System.out.print("\033\143");
                     throw new IllegalArgumentException("Invalid stat choice. Please select a number between 1 and 6.");
                 }
@@ -122,7 +121,7 @@ public class GameLobby {
                     displayStats();
                     pauseForMessage();
                     System.out.print("\033\143");
-                    break; // Exit the loop after successful level up
+                    break;
                 } else {
                     System.out.print("\033\143");
                     System.out.println("Level up cancelled.");
@@ -132,7 +131,6 @@ public class GameLobby {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-            // The loop will continue if the input was invalid, allowing the player to try again.
         }
     }
 
@@ -148,9 +146,9 @@ public class GameLobby {
 
     private static void pauseForMessage() {
         try {
-            Thread.sleep(2000); // Pause for 2 seconds
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Handle the InterruptedException
+            Thread.currentThread().interrupt();
         }
     }
 }

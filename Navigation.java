@@ -66,16 +66,16 @@ public class Navigation implements AreaInteractionListener {
             currentState = GameState.EXIT;
         } else {
             System.out.println("Invalid choice. Please choose 1 or 2.");
-            pauseBeforeCleaningScreen(); // Pause before clearing screen
+            pauseBeforeCleaningScreen();
             System.out.print("\033\143");
         }
     }
 
     private void pauseBeforeCleaningScreen() {
         try {
-            Thread.sleep(3000); // pause for 3 seconds
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // handle InterruptedException
+            Thread.currentThread().interrupt();
         }
     }
  
@@ -87,43 +87,41 @@ public class Navigation implements AreaInteractionListener {
             System.out.println("[1] Fast Travel");
             System.out.println("[2] Level Up");
             System.out.println("[3] Quit Game");
-            // Display player stats at the start of the game lobby loop
+            
             player.displayStats();
             System.out.print("\nPlease choose an option: ");
     
             int choice = obj.hasNextInt() ? obj.nextInt() : -1;
-            obj.nextLine(); // Consume newline after input
+            obj.nextLine(); 
     
             switch (choice) {
                 case 1:
-                    System.out.print("\033\143"); // Clear the screen
+                    System.out.print("\033\143");
                     gameLobby.fastTravel();
                     break;
                 case 2:
-                    System.out.print("\033\143"); // Clear the screen
+                    System.out.print("\033\143");
                     gameLobby.levelUp();
                     break;
                 case 3:
-                    System.out.print("\033\143"); // Clear the screen
+                    System.out.print("\033\143");
                     System.out.println("Going back to the Main Menu...");
                     pauseForMessage();
                     System.out.print("\033\143");
-                    inGameLobby = false; // Exit the loop and go back to the main menu
+                    inGameLobby = false;
                     currentState = GameState.TITLE_SCREEN;
                     currentArea = "Game Lobby";
                     break;
                 default:
-                    System.out.print("\033\143"); // Clear the screen
+                    System.out.print("\033\143");
                     System.out.println("Please choose a valid option.");
                     pauseForMessage();
-                    System.out.print("\033\143"); // Clear the screen
+                    System.out.print("\033\143");
                     break;
             }
         }
     }
     
-    
-
     public void setCurrentArea(String area) {
         this.currentArea = area;
     }
@@ -134,7 +132,7 @@ public class Navigation implements AreaInteractionListener {
 
     public void enterArea() {
         Area1Grid.setCharacter(player);
-        Area1Grid.setAreaInteractionListener(this); // 'this' refers to the Navigation instance
+        Area1Grid.setAreaInteractionListener(this);
         Area1Grid.startArea();
     }
 
@@ -150,9 +148,9 @@ public class Navigation implements AreaInteractionListener {
     
     private static void pauseForMessage() {
         try {
-            Thread.sleep(2000); // Pause for 2 seconds
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Handle the InterruptedException
+            Thread.currentThread().interrupt();
         }
     }
 }

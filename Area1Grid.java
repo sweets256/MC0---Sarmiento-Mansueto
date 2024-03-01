@@ -5,8 +5,8 @@ public class Area1Grid {
     private static Character character;
     private static AreaInteractionListener listener;
     private static String[][] currentFloor;
-    private static int playerRow = 6; // Default starting position for demonstration
-    private static int playerCol = 2; // Default starting position for demonstration
+    private static int playerRow = 6;
+    private static int playerCol = 2;
     private static final Scanner scanner = new Scanner(System.in);
     private static boolean shouldExitArea = false;
     private static String[][] floor1Data = {
@@ -38,19 +38,18 @@ public class Area1Grid {
     };
     private static String[][][] floors = {floor1Data, floor2Data, floor3Data};
     private static int currentFloorIndex = 0;
-
-    // Define starting positions for each floor
+    
     private static final int[][] startingPositions = {
-        {6, 1}, // Starting position on Floor 1
-        {6, 3}, // Starting position on Floor 2
-        {6, 2}  // Starting position on Floor 3
+        {6, 1},
+        {6, 3},
+        {6, 2}
     };
 
     public static void startArea() {
         shouldExitArea = false;
-        currentFloorIndex = 0; // Reset to start from Floor 1
+        currentFloorIndex = 0;
         currentFloor = floors[currentFloorIndex];
-        // Reset player position to the starting position of Floor 1 as well
+       
         playerRow = startingPositions[currentFloorIndex][0];
         playerCol = startingPositions[currentFloorIndex][1];
     
@@ -93,32 +92,23 @@ public class Area1Grid {
     }
 
     private static void displayFloor() {
-        // Calculate the width of the grid in characters. Assuming each cell is 7 characters wide.
         int gridWidth = currentFloor[0].length * 7;
-        
-        // Prepare the title string including the space padding around "Floor: X"
         String title = " Floor " + (currentFloorIndex + 1) + " ";
         int titleLength = title.length();
+        int totalPadding = gridWidth - titleLength;
+        int paddingBefore = totalPadding / 2;
+        int paddingAfter = totalPadding / 2;
         
-        // Calculate how many '=' characters are needed before and after the title to center it
-        int totalPadding = gridWidth - titleLength; // Total amount of '=' to distribute
-        int paddingBefore = totalPadding / 2; // Half the padding goes before the title
-        int paddingAfter = totalPadding / 2; // Start with an equal split for after the title
-        
-        // Adjust for an odd total padding by adding one more '=' to paddingAfter if necessary
         if (totalPadding % 2 != 0) {
             paddingAfter += 1;
         }
         
-        // Construct the centered title with '=' padding
         String centeredTitle = new String(new char[paddingBefore]).replace('\0', '=') 
             + title 
             + new String(new char[paddingAfter]).replace('\0', '=');
         
-        // Print the centered title
         System.out.println(centeredTitle);
         
-        // Print the grid
         for (int i = 0; i < currentFloor.length; i++) {
             for (int j = 0; j < currentFloor[i].length; j++) {
                 if (i == playerRow && j == playerCol) {
@@ -130,17 +120,17 @@ public class Area1Grid {
             System.out.println();
         }
 
-        // Display player stats (calculated current health, level, runes) at the bottom
         System.out.println("\n========== Player Stats ==========");
-        System.out.println("Health: " + character.getCurrentHealth()); // Use the new method
-        System.out.println("Level: " + character.getLevel());           // Display level
-        System.out.println("Runes: " + character.getRunes());           // Display runes
+        System.out.println("Health: " + character.getCurrentHealth());
+        System.out.println("Level: " + character.getLevel());
+        System.out.println("Runes: " + character.getRunes());
         System.out.println("==================================\n");
     }
 
     private static void movePlayer(int rowChange, int colChange) {
         int newRow = playerRow + rowChange;
         int newCol = playerCol + colChange;
+        
         if (newRow >= 0 && newRow < currentFloor.length && newCol >= 0 && newCol < currentFloor[0].length && !currentFloor[newRow][newCol].contains("W")) {
             playerRow = newRow;
             playerCol = newCol;
@@ -155,7 +145,7 @@ public class Area1Grid {
     private static void interact() {
         if (isDoorToAnotherFloor()) {
             handleDoorInteraction();
-            return; // Ensure no further interaction logic is processed after handling a door
+            return;
         }
         
         String currentTile = currentFloor[playerRow][playerCol].trim();
@@ -168,13 +158,10 @@ public class Area1Grid {
             Random rand = new Random();
             double encounterChance = rand.nextDouble();
             String[] enemies = {"Godrick Soldier", "Godrick Archer", "Godrick Knight"};
-            String encounteredEnemy = enemies[rand.nextInt(enemies.length)]; // Randomly select an enemy
-    
-            // Determine if it's a low or high type (50/50 chance)
-            boolean isHighType = rand.nextBoolean(); // true for high, false for low
-    
-            // Assign health based on enemy type and whether it's high or low
+            String encounteredEnemy = enemies[rand.nextInt(enemies.length)];
+            boolean isHighType = rand.nextBoolean();
             int enemyHealth;
+
             switch (encounteredEnemy) {
                 case "Godrick Soldier":
                     enemyHealth = isHighType ? 30 : 20;
@@ -186,33 +173,31 @@ public class Area1Grid {
                     enemyHealth = isHighType ? 80 : 70;
                     break;
                 default:
-                    enemyHealth = 0; // Default case, should not happen
+                    enemyHealth = 0;
             }
     
             if (encounterChance < 0.75) {
                 System.out.print("\033\143");
-                // Display enemy with its health but not specifying the type (low/high)
                 System.out.println("You encounter an enemy!");
                 System.out.println("\n[ " + encounteredEnemy + " ]");
                 System.out.println("HP: "+ enemyHealth);
-                pauseForMessage(); // Pause to allow reading the message
+                pauseForMessage();
                 System.out.print("\033\143");
             } else {
                 int runesGained = (currentFloorIndex + 1) * (rand.nextInt(101) + 50);
                 character.addRunes(runesGained);
                 System.out.print("\033\143");
                 System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
-                pauseForMessage(); // Pause to allow reading the message
+                pauseForMessage();
                 System.out.print("\033\143");
             }
             currentFloor[playerRow][playerCol] = "|     |";
         } else if ("|  B  |".equals(currentTile)) {
             System.out.print("\033\143");
-            // Display boss health when encountered
             System.out.println("You have found the Boss of Stormveil Castle !!! [ Godrick The Grafted ] with 200 HP");
             System.out.println("\n[ Godrick The Grafted ]");
             System.out.println("HP: 200");
-            pauseForMessage(); // pauseForMessage method to pause the output
+            pauseForMessage();
             System.out.print("\033\143");
         } else {
             System.out.println("There's nothing to interact with here.");
@@ -228,13 +213,13 @@ public class Area1Grid {
     
     private static void handleDoorInteraction() {
         if (currentFloorIndex == 0 && playerRow == 0 && playerCol == 1) {
-            moveToFloor(1); // Floor 1 to Floor 2
+            moveToFloor(1);
         } else if (currentFloorIndex == 1 && playerRow == 0 && playerCol == 3) {
-            moveToFloor(2); // Floor 2 to Floor 3
+            moveToFloor(2);
         } else if (currentFloorIndex == 1 && playerRow == 6 && playerCol == 3) {
-            moveToFloor(0); // Floor 2 to Floor 1
+            moveToFloor(0);
         } else if (currentFloorIndex == 2 && playerRow == 6 && playerCol == 2) {
-            moveToFloor(1); // Floor 3 to Floor 2
+            moveToFloor(1);
         }
     }
 
@@ -245,13 +230,10 @@ public class Area1Grid {
             currentFloor = floors[currentFloorIndex];
 
             System.out.print("\033\143");
-    
-            // Determine the player's new position based on the floor transition
+
             if (previousFloorIndex < currentFloorIndex) {
-                // Moving to a higher floor, set position at the "downward" door of the current floor
                 setPlayerPositionForDescending();
             } else {
-                // Moving to a lower floor, set position at the "upward" door of the current floor
                 setPlayerPositionForAscending();
             }
     
@@ -264,33 +246,30 @@ public class Area1Grid {
     }
     
     private static void setPlayerPositionForDescending() {
-        // Example positions; adjust based on your game's actual door positions
         switch (currentFloorIndex) {
-            case 1: // Moved up to Floor 2 from Floor 1
-                playerRow = 6; // Position of door on Floor 2 going down to Floor 1
+            case 1:
+                playerRow = 6;
                 playerCol = 3;
                 break;
-            case 2: // Moved up to Floor 3 from Floor 2
-                playerRow = 6; // Position of door on Floor 3 going down to Floor 2
+            case 2:
+                playerRow = 6;
                 playerCol = 2;
                 break;
         }
     }
     
     private static void setPlayerPositionForAscending() {
-        // Example positions; adjust based on your game's actual door positions
         switch (currentFloorIndex) {
-            case 0: // Moved down to Floor 1 from Floor 2
-                playerRow = 0; // Position of door on Floor 1 going up to Floor 2
+            case 0:
+                playerRow = 0;
                 playerCol = 1;
                 break;
-            case 1: // Moved down to Floor 2 from Floor 3
-                playerRow = 0; // Position of door on Floor 2 going up to Floor 3
+            case 1:
+                playerRow = 0;
                 playerCol = 3;
                 break;
         }
     }
-    
     
     public static void setCharacter(Character characterInstance) {
         character = characterInstance;
@@ -302,11 +281,9 @@ public class Area1Grid {
 
     private static void pauseForMessage() {
         try {
-            Thread.sleep(2000); // Pause for 2 seconds
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Handle the InterruptedException
+            Thread.currentThread().interrupt();
         }
     }
-    
-    
 }
