@@ -54,7 +54,6 @@ public class Area1Grid {
         playerRow = startingPositions[currentFloorIndex][0];
         playerCol = startingPositions[currentFloorIndex][1];
     
-       //1. System.out.println("[ Stormveil Castle ]");
         System.out.println(" _______ _________ _______  _______  _______           _______ _________ _          _______  _______  _______ _________ _        _______ ");
         System.out.println("(  ____ \\\\__   __/(  ___  )(  ____ )(       )|\\     /|(  ____ \\\\__   __/( \\        (  ____ \\(  ___  )(  ____ \\\\__   __/( \\      (  ____ \\");
         System.out.println("| (    \\/   ) (   | (   ) || (    )|| () () || )   ( || (    \\/   ) (   | (        | (    \\/| (   ) || (    \\/   ) (   | (      | (    \\/");
