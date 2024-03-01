@@ -223,7 +223,6 @@ public class Area1Grid {
         }
     }
     
-    
     /**
      * Checks if the player is standing on a door leading to another floor.
      *
@@ -312,7 +311,6 @@ public class Area1Grid {
         }
     }
     
-    
     /**
      * Sets the character instance for the area.
      *
@@ -322,7 +320,6 @@ public class Area1Grid {
         character = characterInstance;
     }
 
-    
     /**
      * Sets the area interaction listener instance.
      *

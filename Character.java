@@ -15,7 +15,10 @@ public class Character {
         {"Astrologer", "6", "9", "12", "16", "9", "8", "7"},
         {"Prophet", "7", "10", "10", "7", "8", "11", "16"}
     };
-
+    
+    /** 
+     * @param milliseconds
+     */
     private void pause(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
@@ -24,6 +27,10 @@ public class Character {
         }
     }
     
+    /** 
+     * @param input
+     * @return boolean
+     */
     public boolean createCharacter(Scanner input) {
         boolean nameSet = false, classSet = false;
     
@@ -91,6 +98,9 @@ public class Character {
         }
     }    
     
+    /** 
+     * @param input
+     */
     private void inputCharacterName(Scanner input) {
         System.out.print("\033\143");
         System.out.println("========== Character Creation ==========");
@@ -103,6 +113,9 @@ public class Character {
         }
     }
     
+    /** 
+     * @param input
+     */
     private void selectJobClass(Scanner input) {
         System.out.print("\033\143");
         System.out.println("========== Character Creation ==========");
@@ -135,14 +148,17 @@ public class Character {
             }
         }
     }
-        
     
+    /** 
+     * @param classIndex
+     */
     private void setInitialStats(int classIndex) {
         this.level = Integer.parseInt(characterClasses[classIndex][1]);
         for (int i = 0; i < stats.length; i++) {
             stats[i] = Integer.parseInt(characterClasses[classIndex][i + 2]);
         }
     }
+    
     
     public void displayStats() {
         System.out.println("\n========== Character Stats ==========");
@@ -153,6 +169,9 @@ public class Character {
         System.out.println("=====================================");
     }
     
+    /** 
+     * @param statIndex
+     */
     public void increaseStat(int statIndex) {
         if (statIndex >= 1 && statIndex <= stats.length) {
             stats[statIndex - 1]++;
@@ -160,7 +179,11 @@ public class Character {
             System.out.println("Invalid stat choice.");
         }
     }
-
+    
+    /** 
+     * @param statIndex
+     * @return int
+     */
     public int getStatValue(int statIndex) {
         if (statIndex >= 1 && statIndex <= stats.length) {
             return stats[statIndex - 1];
@@ -169,28 +192,46 @@ public class Character {
             return -1;
         }
     }
-
+    
+    /** 
+     * @param additionalRunes
+     */
     public void addRunes(int additionalRunes) {
         this.runes += additionalRunes;
         System.out.println("Gained " + additionalRunes + " runes. Total now: " + this.runes);
     }
-
+    
+    /** 
+     * @return int
+     */
     public int getRunes() {
         return this.runes;
     }
-
+    
+    /** 
+     * @param newRunes
+     */
     public void setRunes(int newRunes) {
         this.runes = newRunes;
     }
-
+    
+    /** 
+     * @return int
+     */
     public int getLevel() {
         return level;
     }
-
+    
+    /** 
+     * @param newLevel
+     */
     public void setLevel(int newLevel) {
         this.level = newLevel;
     }
-
+    
+    /** 
+     * @return int
+     */
     public int getCurrentHealth() {
         return 100 + (5 * stats[0]);
     }
