@@ -213,7 +213,7 @@ public class Area1Grid {
             currentFloor[playerRow][playerCol] = "|     |";
         } else if ("|  B  |".equals(currentTile)) {
             System.out.print("\033\143");
-            System.out.println("You have found the Boss of Stormveil Castle !!! [ Godrick The Grafted ] with 200 HP");
+            System.out.println("You have found the Boss of Stormveil Castle !!!");
             System.out.println("\n[ Godrick The Grafted ]");
             System.out.println("HP: 200");
             pauseForMessage();
