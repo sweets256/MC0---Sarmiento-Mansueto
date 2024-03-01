@@ -128,9 +128,13 @@ public class Character {
                     return; // Job class set successfully
                 } else {
                     System.out.println("Invalid choice. Please select a valid job class or type 'back'.");
+                    pauseForMessage();
+                    System.out.print("\033\143");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number or type 'back'.");
+                pauseForMessage();
+                System.out.print("\033\143");
             }
         }
     }
