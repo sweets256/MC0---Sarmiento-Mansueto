@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.Random;
 
+/**
+ * The Area1Grid class represents the grid-based game area in Stormveil Castle.
+ * It allows players to navigate through floors, interact with objects, and encounter enemies.
+ */
 public class Area1Grid {
     private static Character character;
     private static AreaInteractionListener listener;
@@ -45,6 +49,9 @@ public class Area1Grid {
         {6, 2}
     };
 
+     /**
+     * Starts the area by initializing the floor, player position, and processing player actions.
+     */
     public static void startArea() {
         shouldExitArea = false;
         currentFloorIndex = 0;
@@ -91,6 +98,9 @@ public class Area1Grid {
         }
     }
 
+    /**
+     * Displays the current floor layout and player stats.
+     */
     private static void displayFloor() {
         int gridWidth = currentFloor[0].length * 7;
         String title = " Floor " + (currentFloorIndex + 1) + " ";
@@ -127,6 +137,12 @@ public class Area1Grid {
         System.out.println("==================================\n");
     }
 
+    /**
+     * Moves the player in the specified direction if valid.
+     *
+     * @param rowChange the change in row position
+     * @param colChange the change in column position
+     */
     private static void movePlayer(int rowChange, int colChange) {
         int newRow = playerRow + rowChange;
         int newCol = playerCol + colChange;
@@ -142,6 +158,9 @@ public class Area1Grid {
         }
     }
 
+    /**
+     * Handles player interaction with objects in the area.
+     */
     private static void interact() {
         if (isDoorToAnotherFloor()) {
             handleDoorInteraction();
@@ -204,6 +223,12 @@ public class Area1Grid {
         }
     }
     
+    
+    /**
+     * Checks if the player is standing on a door leading to another floor.
+     *
+     * @return boolean true if the player is standing on a door, false otherwise
+     */
     private static boolean isDoorToAnotherFloor() {
         return (currentFloorIndex == 0 && playerRow == 0 && playerCol == 1) ||
                (currentFloorIndex == 1 && playerRow == 0 && playerCol == 3) ||
@@ -211,6 +236,9 @@ public class Area1Grid {
                (currentFloorIndex == 2 && playerRow == 6 && playerCol == 2);
     }
     
+    /**
+     * Handles the interaction when the player moves through a door to another floor.
+     */
     private static void handleDoorInteraction() {
         if (currentFloorIndex == 0 && playerRow == 0 && playerCol == 1) {
             moveToFloor(1);
@@ -223,6 +251,11 @@ public class Area1Grid {
         }
     }
 
+    /**
+     * Moves the player to the specified target floor index.
+     *
+     * @param targetFloorIndex the index of the target floor
+     */
     private static void moveToFloor(int targetFloorIndex) {
         if (targetFloorIndex >= 0 && targetFloorIndex < floors.length) {
             int previousFloorIndex = currentFloorIndex;
@@ -245,6 +278,10 @@ public class Area1Grid {
         }
     }
     
+    /**
+    * Sets the player position for descending to a lower floor.
+    * The player position is adjusted based on the current floor index.
+    */
     private static void setPlayerPositionForDescending() {
         switch (currentFloorIndex) {
             case 1:
@@ -257,7 +294,11 @@ public class Area1Grid {
                 break;
         }
     }
-    
+
+    /**
+    * Sets the player position for ascending to a higher floor.
+    * The player position is adjusted based on the current floor index.
+    */
     private static void setPlayerPositionForAscending() {
         switch (currentFloorIndex) {
             case 0:
@@ -271,14 +312,29 @@ public class Area1Grid {
         }
     }
     
+    
+    /**
+     * Sets the character instance for the area.
+     *
+     * @param characterInstance the character instance to set
+     */
     public static void setCharacter(Character characterInstance) {
         character = characterInstance;
     }
 
+    
+    /**
+     * Sets the area interaction listener instance.
+     *
+     * @param listenerInstance the listener instance to set
+     */
     public static void setAreaInteractionListener(AreaInteractionListener listenerInstance) {
         listener = listenerInstance;
     }
 
+    /**
+     * Pauses the execution for displaying messages.
+     */
     private static void pauseForMessage() {
         try {
             Thread.sleep(2000);

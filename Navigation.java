@@ -1,5 +1,10 @@
 import java.util.Scanner;
 
+
+/**
+ * The Navigation class manages the navigation flow of the game,
+ * including transitions between different game states and areas.
+ */
 public class Navigation implements AreaInteractionListener {
     private Character player;
     private GameLobby gameLobby;
@@ -8,12 +13,19 @@ public class Navigation implements AreaInteractionListener {
     private GameState currentState;
     private String currentArea = "Game Lobby";
 
+    /**
+    * The Navigation class manages the navigation flow of the game,
+    * including transitions between different game states and areas.
+    */
     public Navigation() {
         obj = new Scanner(System.in);
         currentState = GameState.TITLE_SCREEN;
         runGameLoop();
     }
 
+    /**
+     * Starts the game loop, managing transitions between different game states.
+     */
     private void runGameLoop() {
         while (currentState != GameState.EXIT) {
             switch (currentState) {
@@ -37,6 +49,9 @@ public class Navigation implements AreaInteractionListener {
         obj.close();
     }
 
+    /**
+     * Displays the title screen and prompts the player for input.
+     */
     private void titleScreen() {
         System.out.println(" _______  _        ______   _______  _          _______  _______  _______           _______ ");
         System.out.println("(  ____ \\( \\      (  __  \\ (  ____ \\( (    /|  (  ____ )(  ___  )(  ____ \\|\\     /|(  ____ \\");
@@ -71,6 +86,9 @@ public class Navigation implements AreaInteractionListener {
         }
     }
 
+    /**
+     * Pauses the execution for a short duration before clearing the screen.
+     */
     private void pauseBeforeCleaningScreen() {
         try {
             Thread.sleep(3000);
@@ -79,6 +97,9 @@ public class Navigation implements AreaInteractionListener {
         }
     }
  
+    /**
+     * Displays the game lobby menu and handles player input.
+     */
     private void gameLobby() {
         boolean inGameLobby = true;
         while (inGameLobby) {
@@ -122,30 +143,57 @@ public class Navigation implements AreaInteractionListener {
         }
     }
     
+    
+    /**
+     * Sets the current area in the game.
+     *
+     * @param area the name of the current area
+     */
     public void setCurrentArea(String area) {
         this.currentArea = area;
     }
 
+    
+    /**
+     * Retrieves the name of the current area in the game.
+     *
+     * @return the name of the current area
+     */
     public String getCurrentArea() {
         return this.currentArea;
     }
 
+    /**
+     * Enters the specified game area.
+     */
     public void enterArea() {
         Area1Grid.setCharacter(player);
         Area1Grid.setAreaInteractionListener(this);
         Area1Grid.startArea();
     }
 
+    /**
+     * Handles the fast travel action by transitioning the game state to the game lobby.
+     */
     @Override
     public void onFastTravel() {
         currentState = GameState.GAME_LOBBY;
         setCurrentArea("Game Lobby");
     }
 
+    
+    /**
+     * Placeholder method for handling area change events.
+     *
+     * @param newArea the name of the new area
+     */
     @Override
     public void onChangeArea(String newArea) {
     }
     
+    /**
+     * Pauses the execution for a short duration to display messages.
+     */
     private static void pauseForMessage() {
         try {
             Thread.sleep(2000);

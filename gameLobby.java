@@ -1,15 +1,29 @@
 import java.util.Scanner;
 
+/**
+ * The GameLobby class represents the lobby area of the game where players can access various features.
+ * It allows players to fast travel to different areas and level up their characters.
+ */
 public class GameLobby {
     private Character player;
     private Scanner input = new Scanner(System.in);
     private Navigation navigation;
 
+    /**
+     * Constructs a GameLobby object with the provided Navigation and Character instances.
+     *
+     * @param navigation the navigation system of the game
+     * @param player the player character
+     */
     public GameLobby(Navigation navigation, Character player) {
         this.navigation = navigation;
         this.player = player;
     }
 
+    /**
+     * Initiates the fast travel process for the player.
+     * Allows the player to teleport to different available areas.
+     */
     public void fastTravel() {
         System.out.print("\033\143");
         String currentArea = navigation.getCurrentArea();
@@ -71,6 +85,10 @@ public class GameLobby {
         }
     }
     
+    /**
+     * Initiates the level-up process for the player.
+     * Allows the player to spend runes to increase their character's stats.
+     */
     public void levelUp() {
         boolean leveling = true;
     
@@ -134,6 +152,9 @@ public class GameLobby {
         }
     }
 
+    /**
+     * Displays the current stats of the player character.
+     */
     private void displayStats() {
         System.out.println("Current stats:");
         System.out.println("[1] Health: " + player.getStatValue(1));
@@ -144,6 +165,9 @@ public class GameLobby {
         System.out.println("[6] Faith: " + player.getStatValue(6) + "\n");
     }
 
+    /**
+     * Pauses the execution for a short duration to display messages.
+     */
     private static void pauseForMessage() {
         try {
             Thread.sleep(2000);
