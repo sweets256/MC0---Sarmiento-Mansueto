@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * The Character class represents a game character with various attributes 
+ * such as name, job class, level, stats, and runes.
+ */
 public class Character {
     private String characterName;
     private String jobClass;
@@ -7,7 +11,6 @@ public class Character {
     private int runes = 0;
     private int[] stats = new int[6];
     private static final String[][] characterClasses = {
-        
         {"Vagabond", "9", "15", "13", "9", "11", "14", "9"},
         {"Samurai", "9", "12", "15", "9", "13", "12", "8"},
         {"Warrior", "8", "11", "16", "10", "11", "10", "8"},
@@ -15,9 +18,11 @@ public class Character {
         {"Astrologer", "6", "9", "12", "16", "9", "8", "7"},
         {"Prophet", "7", "10", "10", "7", "8", "11", "16"}
     };
-    
-    /** 
-     * @param milliseconds
+
+    /**
+     * Pauses the execution for a specified duration.
+     *
+     * @param milliseconds the duration to pause in milliseconds
      */
     private void pause(int milliseconds) {
         try {
@@ -26,14 +31,16 @@ public class Character {
             Thread.currentThread().interrupt();
         }
     }
-    
-    /** 
-     * @param input
-     * @return boolean
+
+    /**
+     * Creates a new character by prompting the user to input character name and job class.
+     *
+     * @param input the Scanner object to receive user input
+     * @return true if the character creation is successful, otherwise false
      */
     public boolean createCharacter(Scanner input) {
         boolean nameSet = false, classSet = false;
-    
+
         while (!nameSet || !classSet) {
             System.out.print("\033\143");
             System.out.println("========== Character Creation ==========");
@@ -42,14 +49,14 @@ public class Character {
             System.out.println("[2] Job Class");
             System.out.println("Type 'back' at any time to return to the title screen.");
             System.out.print("Enter your choice: ");
-    
+
             String choice = input.nextLine().trim();
-            
+
             if ("back".equalsIgnoreCase(choice)) {
                 System.out.print("\033\143");
                 return false;
             }
-    
+
             switch (choice) {
                 case "1":
                     inputCharacterName(input);
@@ -65,7 +72,7 @@ public class Character {
                     break;
             }
         }
-        
+
         System.out.print("\033\143");
         System.out.println("========== Character Summary ==========");
         System.out.println("Character name: " + characterName);
@@ -78,9 +85,9 @@ public class Character {
         System.out.println("Endurance: " + stats[3]);
         System.out.println("Strength: " + stats[4]);
         System.out.println("Faith: " + stats[5]);
-        
+
         System.out.print("\nConfirm this character? (Y/N): ");
-    
+
         String confirmation = input.nextLine().trim().toUpperCase();
         while (!"Y".equals(confirmation) && !"N".equals(confirmation)) {
             System.out.println("Invalid input. Please enter 'Y' to confirm or 'N' to redo character creation.");
@@ -96,10 +103,12 @@ public class Character {
             System.out.print("\033\143");
             return createCharacter(input);
         }
-    }    
-    
-    /** 
-     * @param input
+    }
+
+    /**
+     * Prompts the user to input character name.
+     *
+     * @param input the Scanner object to receive user input
      */
     private void inputCharacterName(Scanner input) {
         System.out.print("\033\143");
@@ -112,9 +121,11 @@ public class Character {
             System.out.print("\033\143");
         }
     }
-    
-    /** 
-     * @param input
+
+    /**
+     * Prompts the user to select a job class from available options.
+     *
+     * @param input the Scanner object to receive user input
      */
     private void selectJobClass(Scanner input) {
         System.out.print("\033\143");
@@ -122,8 +133,8 @@ public class Character {
         System.out.println("Select a job class (or type 'back' to return to the main menu)");
         for (int i = 0; i < characterClasses.length; i++) {
             System.out.printf("[%d] %s - Level: %s, Health: %s, Dexterity: %s, Intelligence: %s, Endurance: %s, Strength: %s, Faith: %s%n",
-                              i + 1, characterClasses[i][0], characterClasses[i][1], characterClasses[i][2], characterClasses[i][3],
-                              characterClasses[i][4], characterClasses[i][5], characterClasses[i][6], characterClasses[i][7]);
+                    i + 1, characterClasses[i][0], characterClasses[i][1], characterClasses[i][2], characterClasses[i][3],
+                    characterClasses[i][4], characterClasses[i][5], characterClasses[i][6], characterClasses[i][7]);
         }
         while (true) {
             String classInput = input.nextLine();
@@ -148,9 +159,11 @@ public class Character {
             }
         }
     }
-    
-    /** 
-     * @param classIndex
+
+    /**
+     * Sets initial stats based on the selected job class.
+     *
+     * @param classIndex the index of the selected job class
      */
     private void setInitialStats(int classIndex) {
         this.level = Integer.parseInt(characterClasses[classIndex][1]);
@@ -158,8 +171,10 @@ public class Character {
             stats[i] = Integer.parseInt(characterClasses[classIndex][i + 2]);
         }
     }
-    
-    
+
+    /**
+     * Displays the character's stats.
+     */
     public void displayStats() {
         System.out.println("\n========== Character Stats ==========");
         System.out.println("Name: " + characterName);
@@ -168,9 +183,11 @@ public class Character {
         System.out.println("Runes: " + runes);
         System.out.println("=====================================");
     }
-    
-    /** 
-     * @param statIndex
+
+    /**
+     * Increases the specified stat by 1.
+     *
+     * @param statIndex the index of the stat to increase
      */
     public void increaseStat(int statIndex) {
         if (statIndex >= 1 && statIndex <= stats.length) {
@@ -179,10 +196,12 @@ public class Character {
             System.out.println("Invalid stat choice.");
         }
     }
-    
-    /** 
-     * @param statIndex
-     * @return int
+
+    /**
+     * Gets the value of the specified stat.
+     *
+     * @param statIndex the index of the stat to retrieve
+     * @return the value of the specified stat, or -1 if the index is invalid
      */
     public int getStatValue(int statIndex) {
         if (statIndex >= 1 && statIndex <= stats.length) {
@@ -192,50 +211,65 @@ public class Character {
             return -1;
         }
     }
-    
-    /** 
-     * @param additionalRunes
+
+    /**
+     * Adds the specified amount of runes to the character's inventory.
+     *
+     * @param additionalRunes the amount of runes to add
      */
     public void addRunes(int additionalRunes) {
         this.runes += additionalRunes;
         System.out.println("Gained " + additionalRunes + " runes. Total now: " + this.runes);
     }
-    
-    /** 
-     * @return int
+
+    /**
+     * Gets the total number of runes in the character's inventory.
+     *
+     * @return the total number of runes
      */
     public int getRunes() {
         return this.runes;
     }
-    
-    /** 
-     * @param newRunes
+
+    /**
+     * Sets the total number of runes in the character's inventory.
+     *
+     * @param newRunes the new total number of runes
      */
     public void setRunes(int newRunes) {
         this.runes = newRunes;
     }
-    
-    /** 
-     * @return int
+
+    /**
+     * Gets the level of the character.
+     *
+     * @return the level of the character
      */
     public int getLevel() {
         return level;
     }
-    
-    /** 
-     * @param newLevel
+
+    /**
+     * Sets the level of the character.
+     *
+     * @param newLevel the new level of the character
      */
     public void setLevel(int newLevel) {
         this.level = newLevel;
     }
-    
-    /** 
-     * @return int
+
+    /**
+     * Calculates and returns the current health of the character.
+     *
+     * @return the current health of the character
      */
     public int getCurrentHealth() {
         return 100 + (5 * stats[0]);
     }
 
+    /**
+     * Pauses the execution for a fixed duration to display messages.
+     */
     private static void pauseForMessage() {
         try {
             Thread.sleep(2000);
