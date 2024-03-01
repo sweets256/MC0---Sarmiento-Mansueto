@@ -36,7 +36,7 @@ public class Character {
      * Creates a new character by prompting the user to input character name and job class.
      *
      * @param input the Scanner object to receive user input
-     * @return true if the character creation is successful, otherwise false
+     * @return boolean true if the character creation is successful, otherwise false
      */
     public boolean createCharacter(Scanner input) {
         boolean nameSet = false, classSet = false;
