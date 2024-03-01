@@ -54,7 +54,15 @@ public class Area1Grid {
         playerRow = startingPositions[currentFloorIndex][0];
         playerCol = startingPositions[currentFloorIndex][1];
     
-        System.out.println("[ Stormveil Castle ]");
+       //1. System.out.println("[ Stormveil Castle ]");
+        System.out.println(" _______ _________ _______  _______  _______           _______ _________ _          _______  _______  _______ _________ _        _______ ");
+        System.out.println("(  ____ \\\\__   __/(  ___  )(  ____ )(       )|\\     /|(  ____ \\\\__   __/( \\        (  ____ \\(  ___  )(  ____ \\\\__   __/( \\      (  ____ \\");
+        System.out.println("| (    \\/   ) (   | (   ) || (    )|| () () || )   ( || (    \\/   ) (   | (        | (    \\/| (   ) || (    \\/   ) (   | (      | (    \\/");
+        System.out.println("| (_____    | |   | |   | || (____)|| || || || |   | || (__       | |   | |        | |      | (___) || (_____    | |   | |      | (__    ");
+        System.out.println("(_____  )   | |   | |   | ||     __)| |(_)| |( (   ) )|  __)      | |   | |        | |      |  ___  |(_____  )   | |   | |      |  __)   ");
+        System.out.println("      ) |   | |   | |   | || (\\ (   | |   | | \\ \\_/ / | (         | |   | |        | |      | (   ) |      ) |   | |   | |      | (      ");
+        System.out.println("/\\____) |   | |   | (___) || ) \\ \\__| )   ( |  \\   /  | (____/\\___) (___| (____/\\  | (____/\\| )   ( |/\\____) |   | |   | (____/\\| (____/\\");
+        System.out.println("\\_______)   )_(   (_______)|/   \\__/|/     \\|   \\_/   (_______/\\_______/(_______/  (_______/|/     \\|\\_______)   )_(   (_______/(_______/");
         pauseForMessage();
         System.out.print("\033\143");
     
