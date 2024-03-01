@@ -8,7 +8,7 @@ public class Character {
     private String characterName;
     private String jobClass;
     private int level = 1;
-    private int runes = 0;
+    private int runes = 1000;
     private int[] stats = new int[6];
     private static final String[][] characterClasses = {
         {"Vagabond", "9", "15", "13", "9", "11", "14", "9"},

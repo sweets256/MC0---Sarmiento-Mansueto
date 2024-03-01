@@ -170,7 +170,7 @@ public class GameLobby {
      */
     private static void pauseForMessage() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
