@@ -143,7 +143,6 @@ public class Navigation implements AreaInteractionListener {
         }
     }
     
-    
     /**
      * Sets the current area in the game.
      *
@@ -152,7 +151,6 @@ public class Navigation implements AreaInteractionListener {
     public void setCurrentArea(String area) {
         this.currentArea = area;
     }
-
     
     /**
      * Retrieves the name of the current area in the game.
@@ -162,16 +160,18 @@ public class Navigation implements AreaInteractionListener {
     public String getCurrentArea() {
         return this.currentArea;
     }
-
-    /**
-     * Enters the specified game area.
-     */
-    public void enterArea() {
-        Area1Grid.setCharacter(player);
-        Area1Grid.setAreaInteractionListener(this);
-        Area1Grid.startArea();
+        
+    public void enterArea(String areaName) {
+        if ("Stormveil Castle".equals(areaName)) {
+            Area1Grid.setCharacter(player);
+            Area1Grid.startArea();
+        } else if ("Raya Lucaria Academy".equals(areaName)) {
+            Area2Grid.setCharacter(player);
+            Area2Grid.startArea();
+        }
+        // Handle other areas similarly
     }
-
+    
     /**
      * Handles the fast travel action by transitioning the game state to the game lobby.
      */
@@ -181,7 +181,6 @@ public class Navigation implements AreaInteractionListener {
         setCurrentArea("Game Lobby");
     }
 
-    
     /**
      * Placeholder method for handling area change events.
      *

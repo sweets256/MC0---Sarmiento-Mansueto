@@ -2,51 +2,66 @@ import java.util.Scanner;
 import java.util.Random;
 
 /**
- * The Area1Grid class represents the grid-based game area in Stormveil Castle.
+ * The Area1Grid class represents the grid-based game area in Raya Lucaria Academy.
  * It allows players to navigate through floors, interact with objects, and encounter enemies.
  */
-public class Area1Grid {
+public class Area2Grid {
     private static Character character;
     private static AreaInteractionListener listener;
     private static String[][] currentFloor;
-    private static int playerRow = 6;
+    private static int playerRow = 0;
     private static int playerCol = 2;
     private static final Scanner scanner = new Scanner(System.in);
     private static boolean shouldExitArea = false;
     private static String[][] floor1Data = {
-        {"|     |", "|  D  |", "|     |"},
-        {"|  ?  |", "|     |", "|  ?  |"},
-        {"|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |"},
-        {"|     |", "|  F  |", "|     |"}
-    };
-    private static String[][] floor2Data = {
-        {"|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |", "|  ?  |", "|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
-        {"|  ?  |", "|     |", "|  ?  |", "|  ?  |", "|  ?  |", "|     |", "|  ?  |"},
-        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |"}
-    };
-    private static String[][] floor3Data = {
         {"|     |", "|     |", "|  F  |", "|     |", "|     |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|  B  |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
         {"|     |", "|     |", "|  D  |", "|     |", "|     |"}
     };
-    private static String[][][] floors = {floor1Data, floor2Data, floor3Data};
+    private static String[][] floor2Data = {
+        {"|     |", "|  D  |", "|     |",},
+        {"|  ?  |", "|     |", "|     |",},
+        {"|     |", "|     |", "|     |",},
+        {"|  ?  |", "|     |", "|  D  |",},
+        {"|     |", "|     |", "|     |",},
+        {"|  ?  |", "|     |", "|     |",},
+        {"|     |", "|     |", "|     |",}
+    };
+    private static String[][] floor3Data = {
+        {"|     |", "|     |", "|  D  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  ?  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|  D  |", "|     |", "|     |", "|     |", "|  D  |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  ?  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"}
+    };
+    private static String[][] floor4Data = {
+        {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
+        {"|  D  |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"}
+    };
+    private static String[][] floor5Data = {
+        {"|     |", "|     |", "|     |", "|  F  |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|  ?  |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|  ?  |", "|     |", "|  B  |", "|     |", "|  ?  |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|  ?  |", "|     |", "|     |", "|     |", "|  ?  |", "|     |"},
+        {"|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |"}
+    };
+    private static String[][][] floors = {floor1Data, floor2Data, floor3Data, floor4Data, floor5Data};
     private static int currentFloorIndex = 0;
     
     private static final int[][] startingPositions = {
-        {6, 1},
-        {6, 3},
-        {6, 2}
+        {0, 2},
+        {0, 1},
+        {3, 0},
+        {0, 1},
+        {7, 3}
     };
 
      /**
@@ -60,14 +75,7 @@ public class Area1Grid {
         playerRow = startingPositions[currentFloorIndex][0];
         playerCol = startingPositions[currentFloorIndex][1];
     
-        System.out.println(" _______ _________ _______  _______  _______           _______ _________ _          _______  _______  _______ _________ _        _______ ");
-        System.out.println("(  ____ \\\\__   __/(  ___  )(  ____ )(       )|\\     /|(  ____ \\\\__   __/( \\        (  ____ \\(  ___  )(  ____ \\\\__   __/( \\      (  ____ \\");
-        System.out.println("| (    \\/   ) (   | (   ) || (    )|| () () || )   ( || (    \\/   ) (   | (        | (    \\/| (   ) || (    \\/   ) (   | (      | (    \\/");
-        System.out.println("| (_____    | |   | |   | || (____)|| || || || |   | || (__       | |   | |        | |      | (___) || (_____    | |   | |      | (__    ");
-        System.out.println("(_____  )   | |   | |   | ||     __)| |(_)| |( (   ) )|  __)      | |   | |        | |      |  ___  |(_____  )   | |   | |      |  __)   ");
-        System.out.println("      ) |   | |   | |   | || (\\ (   | |   | | \\ \\_/ / | (         | |   | |        | |      | (   ) |      ) |   | |   | |      | (      ");
-        System.out.println("/\\____) |   | |   | (___) || ) \\ \\__| )   ( |  \\   /  | (____/\\___) (___| (____/\\  | (____/\\| )   ( |/\\____) |   | |   | (____/\\| (____/\\");
-        System.out.println("\\_______)   )_(   (_______)|/   \\__/|/     \\|   \\_/   (_______/\\_______/(_______/  (_______/|/     \\|\\_______)   )_(   (_______/(_______/");
+        System.out.println("Raya Lucaria Academy");
         pauseForMessage();
         System.out.print("\033\143");
     
@@ -92,7 +100,7 @@ public class Area1Grid {
             System.out.print("\033\143");
         } else {
             System.out.print("\033\143");
-            System.out.println("Exiting Stormveil Castle...");
+            System.out.println("Exiting Raya Lucaria Academy...");
             pauseForMessage();
             System.out.print("\033\143");
         }
@@ -179,19 +187,19 @@ public class Area1Grid {
         } else if ("|  ?  |".equals(currentTile)) {
             Random rand = new Random();
             double encounterChance = rand.nextDouble();
-            String[] enemies = {"Godrick Soldier", "Godrick Archer", "Godrick Knight"};
+            String[] enemies = {"Living Jar", "Glintstone Sorcerer", "Battlemage"};
             String encounteredEnemy = enemies[rand.nextInt(enemies.length)];
             boolean isHighType = rand.nextBoolean();
             int enemyHealth;
 
             switch (encounteredEnemy) {
-                case "Godrick Soldier":
+                case "Living Jar":
                     enemyHealth = isHighType ? 30 : 20;
                     break;
-                case "Godrick Archer":
+                case "Glintstone Sorcerer":
                     enemyHealth = isHighType ? 35 : 25;
                     break;
-                case "Godrick Knight":
+                case "Battlemage":
                     enemyHealth = isHighType ? 80 : 70;
                     break;
                 default:
@@ -216,9 +224,9 @@ public class Area1Grid {
             currentFloor[playerRow][playerCol] = "|     |";
         } else if ("|  B  |".equals(currentTile)) {
             System.out.print("\033\143");
-            System.out.println("You have found the Boss of Stormveil Castle !!!");
-            System.out.println("\n[ Godrick The Grafted ]");
-            System.out.println("HP: 200");
+            System.out.println("You have found the Boss of Raya Lucaria Academy !!!");
+            System.out.println("\n[ Renala, Queen of the Full Moon ]");
+            System.out.println("HP: 400");
             pauseForMessage();
             System.out.print("\033\143");
         } else {
@@ -235,24 +243,36 @@ public class Area1Grid {
      * @return boolean true if the player is standing on a door, false otherwise
      */
     private static boolean isDoorToAnotherFloor() {
-        return (currentFloorIndex == 0 && playerRow == 0 && playerCol == 1) ||
-               (currentFloorIndex == 1 && playerRow == 0 && playerCol == 3) ||
-               (currentFloorIndex == 1 && playerRow == 6 && playerCol == 3) ||
-               (currentFloorIndex == 2 && playerRow == 6 && playerCol == 2);
+        return (currentFloorIndex == 0 && playerRow == 4 && playerCol == 2) ||
+               (currentFloorIndex == 1 && playerRow == 0 && playerCol == 1) ||
+               (currentFloorIndex == 1 && playerRow == 3 && playerCol == 2) ||
+               (currentFloorIndex == 2 && playerRow == 3 && playerCol == 0) ||
+               (currentFloorIndex == 2 && playerRow == 0 && playerCol == 2) ||
+               (currentFloorIndex == 2 && playerRow == 3 && playerCol == 4) ||
+               (currentFloorIndex == 3 && playerRow == 1 && playerCol == 0) ||
+               (currentFloorIndex == 4 && playerRow == 7 && playerCol == 3);
     }
     
     /**
      * Handles the interaction when the player moves through a door to another floor.
      */
     private static void handleDoorInteraction() {
-        if (currentFloorIndex == 0 && playerRow == 0 && playerCol == 1) {
+        if (currentFloorIndex == 0 && playerRow == 4 && playerCol == 2) {
             moveToFloor(1);
-        } else if (currentFloorIndex == 1 && playerRow == 0 && playerCol == 3) {
-            moveToFloor(2);
-        } else if (currentFloorIndex == 1 && playerRow == 6 && playerCol == 3) {
+        } else if (currentFloorIndex == 1 && playerRow == 0 && playerCol == 1) {
             moveToFloor(0);
-        } else if (currentFloorIndex == 2 && playerRow == 6 && playerCol == 2) {
+        } else if (currentFloorIndex == 1 && playerRow == 3 && playerCol == 2) {
+            moveToFloor(2);
+        } else if (currentFloorIndex == 2 && playerRow == 3 && playerCol == 0) {
             moveToFloor(1);
+        } else if (currentFloorIndex == 2 && playerRow == 3 && playerCol == 4) {
+            moveToFloor(3);
+        } else if (currentFloorIndex == 3 && playerRow == 1 && playerCol == 0) {
+            moveToFloor(2);
+        } else if (currentFloorIndex == 2 && playerRow == 0 && playerCol == 2) {
+            moveToFloor(4);
+        } else if (currentFloorIndex == 4 && playerRow == 7 && playerCol == 3) {
+            moveToFloor(2);
         }
     }
 
@@ -270,9 +290,9 @@ public class Area1Grid {
             System.out.print("\033\143");
 
             if (previousFloorIndex < currentFloorIndex) {
-                setPlayerPositionForDescending();
-            } else {
                 setPlayerPositionForAscending();
+            } else {
+                setPlayerPositionForDescending();
             }
     
             System.out.println("Moving to Floor " + (currentFloorIndex + 1) + "...");
@@ -284,38 +304,62 @@ public class Area1Grid {
     }
     
     /**
-    * Sets the player position for descending to a lower floor.
-    * The player position is adjusted based on the current floor index.
-    */
-    private static void setPlayerPositionForDescending() {
-        switch (currentFloorIndex) {
-            case 1:
-                playerRow = 6;
-                playerCol = 3;
-                break;
-            case 2:
-                playerRow = 6;
-                playerCol = 2;
-                break;
-        }
-    }
-
-    /**
     * Sets the player position for ascending to a higher floor.
     * The player position is adjusted based on the current floor index.
     */
     private static void setPlayerPositionForAscending() {
+        // This switch is based on the target floor (currentFloorIndex)
         switch (currentFloorIndex) {
-            case 0:
+            case 1:
                 playerRow = 0;
                 playerCol = 1;
                 break;
-            case 1:
-                playerRow = 0;
+            case 2:
+                // Assuming the left door connects to floor 2
+                playerRow = 3;
+                playerCol = 0;
+                break;
+            case 3:
+                // Adjusted to enter through the right door from floor 4
+                playerRow = 1;
+                playerCol = 0;
+                break;
+            case 4:
+                // Assuming the middle topmost door connects to floor 5
+                playerRow = 7;
                 playerCol = 3;
                 break;
         }
+    }    
+
+    /**
+    * Sets the player position for descending to a lower floor.
+    * The player position is adjusted based on the current floor index.
+    */
+    private static void setPlayerPositionForDescending() {
+    
+        switch (currentFloorIndex) {
+            case 0:
+                playerRow = 4;
+                playerCol = 2;
+                break;
+            case 1:
+                playerRow = 3;
+                playerCol = 2;
+                break;
+            case 2:
+                playerRow = 3;
+                playerCol = 4;
+                break;
+            case 3:
+                playerRow = 0;
+                playerCol = 4;
+                break;
+            case 4:
+                playerRow = 0;
+                playerCol = 2;
     }
+}
     
     /**
      * Sets the character instance for the area.

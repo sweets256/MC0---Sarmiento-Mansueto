@@ -32,7 +32,7 @@ public class GameLobby {
             System.out.println("========== Fast Travel ==========");
             System.out.println("Available areas:");
             System.out.println("[1] Stormveil Castle");
-            System.out.println("[2] Raya Lucaria Academy [LOCKED]");
+            System.out.println("[2] Raya Lucaria Academy");
             System.out.println("[3] The Elden Throne [LOCKED]");
             System.out.print("\nEnter your choice or 'back' to cancel: ");
     
@@ -55,14 +55,16 @@ public class GameLobby {
                         System.out.println("Teleporting to Stormveil Castle...");
                         pauseForMessage();
                         System.out.print("\033\143");
-                        navigation.enterArea();
+                        navigation.enterArea("Stormveil Castle");
                         return;
                     case 2:
                         System.out.print("\033\143");
-                        System.out.println("Raya Lucaria Academy is LOCKED!");
+                        navigation.setCurrentArea("Raya Lucaria Academy");
+                        System.out.println("Teleporting to Raya Lucaria Academy...");
                         pauseForMessage();
                         System.out.print("\033\143");
-                        break;
+                        navigation.enterArea("Raya Lucaria Academy");
+                        return;
                     case 3:
                         System.out.print("\033\143");
                         System.out.println("Elden Throne is LOCKED!");
