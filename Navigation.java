@@ -107,7 +107,8 @@ public class Navigation implements AreaInteractionListener {
             System.out.println("============ " + currentArea + " =============");
             System.out.println("[1] Fast Travel");
             System.out.println("[2] Level Up");
-            System.out.println("[3] Quit Game");
+            System.out.println("[3] Store");
+            System.out.println("[4] Quit Game");
             
             player.displayStats();
             System.out.print("\nPlease choose an option: ");
@@ -125,6 +126,10 @@ public class Navigation implements AreaInteractionListener {
                     gameLobby.levelUp();
                     break;
                 case 3:
+                    System.out.print("\033\143");
+                    gameLobby.shop();
+                    break;
+                case 4:
                     System.out.print("\033\143");
                     System.out.println("Going back to the Main Menu...");
                     pauseForMessage();

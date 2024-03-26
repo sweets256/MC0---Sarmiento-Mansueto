@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -8,6 +10,7 @@ public class GameLobby {
     private Character player;
     private Scanner input = new Scanner(System.in);
     private Navigation navigation;
+    private List<Weapon> weaponsForSale;
 
     /**
      * Constructs a GameLobby object with the provided Navigation and Character instances.
@@ -18,6 +21,8 @@ public class GameLobby {
     public GameLobby(Navigation navigation, Character player) {
         this.navigation = navigation;
         this.player = player;
+        this.weaponsForSale = new ArrayList<>(); // Initialize weapons only once
+        initializeWeapons(); // Initialize weapons available for sale
     }
 
     /**
@@ -150,6 +155,123 @@ public class GameLobby {
                 System.out.println("Invalid input. Please enter a valid stat number.");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Initializes the weapons available for sale.
+     */
+    private void initializeWeapons() {
+        weaponsForSale.add(new Weapon("Short Sword", 1000, 0, 15, 13, 15, 15, 15));
+        weaponsForSale.add(new Weapon("Rogier's Rapier", 2000, 10, 25, 18, 35, 35, 35));
+        weaponsForSale.add(new Weapon("Coded Sword", 4000, 20, 35, 21, 40, 40, 40));
+        weaponsForSale.add(new Weapon("Sword of Night and Flame", 8000, 30, 45, 25, 55, 55, 55));
+        weaponsForSale.add(new Weapon("Uchigatana", 1875, 20, 35, 15, 30, 0, 0));
+        weaponsForSale.add(new Weapon("Moonveil", 3750, 30, 40, 20, 45, 0, 0));
+        weaponsForSale.add(new Weapon("River of Blood", 7500, 40, 45, 25, 60, 0, 0));
+        weaponsForSale.add(new Weapon("Hand of Malenia", 15000, 50, 50, 30, 75, 0, 0));
+        weaponsForSale.add(new Weapon("Whip", 1500, 15, 60, 20, 20, 0, 0));
+        weaponsForSale.add(new Weapon("Urumi", 3000, 20, 70, 25, 40, 10, 0));
+        weaponsForSale.add(new Weapon("Thorned Whip", 5000, 30, 80, 30, 50, 0, 40));
+        weaponsForSale.add(new Weapon("Hoslow's Petal Whip", 10000,35, 90, 35, 55, 20, 20));
+        weaponsForSale.add(new Weapon("Claymore", 3000, 15, 10, 9, 20, 0, 0));
+        weaponsForSale.add(new Weapon("Starscourge Greatsword", 6000, 20, 15, 14, 40, 0, 20));
+        weaponsForSale.add(new Weapon("Inseparable Sword", 12000, 25, 20, 19, 70, 60, 60));
+        weaponsForSale.add(new Weapon("Malekith's Black Blade", 24000, 30, 25, 24, 80, 40, 60));
+        weaponsForSale.add(new Weapon("Astrologer's Staff", 2000, 5, 20, 12, 5, 25, 15));
+        weaponsForSale.add(new Weapon("Albinauric Staff", 4000, 10, 30, 14, 10, 45, 35));
+        weaponsForSale.add(new Weapon("Staff of the Guilty", 8000, 15, 40, 16, 15, 65, 60));
+        weaponsForSale.add(new Weapon("Carian Regal Scepter", 16000, 25, 50, 18, 20, 85, 75));
+        weaponsForSale.add(new Weapon("Finger Seal", 2500, 10, 45, 10, 0, 15, 20));
+        weaponsForSale.add(new Weapon("Godslayer's Seal", 5000, 15, 50, 12, 0, 35, 40));
+        weaponsForSale.add(new Weapon("Golden Order Seal", 10000, 20, 55, 14, 0, 65, 65));
+        weaponsForSale.add(new Weapon("Dragon Communion Seal", 15000, 25, 60, 18, 0, 75, 80));
+    }
+    
+
+    /**
+     * Displays the weapons available for sale in the shop.
+     */
+    private void displayAvailableWeapons() {
+        System.out.println("===== Weapons Available in the Shop =====");
+    
+        // Define weapon categories and their sizes
+        String[] categories = {"Swords", "Katanas", "Whips", "Greatswords", "Staves", "Seals"};
+        int[] categorySizes = {4, 4, 4, 4, 4, 4};
+    
+        // Counter for tracking the index in the weapons list
+        int weaponIndex = 0;
+    
+        // Iterate through categories
+        for (int i = 0; i < categories.length; i++) {
+            System.out.println("\n---------- " + categories[i] + " ----------");
+    
+            // Iterate through weapons in the category
+            for (int j = 0; j < categorySizes[i]; j++) {
+                if (weaponIndex >= weaponsForSale.size()) {
+                    break; // Exit loop if all weapons are displayed
+                }
+                Weapon weapon = weaponsForSale.get(weaponIndex++);
+                System.out.println("[" + (weaponIndex) + "] " + weapon.getName() +
+                        " - Dexterity: " + weapon.getDexterity() +
+                        ", HP: " + weapon.getHp() +
+                        ", Intelligence: " + weapon.getIntelligence() +
+                        ", Endurance: " + weapon.getEndurance() +
+                        ", Strength: " + weapon.getStrength() +
+                        ", Faith: " + weapon.getFaith() +
+                        ", Cost: " + weapon.getCost() + " runes");
+            }
+        }
+    }
+    
+
+    /**
+     * Allows the player to buy weapons from the shop using their runes.
+     * 
+     */
+    public void shop() {
+        while (true) {
+            displayAvailableWeapons(); 
+            
+            // Prompt the player to buy a weapon
+            System.out.println("\nEnter the number of the weapon you want to buy, or type 'exit' to leave the shop:");
+            String inputChoice = input.nextLine().trim();
+    
+            if ("exit".equalsIgnoreCase(inputChoice)) {
+                System.out.print("\033\143");
+                System.out.println("Exiting the shop...");
+                pauseForMessage();
+                System.out.print("\033\143");
+                return;
+            }
+    
+            try {
+                int weaponChoice = Integer.parseInt(inputChoice);
+                if (weaponChoice >= 1 && weaponChoice <= weaponsForSale.size()) {
+                    Weapon selectedWeapon = weaponsForSale.get(weaponChoice - 1);
+                    if (player.getRunes() >= selectedWeapon.getCost()) {
+                        // Player has enough runes to buy the weapon
+                        player.setRunes(player.getRunes() - selectedWeapon.getCost());
+
+                        System.out.print("\033\143");
+                        System.out.println("You bought the " + selectedWeapon.getName() + "!");
+                        pauseForMessage();
+                        System.out.print("\033\143");
+                        // Insert code for adding new weapon to the player inventory
+    
+                        continue; // Continue shopping
+                    } else {
+                        System.out.print("\033\143");
+                        System.out.println("You don't have enough runes to buy this weapon.\n");
+                    }
+                } else {
+                    System.out.print("\033\143");
+                    System.out.println("Invalid choice. Please select a valid weapon number.\n");
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("\033\143");
+                System.out.println("Invalid input. Please enter a valid weapon number or 'exit'.\n");
             }
         }
     }
