@@ -160,6 +160,67 @@ public class GameLobby {
     }
 
     /**
+     * Displays the player's inventory and allows them to change their equipped weapon.
+     */
+    public void inventory() {
+        while (true) {
+            System.out.println("===== Inventory =====");
+            System.out.println("Equipped Weapon:");
+            if (player.getEquippedWeapon() != null) {
+                System.out.println("Name: " + player.getEquippedWeapon().getName());
+                System.out.println("Dexterity Requirement: " + player.getEquippedWeapon().getDexterity() + "\n");
+            } else {
+                System.out.println("None\n");
+            }
+            
+            // Display inventory
+            System.out.println("Weapons in Inventory:");
+            List<Weapon> inventory = player.getInventory();
+            int i;
+            for (i = 0; i < inventory.size(); i++) {
+                Weapon weapon = inventory.get(i);
+                System.out.println((i + 1) + ". " + weapon.getName() +
+                        " - Dexterity Requirement: " + weapon.getDexterity());
+            }
+
+            // Pick 1 for weapon select, 2 to go back to GameLobby
+            System.out.println("\n[1] Select Weapon");
+            System.out.println("[2] Back");
+            System.out.print("Enter your choice: ");
+            String inputChoice = input.nextLine().trim();
+
+
+            if ("2".equals(inputChoice)) { // Go back to GameLobby
+                System.out.print("\033\143");
+                return;
+            } else if ("1".equals(inputChoice)) { // Prompts user to pick a weapon to equip
+                System.out.print("\nEnter the index of the weapon to equip: ");
+                int index = Integer.parseInt(input.nextLine().trim()) - 1;
+
+                if (index >= 0 && index < inventory.size()) { // Checks if input is a valid weapon index
+                    Weapon selectedWeapon = inventory.get(index);
+                    if (player.getStatValue(2) >= selectedWeapon.getDexterity()) { // If player dex is >= weapon dex
+                        player.setEquippedWeapon(selectedWeapon);
+                        System.out.println("You equipped the " + selectedWeapon.getName() + ".");
+                        pauseForMessage();
+                        System.out.print("\033\143");
+                        return;
+                    } else {
+                        System.out.println("\nYou don't have enough dexterity to equip this weapon."); // If player dex is < weapon dex
+                    }
+                } else {
+                    System.out.println("\nInvalid weapon index."); // Invalid weapon index
+                }
+            } else {
+                System.out.println("\nInvalid choice."); // Choice is not [1] Select Weapon or [2] Back
+            }
+            // Pause and clear per system message
+            pauseForMessage(); 
+            System.out.print("\033\143");
+        }
+    }
+
+    /**
      * Initializes the weapons available for sale.
      */
     private void initializeWeapons() {
@@ -256,9 +317,10 @@ public class GameLobby {
 
                         System.out.print("\033\143");
                         System.out.println("You bought the " + selectedWeapon.getName() + "!");
+                        player.addToInventory(selectedWeapon); // Add the weapon to player's inventory
                         pauseForMessage();
                         System.out.print("\033\143");
-                        // Insert code for adding new weapon to the player inventory
+
     
                         continue; // Continue shopping
                     } else {
@@ -275,6 +337,8 @@ public class GameLobby {
             }
         }
     }
+
+
 
     /**
      * Displays the current stats of the player character.

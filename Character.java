@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -8,7 +10,7 @@ public class Character {
     private String characterName;
     private String jobClass;
     private int level = 1;
-    private int runes = 1000;
+    private int runes = 100000;
     private int[] stats = new int[6];
     private static final String[][] characterClasses = {
         {"Vagabond", "9", "15", "13", "9", "11", "14", "9"},
@@ -18,6 +20,8 @@ public class Character {
         {"Astrologer", "6", "9", "12", "16", "9", "8", "7"},
         {"Prophet", "7", "10", "10", "7", "8", "11", "16"}
     };
+    private List<Weapon> inventory = new ArrayList<>();
+    private Weapon equippedWeapon;
 
     /**
      * Pauses the execution for a specified duration.
@@ -195,6 +199,51 @@ public class Character {
         } else {
             System.out.println("Invalid stat choice.");
         }
+    }
+
+    /**
+     * Adds a weapon to the character's inventory.
+     *
+     * @param weapon the weapon to add
+     */
+    public void addToInventory(Weapon weapon) {
+        inventory.add(weapon);
+    }
+
+    /**
+     * Removes a weapon from the character's inventory.
+     *
+     * @param weapon the weapon to remove
+     */
+    public void removeFromInventory(Weapon weapon) {
+        inventory.remove(weapon);
+    }
+
+    /**
+     * Gets the character's inventory.
+     *
+     * @return the list of weapons in the inventory
+     */
+    public List<Weapon> getInventory() {
+        return inventory;
+    }
+
+     /**
+     * Gets the equipped weapon.
+     *
+     * @return the equipped weapon
+     */
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    /**
+     * Sets the equipped weapon.
+     *
+     * @param equippedWeapon the weapon to equip
+     */
+    public void setEquippedWeapon(Weapon equippedWeapon) {
+        this.equippedWeapon = equippedWeapon;
     }
 
     /**

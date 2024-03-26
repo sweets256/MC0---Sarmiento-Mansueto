@@ -10,7 +10,7 @@ public class Weapon {
     private int faith;
     private int cost;
 
-    public Weapon(String name, int dexterity, int hp, int intelligence, int endurance, int strength, int faith, int cost) {
+    public Weapon(String name, int cost, int hp, int endurance, int dexterity, int strength, int intelligence, int faith) {
         this.name = name;
         this.dexterity = dexterity;
         this.hp = hp;
