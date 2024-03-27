@@ -10,7 +10,7 @@ public class GameLobby {
     private Character player;
     private Scanner input = new Scanner(System.in);
     private Navigation navigation;
-    private List<Weapon> weaponsForSale;
+    List<Weapon> weaponsForSale;
 
     /**
      * Constructs a GameLobby object with the provided Navigation and Character instances.
