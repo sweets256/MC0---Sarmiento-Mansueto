@@ -311,29 +311,28 @@ public class GameLobby {
                 int weaponChoice = Integer.parseInt(inputChoice);
                 if (weaponChoice >= 1 && weaponChoice <= weaponsForSale.size()) {
                     Weapon selectedWeapon = weaponsForSale.get(weaponChoice - 1);
-                    if (player.getRunes() >= selectedWeapon.getCost()) {
-                        // Player has enough runes to buy the weapon
+                    if (player.getRunes() >= selectedWeapon.getCost()) { // Checker to see if player has enough money
+                        // Player has enough runes to buy the weapon, subtract cost from player runes
                         player.setRunes(player.getRunes() - selectedWeapon.getCost());
 
                         System.out.print("\033\143");
-                        System.out.println("You bought the " + selectedWeapon.getName() + "!");
+                        System.out.println("You bought the " + selectedWeapon.getName() + "!"); // Weapon bought print
                         player.addToInventory(selectedWeapon); // Add the weapon to player's inventory
                         pauseForMessage();
                         System.out.print("\033\143");
-
     
-                        continue; // Continue shopping
+                        continue; // Continue shopping, don't go back to game lobby till exit
                     } else {
                         System.out.print("\033\143");
-                        System.out.println("You don't have enough runes to buy this weapon.\n");
+                        System.out.println("You don't have enough runes to buy this weapon.\n"); // Player not enough runes
                     }
                 } else {
                     System.out.print("\033\143");
-                    System.out.println("Invalid choice. Please select a valid weapon number.\n");
+                    System.out.println("Invalid choice. Please select a valid weapon number.\n"); // Invalid weapon index input
                 }
             } catch (NumberFormatException e) {
                 System.out.print("\033\143");
-                System.out.println("Invalid input. Please enter a valid weapon number or 'exit'.\n");
+                System.out.println("Invalid input. Please enter a valid weapon number or 'exit'.\n"); // Error handling
             }
         }
     }
