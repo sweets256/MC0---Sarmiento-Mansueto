@@ -185,6 +185,7 @@ public class Character {
         System.out.println("Job Class: " + jobClass);
         System.out.println("Level: " + level);
         System.out.println("Runes: " + runes);
+        System.out.println("Health: " + getCurrentHealth()); // Add current health display
         System.out.println("=====================================");
     }
 
@@ -198,6 +199,26 @@ public class Character {
             stats[statIndex - 1]++;
         } else {
             System.out.println("Invalid stat choice.");
+        }
+    }
+
+    /**
+     * Reduces the character's health by the specified amount of damage.
+     *
+     * @param damage the amount of damage to take
+     */
+    public void takeDamage(int damage) {
+        if (damage > 0) {
+            int currentHealth = getCurrentHealth();
+            int newHealth = currentHealth - damage;
+            if (newHealth < 0) {
+                newHealth = 0; // Ensure health doesn't go below 0
+            }
+            stats[0] = newHealth / 5; // Update the health stat
+            System.out.println(characterName + " took " + damage + " damage!");
+            System.out.println("Current Health: " + getCurrentHealth());
+        } else {
+            System.out.println("Invalid damage amount.");
         }
     }
 
@@ -314,6 +335,15 @@ public class Character {
      */
     public int getCurrentHealth() {
         return 100 + (5 * stats[0]);
+    }
+
+    /**
+     * Gets the inputted name of the player.
+     *
+     * @return the current name of the player
+     */
+    public String getCharacterName() {
+        return characterName;
     }
 
     /**
