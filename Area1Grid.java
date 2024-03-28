@@ -40,6 +40,34 @@ public class Area1Grid {
         {"|     |", "|     |", "|     |", "|     |", "|     |"},
         {"|     |", "|     |", "|  D  |", "|     |", "|     |"}
     };
+    private static String[][] initialfloor1Data = {
+        {"|     |", "|  D  |", "|     |"},
+        {"|  ?  |", "|     |", "|  ?  |"},
+        {"|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |"},
+        {"|     |", "|  F  |", "|     |"}
+    };
+    private static String[][] initialfloor2Data = {
+        {"|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|  ?  |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|  ?  |", "|     |", "|  ?  |", "|  ?  |", "|  ?  |", "|     |", "|  ?  |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |"}
+    };
+    private static String[][] initialfloor3Data = {
+        {"|     |", "|     |", "|  F  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  B  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  D  |", "|     |", "|     |"}
+    };
+
     private static String[][][] floors = {floor1Data, floor2Data, floor3Data};
     private static int currentFloorIndex = 0;
     
@@ -49,17 +77,31 @@ public class Area1Grid {
         {6, 2}
     };
 
+    // Method to reset floor data to its initial state
+    private static void resetFloorData() {
+        for (int i = 0; i < floor1Data.length; i++) {
+            floor1Data[i] = initialfloor1Data[i].clone();
+        }
+        for (int i = 0; i < floor2Data.length; i++) {
+            floor2Data[i] = initialfloor2Data[i].clone();
+        }
+        for (int i = 0; i < floor3Data.length; i++) {
+            floor3Data[i] = initialfloor3Data[i].clone();
+        }
+    }
+
      /**
      * Starts the area by initializing the floor, player position, and processing player actions.
      */
     public static void startArea() {
         shouldExitArea = false;
         currentFloorIndex = 0;
+        resetFloorData();
         currentFloor = floors[currentFloorIndex];
        
         playerRow = startingPositions[currentFloorIndex][0];
         playerCol = startingPositions[currentFloorIndex][1];
-    
+
         System.out.println(" _______ _________ _______  _______  _______           _______ _________ _          _______  _______  _______ _________ _        _______ ");
         System.out.println("(  ____ \\\\__   __/(  ___  )(  ____ )(       )|\\     /|(  ____ \\\\__   __/( \\        (  ____ \\(  ___  )(  ____ \\\\__   __/( \\      (  ____ \\");
         System.out.println("| (    \\/   ) (   | (   ) || (    )|| () () || )   ( || (    \\/   ) (   | (        | (    \\/| (   ) || (    \\/   ) (   | (      | (    \\/");
@@ -70,8 +112,6 @@ public class Area1Grid {
         System.out.println("\\_______)   )_(   (_______)|/   \\__/|/     \\|   \\_/   (_______/\\_______/(_______/  (_______/|/     \\|\\_______)   )_(   (_______/(_______/");
         pauseForMessage();
         System.out.print("\033\143");
-    
-        resetQuestionTiles();
         
         boolean exitArea = false;
         while (!exitArea && !shouldExitArea) {
@@ -97,20 +137,6 @@ public class Area1Grid {
             System.out.println("Exiting Stormveil Castle...");
             pauseForMessage();
             System.out.print("\033\143");
-        }
-    }
-
-    /**
-    * Resets all the "?" tiles on the current floor.
-    */
-    private static void resetQuestionTiles() {
-        String[][] currentFloorData = floors[currentFloorIndex];
-        for (int i = 0; i < currentFloorData.length; i++) {
-            for (int j = 0; j < currentFloorData[i].length; j++) {
-                if ("|  ?  |".equals(currentFloorData[i][j])) {
-                    currentFloorData[i][j] = "|     |";
-                }
-            }
         }
     }
     

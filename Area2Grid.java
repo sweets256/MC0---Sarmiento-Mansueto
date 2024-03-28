@@ -53,6 +53,47 @@ public class Area2Grid {
         {"|     |", "|  ?  |", "|     |", "|     |", "|     |", "|  ?  |", "|     |"},
         {"|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |"}
     };
+    private static String[][] initialfloor1Data = {
+        {"|     |", "|     |", "|  F  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
+        {"|     |", "|     |", "|  D  |", "|     |", "|     |"}
+    };
+    private static String[][] initialfloor2Data = {
+        {"|     |", "|  D  |", "|     |",},
+        {"|  ?  |", "|     |", "|     |",},
+        {"|     |", "|     |", "|     |",},
+        {"|  ?  |", "|     |", "|  D  |",},
+        {"|     |", "|     |", "|     |",},
+        {"|  ?  |", "|     |", "|     |",},
+        {"|     |", "|     |", "|     |",}
+    };
+    private static String[][] initialfloor3Data = {
+        {"|     |", "|     |", "|  D  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  ?  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|  D  |", "|     |", "|     |", "|     |", "|  D  |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  ?  |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |"}
+    };
+    private static String[][] initialfloor4Data = {
+        {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
+        {"|  D  |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"}
+    };
+    private static String[][] initialfloor5Data = {
+        {"|     |", "|     |", "|     |", "|  F  |", "|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|  ?  |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|  ?  |", "|     |", "|  B  |", "|     |", "|  ?  |", "|     |"},
+        {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+        {"|     |", "|  ?  |", "|     |", "|     |", "|     |", "|  ?  |", "|     |"},
+        {"|     |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|     |"}
+    };
+
     private static String[][][] floors = {floor1Data, floor2Data, floor3Data, floor4Data, floor5Data};
     private static int currentFloorIndex = 0;
     
@@ -64,12 +105,31 @@ public class Area2Grid {
         {7, 3}
     };
 
+    private static void resetFloorData() {
+        for (int i = 0; i < floor1Data.length; i++) {
+            floor1Data[i] = initialfloor1Data[i].clone();
+        }
+        for (int i = 0; i < floor2Data.length; i++) {
+            floor2Data[i] = initialfloor2Data[i].clone();
+        }
+        for (int i = 0; i < floor3Data.length; i++) {
+            floor3Data[i] = initialfloor3Data[i].clone();
+        }
+        for (int i = 0; i < floor4Data.length; i++) {
+            floor4Data[i] = initialfloor4Data[i].clone();
+        }
+        for (int i = 0; i < floor5Data.length; i++) {
+            floor5Data[i] = initialfloor5Data[i].clone();
+        }
+    }
+
      /**
      * Starts the area by initializing the floor, player position, and processing player actions.
      */
     public static void startArea() {
         shouldExitArea = false;
         currentFloorIndex = 0;
+        resetFloorData();
         currentFloor = floors[currentFloorIndex];
        
         playerRow = startingPositions[currentFloorIndex][0];
