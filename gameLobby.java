@@ -256,6 +256,7 @@ public class GameLobby {
      */
     private void displayAvailableWeapons() {
         System.out.println("===== Weapons Available in the Shop =====");
+        System.out.println("\nYou have " + player.getRunes() + " runes");
     
         // Define weapon categories and their sizes
         String[] categories = {"Swords", "Katanas", "Whips", "Greatswords", "Staves", "Seals"};
