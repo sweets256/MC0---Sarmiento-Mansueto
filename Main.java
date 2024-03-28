@@ -31,3 +31,6 @@ public class Main {
         
     }
 }
+
+// Complete Battle class and call whenever an enemy is encountered, call also when fighting bosses
+// Display all stats of weapon when  in inventory, now only req dex is being shown
