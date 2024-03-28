@@ -315,17 +315,14 @@ public class Area2Grid {
                 playerCol = 1;
                 break;
             case 2:
-                // Assuming the left door connects to floor 2
                 playerRow = 3;
                 playerCol = 0;
                 break;
             case 3:
-                // Adjusted to enter through the right door from floor 4
                 playerRow = 1;
                 playerCol = 0;
                 break;
             case 4:
-                // Assuming the middle topmost door connects to floor 5
                 playerRow = 7;
                 playerCol = 3;
                 break;
@@ -348,16 +345,15 @@ public class Area2Grid {
                 playerCol = 2;
                 break;
             case 2:
-                playerRow = 3;
-                playerCol = 4;
-                break;
-            case 3:
-                playerRow = 0;
-                playerCol = 4;
-                break;
-            case 4:
-                playerRow = 0;
-                playerCol = 2;
+                if (playerRow == 1 && playerCol == 0){
+                    playerRow = 3;
+                    playerCol = 4;
+                    break;
+                } else if (playerRow == 7 && playerCol == 3){
+                    playerRow = 0;
+                    playerCol = 2;
+                    break;
+                }
     }
 }
     

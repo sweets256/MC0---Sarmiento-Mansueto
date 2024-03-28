@@ -71,6 +71,8 @@ public class Area1Grid {
         pauseForMessage();
         System.out.print("\033\143");
     
+        resetQuestionTiles();
+        
         boolean exitArea = false;
         while (!exitArea && !shouldExitArea) {
             displayFloor();
@@ -98,6 +100,20 @@ public class Area1Grid {
         }
     }
 
+    /**
+    * Resets all the "?" tiles on the current floor.
+    */
+    private static void resetQuestionTiles() {
+        String[][] currentFloorData = floors[currentFloorIndex];
+        for (int i = 0; i < currentFloorData.length; i++) {
+            for (int j = 0; j < currentFloorData[i].length; j++) {
+                if ("|  ?  |".equals(currentFloorData[i][j])) {
+                    currentFloorData[i][j] = "|     |";
+                }
+            }
+        }
+    }
+    
     /**
      * Displays the current floor layout and player stats.
      */
@@ -325,6 +341,8 @@ public class Area1Grid {
     public static void setCharacter(Character characterInstance) {
         character = characterInstance;
     }
+
+    
 
     /**
      * Sets the area interaction listener instance.
