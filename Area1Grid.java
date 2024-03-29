@@ -225,8 +225,6 @@ public class Area1Grid {
             double encounterChance = rand.nextDouble();
             String[] enemies = {"Godrick Soldier", "Godrick Archer", "Godrick Knight"};
             String encounteredEnemy = enemies[rand.nextInt(enemies.length)];
-            //boolean isHighType = rand.nextBoolean();
-            int enemyHealth;
 
             switch (encounteredEnemy) {
                 case "Godrick Soldier":
