@@ -41,7 +41,7 @@ public class Battle {
                 break;
             }
         }
-        input.close(); // Close the Scanner after the battle ends
+        //input.close(); // Close the Scanner after the battle ends
     }
 
     /**

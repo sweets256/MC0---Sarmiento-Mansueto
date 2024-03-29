@@ -39,6 +39,7 @@ public class Navigation implements AreaInteractionListener {
                     Area1Grid.setCharacter(player);
                     Area1Grid.setAreaInteractionListener(this);
                     Area1Grid.startArea(obj);
+                    obj.close();
                     currentState = GameState.GAME_LOBBY;
                     break;
                 case EXIT:
@@ -175,6 +176,7 @@ public class Navigation implements AreaInteractionListener {
         if ("Stormveil Castle".equals(areaName)) {
             Area1Grid.setCharacter(player);
             Area1Grid.startArea(obj);
+            obj.close();
         } else if ("Raya Lucaria Academy".equals(areaName)) {
             Area2Grid.setCharacter(player);
             Area2Grid.startArea();
