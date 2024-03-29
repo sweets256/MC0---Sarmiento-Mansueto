@@ -9,6 +9,7 @@ public class Area3Grid {
     private static int areaIndex = 3;
     private static Character character;
     private static Enemy enemy;
+    private static Weapon weapon = character.getEquippedWeapon();
     private static AreaInteractionListener listener;
     private static String[][] currentFloor;
     private static int playerRow = 8;
@@ -246,7 +247,7 @@ public class Area3Grid {
             pauseForMessage();
             System.out.print("\033\143");
             enemy = EnemyStats.generateEldenBeast();
-            Battle battle = new Battle(character, enemy, areaIndex);
+            Battle battle = new Battle(character, enemy, areaIndex, weapon);
             battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
