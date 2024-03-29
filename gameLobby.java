@@ -182,8 +182,15 @@ public class GameLobby {
             for (i = 0; i < inventory.size(); i++) {
                 Weapon weapon = inventory.get(i);
                 System.out.println((i + 1) + ". " + weapon.getName() +
-                        " - Dexterity Requirement: " + weapon.getDexterity());
+                        " - Dexterity Requirement: " + weapon.getDexterity() +
+                        ", HP: " + weapon.getHp() +
+                        ", Intelligence: " + weapon.getIntelligence() +
+                        ", Endurance: " + weapon.getEndurance() +
+                        ", Strength: " + weapon.getStrength() +
+                        ", Faith: " + weapon.getFaith() +
+                        ", Cost: " + weapon.getCost() + " runes");
             }
+            
 
             // Pick 1 for weapon select, 2 to go back to GameLobby
             System.out.println("\n[1] Select Weapon");
@@ -206,7 +213,7 @@ public class GameLobby {
                         System.out.println("You equipped the " + selectedWeapon.getName() + ".");
                         pauseForMessage();
                         System.out.print("\033\143");
-                        return;
+                        continue;
                     } else {
                         System.out.println("\nYou don't have enough dexterity to equip this weapon."); // If player dex is < weapon dex
                     }

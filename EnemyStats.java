@@ -91,4 +91,5 @@ public class EnemyStats {
 
         return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
     }
+    
 }
