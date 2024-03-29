@@ -3,13 +3,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Battle {
-    private int attackChoice = 0;
     private Character player;
     private Enemy enemy;
     private int areaIndex;
     private Weapon weapon;
-    private Scanner input = new Scanner(System.in);
-
 
     /**
      * Constructor
@@ -25,12 +22,13 @@ public class Battle {
      * Called from Area(1-3) whenever spawn tile is a monster
      */
     public void startBattle() {
+        Scanner input = new Scanner(System.in); // Create Scanner instance here
         System.out.println("Battle begins!");
         System.out.println("Player: " + player.getCharacterName() + " | Health: " + player.getCurrentHealth());
         System.out.println("Enemy: " + enemy.getName() + " | Health: " + enemy.getHealth());
 
         while (true) {
-            playerTurn();
+            playerTurn(input); // Pass the Scanner instance to playerTurn()
             if (enemy.getHealth() <= 0) {
                 playerWins();
                 break;
@@ -38,62 +36,99 @@ public class Battle {
                 enemyTurn();
             }
 
-            //enemyTurn();
             if (player.getCurrentHealth() <= 0) {
                 playerLoses();
                 break;
             }
         }
+        input.close(); // Close the Scanner after the battle ends
     }
 
     /**
      * When it is the player's turn. Can choose to attack [1] or dodge [2]
      */
-    private void playerTurn() {
+    private void playerTurn(Scanner input) { // Accept Scanner as parameter
+        while (true) {
+            try {
+                System.out.println("\nPlayer's Turn:");
+                System.out.println("[1] Attack");
+                System.out.println("[2] Dodge");
 
-            while (true) {
-                try {
-                    System.out.println("\nPlayer's Turn:");
-                    System.out.println("[1] Attack");
-                    System.out.println("[2] Dodge");
+                int choice = input.nextInt(); // Use the passed Scanner instance
 
-                    //Scanner input = new Scanner(System.in);
-                    int choice = input.nextInt();
+                switch (choice) {
+                    case 1:
+                        int playerDamage = calculatePlayerDamage(input); // Pass Scanner instance
+                        enemy.takeDamage(playerDamage); // Enemy takes damage
+                        System.out.println("Player deals " + playerDamage + " damage to the enemy.");
+                        pauseForMessage();
+                        System.out.print("\033\143");
+                        return; // Exit the method after successful attack
+                    case 2:
+                        // Implement dodge logic here
+                        int dodge_rate = (int) Math.floor(20 + ((player.getStatValue(3) + weapon.getEndurance()) / 2 )) / (100);
 
-                    switch (choice) {
-                        case 1:
-                            int attackType = attackChoice; // Get the attack type
-                            int playerDamage = calculatePlayerDamage(attackType); // Player performs damage
-                            enemy.takeDamage(playerDamage); // Enemy takes damage
-                            System.out.println("Player deals " + playerDamage + " damage to the enemy.");
-                            pauseForMessage();
-                            System.out.print("\033\143");
-                            //enemyTurn(); // Enemy's turn, not sure if we need this bc its already called in startBattle()
-                            return; // Exit the method after successful attack
-                        case 2:
-                            // Implement dodge logic here
-                            int dodge_rate = (int) Math.floor(20 + ((player.getStatValue(3) + weapon.getEndurance()) / 2 )) / 100; 
-
-                            if (Math.random() <= dodge_rate) { // Check if dodge is successful (random 1-100 should be <= than dodge rate)
-                                System.out.println("Player successfully dodges the enemy's attack!");
-                            } else {
-                                System.out.println("Player fails to dodge the enemy's attack!");
-                                int enemyDamage = calculateEnemyDamage(); // Calculate enemy damage
-                                player.takeDamage(enemyDamage); // Player takes damage
-                                System.out.println("Player takes " + enemyDamage + " damage from the enemy.");
-                            }
-                            pauseForMessage();
-                            System.out.print("\033\143");
-                            enemyTurn(); // Not sure if we need this bc its already called in startBattle()
-                            return; // Exit the method after dodge
-                        default:
-                            System.out.println("Invalid choice. Please select [1] to attack or [2] to dodge.");
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a valid integer.");
-                    input.next(); // Clear the invalid input
-                    input.close();
+                        if (Math.random() <= dodge_rate) {
+                            System.out.println("Player successfully dodges the enemy's attack!");
+                        } else {
+                            System.out.println("Player fails to dodge the enemy's attack!");
+                            int enemyDamage = calculateEnemyDamage(); // Calculate enemy damage
+                            player.takeDamage(enemyDamage); // Player takes damage
+                            System.out.println("Player takes " + enemyDamage + " damage from the enemy.");
+                        }
+                        pauseForMessage();
+                        System.out.print("\033\143");
+                        return; // Exit the method after dodge
+                    default:
+                        System.out.println("Invalid choice. Please select [1] to attack or [2] to dodge.");
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                input.next(); // Clear the invalid input
+            }
+        }
+    }
+
+    /**
+     * Calculates player damage based on player and weapon stats. Also depends on what attack they want to do
+     * @return The chosen attack type
+     */
+    private int calculatePlayerDamage(Scanner input) {
+        // Calculation of player damage with the equipped weapon
+        int physicalDamage = (int) ((player.getStatValue(4) + weapon.getStrength()) * (1 - enemy.getPhysicalDefense()));
+        int sorceryDamage = (int) ((player.getStatValue(2) + weapon.getIntelligence()) * (1 - enemy.getSorceryDefense()));
+        int incantationDamage = (int) ((player.getStatValue(5) + weapon.getFaith()) * (1 - enemy.getIncantationDefense()));
+
+        int attackChoice = 0; // Initialize attackChoice variable
+
+        // Loop to repeatedly ask for input until a valid input is provided
+        while (true) {
+            try {
+                System.out.println("What damage type would you like to perform?:");
+                System.out.println("[1] Physical Damage");
+                System.out.println("[2] Sorcery Damage");
+                System.out.println("[3] Incantation Damage");
+
+                attackChoice = input.nextInt();
+
+                switch (attackChoice) {
+                    case 1:
+                        return physicalDamage;
+                    case 2:
+                        return sorceryDamage;
+                    case 3:
+                        return incantationDamage;
+                    default:
+                        System.out.println("Invalid choice. Please select a valid option.");
+                        pauseForMessage();
+                        System.out.print("\033\143");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                input.next(); // Clear the invalid input
+                pauseForMessage();
+                System.out.print("\033\143");
+            }
         }
     }
 
@@ -105,56 +140,6 @@ public class Battle {
         int enemyDamage = calculateEnemyDamage();
         player.takeDamage(enemyDamage);
         System.out.println("Enemy deals " + enemyDamage + " damage to the player.");
-
-        //playerTurn(); 
-    }
-
-    /**
-     * Calculates player damage based on player and weapon stats. Also depends on what attack they want to do
-     * @return The chosen attack type
-     */
-        private int calculatePlayerDamage(int attackChoice) {
-        // Calculation of player damage with the equipped weapon
-
-        int physicalDamage = (int) ((player.getStatValue(4) + weapon.getStrength()) * (1 - enemy.getPhysicalDefense()));
-        int sorceryDamage = (int) ((player.getStatValue(2) + weapon.getIntelligence()) * (1 - enemy.getSorceryDefense()));
-        int incantationDamage = (int) ((player.getStatValue(5) + weapon.getFaith()) * (1 - enemy.getIncantationDefense()));
-
-        attackChoice = 0; // Initialize attackChoice variable
-
-        Scanner input = new Scanner(System.in);
-
-            // Loop to repeatedly ask for input until a valid input is provided
-            while (true) {
-                try {
-                    System.out.println("What damage type would you like to perform?:");
-                    System.out.println("[1] Physical Damage");
-                    System.out.println("[2] Sorcery Damage");
-                    System.out.println("[3] Incantation Damage");
-
-                    attackChoice = input.nextInt();
-                    input.close();
-
-                    switch (attackChoice) {
-                        case 1:
-                            return physicalDamage;
-                        case 2:
-                            return sorceryDamage;
-                        case 3:
-                            return incantationDamage;
-                        default:
-                            System.out.println("Invalid choice. Please select a valid option.");
-                            pauseForMessage();
-                            System.out.print("\033\143");
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a valid integer.");
-                    input.next(); // Clear the invalid input
-                    input.close();
-                    pauseForMessage();
-                    System.out.print("\033\143");
-                }
-        }
     }
 
     /**

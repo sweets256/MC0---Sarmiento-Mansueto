@@ -328,13 +328,14 @@ public class Character {
         this.level = newLevel;
     }
 
-    /**
-     * Calculates and returns the current health of the character.
-     *
-     * @return the current health of the character
-     */
     public int getCurrentHealth() {
-        return 100 + (5 * stats[0]);
+        if (equippedWeapon != null) {
+            // Calculate health based on character's base health and weapon's health bonus
+            return (100 * ((stats[0] + equippedWeapon.getHp()) / 2));
+        } else {
+            // If no weapon is equipped, return only the character's base health
+            return (100 * (stats[0] / 2));
+        }
     }
 
     /**

@@ -253,7 +253,7 @@ public class Area1Grid {
                 pauseForMessage();
                 System.out.print("\033\143");
             } else {
-                int runesGained = (currentFloorIndex + 1) * (rand.nextInt(101) + 50);
+                int runesGained = areaIndex * (rand.nextInt(101) + 50);
                 character.addRunes(runesGained);
                 System.out.print("\033\143");
                 System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
