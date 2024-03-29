@@ -230,16 +230,16 @@ public class Area1Grid {
 
             switch (encounteredEnemy) {
                 case "Godrick Soldier":
-                    EnemyStats.generateEnemyType1();
+                    enemy = EnemyStats.generateEnemyType1();
                     break;
                 case "Godrick Archer":
-                    EnemyStats.generateEnemyType2();
+                    enemy = EnemyStats.generateEnemyType2();
                     break;
                 case "Godrick Knight":
-                    EnemyStats.generateEnemyType3();
+                    enemy = EnemyStats.generateEnemyType3();
                     break;
                 default:
-                    enemyHealth = 0;
+                    return;
             }
     
             if (encounterChance < 0.75) {

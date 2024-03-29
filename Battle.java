@@ -16,7 +16,7 @@ public class Battle {
      */
     public Battle(Character player, Enemy enemy, int areaIndex) {
         this.player = player;
-        this.enemy = enemy;
+        this.enemy =  enemy;
         this.areaIndex = areaIndex;
     }
 
