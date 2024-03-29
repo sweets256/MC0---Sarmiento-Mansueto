@@ -169,7 +169,7 @@ public class GameLobby {
             System.out.println("===== Inventory =====");
             System.out.println("Equipped Weapon:");
             if (player.getEquippedWeapon() != null) {
-                System.out.println("Name: " + player.getEquippedWeapon().getName());
+                System.out.println("Name: " + player.getEquippedWeapon().getName() + player.getEquippedWeaponDexterity() + " " + player.getEquippedWeaponHp() + " " + player.getEquippedWeaponIntelligence() + " " + player.getEquippedWeaponEndurance() + " " + player.getEquippedWeaponStrength() + " " + player.getEquippedWeaponFaith());
                 System.out.println("Dexterity Requirement: " + player.getEquippedWeapon().getDexterity() + "\n");
             } else {
                 System.out.println("None\n");

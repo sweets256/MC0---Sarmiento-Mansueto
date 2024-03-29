@@ -53,6 +53,7 @@ public class Battle {
                 System.out.println("\nPlayer's Turn:");
                 System.out.println("[1] Attack");
                 System.out.println("[2] Dodge");
+                System.out.println("Enemy health: " + enemy.getHealth());
 
                 int choice = input.nextInt(); // Use the passed Scanner instance
 
@@ -66,7 +67,7 @@ public class Battle {
                         return; // Exit the method after successful attack
                     case 2:
                         // Implement dodge logic here
-                        int dodge_rate = (int) Math.floor(20 + ((player.getStatValue(3) + weapon.getEndurance()) / 2 )) / (100);
+                        int dodge_rate = (int) Math.floor(20 + ((player.getStatValue(3) + player.getEquippedWeaponEndurance()) / 2 )) / (100);
 
                         if (Math.random() <= dodge_rate) {
                             System.out.println("Player successfully dodges the enemy's attack!");
@@ -95,9 +96,9 @@ public class Battle {
      */
     private int calculatePlayerDamage(Scanner input) {
         // Calculation of player damage with the equipped weapon
-        int physicalDamage = (int) ((player.getStatValue(4) + weapon.getStrength()) * (1 - enemy.getPhysicalDefense()));
-        int sorceryDamage = (int) ((player.getStatValue(2) + weapon.getIntelligence()) * (1 - enemy.getSorceryDefense()));
-        int incantationDamage = (int) ((player.getStatValue(5) + weapon.getFaith()) * (1 - enemy.getIncantationDefense()));
+        int physicalDamage = (int) ((player.getStatValue(4) + player.getEquippedWeaponStrength()) * (1 - enemy.getPhysicalDefense()));
+        int sorceryDamage = (int) ((player.getStatValue(2) + player.getEquippedWeaponIntelligence()) * (1 - enemy.getSorceryDefense()));
+        int incantationDamage = (int) ((player.getStatValue(5) + player.getEquippedWeaponEndurance()) * (1 - enemy.getIncantationDefense()));
 
         int attackChoice = 0; // Initialize attackChoice variable
 

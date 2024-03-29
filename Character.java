@@ -208,17 +208,11 @@ public class Character {
      * @param damage the amount of damage to take
      */
     public void takeDamage(int damage) {
-        if (damage > 0) {
-            int currentHealth = getCurrentHealth();
-            int newHealth = currentHealth - damage;
-            if (newHealth < 0) {
-                newHealth = 0; // Ensure health doesn't go below 0
-            }
-            stats[0] = newHealth / 5; // Update the health stat
-            System.out.println(characterName + " took " + damage + " damage!");
-            System.out.println("Current Health: " + getCurrentHealth());
-        } else {
-            System.out.println("Invalid damage amount.");
+        int newHealth = getCurrentHealth();
+        newHealth -= damage;
+        System.out.println("Current Health: " + newHealth);
+        if (newHealth < 0) {
+            newHealth = 0;
         }
     }
 
@@ -331,7 +325,7 @@ public class Character {
     public int getCurrentHealth() {
         if (equippedWeapon != null) {
             // Calculate health based on character's base health and weapon's health bonus
-            return (100 * ((stats[0] + equippedWeapon.getHp()) / 2));
+            return (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
         } else {
             // If no weapon is equipped, return only the character's base health
             return (100 * (stats[0] / 2));
@@ -345,6 +339,97 @@ public class Character {
      */
     public String getCharacterName() {
         return characterName;
+    }
+
+    /**
+     * Gets the dexterity of the equipped weapon.
+     * 
+     * @return the dexterity of the equipped weapon, or 0 if no weapon is equipped
+     */
+    public int getEquippedWeaponDexterity() {
+        if (equippedWeapon != null) {
+            return equippedWeapon.getDexterity();
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Gets the health bonus of the equipped weapon.
+     * 
+     * @return the health bonus of the equipped weapon, or 0 if no weapon is equipped
+     */
+    public int getEquippedWeaponHp() {
+        if (equippedWeapon != null) {
+            return equippedWeapon.getHp();
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Gets the intelligence bonus of the equipped weapon.
+     * 
+     * @return the intelligence bonus of the equipped weapon, or 0 if no weapon is equipped
+     */
+    public int getEquippedWeaponIntelligence() {
+        if (equippedWeapon != null) {
+            return equippedWeapon.getIntelligence();
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Gets the endurance bonus of the equipped weapon.
+     * 
+     * @return the endurance bonus of the equipped weapon, or 0 if no weapon is equipped
+     */
+    public int getEquippedWeaponEndurance() {
+        if (equippedWeapon != null) {
+            return equippedWeapon.getEndurance();
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Gets the strength bonus of the equipped weapon.
+     * 
+     * @return the strength bonus of the equipped weapon, or 0 if no weapon is equipped
+     */
+    public int getEquippedWeaponStrength() {
+        if (equippedWeapon != null) {
+            return equippedWeapon.getStrength();
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Gets the faith bonus of the equipped weapon.
+     * 
+     * @return the faith bonus of the equipped weapon, or 0 if no weapon is equipped
+     */
+    public int getEquippedWeaponFaith() {
+        if (equippedWeapon != null) {
+            return equippedWeapon.getFaith();
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Gets the cost of the equipped weapon.
+     * 
+     * @return the cost of the equipped weapon, or 0 if no weapon is equipped
+     */
+    public int getEquippedWeaponCost() {
+        if (equippedWeapon != null) {
+            return equippedWeapon.getCost();
+        } else {
+            return 0;
+        }
     }
 
     /**
