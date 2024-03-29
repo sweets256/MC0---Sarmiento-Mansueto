@@ -228,13 +228,13 @@ public class Area1Grid {
 
             switch (encounteredEnemy) {
                 case "Godrick Soldier":
-                    enemy = EnemyStats.generateEnemyType1();
+                    enemy = EnemyStats.generateEnemyType1(areaIndex);
                     break;
                 case "Godrick Archer":
-                    enemy = EnemyStats.generateEnemyType2();
+                    enemy = EnemyStats.generateEnemyType2(areaIndex);
                     break;
                 case "Godrick Knight":
-                    enemy = EnemyStats.generateEnemyType3();
+                    enemy = EnemyStats.generateEnemyType3(areaIndex);
                     break;
                 default:
                     return;
@@ -264,6 +264,11 @@ public class Area1Grid {
             System.out.println("You have found the Boss of Stormveil Castle !!!");
             System.out.println("\n[ Godrick The Grafted ]");
             System.out.println("HP: 200");
+            pauseForMessage();;
+            System.out.print("\033\143");
+            enemy = EnemyStats.generateGodrickBoss();
+            Battle battle = new Battle(character, enemy, areaIndex);
+            battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
         } else {

@@ -1,13 +1,17 @@
 import java.util.Random;
 
 public class EnemyStats {
-
     /**
      * Stats for enemy type 1 in area 1 and 2
      */
-    public static Enemy generateEnemyType1() {
+    public static Enemy generateEnemyType1(int areaIndex) {
         Random rand = new Random();
-        String name = "placeholder1";
+        String name = "";
+        if (areaIndex == 1){
+            name = "Godrick Soldier";
+        } else if (areaIndex == 2){
+            name = "Living Jar";
+        }
         int health = rand.nextInt(30 - 20 + 1) + 20;
         int attack = rand.nextInt(80 - 70 + 1) + 70;
         double physicalDefense = 0.20;
@@ -20,9 +24,14 @@ public class EnemyStats {
     /**
      * Stats for enemy type 2 in area 1 and 2
      */
-    public static Enemy generateEnemyType2() {
+    public static Enemy generateEnemyType2(int areaIndex) {
         Random rand = new Random();
-        String name = "placeholder2";
+        String name = "";
+        if (areaIndex == 1){
+            name = "Godrick Archer";
+        } else if (areaIndex == 2){
+            name = "Glintstone Sorcerer";
+        }
         int health = rand.nextInt(35 - 25 + 1) + 25;
         int attack = rand.nextInt(120 - 110 + 1) + 110;
         double physicalDefense = 0.50;
@@ -35,9 +44,14 @@ public class EnemyStats {
     /**
      * Stats for enemy type 3 in area 1 and 2
      */
-    public static Enemy generateEnemyType3() {
+    public static Enemy generateEnemyType3(int areaIndex) {
         Random rand = new Random();
-        String name = "placeholder3";
+        String name = "";
+        if (areaIndex == 1){
+            name = "Godrick Knight";
+        } else if (areaIndex == 2){
+            name = "Battle Mage";
+        }
         int health = rand.nextInt(80 - 70 + 1) + 70;
         int attack = rand.nextInt(130 - 120 + 1) + 120;
         double physicalDefense = 0.25;

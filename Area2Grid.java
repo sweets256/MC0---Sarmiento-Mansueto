@@ -6,7 +6,9 @@ import java.util.Random;
  * It allows players to navigate through floors, interact with objects, and encounter enemies.
  */
 public class Area2Grid {
+    private static int areaIndex = 2;
     private static Character character;
+    private static Enemy enemy;
     private static AreaInteractionListener listener;
     private static String[][] currentFloor;
     private static int playerRow = 0;
@@ -256,28 +258,29 @@ public class Area2Grid {
             double encounterChance = rand.nextDouble();
             String[] enemies = {"Living Jar", "Glintstone Sorcerer", "Battlemage"};
             String encounteredEnemy = enemies[rand.nextInt(enemies.length)];
-            boolean isHighType = rand.nextBoolean();
-            int enemyHealth;
 
             switch (encounteredEnemy) {
                 case "Living Jar":
-                    enemyHealth = isHighType ? 30 : 20;
+                    enemy = EnemyStats.generateEnemyType1(areaIndex);
                     break;
                 case "Glintstone Sorcerer":
-                    enemyHealth = isHighType ? 35 : 25;
+                    enemy = EnemyStats.generateEnemyType2(areaIndex);
                     break;
                 case "Battlemage":
-                    enemyHealth = isHighType ? 80 : 70;
+                    enemy = EnemyStats.generateEnemyType3(areaIndex);
                     break;
                 default:
-                    enemyHealth = 0;
+                    return;
             }
     
             if (encounterChance < 0.75) {
                 System.out.print("\033\143");
                 System.out.println("You encounter an enemy!");
-                System.out.println("\n[ " + encounteredEnemy + " ]");
-                System.out.println("HP: "+ enemyHealth);
+                // Start battle sequence
+                Battle battle = new Battle(character, enemy, areaIndex);
+                battle.startBattle();
+                //System.out.println("\n[ " + encounteredEnemy + " ]");
+                //System.out.println("HP: "+ enemyHealth);
                 pauseForMessage();
                 System.out.print("\033\143");
             } else {
@@ -292,8 +295,13 @@ public class Area2Grid {
         } else if ("|  B  |".equals(currentTile)) {
             System.out.print("\033\143");
             System.out.println("You have found the Boss of Raya Lucaria Academy !!!");
-            System.out.println("\n[ Renala, Queen of the Full Moon ]");
-            System.out.println("HP: 400");
+            System.out.println("\n[ Rennala, Queen of the Full Moon ]");
+            System.out.println("HP: 200");
+            pauseForMessage();;
+            System.out.print("\033\143");
+            enemy = EnemyStats.generateNalaBoss();
+            Battle battle = new Battle(character, enemy, areaIndex);
+            battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
         } else {
