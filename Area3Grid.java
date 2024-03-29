@@ -6,7 +6,9 @@ import java.util.Random;
  * It allows players to navigate through floors, interact with objects, and encounter enemies.
  */
 public class Area3Grid {
+    private static int areaIndex = 3;
     private static Character character;
+    private static Enemy enemy;
     private static AreaInteractionListener listener;
     private static String[][] currentFloor;
     private static int playerRow = 8;
@@ -241,6 +243,11 @@ public class Area3Grid {
             System.out.println("You have found the Boss of The Elden Throne !!!");
             System.out.println("\n[ The Elden Beast ]");
             System.out.println("HP: 800");
+            pauseForMessage();
+            System.out.print("\033\143");
+            enemy = EnemyStats.generateEldenBeast();
+            Battle battle = new Battle(character, enemy, areaIndex);
+            battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
         } else if ("|  C  |".equals(currentTile)) {
