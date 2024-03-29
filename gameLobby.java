@@ -38,7 +38,7 @@ public class GameLobby {
             System.out.println("Available areas:");
             System.out.println("[1] Stormveil Castle");
             System.out.println("[2] Raya Lucaria Academy");
-            System.out.println("[3] The Elden Throne [LOCKED]");
+            System.out.println("[3] The Elden Throne");
             System.out.print("\nEnter your choice or 'back' to cancel: ");
     
             String inputChoice = input.nextLine().trim();
@@ -72,10 +72,12 @@ public class GameLobby {
                         return;
                     case 3:
                         System.out.print("\033\143");
-                        System.out.println("Elden Throne is LOCKED!");
+                        navigation.setCurrentArea("The Elden Throne");
+                        System.out.println("Teleporting to The Elden Throne...");
                         pauseForMessage();
                         System.out.print("\033\143");
-                        break;
+                        navigation.enterArea("The Elden Throne");
+                        return;
                     default:
                         System.out.print("\033\143");
                         System.out.println("Invalid choice! Choose an available location or type 'back'.");

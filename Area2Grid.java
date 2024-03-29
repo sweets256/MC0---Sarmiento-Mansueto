@@ -30,13 +30,13 @@ public class Area2Grid {
         {"|     |", "|     |", "|     |",}
     };
     private static String[][] floor3Data = {
-        {"|     |", "|     |", "|  D  |", "|     |", "|     |"},
-        {"|     |", "|     |", "|  ?  |", "|     |", "|     |"},
+        {"|  X  |", "|     |", "|  D  |", "|     |", "|  X  |"},
+        {"|  X  |", "|     |", "|  ?  |", "|     |", "|  X  |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |"},
         {"|  D  |", "|     |", "|     |", "|     |", "|  D  |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|  ?  |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |", "|     |", "|     |"}
+        {"|  X  |", "|     |", "|  ?  |", "|     |", "|  X  |"},
+        {"|  X  |", "|     |", "|     |", "|     |", "|  X  |"}
     };
     private static String[][] floor4Data = {
         {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
@@ -44,7 +44,7 @@ public class Area2Grid {
         {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"}
     };
     private static String[][] floor5Data = {
-        {"|     |", "|     |", "|     |", "|  F  |", "|     |", "|     |", "|     |"},
+        {"|  X  |", "|  X  |", "|     |", "|  F  |", "|     |", "|  X  |", "|  X  |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
         {"|     |", "|  ?  |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
@@ -70,13 +70,13 @@ public class Area2Grid {
         {"|     |", "|     |", "|     |",}
     };
     private static String[][] initialfloor3Data = {
-        {"|     |", "|     |", "|  D  |", "|     |", "|     |"},
-        {"|     |", "|     |", "|  ?  |", "|     |", "|     |"},
+        {"|  X  |", "|     |", "|  D  |", "|     |", "|  X  |"},
+        {"|  X  |", "|     |", "|  ?  |", "|     |", "|  X  |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |"},
         {"|  D  |", "|     |", "|     |", "|     |", "|  D  |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |"},
-        {"|     |", "|     |", "|  ?  |", "|     |", "|     |"},
-        {"|     |", "|     |", "|     |", "|     |", "|     |"}
+        {"|  X  |", "|     |", "|  ?  |", "|     |", "|  X  |"},
+        {"|  X  |", "|     |", "|     |", "|     |", "|  X  |"}
     };
     private static String[][] initialfloor4Data = {
         {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
@@ -84,7 +84,7 @@ public class Area2Grid {
         {"|     |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"}
     };
     private static String[][] initialfloor5Data = {
-        {"|     |", "|     |", "|     |", "|  F  |", "|     |", "|     |", "|     |"},
+        {"|  X  |", "|  X  |", "|     |", "|  F  |", "|     |", "|  X  |", "|  X  |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
         {"|     |", "|  ?  |", "|     |", "|  ?  |", "|     |", "|  ?  |", "|     |"},
         {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
@@ -216,8 +216,15 @@ public class Area2Grid {
         int newCol = playerCol + colChange;
         
         if (newRow >= 0 && newRow < currentFloor.length && newCol >= 0 && newCol < currentFloor[0].length && !currentFloor[newRow][newCol].contains("W")) {
+            if (!currentFloor[newRow][newCol].trim().equals("|  X  |")) {
             playerRow = newRow;
             playerCol = newCol;
+            } else {
+                System.out.print("\033\143");
+                System.out.println("You cannot move there. It is out of bounds.");
+                pauseForMessage();
+                System.out.print("\033\143");
+            }
         } else {
             System.out.print("\033\143");
             System.out.println("Cannot move there.");
@@ -368,7 +375,7 @@ public class Area2Grid {
     * The player position is adjusted based on the current floor index.
     */
     private static void setPlayerPositionForAscending() {
-        // This switch is based on the target floor (currentFloorIndex)
+
         switch (currentFloorIndex) {
             case 1:
                 playerRow = 0;

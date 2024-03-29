@@ -178,6 +178,9 @@ public class Navigation implements AreaInteractionListener {
         } else if ("Raya Lucaria Academy".equals(areaName)) {
             Area2Grid.setCharacter(player);
             Area2Grid.startArea();
+        } else if ("The Elden Throne".equals(areaName)) {
+            Area3Grid.setCharacter(player);
+            Area3Grid.startArea();
         }
         // Handle other areas similarly
     }
