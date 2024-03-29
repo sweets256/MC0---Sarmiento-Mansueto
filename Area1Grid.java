@@ -116,12 +116,14 @@ public class Area1Grid {
         pauseForMessage();
         System.out.print("\033\143");
         
+        String action = input.nextLine().toUpperCase();
+
         boolean exitArea = false;
         while (!exitArea && !shouldExitArea) {
             displayFloor();
             System.out.println("Enter action (WASD to move, E to interact): ");
 
-            String action = input.nextLine().toUpperCase();
+            //String action = input.nextLine().toUpperCase();
             
             switch (action) {
                 case "W": movePlayer(-1, 0); System.out.print("\033\143"); break;
@@ -131,7 +133,6 @@ public class Area1Grid {
                 case "E": interact(); break;
                 default: System.out.println("Invalid action."); pauseForMessage(); System.out.print("\033\143"); break;
             }
-            input.close();
         }
         if (shouldExitArea) {
             System.out.print("\033\143");
@@ -144,6 +145,8 @@ public class Area1Grid {
             pauseForMessage();
             System.out.print("\033\143");
         }
+
+        input.close();
     }
     
     /**
