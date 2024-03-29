@@ -9,6 +9,7 @@ public class Area2Grid {
     private static int areaIndex = 2;
     private static Character character;
     private static Enemy enemy;
+    private static Weapon weapon = character.getEquippedWeapon();
     private static AreaInteractionListener listener;
     private static String[][] currentFloor;
     private static int playerRow = 0;
@@ -277,7 +278,7 @@ public class Area2Grid {
                 System.out.print("\033\143");
                 System.out.println("You encounter an enemy!");
                 // Start battle sequence
-                Battle battle = new Battle(character, enemy, areaIndex);
+                Battle battle = new Battle(character, enemy, areaIndex, weapon);
                 battle.startBattle();
                 //System.out.println("\n[ " + encounteredEnemy + " ]");
                 //System.out.println("HP: "+ enemyHealth);
@@ -300,7 +301,7 @@ public class Area2Grid {
             pauseForMessage();;
             System.out.print("\033\143");
             enemy = EnemyStats.generateNalaBoss();
-            Battle battle = new Battle(character, enemy, areaIndex);
+            Battle battle = new Battle(character, enemy, areaIndex, weapon);
             battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");

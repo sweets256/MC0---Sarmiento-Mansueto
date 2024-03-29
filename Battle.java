@@ -7,17 +7,18 @@ public class Battle {
     private Character player;
     private Enemy enemy;
     private int areaIndex;
-    //Weapon weapon = player.getEquippedWeapon();
-    //private Scanner input = new Scanner(System.in);
+    private Weapon weapon;
+    private Scanner input = new Scanner(System.in);
 
 
     /**
      * Constructor
      */
-    public Battle(Character player, Enemy enemy, int areaIndex) {
+    public Battle(Character player, Enemy enemy, int areaIndex, Weapon weapon) {
         this.player = player;
         this.enemy =  enemy;
         this.areaIndex = areaIndex;
+        this.weapon = weapon;
     }
 
     /**
@@ -37,7 +38,7 @@ public class Battle {
                 enemyTurn();
             }
 
-            enemyTurn();
+            //enemyTurn();
             if (player.getCurrentHealth() <= 0) {
                 playerLoses();
                 break;
@@ -49,14 +50,14 @@ public class Battle {
      * When it is the player's turn. Can choose to attack [1] or dodge [2]
      */
     private void playerTurn() {
-        Weapon weapon = player.getEquippedWeapon();
-        try (Scanner input = new Scanner(System.in)) {
+
             while (true) {
                 try {
                     System.out.println("\nPlayer's Turn:");
                     System.out.println("[1] Attack");
                     System.out.println("[2] Dodge");
 
+                    //Scanner input = new Scanner(System.in);
                     int choice = input.nextInt();
 
                     switch (choice) {
@@ -67,7 +68,7 @@ public class Battle {
                             System.out.println("Player deals " + playerDamage + " damage to the enemy.");
                             pauseForMessage();
                             System.out.print("\033\143");
-                            enemyTurn(); // Enemy's turn, not sure if we need this bc its already called in startBattle()
+                            //enemyTurn(); // Enemy's turn, not sure if we need this bc its already called in startBattle()
                             return; // Exit the method after successful attack
                         case 2:
                             // Implement dodge logic here
@@ -91,8 +92,8 @@ public class Battle {
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input. Please enter a valid integer.");
                     input.next(); // Clear the invalid input
+                    input.close();
                 }
-            }
         }
     }
 
@@ -105,7 +106,7 @@ public class Battle {
         player.takeDamage(enemyDamage);
         System.out.println("Enemy deals " + enemyDamage + " damage to the player.");
 
-        playerTurn(); 
+        //playerTurn(); 
     }
 
     /**
@@ -114,14 +115,15 @@ public class Battle {
      */
         private int calculatePlayerDamage(int attackChoice) {
         // Calculation of player damage with the equipped weapon
-        Weapon weapon = player.getEquippedWeapon();
+
         int physicalDamage = (int) ((player.getStatValue(4) + weapon.getStrength()) * (1 - enemy.getPhysicalDefense()));
         int sorceryDamage = (int) ((player.getStatValue(2) + weapon.getIntelligence()) * (1 - enemy.getSorceryDefense()));
         int incantationDamage = (int) ((player.getStatValue(5) + weapon.getFaith()) * (1 - enemy.getIncantationDefense()));
 
         attackChoice = 0; // Initialize attackChoice variable
 
-        try (Scanner input = new Scanner(System.in)) {
+        Scanner input = new Scanner(System.in);
+
             // Loop to repeatedly ask for input until a valid input is provided
             while (true) {
                 try {
@@ -131,6 +133,7 @@ public class Battle {
                     System.out.println("[3] Incantation Damage");
 
                     attackChoice = input.nextInt();
+                    input.close();
 
                     switch (attackChoice) {
                         case 1:
@@ -147,10 +150,10 @@ public class Battle {
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input. Please enter a valid integer.");
                     input.next(); // Clear the invalid input
+                    input.close();
                     pauseForMessage();
                     System.out.print("\033\143");
                 }
-            }
         }
     }
 

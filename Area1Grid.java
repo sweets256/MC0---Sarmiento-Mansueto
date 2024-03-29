@@ -8,6 +8,7 @@ import java.util.Random;
 public class Area1Grid {
     private static int areaIndex = 1;
     private static Character character;
+    private static Weapon weapon;
     private static Enemy enemy;
     private static AreaInteractionListener listener;
     private static String[][] currentFloor;
@@ -244,7 +245,8 @@ public class Area1Grid {
                 System.out.print("\033\143");
                 System.out.println("You encounter an enemy!");
                 // Start battle sequence
-                Battle battle = new Battle(character, enemy, areaIndex);
+                weapon = character.getEquippedWeapon();
+                Battle battle = new Battle(character, enemy, areaIndex, weapon);
                 battle.startBattle();
                 //System.out.println("\n[ " + encounteredEnemy + " ]");
                 //System.out.println("HP: "+ enemyHealth);
@@ -267,7 +269,8 @@ public class Area1Grid {
             pauseForMessage();;
             System.out.print("\033\143");
             enemy = EnemyStats.generateGodrickBoss();
-            Battle battle = new Battle(character, enemy, areaIndex);
+            Weapon weapon = character.getEquippedWeapon();
+            Battle battle = new Battle(character, enemy, areaIndex, weapon);
             battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
