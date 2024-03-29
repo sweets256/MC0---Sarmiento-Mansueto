@@ -7,13 +7,14 @@ public class EnemyStats {
      */
     public static Enemy generateEnemyType1() {
         Random rand = new Random();
+        String name = "placeholder1";
         int health = rand.nextInt(30 - 20 + 1) + 20;
         int attack = rand.nextInt(80 - 70 + 1) + 70;
         double physicalDefense = 0.20;
         double sorceryDefense = 0.15;
         double incantationDefense = 0.10;
 
-        return new Enemy(health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
     }
 
     /**
@@ -21,13 +22,14 @@ public class EnemyStats {
      */
     public static Enemy generateEnemyType2() {
         Random rand = new Random();
+        String name = "placeholder2";
         int health = rand.nextInt(35 - 25 + 1) + 25;
         int attack = rand.nextInt(120 - 110 + 1) + 110;
         double physicalDefense = 0.50;
         double sorceryDefense = 0.15;
         double incantationDefense = 0.20;
 
-        return new Enemy(health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
     }
 
     /**
@@ -35,13 +37,14 @@ public class EnemyStats {
      */
     public static Enemy generateEnemyType3() {
         Random rand = new Random();
+        String name = "placeholder3";
         int health = rand.nextInt(80 - 70 + 1) + 70;
         int attack = rand.nextInt(130 - 120 + 1) + 120;
         double physicalDefense = 0.25;
         double sorceryDefense = 0.25;
         double incantationDefense = 0.20;
 
-        return new Enemy(health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
     }
 
     /**
@@ -50,12 +53,13 @@ public class EnemyStats {
     public static Enemy generateGodrickBoss() {
         int health = 200;
         Random rand = new Random();
+        String name = "Godrick the Grafted";
         int attack = rand.nextInt(300 - 150 + 1) + 150;
         double physicalDefense = 0.35;
         double sorceryDefense = 0.20;
         double incantationDefense = 0.15;
 
-        return new Enemy(health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
     }
 
     /**
@@ -64,12 +68,13 @@ public class EnemyStats {
     public static Enemy generateNalaBoss() {
         int health = 400;
         Random rand = new Random();
+        String name = "Rennala, Queen of the Full Moon";
         int attack = rand.nextInt(300 - 200 + 1) + 200;
         double physicalDefense = 0.15;
         double sorceryDefense = 0.30;
         double incantationDefense = 0.25;
 
-        return new Enemy(health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
     }
 
     /**
@@ -78,11 +83,12 @@ public class EnemyStats {
     public static Enemy generateEldenBeast() {
         int health = 800;
         Random rand = new Random();
+        String name = "Elden Beast";
         int attack = rand.nextInt(500 - 250 + 1) + 250;
         double physicalDefense = 0.25;
         double sorceryDefense = 0.50;
         double incantationDefense = 0.40;
 
-        return new Enemy(health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
     }
 }

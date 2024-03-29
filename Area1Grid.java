@@ -6,7 +6,9 @@ import java.util.Random;
  * It allows players to navigate through floors, interact with objects, and encounter enemies.
  */
 public class Area1Grid {
+    private static int areaIndex = 1;
     private static Character character;
+    private static Enemy enemy;
     private static AreaInteractionListener listener;
     private static String[][] currentFloor;
     private static int playerRow = 6;
@@ -223,18 +225,18 @@ public class Area1Grid {
             double encounterChance = rand.nextDouble();
             String[] enemies = {"Godrick Soldier", "Godrick Archer", "Godrick Knight"};
             String encounteredEnemy = enemies[rand.nextInt(enemies.length)];
-            boolean isHighType = rand.nextBoolean();
+            //boolean isHighType = rand.nextBoolean();
             int enemyHealth;
 
             switch (encounteredEnemy) {
                 case "Godrick Soldier":
-                    enemyHealth = isHighType ? 30 : 20;
+                    EnemyStats.generateEnemyType1();
                     break;
                 case "Godrick Archer":
-                    enemyHealth = isHighType ? 35 : 25;
+                    EnemyStats.generateEnemyType2();
                     break;
                 case "Godrick Knight":
-                    enemyHealth = isHighType ? 80 : 70;
+                    EnemyStats.generateEnemyType3();
                     break;
                 default:
                     enemyHealth = 0;
@@ -243,8 +245,11 @@ public class Area1Grid {
             if (encounterChance < 0.75) {
                 System.out.print("\033\143");
                 System.out.println("You encounter an enemy!");
-                System.out.println("\n[ " + encounteredEnemy + " ]");
-                System.out.println("HP: "+ enemyHealth);
+                // Start battle sequence
+                Battle battle = new Battle(character, enemy, areaIndex);
+                battle.startBattle();
+                //System.out.println("\n[ " + encounteredEnemy + " ]");
+                //System.out.println("HP: "+ enemyHealth);
                 pauseForMessage();
                 System.out.print("\033\143");
             } else {

@@ -6,7 +6,8 @@ public class Enemy {
     private double sorceryDefense;
     private double incantationDefense;
 
-    public Enemy(int health, int attack, double physicalDefense, double sorceryDefense, double incantationDefense) {
+    public Enemy(String name, int health, int attack, double physicalDefense, double sorceryDefense, double incantationDefense) {
+        this.name = name;
         this.health = health;
         this.attack = attack;
         this.physicalDefense = physicalDefense;
@@ -15,6 +16,9 @@ public class Enemy {
     }
 
     // Getters
+    public String getName() {
+        return name;
+    }
     public int getHealth() {
         return health;
     }
@@ -54,15 +58,6 @@ public class Enemy {
 
     public void setIncantationDefense(double incantationDefense) {
         this.incantationDefense = incantationDefense;
-    }
-
-    /**
-     * Method to get the name of the enemy. (not used yet)
-     * 
-     * @return The name of the enemy.
-     */
-    public String getName() {
-        return name;
     }
 
     /**
