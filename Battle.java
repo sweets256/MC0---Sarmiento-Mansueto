@@ -96,6 +96,7 @@ public class Battle {
 
         attackChoice = input.nextInt(); 
 
+        // Insert sys.out
         // Depends on user input
         switch (attackChoice) {
             case 1:
