@@ -21,6 +21,7 @@ public class Area3Grid {
         {"|     |", "|  ?  |", "|     |"},
         {"|     |", "|     |", "|     |"},
         {"|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |"},
         {"|     |", "|  F  |", "|     |"}
     };
     private static String[][] floor2Data = {
@@ -51,6 +52,7 @@ public class Area3Grid {
         {"|     |", "|  ?  |", "|     |"},
         {"|     |", "|     |", "|     |"},
         {"|     |", "|     |", "|     |"},
+        {"|     |", "|     |", "|     |"},
         {"|     |", "|  F  |", "|     |"}
     };
     private static String[][] initialfloor2Data = {
@@ -78,7 +80,7 @@ public class Area3Grid {
     private static int currentFloorIndex = 0;
     
     private static final int[][] startingPositions = {
-        {7, 1},
+        {8, 1},
         {6, 3},
         {8, 1}
     };
@@ -239,6 +241,23 @@ public class Area3Grid {
             System.out.println("You have found the Boss of The Elden Throne !!!");
             System.out.println("\n[ The Elden Beast ]");
             System.out.println("HP: 800");
+            pauseForMessage();
+            System.out.print("\033\143");
+        } else if ("|  C  |".equals(currentTile)) {
+            System.out.print("\033\143");
+            System.out.println("================================== THANK YOU FOR PLAYING ! =================================");
+            System.out.println(" _______  _        ______   _______  _          _______  _______  _______           _______ ");
+            System.out.println("(  ____ \\( \\      (  __  \\ (  ____ \\( (    /|  (  ____ )(  ___  )(  ____ \\|\\     /|(  ____ \\");
+            System.out.println("| (    \\/| (      | (  \\  )| (    \\/|  \\  ( |  | (    )|| (   ) || (    \\/| )   ( || (    \\/");
+            System.out.println("| (__    | |      | |   ) || (__    |   \\ | |  | (____)|| |   | || |      | |   | || (__    ");
+            System.out.println("|  __)   | |      | |   | ||  __)   | (\\ \\) |  |     __)| |   | || | ____ | |   | ||  __)   ");
+            System.out.println("| (      | |      | |   ) || (      | | \\   |  | (\\ (   | |   | || | \\_  )| |   | || (      ");
+            System.out.println("| (____/\\| (____/\\| (__/  )| (____/\\| )  \\  |  | ) \\ \\__| (___) || (___) || (___) || (____/\\");
+            System.out.println("(_______/(_______/(______/ (_______/|/    )_)  |/   \\__/(_______)(_______)(_______)(_______/");
+            System.out.println("\n                                         DEVELOPERS                                         ");
+            System.out.println("============================================================================================");
+            System.out.println("                                   MANSUETO, MARIA ALYSAA                                   ");
+            System.out.println("                                   SARMIENTO IV, ABRAHAM                                    ");
             pauseForMessage();
             System.out.print("\033\143");
         } else {
