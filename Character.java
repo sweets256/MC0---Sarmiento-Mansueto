@@ -330,6 +330,7 @@ public class Character {
             // If no weapon is equipped, return only the character's base health
             return (100 * (stats[0] / 2));
         }
+
     }
 
     /**

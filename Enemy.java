@@ -1,6 +1,7 @@
 public class Enemy {
     private String name;
     private int health;
+    private int originalHealth;
     private int attack;
     private double physicalDefense;
     private double sorceryDefense;
@@ -9,6 +10,7 @@ public class Enemy {
     public Enemy(String name, int health, int attack, double physicalDefense, double sorceryDefense, double incantationDefense) {
         this.name = name;
         this.health = health;
+        this.originalHealth = health; // Set the original health
         this.attack = attack;
         this.physicalDefense = physicalDefense;
         this.sorceryDefense = sorceryDefense;
@@ -22,6 +24,10 @@ public class Enemy {
 
     public int getHealth() {
         return health;
+    }
+
+    public int getOriginalHealth() {
+        return originalHealth;
     }
 
     public int getAttack() {
@@ -43,6 +49,10 @@ public class Enemy {
     // Setters
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void setOriginalHealth(int originalHealth) {
+        this.originalHealth = originalHealth;
     }
 
     public void setAttack(int attack) {

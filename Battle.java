@@ -95,10 +95,21 @@ public class Battle {
      * @return The chosen attack type
      */
     private int calculatePlayerDamage(Scanner input) {
+        int physicalDamage;
+        int sorceryDamage;
+        int incantationDamage;
+        
+        // Calculation of player damage with no equipped weapon
+        physicalDamage = (int) (player.getStatValue(4) * (1 - enemy.getPhysicalDefense()));
+        sorceryDamage = (int) (player.getStatValue(2) * (1 - enemy.getSorceryDefense()));
+        incantationDamage = (int) (player.getStatValue(5) * (1 - enemy.getIncantationDefense()));
+
         // Calculation of player damage with the equipped weapon
-        int physicalDamage = (int) ((player.getStatValue(4) + player.getEquippedWeaponStrength()) * (1 - enemy.getPhysicalDefense()));
-        int sorceryDamage = (int) ((player.getStatValue(2) + player.getEquippedWeaponIntelligence()) * (1 - enemy.getSorceryDefense()));
-        int incantationDamage = (int) ((player.getStatValue(5) + player.getEquippedWeaponEndurance()) * (1 - enemy.getIncantationDefense()));
+        if (player.getEquippedWeapon() != null){
+        physicalDamage = (int) ((player.getStatValue(4) + player.getEquippedWeaponStrength()) * (1 - enemy.getPhysicalDefense()));
+        sorceryDamage = (int) ((player.getStatValue(2) + player.getEquippedWeaponIntelligence()) * (1 - enemy.getSorceryDefense()));
+        incantationDamage = (int) ((player.getStatValue(5) + player.getEquippedWeaponEndurance()) * (1 - enemy.getIncantationDefense()));
+        }
 
         int attackChoice = 0; // Initialize attackChoice variable
 
@@ -157,7 +168,7 @@ public class Battle {
      * Result when player wins
      */
     private void playerWins() {
-        int runesGained = enemy.getHealth() * 2;
+        int runesGained = enemy.getOriginalHealth() * 2;
         System.out.println("Enemy felled!");
         System.out.println("Player gains " + runesGained + " runes.");
 

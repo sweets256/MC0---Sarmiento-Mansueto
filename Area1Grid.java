@@ -14,7 +14,7 @@ public class Area1Grid {
     private static String[][] currentFloor;
     private static int playerRow = 6;
     private static int playerCol = 2;
-    private static final Scanner scanner = new Scanner(System.in);
+    //private static final Scanner scanner = new Scanner(System.in);
     private static boolean shouldExitArea = false;
     private static String[][] floor1Data = {
         {"|     |", "|  D  |", "|     |"},
@@ -96,7 +96,7 @@ public class Area1Grid {
      /**
      * Starts the area by initializing the floor, player position, and processing player actions.
      */
-    public static void startArea() {
+    public static void startArea(Scanner input) {
         shouldExitArea = false;
         currentFloorIndex = 0;
         resetFloorData();
@@ -120,7 +120,9 @@ public class Area1Grid {
         while (!exitArea && !shouldExitArea) {
             displayFloor();
             System.out.println("Enter action (WASD to move, E to interact): ");
-            String action = scanner.nextLine().toUpperCase();
+
+            String action = input.nextLine().toUpperCase();
+            
             switch (action) {
                 case "W": movePlayer(-1, 0); System.out.print("\033\143"); break;
                 case "A": movePlayer(0, -1); System.out.print("\033\143"); break;
@@ -129,6 +131,7 @@ public class Area1Grid {
                 case "E": interact(); break;
                 default: System.out.println("Invalid action."); pauseForMessage(); System.out.print("\033\143"); break;
             }
+            input.close();
         }
         if (shouldExitArea) {
             System.out.print("\033\143");
