@@ -184,6 +184,7 @@ public class Battle {
         // Insert code to reset player's health and return to game lobby
         player.setRunes(0);
         // Player returns back to gamelobby
+        navigation.onFastTravel();
     }
 
     /**
