@@ -76,10 +76,9 @@ public class Battle {
                             int enemyDamage = calculateEnemyDamage(); // Calculate enemy damage
                             player.takeDamage(enemyDamage); // Player takes damage
                             System.out.println("Player takes " + enemyDamage + " damage from the enemy.");
-                            System.out.println("Current Health: " + player.getEffectiveHealth());
                         }
-                        pauseForMessage();
-                        System.out.print("\033\143");
+                        //pauseForMessage();
+                        //System.out.print("\033\143");
                         return; // Exit the method after dodge
                     default:
                         System.out.println("Invalid choice. Please select [1] to attack or [2] to dodge.");
