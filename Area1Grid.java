@@ -252,8 +252,9 @@ public class Area1Grid {
                 weapon = character.getEquippedWeapon();
                 Battle battle = new Battle(character, enemy, areaIndex, weapon);
                 battle.startBattle();
-                //System.out.println("\n[ " + encounteredEnemy + " ]");
-                //System.out.println("HP: "+ enemyHealth);
+
+                //character.updateHealthAfterBattle(character.getCurrentHealth());
+
                 pauseForMessage();
                 System.out.print("\033\143");
             } else {

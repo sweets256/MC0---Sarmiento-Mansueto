@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class EnemyStats {
+    
     /**
      * Stats for enemy type 1 in area 1 and 2
      */
@@ -18,7 +19,7 @@ public class EnemyStats {
         double sorceryDefense = 0.15;
         double incantationDefense = 0.10;
 
-        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense, false);
     }
 
     /**
@@ -38,7 +39,7 @@ public class EnemyStats {
         double sorceryDefense = 0.15;
         double incantationDefense = 0.20;
 
-        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense, false);
     }
 
     /**
@@ -58,7 +59,7 @@ public class EnemyStats {
         double sorceryDefense = 0.25;
         double incantationDefense = 0.20;
 
-        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense, false);
     }
 
     /**
@@ -73,7 +74,7 @@ public class EnemyStats {
         double sorceryDefense = 0.20;
         double incantationDefense = 0.15;
 
-        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense, true);
     }
 
     /**
@@ -88,7 +89,7 @@ public class EnemyStats {
         double sorceryDefense = 0.30;
         double incantationDefense = 0.25;
 
-        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense, true);
     }
 
     /**
@@ -103,7 +104,7 @@ public class EnemyStats {
         double sorceryDefense = 0.50;
         double incantationDefense = 0.40;
 
-        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);
+        return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense, true);
     }
     
 }

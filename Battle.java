@@ -42,6 +42,7 @@ public class Battle {
             }
         }
         //input.close(); // Close the Scanner after the battle ends
+        //player.updateHealthAfterBattle(player.getCurrentHealth());
     }
 
     /**
@@ -77,9 +78,9 @@ public class Battle {
                             player.takeDamage(enemyDamage); // Player takes damage
                             System.out.println("Player takes " + enemyDamage + " damage from the enemy.");
                         }
-                        pauseForMessage();
-                        System.out.print("\033\143");
-                        return; // Exit the method after dodge
+                        //pauseForMessage();
+                        //System.out.print("\033\143");
+                        //return; // Exit the method after dodge
                     default:
                         System.out.println("Invalid choice. Please select [1] to attack or [2] to dodge.");
                 }
@@ -168,10 +169,15 @@ public class Battle {
      * Result when player wins
      */
     private void playerWins() {
-        int runesGained = enemy.getOriginalHealth() * 2;
+        int runesGained;
+        if (enemy.isBoss()) {
+            runesGained = enemy.getOriginalHealth() * 5; // Boss runes gained
+        } else {
+            runesGained = enemy.getOriginalHealth() * 2; // Regular enemy runes gained
+        }
         System.out.println("Enemy felled!");
         System.out.println("Player gains " + runesGained + " runes.");
-
+    
         // Add gained runes to player's inventory
         player.addRunes(runesGained);
     }

@@ -6,8 +6,9 @@ public class Enemy {
     private double physicalDefense;
     private double sorceryDefense;
     private double incantationDefense;
+    private boolean isBoss;
 
-    public Enemy(String name, int health, int attack, double physicalDefense, double sorceryDefense, double incantationDefense) {
+    public Enemy(String name, int health, int attack, double physicalDefense, double sorceryDefense, double incantationDefense, boolean isBoss) {
         this.name = name;
         this.health = health;
         this.originalHealth = health; // Set the original health
@@ -15,6 +16,7 @@ public class Enemy {
         this.physicalDefense = physicalDefense;
         this.sorceryDefense = sorceryDefense;
         this.incantationDefense = incantationDefense;
+        this.isBoss = isBoss;
     }
 
     // Getters
@@ -69,6 +71,11 @@ public class Enemy {
 
     public void setIncantationDefense(double incantationDefense) {
         this.incantationDefense = incantationDefense;
+    }
+
+     // Getter for isBoss field
+     public boolean isBoss() {
+        return isBoss;
     }
 
     /**
