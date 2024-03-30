@@ -7,17 +7,15 @@ public class Battle {
     private Enemy enemy;
     private int areaIndex;
     private Weapon weapon;
-    private Navigation navigation;
 
     /**
      * Constructor
      */
-    public Battle(Character player, Enemy enemy, int areaIndex, Weapon weapon, Navigation navigation) {
+    public Battle(Character player, Enemy enemy, int areaIndex, Weapon weapon) {
         this.player = player;
         this.enemy =  enemy;
         this.areaIndex = areaIndex;
         this.weapon = weapon;
-        this.navigation = navigation;
     }
 
     /**
@@ -186,7 +184,6 @@ public class Battle {
         // Insert code to reset player's health and return to game lobby
         player.setRunes(0);
         // Player returns back to gamelobby
-        navigation.onFastTravel();
     }
 
     /**
