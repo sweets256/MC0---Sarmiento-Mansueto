@@ -175,6 +175,7 @@ public class Character {
         for (int i = 0; i < stats.length; i++) {
             stats[i] = Integer.parseInt(characterClasses[classIndex][i + 2]);
         }
+        effectiveHealth = (100 * (stats[0] / 2));
     }
 
     /**
@@ -186,7 +187,7 @@ public class Character {
         System.out.println("Job Class: " + jobClass);
         System.out.println("Level: " + level);
         System.out.println("Runes: " + runes);
-        System.out.println("Health: " + getEffectiveHealth()); // Add current health display
+        System.out.println("Health: " + effectiveHealth); // Add current health display
         System.out.println("=====================================");
     }
 
@@ -214,13 +215,7 @@ public class Character {
     }
 
     public int getEffectiveHealth() {
-        if (equippedWeapon != null) {
-            // Calculate health based on character's base health and weapon's health bonus
-            return effectiveHealth = (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
-        } else {
-            // If no weapon is equipped, return only the character's base health
-            return effectiveHealth = (100 * (stats[0] / 2));
-        }
+        return effectiveHealth;
     }
 
     /**
@@ -266,6 +261,7 @@ public class Character {
      */
     public void setEquippedWeapon(Weapon equippedWeapon) {
         this.equippedWeapon = equippedWeapon;
+        effectiveHealth = (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
     }
 
     /**
