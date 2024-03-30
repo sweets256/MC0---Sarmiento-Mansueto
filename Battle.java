@@ -24,7 +24,7 @@ public class Battle {
     public void startBattle() {
         Scanner input = new Scanner(System.in); // Create Scanner instance here
         System.out.println("Battle begins!");
-        System.out.println("Player: " + player.getCharacterName() + " | Health: " + player.getOriginalHealth());
+        System.out.println("Player: " + player.getCharacterName() + " | Health: " + player.getCurrentHealth());
         System.out.println("Enemy: " + enemy.getName() + " | Health: " + enemy.getHealth());
 
         while (true) {
