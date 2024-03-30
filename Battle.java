@@ -24,7 +24,7 @@ public class Battle {
     public void startBattle() {
         Scanner input = new Scanner(System.in); // Create Scanner instance here
         System.out.println("Battle begins!");
-        System.out.println("Player: " + player.getCharacterName() + " | Health: " + player.getCurrentHealth());
+        System.out.println("Player: " + player.getCharacterName() + " | Health: " + player.getEffectiveHealth());
         System.out.println("Enemy: " + enemy.getName() + " | Health: " + enemy.getHealth());
 
         while (true) {
@@ -36,7 +36,7 @@ public class Battle {
                 enemyTurn();
             }
 
-            if (player.getCurrentHealth() <= 0) {
+            if (player.getEffectiveHealth() <= 0) {
                 playerLoses();
                 break;
             }
@@ -76,6 +76,7 @@ public class Battle {
                             int enemyDamage = calculateEnemyDamage(); // Calculate enemy damage
                             player.takeDamage(enemyDamage); // Player takes damage
                             System.out.println("Player takes " + enemyDamage + " damage from the enemy.");
+                            System.out.println("Current Health: " + player.getEffectiveHealth());
                         }
                         pauseForMessage();
                         System.out.print("\033\143");

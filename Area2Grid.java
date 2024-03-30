@@ -202,7 +202,7 @@ public class Area2Grid {
         }
 
         System.out.println("\n========== Player Stats ==========");
-        System.out.println("Health: " + character.getCurrentHealth());
+        System.out.println("Health: " + character.getEffectiveHealth());
         System.out.println("Level: " + character.getLevel());
         System.out.println("Runes: " + character.getRunes());
         System.out.println("==================================\n");

@@ -97,6 +97,7 @@ public class Area1Grid {
      * Starts the area by initializing the floor, player position, and processing player actions.
      */
     public static void startArea(Scanner input) {
+        character.getEffectiveHealth();
         shouldExitArea = false;
         currentFloorIndex = 0;
         resetFloorData();
@@ -180,7 +181,7 @@ public class Area1Grid {
         }
 
         System.out.println("\n========== Player Stats ==========");
-        System.out.println("Health: " + character.getCurrentHealth());
+        System.out.println("Health: " + character.getEffectiveHealth());
         System.out.println("Level: " + character.getLevel());
         System.out.println("Runes: " + character.getRunes());
         System.out.println("==================================\n");

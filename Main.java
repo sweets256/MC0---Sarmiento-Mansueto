@@ -32,5 +32,8 @@ public class Main {
     }
 }
 
-// Complete Battle class and call whenever an enemy is encountered, call also when fighting bosses
-// Display all stats of weapon when  in inventory, now only req dex is being shown
+// Health lost from battle should carry onto when player enters area again, health gained back when player goes to game lobby
+// player takedamage() should be fixed (it works at first then all of a sudden it goes up????)
+// area 3 should only be accessed when area 1 and 2 are cleared
+
+// if the enemy was a boss, the runes gained is equal to the boss’ max health multiplied by 5 (DONE)
