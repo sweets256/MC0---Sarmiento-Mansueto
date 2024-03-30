@@ -10,7 +10,6 @@ public class Character {
     private String characterName;
     private String jobClass;
     private int level = 1;
-    private int originalHealth;
     private int runes = 100000;
     private int[] stats = new int[6];
     private static final String[][] characterClasses = {
@@ -177,39 +176,6 @@ public class Character {
         }
     }
 
-    private int originalHealth() {
-        if (equippedWeapon != null) {
-            // Calculate health based on character's base health and weapon's health bonus
-            return (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
-        } else {
-            // If no weapon is equipped, return only the character's base health
-            return (100 * (stats[0] / 2));
-        }
-    }
-
-    public int getOriginalHealth() {
-        return originalHealth;
-    }
-
-    public void setOriginalHealth(int originalHealth) {
-        this.originalHealth = originalHealth;
-    }
-    
-    /**
-     * Reduces the character's health by the specified amount of damage.
-     *
-     * @param damage the amount of damage to take
-     */
-    public void takeDamage(int damage) {
-        int currentHealth = originalHealth();
-        int newHealth = currentHealth - damage;
-        if (newHealth < 0) {
-            newHealth = 0; // Ensure health does not go below 0
-        }
-        System.out.println("Current Health: " + newHealth);
-    }
-    
-
     /**
      * Displays the character's stats.
      */
@@ -219,7 +185,7 @@ public class Character {
         System.out.println("Job Class: " + jobClass);
         System.out.println("Level: " + level);
         System.out.println("Runes: " + runes);
-        System.out.println("Health: " + getOriginalHealth()); // Add current health display
+        System.out.println("Health: " + getCurrentHealth()); // Add current health display
         System.out.println("=====================================");
     }
 
@@ -235,34 +201,33 @@ public class Character {
             System.out.println("Invalid stat choice.");
         }
     }
-    
 
     /**
      * Reduces the character's health by the specified amount of damage.
      *
      * @param damage the amount of damage to take
      */
-    /*public void takeDamage(int damage) {
+    public void takeDamage(int damage) {
         int newHealth = getCurrentHealth() - damage;
         if (newHealth < 0) {
             newHealth = 0; // Ensure health does not go below 0
         }
         System.out.println("Current Health: " + newHealth);
-    }*/
+    }
 
     /**
      * Updates the character's health after taking damage.
      *
      * @param newHealth the new health value after taking damage
      */
-    /*public void updateCurrentHealth(int newHealth) {
+    public void updateCurrentHealth(int newHealth) {
         if (newHealth < 0) {
             newHealth = 0; // Ensure health cannot be negative
         }
         stats[0] = newHealth; // Update the current health
-    }*/
+    }
 
-    /*public int getCurrentHealth() {
+    public int getCurrentHealth() {
         if (equippedWeapon != null) {
             // Calculate health based on character's base health and weapon's health bonus
             return (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
@@ -271,7 +236,7 @@ public class Character {
             return (100 * (stats[0] / 2));
         }
 
-    }*/
+    }
 
     /**
      * Adds a weapon to the character's inventory.
