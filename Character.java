@@ -208,12 +208,34 @@ public class Character {
      * @param damage the amount of damage to take
      */
     public void takeDamage(int damage) {
-        int newHealth = getCurrentHealth();
-        newHealth -= damage;
+        int newHealth = getCurrentHealth() - damage;
+        updateCurrentHealth(newHealth);
         System.out.println("Current Health: " + newHealth);
         if (newHealth < 0) {
             newHealth = 0;
         }
+    }
+
+    public int getCurrentHealth() {
+        if (equippedWeapon != null) {
+            // Calculate health based on character's base health and weapon's health bonus
+            return (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
+        } else {
+            // If no weapon is equipped, return only the character's base health
+            return (100 * (stats[0] / 2));
+        }
+
+    }
+
+    /**
+     * Updates the character's health after a battle encounter.
+     * @param remainingHealth the remaining health after the battle
+     */
+    public void updateCurrentHealth(int newHealth) {
+        if (newHealth < 0) {
+            newHealth = 0; // Ensure health cannot be negative
+        }
+        stats[0] = newHealth; // Update the current health
     }
 
     /**
@@ -320,17 +342,6 @@ public class Character {
      */
     public void setLevel(int newLevel) {
         this.level = newLevel;
-    }
-
-    public int getCurrentHealth() {
-        if (equippedWeapon != null) {
-            // Calculate health based on character's base health and weapon's health bonus
-            return (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
-        } else {
-            // If no weapon is equipped, return only the character's base health
-            return (100 * (stats[0] / 2));
-        }
-
     }
 
     /**
