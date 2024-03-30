@@ -279,12 +279,14 @@ public class Area1Grid {
             battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
+            currentFloor[playerRow][playerCol] = "|     |";
         } else {
             System.out.print("\033\143");
             System.out.println("There's nothing to interact with here.");
             pauseForMessage();
             System.out.print("\033\143");
         }
+        
     }
     
     /**

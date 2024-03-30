@@ -251,6 +251,7 @@ public class Area3Grid {
             battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
+            currentFloor[playerRow][playerCol] = "|     |";
         } else if ("|  C  |".equals(currentTile)) {
             System.out.print("\033\143");
             System.out.println("================================== THANK YOU FOR PLAYING ! =================================");
