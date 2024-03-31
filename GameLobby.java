@@ -129,7 +129,7 @@ public class GameLobby {
                 System.out.println("Not enough runes. You have " + player.getRunes() + " runes, but need " + runeCost + ".");
                 pauseForMessage();
                 System.out.print("\033\143");
-                break;
+                continue;
             }
     
             System.out.println("Choose a stat to level up or type 'back' to cancel leveling up:");
@@ -138,7 +138,7 @@ public class GameLobby {
             if ("back".equalsIgnoreCase(inputChoice)) {
                 System.out.print("\033\143");
                 System.out.println("Level up cancelled...");
-                break;
+                continue;
             }
     
             try {
@@ -162,7 +162,7 @@ public class GameLobby {
                     displayStats();
                     pauseForMessage();
                     System.out.print("\033\143");
-                    break;
+                    continue;
                 } else {
                     System.out.print("\033\143");
                     System.out.println("Level up cancelled.");
@@ -183,7 +183,8 @@ public class GameLobby {
             System.out.println("===== Inventory =====");
             System.out.println("Equipped Weapon:");
             if (player.getEquippedWeapon() != null) {
-                System.out.println("Name: " + player.getEquippedWeapon().getName() + player.getEquippedWeaponDexterity() + " " + player.getEquippedWeaponHp() + " " + player.getEquippedWeaponIntelligence() + " " + player.getEquippedWeaponEndurance() + " " + player.getEquippedWeaponStrength() + " " + player.getEquippedWeaponFaith());
+                System.out.println("Name: " + player.getEquippedWeapon().getName() + " Dexterity: " + player.getEquippedWeaponDexterity() + " HP: " + player.getEquippedWeaponHp() + " Intelligence: " + player.getEquippedWeaponIntelligence() + 
+                " Endurance: " + player.getEquippedWeaponEndurance() + " Strength: " + player.getEquippedWeaponStrength() + " Faith: " + player.getEquippedWeaponFaith());
                 System.out.println("Dexterity Requirement: " + player.getEquippedWeapon().getDexterity() + "\n");
             } else {
                 System.out.println("None\n");
