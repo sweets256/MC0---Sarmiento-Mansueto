@@ -10,7 +10,6 @@ public class Area1Grid {
     private static boolean isBossDead = false;
     public static boolean isAreaDone = false;
     private static Character character;
-    private static Weapon weapon;
     private static Enemy enemy;
     private static AreaInteractionListener listener;
     private static String[][] currentFloor;
@@ -266,8 +265,7 @@ public class Area1Grid {
                 System.out.print("\033\143");
                 System.out.println("You encounter an enemy!");
                 // Start battle sequence
-                weapon = character.getEquippedWeapon();
-                Battle battle = new Battle(character, enemy, areaIndex, weapon);
+                Battle battle = new Battle(character, enemy, areaIndex);
                 battle.startBattle();
                 pauseForMessage();
                 System.out.print("\033\143");
@@ -295,8 +293,7 @@ public class Area1Grid {
             pauseForMessage();;
             System.out.print("\033\143");
             enemy = EnemyStats.generateGodrickBoss();
-            Weapon weapon = character.getEquippedWeapon();
-            Battle battle = new Battle(character, enemy, areaIndex, weapon);
+            Battle battle = new Battle(character, enemy, areaIndex);
             battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");

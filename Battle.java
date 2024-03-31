@@ -6,17 +6,14 @@ public class Battle {
     private Character player;
     private Enemy enemy;
     private int areaIndex;
-    private Weapon weapon;
-    private Navigation nav;
 
     /**
      * Constructor
      */
-    public Battle(Character player, Enemy enemy, int areaIndex, Weapon weapon) {
+    public Battle(Character player, Enemy enemy, int areaIndex) {
         this.player = player;
         this.enemy =  enemy;
         this.areaIndex = areaIndex;
-        this.weapon = weapon;
     }
 
     /**
