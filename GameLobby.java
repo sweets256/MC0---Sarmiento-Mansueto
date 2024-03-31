@@ -138,7 +138,7 @@ public class GameLobby {
             if ("back".equalsIgnoreCase(inputChoice)) {
                 System.out.print("\033\143");
                 System.out.println("Level up cancelled...");
-                continue;
+                break;
             }
     
             try {
