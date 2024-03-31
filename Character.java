@@ -211,6 +211,9 @@ public class Character {
      */
     public void takeDamage(int damage) {
         effectiveHealth -= damage;
+        if (effectiveHealth < 0){
+            effectiveHealth = 0;
+        }
         System.out.println("Current Health: " + effectiveHealth);
     }
 

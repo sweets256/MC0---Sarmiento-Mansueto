@@ -7,6 +7,7 @@ public class Battle {
     private Enemy enemy;
     private int areaIndex;
     private Weapon weapon;
+    private Navigation nav;
 
     /**
      * Constructor
@@ -184,7 +185,9 @@ public class Battle {
         // Insert code to reset player's health and return to game lobby
         player.setRunes(0);
         // Player returns back to gamelobby
-        navigation.onFastTravel();
+        //GameLobby gameLobby = new GameLobby(nav, player);
+        Navigation nav = new Navigation();
+        nav.gameLobby(player);
     }
 
     /**

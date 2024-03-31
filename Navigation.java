@@ -33,13 +33,13 @@ public class Navigation implements AreaInteractionListener {
                     titleScreen();
                     break;
                 case GAME_LOBBY:
-                    gameLobby();
+                    gameLobby(player);
                     break;
                 case IN_AREA:
                     Area1Grid.setCharacter(player);
                     Area1Grid.setAreaInteractionListener(this);
                     Area1Grid.startArea(obj);
-                    obj.close();
+                    //obj.close();
                     currentState = GameState.GAME_LOBBY;
                     break;
                 case EXIT:
@@ -47,13 +47,13 @@ public class Navigation implements AreaInteractionListener {
                     break;
             }
         }
-        obj.close();
+        //obj.close();
     }
 
     /**
      * Displays the title screen and prompts the player for input.
      */
-    private void titleScreen() {
+    public void titleScreen() {
         System.out.println(" _______  _        ______   _______  _          _______  _______  _______           _______ ");
         System.out.println("(  ____ \\( \\      (  __  \\ (  ____ \\( (    /|  (  ____ )(  ___  )(  ____ \\|\\     /|(  ____ \\");
         System.out.println("| (    \\/| (      | (  \\  )| (    \\/|  \\  ( |  | (    )|| (   ) || (    \\/| )   ( || (    \\/");
@@ -101,7 +101,7 @@ public class Navigation implements AreaInteractionListener {
     /**
      * Displays the game lobby menu and handles player input.
      */
-    private void gameLobby() {
+    public void gameLobby(Character player) {
         boolean inGameLobby = true;
         while (inGameLobby) {
             
@@ -176,7 +176,7 @@ public class Navigation implements AreaInteractionListener {
         if ("Stormveil Castle".equals(areaName)) {
             Area1Grid.setCharacter(player);
             Area1Grid.startArea(obj);
-            obj.close();
+            //obj.close();
         } else if ("Raya Lucaria Academy".equals(areaName)) {
             Area2Grid.setCharacter(player);
             Area2Grid.startArea();
