@@ -46,7 +46,11 @@ public class GameLobby {
             System.out.println("Available areas:");
             System.out.println("[1] Stormveil Castle");
             System.out.println("[2] Raya Lucaria Academy");
-            System.out.println("[3] The Elden Throne");
+            if (isArea1and2Clear() == true){
+                System.out.println("[3] The Elden Throne");
+            } else {
+                System.out.println("[3] The Elden Throne [LOCKED]");
+            }
             System.out.print("\nEnter your choice or 'back' to cancel: ");
     
             String inputChoice = input.nextLine().trim();
@@ -87,7 +91,7 @@ public class GameLobby {
                         System.out.print("\033\143");
                         navigation.enterArea("The Elden Throne");
                         } else if (isArea1and2Clear() == false){
-                            System.out.println("Areas 1 and 2 need to be cleared before entering!");
+                            System.out.println("This Area is locked! Areas 1 and 2 need to be cleared before entering!");
                             pauseForMessage();
                             System.out.print("\033\143");
                         }
