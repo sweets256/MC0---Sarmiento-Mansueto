@@ -131,6 +131,7 @@ public class Area2Grid {
      * Starts the area by initializing the floor, player position, and processing player actions.
      */
     public static void startArea(Scanner input) {
+        character.getEffectiveHealth();
         shouldExitArea = false;
         currentFloorIndex = 0;
         resetFloorData();

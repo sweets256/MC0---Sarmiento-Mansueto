@@ -168,8 +168,6 @@ public class Battle {
         int runesGained = enemy.getOriginalHealth() * 2;
         System.out.println("Enemy felled!");
         System.out.println("Player gains " + runesGained + " runes.");
-
-        // Add gained runes to player's inventory
         player.addRunes(runesGained);
     }
 
@@ -179,13 +177,7 @@ public class Battle {
      */
     private int playerLoses() {
         System.out.println("You died!");
-        // Insert code to reset player's health and return to game lobby
         player.setRunes(0);
-        // Player returns back to gamelobby
-        //GameLobby gameLobby = new GameLobby(nav, player);
-        //Navigation nav = new Navigation();
-        //nav.gameLobby(player);
-
         return 0;
     }
 
