@@ -85,7 +85,7 @@ public class EnemyStats {
         String name = "Rennala, Queen of the Full Moon";
         int attack = rand.nextInt(300 - 200 + 1) + 200;
         double physicalDefense = 0.15;
-        double sorceryDefense = 0.30;
+        double sorceryDefense = 0.35;
         double incantationDefense = 0.25;
 
         return new Enemy(name, health, attack, physicalDefense, sorceryDefense, incantationDefense);

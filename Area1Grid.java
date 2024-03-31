@@ -220,11 +220,11 @@ public class Area1Grid {
         
         String currentTile = currentFloor[playerRow][playerCol].trim();
         if ("|  F  |".equals(currentTile)) {
-            if (currentTile == floor3Data[0][2] && isBossDead == false){
+            if (currentFloorIndex == 2 && isBossDead == false){
                 System.out.println("Great enemy has not yet fallen! Fast travel is not accessible.");
                 pauseForMessage();
                 System.out.print("\033\143");
-            } else if (currentTile == floor3Data[0][2] && isBossDead == true){
+            } else if (currentFloorIndex == 2 && isBossDead == true){
                 if (listener != null) {
                     listener.onFastTravel();
                     shouldExitArea = true;
@@ -232,7 +232,7 @@ public class Area1Grid {
                     System.out.println("Fast travel point activated. Returning to game lobby...");
                     shouldExitArea = true; 
                 }
-            } else if (currentTile == floor1Data[6][1]){
+            } else if (currentFloorIndex == 0 && isBossDead == false || currentFloorIndex == 0 && isBossDead == true){
                 if (listener != null) {
                     listener.onFastTravel();
                     shouldExitArea = true;

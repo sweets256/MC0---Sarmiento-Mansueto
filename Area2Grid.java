@@ -248,11 +248,11 @@ public class Area2Grid {
         
         String currentTile = currentFloor[playerRow][playerCol].trim();
         if ("|  F  |".equals(currentTile)) {
-            if (currentTile == floor5Data[0][3] && isBossDead == false){
+            if (currentFloorIndex == 4 && isBossDead == false){
                 System.out.println("Great enemy has not yet fallen! Fast travel is not accessible.");
                 pauseForMessage();
                 System.out.print("\033\143");
-            } else if (currentTile == floor5Data[0][3] && isBossDead == true){
+            } else if (currentFloorIndex == 4 && isBossDead == true){
                 if (listener != null) {
                     listener.onFastTravel();
                     shouldExitArea = true;
@@ -260,7 +260,7 @@ public class Area2Grid {
                     System.out.println("Fast travel point activated. Returning to game lobby...");
                     shouldExitArea = true; 
                 }
-            } else if (currentTile == floor1Data[0][3]){
+            } else if (currentFloorIndex == 0 && isBossDead == false || currentFloorIndex == 0 && isBossDead == true){
                 if (listener != null) {
                     listener.onFastTravel();
                     shouldExitArea = true;
@@ -317,7 +317,7 @@ public class Area2Grid {
             System.out.print("\033\143");
             System.out.println("You have found the Boss of Raya Lucaria Academy !!!");
             System.out.println("\n[ Rennala, Queen of the Full Moon ]");
-            System.out.println("HP: 200");
+            System.out.println("HP: 400");
             pauseForMessage();;
             System.out.print("\033\143");
             enemy = EnemyStats.generateNalaBoss();

@@ -34,6 +34,9 @@ public class Main {
 
 // health gained back when player goes to game lobby
 
+// fix print sa inventory
+// add continue in level up screen
+
 // Health lost from battle should carry onto when player enters area again (DONE)
 // area 3 should only be accessed when area 1 and 2 are cleared (DONE)
 // FAST TRAVEL PAGAMELOBBY SA BOSS ROOM SHOULD BE ACCESSIBLE PAG NATALO LANG UNG BOSS:) (DONE)
