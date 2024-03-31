@@ -445,7 +445,7 @@ public class Character {
      */
     private static void pauseForMessage() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(0500);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
