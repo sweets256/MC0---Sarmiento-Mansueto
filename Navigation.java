@@ -22,6 +22,7 @@ public class Navigation implements AreaInteractionListener {
         currentState = GameState.TITLE_SCREEN;
         runGameLoop();
     }
+    
 
     /**
      * Starts the game loop, managing transitions between different game states.
@@ -176,13 +177,12 @@ public class Navigation implements AreaInteractionListener {
         if ("Stormveil Castle".equals(areaName)) {
             Area1Grid.setCharacter(player);
             Area1Grid.startArea(obj);
-            //obj.close();
         } else if ("Raya Lucaria Academy".equals(areaName)) {
             Area2Grid.setCharacter(player);
-            Area2Grid.startArea();
+            Area2Grid.startArea(obj);
         } else if ("The Elden Throne".equals(areaName)) {
             Area3Grid.setCharacter(player);
-            Area3Grid.startArea();
+            Area3Grid.startArea(obj);
         }
         // Handle other areas similarly
     }

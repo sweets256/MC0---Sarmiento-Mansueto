@@ -7,6 +7,8 @@ import java.util.Random;
  */
 public class Area2Grid {
     private static int areaIndex = 2;
+    private static boolean isBossDead = false;
+    public static boolean isAreaDone = false;
     private static Character character;
     private static Enemy enemy;
     private static Weapon weapon = character.getEquippedWeapon();
@@ -14,7 +16,7 @@ public class Area2Grid {
     private static String[][] currentFloor;
     private static int playerRow = 0;
     private static int playerCol = 2;
-    private static final Scanner scanner = new Scanner(System.in);
+    //private static final Scanner scanner = new Scanner(System.in);
     private static boolean shouldExitArea = false;
     private static String[][] floor1Data = {
         {"|     |", "|     |", "|  F  |", "|     |", "|     |"},
@@ -129,7 +131,7 @@ public class Area2Grid {
      /**
      * Starts the area by initializing the floor, player position, and processing player actions.
      */
-    public static void startArea() {
+    public static void startArea(Scanner input) {
         shouldExitArea = false;
         currentFloorIndex = 0;
         resetFloorData();
@@ -146,7 +148,7 @@ public class Area2Grid {
         while (!exitArea && !shouldExitArea) {
             displayFloor();
             System.out.println("Enter action (WASD to move, E to interact): ");
-            String action = scanner.nextLine().toUpperCase();
+            String action = input.nextLine().toUpperCase();
             switch (action) {
                 case "W": movePlayer(-1, 0); System.out.print("\033\143"); break;
                 case "A": movePlayer(0, -1); System.out.print("\033\143"); break;
@@ -247,12 +249,26 @@ public class Area2Grid {
         
         String currentTile = currentFloor[playerRow][playerCol].trim();
         if ("|  F  |".equals(currentTile)) {
-            if (listener != null) {
-                listener.onFastTravel();
-                shouldExitArea = true;
-            } else {
-                System.out.println("Fast travel point activated. Returning to game lobby...");
-                shouldExitArea = true; 
+            if (currentTile == floor5Data[0][3] && isBossDead == false){
+                System.out.println("Great enemy has not yet fallen! Fast travel is not accessible.");
+                pauseForMessage();
+                System.out.print("\033\143");
+            } else if (currentTile == floor5Data[0][3] && isBossDead == true){
+                if (listener != null) {
+                    listener.onFastTravel();
+                    shouldExitArea = true;
+                } else {
+                    System.out.println("Fast travel point activated. Returning to game lobby...");
+                    shouldExitArea = true; 
+                }
+            } else if (currentTile == floor1Data[0][3]){
+                if (listener != null) {
+                    listener.onFastTravel();
+                    shouldExitArea = true;
+                } else {
+                    System.out.println("Fast travel point activated. Returning to game lobby...");
+                    shouldExitArea = true; 
+                }
             }
         } else if ("|  ?  |".equals(currentTile)) {
             Random rand = new Random();
@@ -280,10 +296,15 @@ public class Area2Grid {
                 // Start battle sequence
                 Battle battle = new Battle(character, enemy, areaIndex, weapon);
                 battle.startBattle();
-                //System.out.println("\n[ " + encounteredEnemy + " ]");
-                //System.out.println("HP: "+ enemyHealth);
                 pauseForMessage();
                 System.out.print("\033\143");
+                if (character.getEffectiveHealth() != 0){
+                    currentFloor[playerRow][playerCol] = "|     |";
+                } else if (character.getEffectiveHealth() == 0){            
+                pauseForMessage();
+                System.out.print("\033\143");
+                shouldExitArea = true;
+                }
             } else {
                 int runesGained = areaIndex * (rand.nextInt(101) + 50);
                 character.addRunes(runesGained);
@@ -291,8 +312,8 @@ public class Area2Grid {
                 System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
                 pauseForMessage();
                 System.out.print("\033\143");
+                currentFloor[playerRow][playerCol] = "|     |";
             }
-            currentFloor[playerRow][playerCol] = "|     |";
         } else if ("|  B  |".equals(currentTile)) {
             System.out.print("\033\143");
             System.out.println("You have found the Boss of Raya Lucaria Academy !!!");
@@ -305,7 +326,15 @@ public class Area2Grid {
             battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
-            currentFloor[playerRow][playerCol] = "|     |";
+            if (character.getEffectiveHealth() != 0){
+                currentFloor[playerRow][playerCol] = "|     |";
+                isBossDead = true;
+                isAreaDone = true;
+            } else if (character.getEffectiveHealth() == 0){            
+            pauseForMessage();
+            System.out.print("\033\143");
+            shouldExitArea = true;
+            }
         } else {
             System.out.print("\033\143");
             System.out.println("There's nothing to interact with here.");

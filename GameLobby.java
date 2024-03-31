@@ -10,6 +10,7 @@ public class GameLobby {
     private Character player;
     private Scanner input = new Scanner(System.in);
     private Navigation navigation;
+    private boolean areasCleared = false;
     List<Weapon> weaponsForSale;
 
     /**
@@ -23,6 +24,12 @@ public class GameLobby {
         this.player = player;
         this.weaponsForSale = new ArrayList<>(); // Initialize weapons only once
         initializeWeapons(); // Initialize weapons available for sale
+    }
+
+    private void isArea1and2Clear(){
+        if (Area1Grid.isAreaDone == true && Area2Grid.isAreaDone == true){
+            areasCleared = true;
+        }
     }
 
     /**
@@ -71,12 +78,18 @@ public class GameLobby {
                         navigation.enterArea("Raya Lucaria Academy");
                         return;
                     case 3:
+                        if (areasCleared == true){
                         System.out.print("\033\143");
                         navigation.setCurrentArea("The Elden Throne");
                         System.out.println("Teleporting to The Elden Throne...");
                         pauseForMessage();
                         System.out.print("\033\143");
                         navigation.enterArea("The Elden Throne");
+                        } else if (areasCleared == false){
+                            System.out.println("Areas 1 and 2 need to be cleared before entering!");
+                            pauseForMessage();
+                            System.out.print("\033\143");
+                        }
                         return;
                     default:
                         System.out.print("\033\143");

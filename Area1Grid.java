@@ -7,6 +7,8 @@ import java.util.Random;
  */
 public class Area1Grid {
     private static int areaIndex = 1;
+    private static boolean isBossDead = false;
+    public static boolean isAreaDone = false;
     private static Character character;
     private static Weapon weapon;
     private static Enemy enemy;
@@ -219,12 +221,26 @@ public class Area1Grid {
         
         String currentTile = currentFloor[playerRow][playerCol].trim();
         if ("|  F  |".equals(currentTile)) {
-            if (listener != null) {
-                listener.onFastTravel();
-                shouldExitArea = true;
-            } else {
-                System.out.println("Fast travel point activated. Returning to game lobby...");
-                shouldExitArea = true; 
+            if (currentTile == floor3Data[0][2] && isBossDead == false){
+                System.out.println("Great enemy has not yet fallen! Fast travel is not accessible.");
+                pauseForMessage();
+                System.out.print("\033\143");
+            } else if (currentTile == floor3Data[0][2] && isBossDead == true){
+                if (listener != null) {
+                    listener.onFastTravel();
+                    shouldExitArea = true;
+                } else {
+                    System.out.println("Fast travel point activated. Returning to game lobby...");
+                    shouldExitArea = true; 
+                }
+            } else if (currentTile == floor1Data[6][1]){
+                if (listener != null) {
+                    listener.onFastTravel();
+                    shouldExitArea = true;
+                } else {
+                    System.out.println("Fast travel point activated. Returning to game lobby...");
+                    shouldExitArea = true; 
+                }
             }
         } else if ("|  ?  |".equals(currentTile)) {
             Random rand = new Random();
@@ -253,10 +269,15 @@ public class Area1Grid {
                 weapon = character.getEquippedWeapon();
                 Battle battle = new Battle(character, enemy, areaIndex, weapon);
                 battle.startBattle();
-                //System.out.println("\n[ " + encounteredEnemy + " ]");
-                //System.out.println("HP: "+ enemyHealth);
                 pauseForMessage();
                 System.out.print("\033\143");
+                if (character.getEffectiveHealth() != 0){
+                    currentFloor[playerRow][playerCol] = "|     |";
+                } else if (character.getEffectiveHealth() == 0){            
+                pauseForMessage();
+                System.out.print("\033\143");
+                shouldExitArea = true;
+                }
             } else {
                 int runesGained = areaIndex * (rand.nextInt(101) + 50);
                 character.addRunes(runesGained);
@@ -264,8 +285,8 @@ public class Area1Grid {
                 System.out.println("You found " + runesGained + " runes! Total runes: " + character.getRunes());
                 pauseForMessage();
                 System.out.print("\033\143");
+                currentFloor[playerRow][playerCol] = "|     |";
             }
-            currentFloor[playerRow][playerCol] = "|     |";
         } else if ("|  B  |".equals(currentTile)) {
             System.out.print("\033\143");
             System.out.println("You have found the Boss of Stormveil Castle !!!");
@@ -279,7 +300,15 @@ public class Area1Grid {
             battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
-            currentFloor[playerRow][playerCol] = "|     |";
+            if (character.getEffectiveHealth() != 0){
+                currentFloor[playerRow][playerCol] = "|     |";
+                isBossDead = true;
+                isAreaDone = true;
+            } else if (character.getEffectiveHealth() == 0){            
+            pauseForMessage();
+            System.out.print("\033\143");
+            shouldExitArea = true;
+            }
         } else {
             System.out.print("\033\143");
             System.out.println("There's nothing to interact with here.");

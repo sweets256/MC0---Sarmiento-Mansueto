@@ -14,7 +14,6 @@ public class Area3Grid {
     private static String[][] currentFloor;
     private static int playerRow = 8;
     private static int playerCol = 1;
-    private static final Scanner scanner = new Scanner(System.in);
     private static boolean shouldExitArea = false;
     private static String[][] floor1Data = {
         {"|     |", "|  D  |", "|     |"},
@@ -100,10 +99,11 @@ public class Area3Grid {
         }
     }
 
+
      /**
      * Starts the area by initializing the floor, player position, and processing player actions.
      */
-    public static void startArea() {
+    public static void startArea(Scanner input) {
         shouldExitArea = false;
         currentFloorIndex = 0;
         resetFloorData();
@@ -120,7 +120,7 @@ public class Area3Grid {
         while (!exitArea && !shouldExitArea) {
             displayFloor();
             System.out.println("Enter action (WASD to move, E to interact): ");
-            String action = scanner.nextLine().toUpperCase();
+            String action = input.nextLine().toUpperCase();
             switch (action) {
                 case "W": movePlayer(-1, 0); System.out.print("\033\143"); break;
                 case "A": movePlayer(0, -1); System.out.print("\033\143"); break;
@@ -251,7 +251,13 @@ public class Area3Grid {
             battle.startBattle();
             pauseForMessage();
             System.out.print("\033\143");
-            currentFloor[playerRow][playerCol] = "|     |";
+            if (character.getEffectiveHealth() != 0){
+                currentFloor[playerRow][playerCol] = "|     |";
+            } else if (character.getEffectiveHealth() == 0){            
+            pauseForMessage();
+            System.out.print("\033\143");
+            shouldExitArea = true;
+            }
         } else if ("|  C  |".equals(currentTile)) {
             System.out.print("\033\143");
             System.out.println("================================== THANK YOU FOR PLAYING ! =================================");

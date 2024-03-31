@@ -42,7 +42,6 @@ public class Battle {
                 break;
             }
         }
-        //input.close(); // Close the Scanner after the battle ends
     }
 
     /**
@@ -177,17 +176,20 @@ public class Battle {
         player.addRunes(runesGained);
     }
 
+
     /**
      * Result when player dies
      */
-    private void playerLoses() {
+    private int playerLoses() {
         System.out.println("You died!");
         // Insert code to reset player's health and return to game lobby
         player.setRunes(0);
         // Player returns back to gamelobby
         //GameLobby gameLobby = new GameLobby(nav, player);
-        Navigation nav = new Navigation();
-        nav.gameLobby(player);
+        //Navigation nav = new Navigation();
+        //nav.gameLobby(player);
+
+        return 0;
     }
 
     /**
