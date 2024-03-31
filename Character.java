@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Character {
     private String characterName;
     private String jobClass;
+    private int origHealth = 0;
     private int level = 1;
     private int runes = 100000;
     private int[] stats = new int[6];
@@ -187,8 +188,19 @@ public class Character {
         System.out.println("Job Class: " + jobClass);
         System.out.println("Level: " + level);
         System.out.println("Runes: " + runes);
-        System.out.println("Health: " + effectiveHealth); // Add current health display
+        System.out.println("Health: " + maxHealth()); // Add current health display
         System.out.println("=====================================");
+    }
+
+    public int maxHealth(){
+        if (equippedWeapon != null){origHealth = (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));}
+        else {origHealth = (100 * (stats[0] / 2));}
+
+        return origHealth;
+    }
+
+    public void setEffectiveHealth(int origHealth){
+        this.effectiveHealth = origHealth;
     }
 
     /**
