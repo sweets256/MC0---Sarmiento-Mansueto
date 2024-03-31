@@ -193,9 +193,12 @@ public class Character {
     }
 
     public int maxHealth(){
-        if (equippedWeapon != null){origHealth = (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));}
-        else {origHealth = (100 * (stats[0] / 2));}
-
+        if (equippedWeapon != null){
+            origHealth = (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
+        }else {
+            origHealth = (100 * (stats[0] / 2));
+        }
+        effectiveHealth = origHealth;
         return origHealth;
     }
 
