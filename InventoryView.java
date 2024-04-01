@@ -7,13 +7,13 @@ public class InventoryView extends JFrame {
     private JLabel weaponLabel;
     private JTextField chooseWeaponTextField;
     private JButton confirmButton;
-    private JTextArea characterWeaponsArea; // Field to display character's weapons
-    private JButton backButton; // Back button
-    private JLabel currentWeaponText; // Field to display current weapon text
+    private JTextArea characterWeaponsArea;
+    private JButton backButton; 
+    private JLabel currentWeaponText; 
 
     public InventoryView() {
         setTitle("Inventory");
-        setSize(400, 400); // Adjusted height to accommodate new components
+        setSize(400, 400); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -23,7 +23,7 @@ public class InventoryView extends JFrame {
         add(titleLabel, BorderLayout.NORTH);
 
         // Create panel for fields with padding
-        JPanel fieldPanel = new JPanel(new GridLayout(4, 1)); // Adjusted to 4 rows
+        JPanel fieldPanel = new JPanel(new GridLayout(4, 1)); 
         fieldPanel.setBorder(new EmptyBorder(10, 50, 10, 50)); // Add padding
         add(fieldPanel, BorderLayout.CENTER);
 
@@ -32,7 +32,7 @@ public class InventoryView extends JFrame {
         fieldPanel.add(weaponLabel);
 
         // Create and add current weapon text field
-        currentWeaponText = new JLabel("pweter!"); // Initially blank
+        currentWeaponText = new JLabel("pweter!"); // Initially blank bc we haven't connected model yet
         fieldPanel.add(currentWeaponText);
 
         // Create panel for choosing a weapon to equip
