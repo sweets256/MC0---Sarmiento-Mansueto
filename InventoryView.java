@@ -4,7 +4,6 @@ import java.awt.*;
 
 public class InventoryView extends JFrame {
     private JLabel titleLabel;
-    private JLabel equippedWeaponLabel;
     private JLabel weaponLabel;
     private JTextField chooseWeaponTextField;
     private JButton confirmButton;
