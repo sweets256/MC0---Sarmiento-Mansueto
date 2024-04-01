@@ -31,5 +31,3 @@ public class Main {
         
     }
 }
-
-// health gained back when player goes to game lobby
