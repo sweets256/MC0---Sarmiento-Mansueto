@@ -56,5 +56,4 @@ public class GameLobbyView extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-   
 }

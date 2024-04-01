@@ -41,8 +41,6 @@ public class TitleScreenView extends JFrame {
         setVisible(true);
     }
 
-
-
     // Test the view
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
