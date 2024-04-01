@@ -7,10 +7,11 @@ public class InventoryView extends JFrame {
     private JLabel equippedWeaponLabel;
     private JLabel weaponLabel;
     private JTextArea characterWeaponsArea; // Field to display character's weapons
+    private JButton backButton; // Back button
 
     public InventoryView() {
         setTitle("Inventory");
-        setSize(400, 300);
+        setSize(400, 350); // Increased height to accommodate the back button
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -37,6 +38,12 @@ public class InventoryView extends JFrame {
         characterWeaponsArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(characterWeaponsArea);
         fieldPanel.add(scrollPane);
+
+        // Create panel for back button
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        backButton = new JButton("Back");
+        buttonPanel.add(backButton);
+        add(buttonPanel, BorderLayout.SOUTH);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
