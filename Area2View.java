@@ -7,16 +7,23 @@ public class Area2View extends JFrame {
         setTitle("Map View");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Create tabbed pane for floors
         JTabbedPane tabbedPane = new JTabbedPane();
-
-        // Add panels for each floor
         tabbedPane.addTab("Floor 1", createMapPanel(floor1Data));
         tabbedPane.addTab("Floor 2", createMapPanel(floor2Data));
         tabbedPane.addTab("Floor 3", createMapPanel(floor3Data));
         tabbedPane.addTab("Floor 4", createMapPanel(floor4Data));
         tabbedPane.addTab("Floor 5", createMapPanel(floor5Data));
 
-        add(tabbedPane);
+        // Create panel for player stats
+        JPanel playerStatsPanel = createPlayerStatsPanel();
+
+        // Create split pane to divide frame into map view and player stats panel
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tabbedPane, playerStatsPanel);
+        splitPane.setResizeWeight(0.875); // Map view occupies 7/8 of the width
+        splitPane.setContinuousLayout(true);
+        getContentPane().add(splitPane);
+
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -36,6 +43,24 @@ public class Area2View extends JFrame {
         }
 
         return mapPanel;
+    }
+
+    // Method to create player stats panel
+    private JPanel createPlayerStatsPanel() {
+        JPanel playerStatsPanel = new JPanel(new GridLayout(4, 1));
+        playerStatsPanel.setPreferredSize(new Dimension(200, getHeight())); // Adjust width as needed
+
+        JLabel titleLabel = new JLabel("Player Stats", SwingConstants.CENTER);
+        playerStatsPanel.add(titleLabel);
+
+        // Create and add player stats labels
+        String[] statLabels = {"Health:", "Level:", "Runes:"};
+        for (String label : statLabels) {
+            JLabel statLabel = new JLabel(label, SwingConstants.CENTER);
+            playerStatsPanel.add(statLabel);
+        }
+
+        return playerStatsPanel;
     }
 
     // Sample map data

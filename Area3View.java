@@ -7,20 +7,21 @@ public class Area3View extends JFrame {
         setTitle("Map View");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Create panels for map and player stats
-        JPanel mapPanel = createMapPanel(floor1Data); // Displaying floor1Data by default
+        // Floor tabbed panes
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Floor 1", createMapPanel(floor1Data));
+        tabbedPane.addTab("Floor 2", createMapPanel(floor2Data));
+        tabbedPane.addTab("Floor 3", createMapPanel(floor3Data));
+
+        // Player stats thing
         JPanel playerStatsPanel = createPlayerStatsPanel();
 
-        // Set the size of playerStatsPanel to occupy 1/8th of the screen
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int playerStatsWidth = screenSize.width / 8;
-        playerStatsPanel.setPreferredSize(new Dimension(playerStatsWidth, screenSize.height));
+        // Split pane to divide frame into map view and player stats panel
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tabbedPane, playerStatsPanel);
+        splitPane.setResizeWeight(0.875); // Map view occupies 7/8 of the width
+        splitPane.setContinuousLayout(true);
+        getContentPane().add(splitPane);
 
-        // Create a split pane to display map and player stats side by side
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mapPanel, playerStatsPanel);
-        splitPane.setResizeWeight(0.875); // Map panel occupies 7/8ths of the screen
-
-        add(splitPane);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -29,7 +30,7 @@ public class Area3View extends JFrame {
     // Method to create a panel for a floor with given map data
     private JPanel createMapPanel(String[][] mapData) {
         JPanel mapPanel = new JPanel(new GridLayout(mapData.length, mapData[0].length));
-        mapPanel.setPreferredSize(new Dimension(7 * 50 * mapData[0].length / 8, 50 * mapData.length));
+        mapPanel.setPreferredSize(new Dimension(50 * mapData[0].length, 50 * mapData.length));
 
         for (String[] row : mapData) {
             for (String tile : row) {
@@ -42,27 +43,25 @@ public class Area3View extends JFrame {
         return mapPanel;
     }
 
-    // Method to create a panel for player stats
+    // Create player stats panel method
     private JPanel createPlayerStatsPanel() {
         JPanel playerStatsPanel = new JPanel(new GridLayout(3, 1));
-        playerStatsPanel.setBackground(Color.LIGHT_GRAY);
+        playerStatsPanel.setPreferredSize(new Dimension(200, getHeight())); // Adjust width as needed
 
-        JLabel healthLabel = new JLabel("Health: ");
-        healthLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        playerStatsPanel.add(healthLabel);
+        JLabel titleLabel = new JLabel("Player Stats", SwingConstants.CENTER);
+        playerStatsPanel.add(titleLabel);
 
-        JLabel levelLabel = new JLabel("Level: ");
-        levelLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        playerStatsPanel.add(levelLabel);
-
-        JLabel runesLabel = new JLabel("Runes: ");
-        runesLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        playerStatsPanel.add(runesLabel);
+        // Create and add player stats labels
+        String[] statLabels = {"Health:", "Level:", "Runes:"};
+        for (String label : statLabels) {
+            JLabel statLabel = new JLabel(label, SwingConstants.CENTER);
+            playerStatsPanel.add(statLabel);
+        }
 
         return playerStatsPanel;
     }
 
-    // Sample map data
+    // Map data
     private static String[][] floor1Data = {
             {"|     |", "|  D  |", "|     |"},
             {"|     |", "|     |", "|     |"},
@@ -73,6 +72,28 @@ public class Area3View extends JFrame {
             {"|     |", "|     |", "|     |"},
             {"|     |", "|     |", "|     |"},
             {"|     |", "|  F  |", "|     |"}
+    };
+
+    private static String[][] floor2Data = {
+            {"|  X  |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|  X  |"},
+            {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+            {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+            {"|     |", "|     |", "|     |", "|  B  |", "|     |", "|     |", "|     |"},
+            {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+            {"|     |", "|     |", "|     |", "|     |", "|     |", "|     |", "|     |"},
+            {"|  X  |", "|     |", "|     |", "|  D  |", "|     |", "|     |", "|  X  |"}
+    };
+
+    private static String[][] floor3Data = {
+            {"|     |", "|  C  |", "|     |",},
+            {"|  ?  |", "|     |", "|  ?  |",},
+            {"|     |", "|     |", "|     |",},
+            {"|  ?  |", "|     |", "|  ?  |",},
+            {"|     |", "|     |", "|     |",},
+            {"|  ?  |", "|     |", "|  ?  |",},
+            {"|     |", "|     |", "|     |",},
+            {"|  ?  |", "|     |", "|  ?  |",},
+            {"|     |", "|  D  |", "|     |",}
     };
 
     public static void main(String[] args) {
