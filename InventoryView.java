@@ -6,12 +6,14 @@ public class InventoryView extends JFrame {
     private JLabel titleLabel;
     private JLabel equippedWeaponLabel;
     private JLabel weaponLabel;
+    private JTextField chooseWeaponTextField;
+    private JButton confirmButton;
     private JTextArea characterWeaponsArea; // Field to display character's weapons
     private JButton backButton; // Back button
 
     public InventoryView() {
         setTitle("Inventory");
-        setSize(400, 350); // Increased height to accommodate the back button
+        setSize(400, 400); // Adjusted height to accommodate new components
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -21,17 +23,29 @@ public class InventoryView extends JFrame {
         add(titleLabel, BorderLayout.NORTH);
 
         // Create panel for fields with padding
-        JPanel fieldPanel = new JPanel(new GridLayout(3, 1, 0, 5));
+        JPanel fieldPanel = new JPanel(new GridLayout(4, 1));
         fieldPanel.setBorder(new EmptyBorder(10, 50, 10, 50)); // Add padding
         add(fieldPanel, BorderLayout.CENTER);
 
-        // Create and add equipped weapon label
-        equippedWeaponLabel = new JLabel("Equipped Weapon ");
-        fieldPanel.add(equippedWeaponLabel);
-
         // Create and add weapon label
-        weaponLabel = new JLabel("Weapon: ");
+        weaponLabel = new JLabel("Current Weapon: ");
         fieldPanel.add(weaponLabel);
+
+        // Create panel for choosing a weapon to equip
+        JPanel chooseWeaponPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        fieldPanel.add(chooseWeaponPanel);
+
+        // Create label for "Choose a weapon to equip"
+        JLabel chooseWeaponLabel = new JLabel("Choose a weapon to equip: ");
+        chooseWeaponPanel.add(chooseWeaponLabel);
+
+        // Create text field for choosing a weapon
+        chooseWeaponTextField = new JTextField(15); // Set columns to limit the width
+        chooseWeaponPanel.add(chooseWeaponTextField);
+
+        // Create confirm button
+        confirmButton = new JButton("Confirm");
+        chooseWeaponPanel.add(confirmButton);
 
         // Create and add character's weapons area
         characterWeaponsArea = new JTextArea();
