@@ -7,6 +7,7 @@ public class FastTravelView extends JFrame {
     private JButton area1Button;
     private JButton area2Button;
     private JButton area3Button;
+    private JButton backButton;
 
     public FastTravelView() {
         setTitle("Fast Travel");
@@ -20,7 +21,7 @@ public class FastTravelView extends JFrame {
         add(titleLabel, BorderLayout.NORTH);
 
         // Create panel for buttons with padding
-        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
+        JPanel buttonPanel = new JPanel(new GridLayout(4, 1, 0, 10));
         buttonPanel.setBorder(new EmptyBorder(20, 100, 20, 100)); // Add padding
         add(buttonPanel, BorderLayout.CENTER);
 
@@ -39,8 +40,21 @@ public class FastTravelView extends JFrame {
         area3Button.setPreferredSize(new Dimension(150, 30)); // Set preferred size
         buttonPanel.add(area3Button);
 
+        // Create and back button
+        backButton = new JButton("Back");
+        backButton.setPreferredSize(new Dimension(150, 30)); // Set preferred size
+        buttonPanel.add(backButton);
+
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new FastTravelView();
+            }
+        });
     }
 }
