@@ -16,32 +16,32 @@ public class LevelUpView extends JFrame {
 
         // Create and center the title label
         titleLabel = new JLabel("Level Up", SwingConstants.CENTER);
-        titleLabel.setBorder(new EmptyBorder(20, 100, 20, 100)); // Add padding
+        titleLabel.setBorder(new EmptyBorder(70, 170, 0, 170)); // Add padding
         titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
         add(titleLabel, BorderLayout.NORTH);
 
         // Create panel for buttons with padding
-        JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
-        buttonPanel.setBorder(new EmptyBorder(20, 100, 20, 100)); // Add padding
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 0, 20));
+        buttonPanel.setBorder(new EmptyBorder(30, 200, 100, 200)); // Add padding
         add(buttonPanel, BorderLayout.CENTER);
 
         // Create and center choose stat button
         chooseStatButton = new JButton("Choose Stat to Level Up");
         chooseStatButton.setFont(new Font("Arial", Font.BOLD, 30));
-        chooseStatButton.setPreferredSize(new Dimension(200, 30)); // Set preferred size
+        chooseStatButton.setPreferredSize(new Dimension(80, 30)); // Set preferred size
         buttonPanel.add(chooseStatButton);
 
         // Create and center exit button
         exitButton = new JButton("Exit");
         exitButton.setFont(new Font("Arial", Font.BOLD, 30));
-        exitButton.setPreferredSize(new Dimension(150, 30)); // Set preferred size
+        exitButton.setPreferredSize(new Dimension(180, 30)); // Set preferred size
         buttonPanel.add(exitButton);
 
         // Create new stats panel
         newStatsPanel = new JPanel();
         newStatsPanel.setLayout(new BorderLayout());
         JLabel newStatsLabel = new JLabel("New Stats", SwingConstants.CENTER);
-        newStatsLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        newStatsLabel.setFont(new Font("Arial", Font.BOLD, 30));
         newStatsPanel.add(newStatsLabel, BorderLayout.NORTH);
         // Add any additional components for new stats panel here
 
