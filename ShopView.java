@@ -1,11 +1,19 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 public class ShopView extends JFrame {
     private JLabel titleLabel;
     private JLabel playerRunesLabel;
     private JButton[] shopButtons;
+    private JButton nextPageButton;
+    private JButton prevPageButton;
+    private int currentPage = 0; // Current page index
+    private int itemsPerPage = 4; // Number of items per page
+    private int totalButtons = 24; // Total number of buttons
 
     public ShopView() {
         setTitle("Shop");
@@ -19,25 +27,101 @@ public class ShopView extends JFrame {
         add(titleLabel, BorderLayout.NORTH);
 
         // Create panel for buttons with padding
-        JPanel buttonPanel = new JPanel(new GridLayout(6, 4, 10, 10)); // 6 rows, 4 columns, with 10px horizontal and vertical gap
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 10)); // 1 row, 4 columns, with 10px horizontal and vertical gap
         buttonPanel.setBorder(new EmptyBorder(20, 50, 20, 50)); // Add padding
         add(buttonPanel, BorderLayout.CENTER);
 
-        // Create buttons array
-        shopButtons = new JButton[24];
-        for (int i = 0; i < 24; i++) {
+        // Load and resize image icons
+        shopButtons = new JButton[itemsPerPage];
+        for (int i = 0; i < itemsPerPage; i++) {
             // Create button with image icon
-            shopButtons[i] = new JButton(new ImageIcon("image_" + (i + 1) + ".png"));
-            buttonPanel.add(shopButtons[i]); // Add button to panel
+            ImageIcon icon = resizeImageIcon("image_" + (i + 1) + ".png", 200, 500);
+            if (icon != null) {
+                shopButtons[i] = createImageButton(icon);
+                buttonPanel.add(shopButtons[i]); // Add button to panel
+            }
         }
 
         // Create and add player runes label
         playerRunesLabel = new JLabel("Player Runes: ", SwingConstants.CENTER);
         add(playerRunesLabel, BorderLayout.SOUTH);
 
+        // Create next and previous page buttons
+        createPageButtons();
+
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    // Method to resize image icon
+    private ImageIcon resizeImageIcon(String imagePath, int width, int height) {
+        try {
+            ImageIcon icon = new ImageIcon(imagePath);
+            Image img = icon.getImage();
+            Image resizedImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            return new ImageIcon(resizedImg);
+        } catch (Exception ex) {
+            System.out.println("Error resizing image: " + ex.getMessage());
+            return null;
+        }
+    }
+
+    // Method to create image button
+    private JButton createImageButton(ImageIcon icon) {
+        JButton button = new JButton(icon);
+        button.setText(null); // Set text to null to remove it
+        button.setContentAreaFilled(false); // Make the button transparent
+        button.setBorderPainted(false); // Remove the border
+        button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight())); // Set preferred size to match image dimensions
+        return button;
+    }
+
+    // Create next and previous page buttons along with an exit button
+    private void createPageButtons() {
+        nextPageButton = new JButton("Next Page");
+        prevPageButton = new JButton("Previous Page");
+        
+        // Exit button
+        JButton exitButton = new JButton("Exit");
+
+        // Add next and previous page buttons to bottom panel based on current page
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Align buttons to the left
+        bottomPanel.add(exitButton); // Add exit button
+        if (currentPage > 0) {
+            bottomPanel.add(prevPageButton);
+        }
+        if (currentPage < totalButtons / itemsPerPage - 1) {
+            bottomPanel.add(nextPageButton);
+        }
+        add(bottomPanel, BorderLayout.SOUTH);
+    }
+
+
+    // Refresh buttons based on current page
+    private void refreshButtons() {
+        // Remove existing buttons
+        getContentPane().removeAll();
+
+        // Add components again
+        add(titleLabel, BorderLayout.NORTH);
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 10));
+        buttonPanel.setBorder(new EmptyBorder(20, 50, 20, 50));
+        add(buttonPanel, BorderLayout.CENTER);
+        for (int i = currentPage * itemsPerPage; i < (currentPage + 1) * itemsPerPage && i < totalButtons; i++) {
+            ImageIcon icon = resizeImageIcon("image_" + (i + 1) + ".png", 200, 500);
+            if (icon != null) {
+                JButton button = createImageButton(icon);
+                buttonPanel.add(button);
+            }
+        }
+        add(playerRunesLabel, BorderLayout.SOUTH);
+        createPageButtons();
+
+        // Refresh the frame
+        revalidate();
+        repaint();
     }
 
     // Test the view
