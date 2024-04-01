@@ -28,8 +28,17 @@ public class SelectJobClassView extends JFrame {
         buttonPanel.setBorder(new EmptyBorder(50, 50, 50, 50)); // Add padding
         add(buttonPanel, BorderLayout.CENTER);
 
+        /* Make sure the images are in the directory which the program is being loaded 
+        from or just copy the direct path but make sure to use double back slashes "\\" when typing the path
+        example: "D:\\School Stuff\\CCPROG3\\Github\\MC01 - DUWAHUIDH\\vagabond.png" <- please use this exact formatting
+        "D:\\School Stuff\\CCPROG3\\Github\\MC01 - DUWAHUIDH" being the directory.
+        Cannot upload files directly to github repository as the directory which the program is being run from is the file containing
+        the repository but not the repository itself.
+        */
+
+        // Will include the images in submission
         // Load and resize image icons
-        // Make sure the images are in the directory which the program is being loaded from or just copy the direct path but make sure to use double back slashes "\\" when typing the path
+
         vagabondIcon = resizeImageIcon("vagabond.png", 150, 150);
         samuraiIcon = resizeImageIcon("samurai.png", 150, 150);
         warriorIcon = resizeImageIcon("warrior.png", 150, 150);
