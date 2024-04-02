@@ -95,12 +95,4 @@ public class Area3View extends JFrame {
             {"|  ?  |", "|     |", "|  ?  |",},
             {"|     |", "|  D  |", "|     |",}
     };
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Area3View();
-            }
-        });
-    }
 }

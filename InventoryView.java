@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class InventoryView extends JFrame {
     private JLabel titleLabel;
@@ -8,12 +10,12 @@ public class InventoryView extends JFrame {
     private JTextField chooseWeaponTextField;
     private JButton confirmButton;
     private JTextArea characterWeaponsArea;
-    private JButton backButton; 
-    private JLabel currentWeaponText; 
+    private JButton backButton;
+    private JLabel currentWeaponText;
 
     public InventoryView() {
         setTitle("Inventory");
-        setSize(400, 400); 
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -23,7 +25,7 @@ public class InventoryView extends JFrame {
         add(titleLabel, BorderLayout.NORTH);
 
         // Create panel for fields with padding
-        JPanel fieldPanel = new JPanel(new GridLayout(4, 1)); 
+        JPanel fieldPanel = new JPanel(new GridLayout(4, 1));
         fieldPanel.setBorder(new EmptyBorder(10, 50, 10, 50)); // Add padding
         add(fieldPanel, BorderLayout.CENTER);
 
@@ -49,6 +51,11 @@ public class InventoryView extends JFrame {
 
         // Create confirm button
         confirmButton = new JButton("Confirm");
+        confirmButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for confirm button here
+            }
+        });
         chooseWeaponPanel.add(confirmButton);
 
         // Create and add character's weapons area
@@ -60,19 +67,17 @@ public class InventoryView extends JFrame {
         // Create panel for back button
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for back button here
+                dispose(); // Close the frame
+            }
+        });
         buttonPanel.add(backButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new InventoryView();
-            }
-        });
     }
 }

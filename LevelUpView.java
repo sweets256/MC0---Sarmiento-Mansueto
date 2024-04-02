@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LevelUpView extends JFrame {
     private JLabel titleLabel;
@@ -29,12 +31,22 @@ public class LevelUpView extends JFrame {
         chooseStatButton = new JButton("Choose Stat to Level Up");
         chooseStatButton.setFont(new Font("Arial", Font.BOLD, 30));
         chooseStatButton.setPreferredSize(new Dimension(80, 30)); // Set preferred size
+        chooseStatButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for choose stat button here
+            }
+        });
         buttonPanel.add(chooseStatButton);
 
         // Create and center exit button
         exitButton = new JButton("Exit");
         exitButton.setFont(new Font("Arial", Font.BOLD, 30));
         exitButton.setPreferredSize(new Dimension(180, 30)); // Set preferred size
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the frame
+            }
+        });
         buttonPanel.add(exitButton);
 
         // Create new stats panel
@@ -53,13 +65,4 @@ public class LevelUpView extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new LevelUpView();
-            }
-        });
-    }
-   
 }

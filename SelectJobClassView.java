@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SelectJobClassView extends JFrame {
     private JLabel titleLabel;
@@ -48,12 +50,53 @@ public class SelectJobClassView extends JFrame {
         
 
         // Create and add buttons
-        buttonPanel.add(createImageButton(vagabondIcon));
-        buttonPanel.add(createImageButton(samuraiIcon));
-        buttonPanel.add(createImageButton(warriorIcon));
-        buttonPanel.add(createImageButton(heroIcon));
-        buttonPanel.add(createImageButton(astrologerIcon));
-        buttonPanel.add(createImageButton(prophetIcon));
+        JButton vagabondButton = createImageButton(vagabondIcon);
+        vagabondButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for vagabond button here
+            }
+        });
+        buttonPanel.add(vagabondButton);
+        
+        JButton samuraiButton = createImageButton(samuraiIcon);
+        samuraiButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for samurai button here
+            }
+        });
+        buttonPanel.add(samuraiButton);
+        
+        JButton warriorButton = createImageButton(warriorIcon);
+        warriorButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for warrior button here
+            }
+        });
+        buttonPanel.add(warriorButton);
+        
+        JButton heroButton = createImageButton(heroIcon);
+        heroButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for hero button here
+            }
+        });
+        buttonPanel.add(heroButton);
+        
+        JButton astrologerButton = createImageButton(astrologerIcon);
+        astrologerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for astrologer button here
+            }
+        });
+        buttonPanel.add(astrologerButton);
+        
+        JButton prophetButton = createImageButton(prophetIcon);
+        prophetButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for prophet button here
+            }
+        });
+        buttonPanel.add(prophetButton);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
@@ -74,13 +117,5 @@ public class SelectJobClassView extends JFrame {
         Image img = icon.getImage();
         Image resizedImg = img.getScaledInstance(200, 400, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImg);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new SelectJobClassView();
-            }
-        });
     }
 }

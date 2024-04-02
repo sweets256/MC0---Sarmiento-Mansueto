@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BattleView extends JFrame {
     private JLabel titleLabel;
@@ -52,19 +54,15 @@ public class BattleView extends JFrame {
 
         // Create and add dodge button
         dodgeButton = new JButton("Dodge");
+        dodgeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for dodge button here
+            }
+        });
         bottomPanel.add(dodgeButton);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-
-    // Test the view
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new BattleView();
-            }
-        });
     }
 }

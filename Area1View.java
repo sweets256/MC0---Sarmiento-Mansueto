@@ -95,12 +95,4 @@ public class Area1View extends JFrame {
         {"|     |", "|     |", "|     |", "|     |", "|     |"},
         {"|     |", "|     |", "|  D  |", "|     |", "|     |"}
     };
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Area1View();
-            }
-        });
-    }
 }

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -80,10 +82,28 @@ public class ShopView extends JFrame {
     // Create next and previous page buttons along with an exit button
     private void createPageButtons() {
         nextPageButton = new JButton("Next Page");
+        nextPageButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                currentPage++;
+                refreshButtons();
+            }
+        });
+
         prevPageButton = new JButton("Previous Page");
-        
+        prevPageButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                currentPage--;
+                refreshButtons();
+            }
+        });
+
         // Exit button
         JButton exitButton = new JButton("Exit");
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the frame
+            }
+        });
 
         // Add next and previous page buttons to bottom panel based on current page
         JPanel bottomPanel = new JPanel();
@@ -122,14 +142,5 @@ public class ShopView extends JFrame {
         // Refresh the frame
         revalidate();
         repaint();
-    }
-
-    // Test the view
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new ShopView();
-            }
-        });
     }
 }

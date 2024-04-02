@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CharacterCreationView extends JFrame {
     private JLabel titleLabel;
@@ -30,30 +32,37 @@ public class CharacterCreationView extends JFrame {
         nameTextField = new JTextField();
         namePanel.add(new JLabel("Name: "), BorderLayout.WEST);
         namePanel.add(nameTextField, BorderLayout.CENTER);
-        namePanel.add(new JButton("Enter"), BorderLayout.EAST);
+        JButton enterButton = new JButton("Enter");
+        enterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for enter button here
+            }
+        });
+        namePanel.add(enterButton, BorderLayout.EAST);
         componentPanel.add(namePanel);
 
         // Create and center select job class button
         selectJobClassButton = new JButton("Select Job Class");
         selectJobClassButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selectJobClassButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for select job class button here
+            }
+        });
         componentPanel.add(selectJobClassButton);
 
         // Create and center confirm character button
         confirmCharacterButton = new JButton("Confirm Character Created");
         confirmCharacterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        confirmCharacterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Add your action for confirm character button here
+            }
+        });
         componentPanel.add(confirmCharacterButton);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
-        // Test the view
-        public static void main(String[] args) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    new CharacterCreationView();
-                }
-            });
-        }
 }
