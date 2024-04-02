@@ -1,10 +1,10 @@
-public class TitleController {
+public class CharacterCreationController {
     private MainController mainController;
-    private TitleScreenView view;
+    private CharacterCreationView view;
 
-    public TitleController(MainController mainController) {
+    public CharacterCreationController(MainController mainController) {
         this.mainController = mainController;
-        this.view = new TitleScreenView(this);
+        this.view = new CharacterCreationView(this);
     }
 
 

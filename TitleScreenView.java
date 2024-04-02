@@ -7,8 +7,12 @@ public class TitleScreenView extends JFrame {
     private JLabel titleLabel;
     private JButton startButton;
     private JButton exitButton;
+    private TitleController controller;
 
-    public TitleScreenView() {
+    public TitleScreenView(TitleController controller) {
+
+        this.controller = controller;
+
         setTitle("Elden Rogue");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,12 +50,24 @@ public class TitleScreenView extends JFrame {
     // Listener for the start button
     public void addStartButtonListener (ActionListener listener) {
         startButton.addActionListener(listener);
+
+        //nav to char create
+        setVisible(false);
+        controller.finishProcess("CHAR_CREATION");
+
     }
 
     // Listener for the exit button
     public void addExitButtonListener (ActionListener listener) {
         exitButton.addActionListener(listener);
     }
+
+
+    public void showView(Boolean state){
+        setVisible(state);
+    }
+   
+
 
     // view tester
 }

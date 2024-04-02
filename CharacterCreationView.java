@@ -9,8 +9,12 @@ public class CharacterCreationView extends JFrame {
     private JTextField nameTextField;
     private JButton selectJobClassButton;
     private JButton confirmCharacterButton;
+    private CharacterCreationController controller;
 
     public CharacterCreationView() {
+
+        this.controller = controller;
+
         setTitle("Character Creation");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,15 +58,39 @@ public class CharacterCreationView extends JFrame {
         // Create and center confirm character button
         confirmCharacterButton = new JButton("Confirm Character Created");
         confirmCharacterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        confirmCharacterButton.addActionListener(new ActionListener() {
+
+        confirmCharacterButton.addActionListener(new ActionListener()) {
             public void actionPerformed(ActionEvent e) {
-                // Add your action for confirm character button here
+                //nav to Game Lobby
+                setVisible(false);
+                controller.finishProcess("GAME_LOBBY");
             }
-        });
+        }
         componentPanel.add(confirmCharacterButton);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
+
+    }
+
+    public void showView(Boolean state){
+        setVisible(state);
     }
 }
+
+//put here listenerees
+
+// public void addStartButtonListener (ActionListener listener) {
+//     startButton.addActionListener(listener);
+
+//     //nav to char create
+//     setVisible(false);
+//     controller.finishProcess("CHAR_CREATION");
+
+// }
+
+// // Listener for the exit button
+// public void addExitButtonListener (ActionListener listener) {
+//     exitButton.addActionListener(listener);
+// }
