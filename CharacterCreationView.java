@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CharacterCreationView extends JFrame {
@@ -12,9 +11,6 @@ public class CharacterCreationView extends JFrame {
     private CharacterCreationController controller;
 
     public CharacterCreationView() {
-
-        this.controller = controller;
-
         setTitle("Character Creation");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,60 +33,35 @@ public class CharacterCreationView extends JFrame {
         namePanel.add(new JLabel("Name: "), BorderLayout.WEST);
         namePanel.add(nameTextField, BorderLayout.CENTER);
         JButton enterButton = new JButton("Enter");
-        enterButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for enter button here
-            }
-        });
         namePanel.add(enterButton, BorderLayout.EAST);
         componentPanel.add(namePanel);
 
         // Create and center select job class button
         selectJobClassButton = new JButton("Select Job Class");
         selectJobClassButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        selectJobClassButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for select job class button here
-            }
-        });
         componentPanel.add(selectJobClassButton);
 
         // Create and center confirm character button
         confirmCharacterButton = new JButton("Confirm Character Created");
         confirmCharacterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        confirmCharacterButton.addActionListener(new ActionListener()) {
-            public void actionPerformed(ActionEvent e) {
-                //nav to Game Lobby
-                setVisible(false);
-                controller.finishProcess("GAME_LOBBY");
-            }
-        }
         componentPanel.add(confirmCharacterButton);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
-
     }
 
     public void showView(Boolean state){
         setVisible(state);
     }
+
+    // Method to add listener for confirm character button
+    public void addConfirmCharacterButtonListener(ActionListener listener) {
+        confirmCharacterButton.addActionListener(listener);
+    }
+
+    // Method to add listener for select job class button
+    public void addSelectJobClassButtonListener(ActionListener listener) {
+        selectJobClassButton.addActionListener(listener);
+    }
 }
-
-//put here listenerees
-
-// public void addStartButtonListener (ActionListener listener) {
-//     startButton.addActionListener(listener);
-
-//     //nav to char create
-//     setVisible(false);
-//     controller.finishProcess("CHAR_CREATION");
-
-// }
-
-// // Listener for the exit button
-// public void addExitButtonListener (ActionListener listener) {
-//     exitButton.addActionListener(listener);
-// }
