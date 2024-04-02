@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FastTravelView extends JFrame {
+public class FastTravelView extends JFrame implements ActionListener{
     private JLabel titleLabel;
     private JButton area1Button;
     private JButton area2Button;
@@ -52,42 +53,36 @@ public class FastTravelView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        //setVisible(true);
+        showView(true);
+        addButtonListener();
     }
 
-    // Method to add action listener to the area 1 button
-    public void addArea1ButtonListener(ActionListener listener) {
-        area1Button.addActionListener(listener);
-
-        setVisible(false);
-        controller.finishProcess("AREA_1");
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == area1Button){
+            showView(false);
+            controller.finishProcess("AREA_1");
+        } else if (e.getSource() == area2Button){
+            showView(false);
+            controller.finishProcess("AREA_2");
+        } else if (e.getSource() == area3Button){
+            showView(false);
+            controller.finishProcess("AREA_3");
+        } else if (e.getSource() == backButton){
+            showView(false);
+            controller.finishProcess("GAME_LOBBY");
+        }
     }
 
-    // Method to add action listener to the area 2 button
-    public void addArea2ButtonListener(ActionListener listener) {
-        area2Button.addActionListener(listener);
-
-        setVisible(false);
-        controller.finishProcess("AREA_2");
-    }
-
-    // Method to add action listener to the area 3 button
-    public void addArea3ButtonListener(ActionListener listener) {
-        area3Button.addActionListener(listener);
-
-        setVisible(false);
-        controller.finishProcess("AREA_3");
-    }
-
-    // Method to add action listener to the back button
-    public void addBackButtonListener(ActionListener listener) {
-        backButton.addActionListener(listener);
-
-        setVisible(false);
-        controller.finishProcess("EXIT");
+    public void addButtonListener(){
+        area1Button.addActionListener(this);
+        area2Button.addActionListener(this);
+        area3Button.addActionListener(this);
+        backButton.addActionListener(this);
     }
 
     public void showView(Boolean state){
         setVisible(state);
     }
+
 }
