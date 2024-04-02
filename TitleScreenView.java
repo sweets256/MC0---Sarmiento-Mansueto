@@ -1,9 +1,10 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class TitleScreenView extends JFrame {
-    private JLabel titleLabel; // Added titleLabel field
+    private JLabel titleLabel;
     private JButton startButton;
     private JButton exitButton;
 
@@ -13,40 +14,44 @@ public class TitleScreenView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Create and center the title label
+        // center title
         titleLabel = new JLabel("Elden Rogue", SwingConstants.CENTER);
         titleLabel.setBorder(new EmptyBorder(70, 170, 0, 170));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
         add(titleLabel, BorderLayout.NORTH);
 
-        // Create panel for buttons with padding
+        // button panel with padding
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 0, 20));
         buttonPanel.setBorder(new EmptyBorder(30, 200, 100, 200)); // Add padding
         add(buttonPanel, BorderLayout.CENTER);
 
-        // Create and center start button
+        // start button
         startButton = new JButton("Start");
         startButton.setFont(new Font("Arial", Font.BOLD, 30));
         startButton.setPreferredSize(new Dimension(80, 30)); // Set preferred size
         buttonPanel.add(startButton);
 
-        // Create and center exit button
+        // exit button
         exitButton = new JButton("Exit");
         exitButton.setFont(new Font("Arial", Font.BOLD, 30));
         exitButton.setPreferredSize(new Dimension(80, 30)); // Set preferred size
         buttonPanel.add(exitButton);
 
-        // Center the frame on the screen
+
+        // center frame
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    // Test the view
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new TitleScreenView();
-            }
-        });
+    // Listener for the start button
+    public void addStartButtonListener (ActionListener listener) {
+        startButton.addActionListener(listener);
     }
+
+    // Listener for the exit button
+    public void addExitButtonListener (ActionListener listener) {
+        exitButton.addActionListener(listener);
+    }
+
+    // view tester
 }

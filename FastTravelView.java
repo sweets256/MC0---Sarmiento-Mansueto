@@ -22,7 +22,7 @@ public class FastTravelView extends JFrame {
 
         // Create panel for buttons with padding
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1, 0, 10));
-        buttonPanel.setBorder(new EmptyBorder(20, 100, 20, 100)); // Add padding
+        buttonPanel.setBorder(new EmptyBorder(20, 200, 20, 200)); // Add padding
         add(buttonPanel, BorderLayout.CENTER);
 
         // Create and center area 1 button
