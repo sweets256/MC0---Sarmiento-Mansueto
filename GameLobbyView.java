@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
 
 public class GameLobbyView extends JFrame {
     private JLabel titleLabel;
@@ -55,5 +56,30 @@ public class GameLobbyView extends JFrame {
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    // Method to add action listener to the fast travel button
+    public void addFastTravelButtonListener(ActionListener listener) {
+        fastTravelButton.addActionListener(listener);
+    }
+
+    // Method to add action listener to the level up button
+    public void addLevelUpButtonListener(ActionListener listener) {
+        levelUpButton.addActionListener(listener);
+    }
+
+    // Method to add action listener to the inventory button
+    public void addInventoryButtonListener(ActionListener listener) {
+        inventoryButton.addActionListener(listener);
+    }
+
+    // Method to add action listener to the shop button
+    public void addShopButtonListener(ActionListener listener) {
+        shopButton.addActionListener(listener);
+    }
+
+    // Method to add action listener to the exit button
+    public void addExitButtonListener(ActionListener listener) {
+        exitButton.addActionListener(listener);
     }
 }
