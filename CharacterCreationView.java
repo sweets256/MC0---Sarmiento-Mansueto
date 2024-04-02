@@ -64,7 +64,7 @@ public class CharacterCreationView extends JFrame implements ActionListener {
         } else if(e.getSource() == selectJobClassButton){
             showView(false);
             controller.finishProcess("JOB_SELECT");
-        } 
+        } //add text field???? maybe???
     }
 
     public void addButtonListener(){

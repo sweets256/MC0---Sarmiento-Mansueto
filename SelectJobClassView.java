@@ -6,6 +6,12 @@ import java.awt.event.ActionEvent;
 
 public class SelectJobClassView extends JFrame implements ActionListener{
     private JLabel titleLabel;
+    private JButton vagabondButton;
+    private JButton samuraiButton;
+    private JButton warriorButton;
+    private JButton heroButton;
+    private JButton astrologerButton;
+    private JButton prophetButton;
     private ImageIcon vagabondIcon;
     private ImageIcon samuraiIcon;
     private ImageIcon warriorIcon;
@@ -97,7 +103,22 @@ public class SelectJobClassView extends JFrame implements ActionListener{
         if (e.getSource() == vagabondButton){
             showView(false);
             controller.finishProcess("CHAR_CREATION");
-        } 
+        } else if (e.getSource() == samuraiButton){
+            showView(false);
+            controller.finishProcess("CHAR_CREATION");
+        } else if (e.getSource() == warriorButton){
+            showView(false);
+            controller.finishProcess("CHAR_CREATION");
+        } else if (e.getSource() == heroButton){
+            showView(false);
+            controller.finishProcess("CHAR_CREATION");
+        } else if (e.getSource() == astrologerButton){
+            showView(false);
+            controller.finishProcess("CHAR_CREATION");
+        } else if (e.getSource() == prophetButton){
+            showView(false);
+            controller.finishProcess("CHAR_CREATION");
+        }
     }
 
     public void addButtonListener(){
