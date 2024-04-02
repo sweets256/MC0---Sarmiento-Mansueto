@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CharacterCreationView extends JFrame {
     private JLabel titleLabel;
@@ -11,7 +12,6 @@ public class CharacterCreationView extends JFrame {
     private CharacterCreationController controller;
 
     public CharacterCreationView(CharacterCreationController characterCreationController) {
-
         this.controller = controller;
 
         setTitle("Character Creation");
@@ -54,22 +54,22 @@ public class CharacterCreationView extends JFrame {
         setVisible(true);
     }
 
-    public void showView(Boolean state){
+    public void showView(Boolean state) {
         setVisible(state);
     }
 
     // Method to add listener for confirm character button
     public void addConfirmCharacterButtonListener(ActionListener listener) {
         confirmCharacterButton.addActionListener(listener);
-
-        setVisible(false);
-        controller.finishProcess("GAME_LOBBY");
     }
 
     // Method to add listener for select job class button
     public void addSelectJobClassButtonListener(ActionListener listener) {
         selectJobClassButton.addActionListener(listener);
-        setVisible(false);
-        controller.finishProcess("JOB_CLASS");
+    }
+
+    // Method to add listener for name text field
+    public void addNameTextFieldListener(ActionListener listener) {
+        nameTextField.addActionListener(listener);
     }
 }
