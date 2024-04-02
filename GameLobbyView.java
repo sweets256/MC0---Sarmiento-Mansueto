@@ -13,11 +13,10 @@ public class GameLobbyView extends JFrame {
     private GameLobbyController controller;
 
     public GameLobbyView(GameLobbyController controller) {
-
         this.controller = controller;
 
         setTitle("Game Lobby");
-        setSize(400, 300);
+        setSize(600, 400); // Increased size for the side panel
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -27,9 +26,9 @@ public class GameLobbyView extends JFrame {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         add(titleLabel, BorderLayout.NORTH);
 
-        // Create panel for buttons with padding
+        // Create panel for buttons
         JPanel buttonPanel = new JPanel(new GridLayout(5, 1, 0, 10));
-        buttonPanel.setBorder(new EmptyBorder(20, 100, 20, 100)); // Add padding
+        buttonPanel.setBorder(new EmptyBorder(20, 20, 20, 20)); // Add padding
         add(buttonPanel, BorderLayout.CENTER);
 
         // Create and center fast travel button
@@ -57,45 +56,39 @@ public class GameLobbyView extends JFrame {
         exitButton.setPreferredSize(new Dimension(150, 30)); // Set preferred size
         buttonPanel.add(exitButton);
 
+        // Create side panel
+        JPanel sidePanel = new JPanel();
+        sidePanel.setPreferredSize(new Dimension(200, getHeight()));
+        sidePanel.setBackground(Color.LIGHT_GRAY);
+        add(sidePanel, BorderLayout.WEST);
+
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        //setVisible(true);
     }
 
     // Method to add action listener to the fast travel button
     public void addFastTravelButtonListener(ActionListener listener) {
         fastTravelButton.addActionListener(listener);
-
-        setVisible(false);
-        controller.finishProcess("FAST_TRAVEL");
     }
 
     // Method to add action listener to the level up button
     public void addLevelUpButtonListener(ActionListener listener) {
         levelUpButton.addActionListener(listener);
-        setVisible(false);
-        controller.finishProcess("LEVEL_UP");
     }
 
     // Method to add action listener to the inventory button
     public void addInventoryButtonListener(ActionListener listener) {
         inventoryButton.addActionListener(listener);
-        setVisible(false);
-        controller.finishProcess("INVENTORY");
     }
 
     // Method to add action listener to the shop button
     public void addShopButtonListener(ActionListener listener) {
         shopButton.addActionListener(listener);
-        setVisible(false);
-        controller.finishProcess("SHOP");
     }
 
     // Method to add action listener to the exit button
     public void addExitButtonListener(ActionListener listener) {
         exitButton.addActionListener(listener);
-        setVisible(false);
-        controller.finishProcess("EXIT");
     }
 
     public void showView(Boolean state){
