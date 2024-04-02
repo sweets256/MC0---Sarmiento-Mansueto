@@ -65,7 +65,7 @@ public class LevelUpView extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == chooseStatButton){
             showView(false);
-            controller.finishProcess("CHAR_CREATION");
+            controller.finishProcess("GAME_LOBBY");
         } else if (e.getSource() == exitButton){
             System.out.println("Exit Button Pressed");
         }

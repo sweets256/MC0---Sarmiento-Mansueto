@@ -36,7 +36,7 @@ public class MainController {
             case "GAME_LOBBY" -> gameLobbyController.showView(true); //ok na
             case "FAST_TRAVEL" -> fastTravelController.showView(true); //ok na
             case "JOB_SELECT" -> selectJobClassController.showView(true); //ok na
-            //case "LEVEL_UP" -> LevelUpController.showView(true);
+            case "LEVEL_UP" -> levelUpController.showView(true); //ok na
             //case "SHOP" -> ShopController.showView(true);
             //case "BACK" -> titleController.showView(true); //ok na
             //case "AREA_1" -> Area1Controller.showView(true);
