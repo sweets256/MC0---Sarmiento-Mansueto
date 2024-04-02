@@ -10,7 +10,7 @@ public class CharacterCreationView extends JFrame {
     private JButton confirmCharacterButton;
     private CharacterCreationController controller;
 
-    public CharacterCreationView(CharacterCreationController characterCreationController) {
+    public CharacterCreationView(CharacterCreationController controller) {
 
         this.controller = controller;
 
@@ -51,7 +51,7 @@ public class CharacterCreationView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        setVisible(true);
+        //setVisible(true);
     }
 
     public void showView(Boolean state){

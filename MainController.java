@@ -13,32 +13,34 @@ public class MainController {
     //BattleView
 
     public TitleController titleController;
-    public CharacterCreationController charCreationController;
+    public CharacterCreationController characterCreationController;
     public GameLobbyController gameLobbyController;
     public FastTravelController fastTravelController;
+    public SelectJobClassController selectJobClassController;
 
     public MainController(){
         this.titleController = new TitleController(this);
-        this.charCreationController = new CharacterCreationController(this);
+        this.characterCreationController = new CharacterCreationController(this);
         this.gameLobbyController = new GameLobbyController(this);
         this.fastTravelController = new FastTravelController(this);
+        this.selectJobClassController = new SelectJobClassController(this);
     }
 
 
     public void navTo(String controller){   
         switch(controller){
-            case "EXIT" -> TitleController.showView(true); //ok na
-            case "CHAR_CREATION" -> CharacterCreationController.showView(true); //ok na
-            case "GAME_LOBBY" -> GameLobbyController.showView(true); //ok na
-            case "FAST_TRAVEL" -> FastTravelController.showView(true); //ok na
-            case "JOB_SELECT" -> FastTravelController.showView(true); //ok na
-            case "LEVEL_UP" -> LevelUpController.showView(true);
-            case "SHOP" -> ShopController.showView(true);
-            case "BACK" -> TitleController.showView(true);
-            case "AREA_1" -> Area1Controller.showView(true);
-            case "AREA_2" -> Area2Controller.showView(true);
-            case "AREA_3" -> Area3Controller.showView(true);
-            case "BATTLE" -> BattleController.showView(true);
+            case "EXIT" -> titleController.showView(true); //ok na
+            case "CHAR_CREATION" -> characterCreationController.showView(true); //ok na
+            case "GAME_LOBBY" -> gameLobbyController.showView(true); //ok na
+            case "FAST_TRAVEL" -> fastTravelController.showView(true); //ok na
+            case "JOB_SELECT" -> selectJobClassController.showView(true); //ok na
+            //case "LEVEL_UP" -> LevelUpController.showView(true);
+            //case "SHOP" -> ShopController.showView(true);
+            //case "BACK" -> titleController.showView(true); //ok na
+            //case "AREA_1" -> Area1Controller.showView(true);
+            //case "AREA_2" -> Area2Controller.showView(true);
+            //case "AREA_3" -> Area3Controller.showView(true);
+            //case "BATTLE" -> BattleController.showView(true);
 
         }
     }

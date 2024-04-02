@@ -44,6 +44,10 @@ public class TitleScreenView extends JFrame {
 
         // center frame
         setLocationRelativeTo(null);
+        temp();
+    }
+
+    public void temp(){
         setVisible(true);
     }
 

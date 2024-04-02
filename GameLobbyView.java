@@ -10,9 +10,9 @@ public class GameLobbyView extends JFrame {
     private JButton inventoryButton;
     private JButton shopButton;
     private JButton exitButton;
-    private TitleController controller;
+    private GameLobbyController controller;
 
-    public GameLobbyView(GameLobbyController gameLobbyController) {
+    public GameLobbyView(GameLobbyController controller) {
 
         this.controller = controller;
 
@@ -59,7 +59,7 @@ public class GameLobbyView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        setVisible(true);
+        //setVisible(true);
     }
 
     // Method to add action listener to the fast travel button

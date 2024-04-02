@@ -11,7 +11,7 @@ public class FastTravelView extends JFrame {
     private JButton backButton;
     private FastTravelController controller;
 
-    public FastTravelView(FastTravelController fastTravelController) {
+    public FastTravelView(FastTravelController controller) {
 
         this.controller = controller;
 
@@ -52,7 +52,7 @@ public class FastTravelView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        setVisible(true);
+        //setVisible(true);
     }
 
     // Method to add action listener to the area 1 button

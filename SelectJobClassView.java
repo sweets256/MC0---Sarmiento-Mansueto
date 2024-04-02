@@ -63,7 +63,7 @@ public class SelectJobClassView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        setVisible(true);
+        //setVisible(true);
     }
 
     private JButton createImageButton(ImageIcon icon) {

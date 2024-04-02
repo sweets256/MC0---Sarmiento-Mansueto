@@ -67,7 +67,7 @@ public class InventoryView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        setVisible(true);
+        //setVisible(true);
 
         // Add action listeners
         addListeners();

@@ -31,6 +31,6 @@ public class Main {
 
         // controllers (all)
         MainController mainController = new MainController();
-        TitleController titleController = new TitleController(mainController);
+        //ShopController shopController = new ShopController(mainController);
     }
 }
