@@ -6,6 +6,7 @@ public class GameLobbyController {
     public GameLobbyController(MainController mainController) {
         this.mainController = mainController;
         this.view = new GameLobbyView(this);
+        this.gameLobby = new GameLobby(this);
     }
 
     public void showView(Boolean state){
@@ -16,16 +17,6 @@ public class GameLobbyController {
         mainController.navTo(controller);
         
     }
+
+    public void
 }
-
-
-// public class CharacterCreationController{
-//     //ALL of the other shit na nilagay, included contstructor tamad ako
-
-
-//     public void showView(Boolean state){
-//         view.showView(state);
-//     }
-
-    
-// }

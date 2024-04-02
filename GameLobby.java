@@ -11,6 +11,7 @@ public class GameLobby {
     private Scanner input = new Scanner(System.in);
     private Navigation navigation;
     private boolean areasCleared = false;
+    private GameLobbyController controller;
     List<Weapon> weaponsForSale;
 
     /**
@@ -19,9 +20,8 @@ public class GameLobby {
      * @param navigation the navigation system of the game
      * @param player the player character
      */
-    public GameLobby(Navigation navigation, Character player) {
-        this.navigation = navigation;
-        this.player = player;
+    public GameLobby(GameLobbyController controller) {
+        this.controller = controller;
         this.weaponsForSale = new ArrayList<>(); // Initialize weapons only once
         initializeWeapons(); // Initialize weapons available for sale
     }
