@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FastTravelView extends JFrame {
@@ -30,46 +29,45 @@ public class FastTravelView extends JFrame {
         // Create and center area 1 button
         area1Button = new JButton("Area 1");
         area1Button.setPreferredSize(new Dimension(150, 30)); // Set preferred size
-        area1Button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for area 1 button here
-            }
-        });
         buttonPanel.add(area1Button);
 
         // Create and center area 2 button
         area2Button = new JButton("Area 2");
         area2Button.setPreferredSize(new Dimension(150, 30)); // Set preferred size
-        area2Button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for area 2 button here
-            }
-        });
         buttonPanel.add(area2Button);
 
         // Create and center area 3 button
         area3Button = new JButton("Area 3");
         area3Button.setPreferredSize(new Dimension(150, 30)); // Set preferred size
-        area3Button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for area 3 button here
-            }
-        });
         buttonPanel.add(area3Button);
 
         // Create and back button
         backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(150, 30)); // Set preferred size
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for back button here
-                dispose(); // Close the frame
-            }
-        });
         buttonPanel.add(backButton);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    // Method to add action listener to the area 1 button
+    public void addArea1ButtonListener(ActionListener listener) {
+        area1Button.addActionListener(listener);
+    }
+
+    // Method to add action listener to the area 2 button
+    public void addArea2ButtonListener(ActionListener listener) {
+        area2Button.addActionListener(listener);
+    }
+
+    // Method to add action listener to the area 3 button
+    public void addArea3ButtonListener(ActionListener listener) {
+        area3Button.addActionListener(listener);
+    }
+
+    // Method to add action listener to the back button
+    public void addBackButtonListener(ActionListener listener) {
+        backButton.addActionListener(listener);
     }
 }
