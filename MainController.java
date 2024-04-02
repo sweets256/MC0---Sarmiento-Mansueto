@@ -16,7 +16,8 @@ public class MainController {
     public CharacterCreationController characterCreationController;
     public GameLobbyController gameLobbyController;
     public FastTravelController fastTravelController;
-    public SelectJobClassController selectJobClassController;
+    public SelectJobClassController selectJobClassController; 
+    public LevelUpController levelUpController;
 
     public MainController(){
         this.titleController = new TitleController(this);
@@ -24,6 +25,7 @@ public class MainController {
         this.gameLobbyController = new GameLobbyController(this);
         this.fastTravelController = new FastTravelController(this);
         this.selectJobClassController = new SelectJobClassController(this);
+        this.levelUpController = new LevelUpController(this);
     }
 
 

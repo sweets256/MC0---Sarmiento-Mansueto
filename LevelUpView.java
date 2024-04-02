@@ -4,13 +4,17 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LevelUpView extends JFrame {
+public class LevelUpView extends JFrame implements ActionListener{
     private JLabel titleLabel;
     private JButton chooseStatButton;
     private JButton exitButton;
     private JPanel newStatsPanel;
+    private LevelUpController controller;
 
-    public LevelUpView() {
+    public LevelUpView(LevelUpController controller) {
+
+        this.controller = controller;
+
         setTitle("Level Up");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,22 +35,12 @@ public class LevelUpView extends JFrame {
         chooseStatButton = new JButton("Choose Stat to Level Up");
         chooseStatButton.setFont(new Font("Arial", Font.BOLD, 30));
         chooseStatButton.setPreferredSize(new Dimension(80, 30)); // Set preferred size
-        chooseStatButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for choose stat button here
-            }
-        });
         buttonPanel.add(chooseStatButton);
 
         // Create and center exit button
         exitButton = new JButton("Exit");
         exitButton.setFont(new Font("Arial", Font.BOLD, 30));
         exitButton.setPreferredSize(new Dimension(180, 30)); // Set preferred size
-        exitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the frame
-            }
-        });
         buttonPanel.add(exitButton);
 
         // Create new stats panel
@@ -63,6 +57,27 @@ public class LevelUpView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        setVisible(true);
+        showView(true);
+        addButtonListener();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == chooseStatButton){
+            showView(false);
+            controller.finishProcess("CHAR_CREATION");
+        } else if (e.getSource() == exitButton){
+            System.out.println("Exit Button Pressed");
+        }
+    }
+
+    public void addButtonListener(){
+        chooseStatButton.addActionListener(this);
+        exitButton.addActionListener(this);
+    }
+
+
+    public void showView(Boolean state){
+        setVisible(state);
     }
 }
