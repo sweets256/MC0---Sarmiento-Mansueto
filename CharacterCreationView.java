@@ -4,7 +4,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CharacterCreationView extends JFrame {
+public class CharacterCreationView extends JFrame implements ActionListener {
     private JLabel titleLabel;
     private JTextField nameTextField;
     private JButton selectJobClassButton;
@@ -52,25 +52,32 @@ public class CharacterCreationView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        //setVisible(true);
+        showView(true);
+        addButtonListener();
     }
 
-    public void showView(Boolean state) {
-        setVisible(state);
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == confirmCharacterButton){
+            showView(false);
+            controller.finishProcess("GAME_LOBBY");
+        } else if(e.getSource() == selectJobClassButton){
+            showView(false);
+            controller.finishProcess("JOB_SELECT");
+        } 
     }
 
-    // Method to add listener for confirm character button
-    public void addConfirmCharacterButtonListener(ActionListener listener) {
-        confirmCharacterButton.addActionListener(listener);
-    }
-
-    // Method to add listener for select job class button
-    public void addSelectJobClassButtonListener(ActionListener listener) {
-        selectJobClassButton.addActionListener(listener);
+    public void addButtonListener(){
+        confirmCharacterButton.addActionListener(this);
+        selectJobClassButton.addActionListener(this);
     }
 
     // Method to add listener for name text field
     public void addNameTextFieldListener(ActionListener listener) {
         nameTextField.addActionListener(listener);
+    }
+
+    public void showView(Boolean state) {
+        setVisible(state);
     }
 }

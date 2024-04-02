@@ -1,9 +1,10 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TitleScreenView extends JFrame {
+public class TitleScreenView extends JFrame implements ActionListener {
     private JLabel titleLabel;
     private JButton startButton;
     private JButton exitButton;
@@ -44,26 +45,23 @@ public class TitleScreenView extends JFrame {
 
         // center frame
         setLocationRelativeTo(null);
-        temp();
+        showView(true);
+        addButtonListener();
     }
 
-    public void temp(){
-        setVisible(true);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == startButton){
+            showView(false);
+            controller.finishProcess("CHAR_CREATION");
+        } else if (e.getSource() == exitButton){
+            System.out.println("Exit Button Pressed");
+        }
     }
 
-    // Listener for the start button
-    public void addStartButtonListener (ActionListener listener) {
-        startButton.addActionListener(listener);
-
-        //nav to char create
-        setVisible(false);
-        controller.finishProcess("CHAR_CREATION");
-
-    }
-
-    // Listener for the exit button
-    public void addExitButtonListener (ActionListener listener) {
-        exitButton.addActionListener(listener);
+    public void addButtonListener(){
+        startButton.addActionListener(this);
+        exitButton.addActionListener(this);
     }
 
 
