@@ -51,11 +51,6 @@ public class InventoryView extends JFrame {
 
         // Create confirm button
         confirmButton = new JButton("Confirm");
-        confirmButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for confirm button here
-            }
-        });
         chooseWeaponPanel.add(confirmButton);
 
         // Create and add character's weapons area
@@ -67,17 +62,28 @@ public class InventoryView extends JFrame {
         // Create panel for back button
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         backButton = new JButton("Back");
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for back button here
-                dispose(); // Close the frame
-            }
-        });
         buttonPanel.add(backButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
         setVisible(true);
+
+        // Add action listeners
+        addListeners();
+    }
+
+    private void addListeners() {
+        confirmButton.addActionListener(e -> onConfirmButtonClicked());
+        backButton.addActionListener(e -> onBackButtonClicked());
+    }
+
+    private void onConfirmButtonClicked() {
+        // Add your action for confirm button here
+    }
+
+    private void onBackButtonClicked() {
+        // Add your action for back button here
+        dispose(); // Close the frame
     }
 }
