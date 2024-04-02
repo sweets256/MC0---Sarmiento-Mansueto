@@ -12,8 +12,12 @@ public class SelectJobClassView extends JFrame {
     private ImageIcon heroIcon;
     private ImageIcon astrologerIcon;
     private ImageIcon prophetIcon;
+    private SelectJobClassController controller;
 
-    public SelectJobClassView() {
+    public SelectJobClassView(SelectJobClassController controller) {
+
+        this.controller = controller;
+
         setTitle("Select Job Class");
         setSize(600, 400); // Adjusted size for better visibility of buttons
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,35 +86,57 @@ public class SelectJobClassView extends JFrame {
     public void addVagabondButtonListener(ActionListener listener) {
         JButton vagabondButton = (JButton) getContentPane().getComponent(0);
         vagabondButton.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("CHAR_CREATION");
     }
 
     // Method to add listener for Samurai button
     public void addSamuraiButtonListener(ActionListener listener) {
         JButton samuraiButton = (JButton) getContentPane().getComponent(1);
         samuraiButton.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("CHAR_CREATION");
     }
 
     // Method to add listener for Warrior button
     public void addWarriorButtonListener(ActionListener listener) {
         JButton warriorButton = (JButton) getContentPane().getComponent(2);
         warriorButton.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("CHAR_CREATION");
     }
 
     // Method to add listener for Hero button
     public void addHeroButtonListener(ActionListener listener) {
         JButton heroButton = (JButton) getContentPane().getComponent(3);
         heroButton.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("CHAR_CREATION");
     }
 
     // Method to add listener for Astrologer button
     public void addAstrologerButtonListener(ActionListener listener) {
         JButton astrologerButton = (JButton) getContentPane().getComponent(4);
         astrologerButton.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("CHAR_CREATION");
     }
 
     // Method to add listener for Prophet button
     public void addProphetButtonListener(ActionListener listener) {
         JButton prophetButton = (JButton) getContentPane().getComponent(5);
         prophetButton.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("CHAR_CREATION");
+    }
+
+    public void showView(Boolean state){
+        setVisible(state);
     }
 }

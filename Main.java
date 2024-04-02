@@ -27,10 +27,10 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        TitleScreenView titleScreenView = new TitleScreenView();
-        Navigation navigation = new Navigation();
+        //Navigation navigation = new Navigation();
 
-        // Create controller and connect view with model
-        new TitleController(titleScreenView, navigation);
+        // controllers (all)
+        MainController mainController = new MainController();
+        TitleController titleController = new TitleController(mainController);
     }
 }

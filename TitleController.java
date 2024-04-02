@@ -13,6 +13,10 @@ public class TitleController {
         mainController.navTo(controller);
         
     }
+
+    public void showView(Boolean state){
+        view.showView(state);
+    }
 }
 
 

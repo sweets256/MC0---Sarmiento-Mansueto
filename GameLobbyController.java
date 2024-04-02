@@ -1,12 +1,11 @@
-public class CharacterCreationController {
+public class GameLobbyController {
     private MainController mainController;
-    private CharacterCreationView view;
-    private Character character;
+    private GameLobbyView view;
+    private GameLobby gameLobby;
 
-    public CharacterCreationController(MainController mainController) {
+    public GameLobbyController(MainController mainController) {
         this.mainController = mainController;
-        this.view = new CharacterCreationView(this);
-        //this.character = new Character(this);
+        this.view = new GameLobbyView(this);
     }
 
     public void showView(Boolean state){
@@ -15,6 +14,7 @@ public class CharacterCreationController {
 
     public void finishProcess(String controller){
         mainController.navTo(controller);
+        
     }
 }
 

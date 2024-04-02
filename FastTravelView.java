@@ -9,8 +9,12 @@ public class FastTravelView extends JFrame {
     private JButton area2Button;
     private JButton area3Button;
     private JButton backButton;
+    private FastTravelController controller;
 
-    public FastTravelView() {
+    public FastTravelView(FastTravelController fastTravelController) {
+
+        this.controller = controller;
+
         setTitle("Fast Travel");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,20 +58,36 @@ public class FastTravelView extends JFrame {
     // Method to add action listener to the area 1 button
     public void addArea1ButtonListener(ActionListener listener) {
         area1Button.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("AREA_1");
     }
 
     // Method to add action listener to the area 2 button
     public void addArea2ButtonListener(ActionListener listener) {
         area2Button.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("AREA_2");
     }
 
     // Method to add action listener to the area 3 button
     public void addArea3ButtonListener(ActionListener listener) {
         area3Button.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("AREA_3");
     }
 
     // Method to add action listener to the back button
     public void addBackButtonListener(ActionListener listener) {
         backButton.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("EXIT");
+    }
+
+    public void showView(Boolean state){
+        setVisible(state);
     }
 }

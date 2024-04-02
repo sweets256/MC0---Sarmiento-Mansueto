@@ -10,8 +10,12 @@ public class GameLobbyView extends JFrame {
     private JButton inventoryButton;
     private JButton shopButton;
     private JButton exitButton;
+    private TitleController controller;
 
-    public GameLobbyView() {
+    public GameLobbyView(GameLobbyController gameLobbyController) {
+
+        this.controller = controller;
+
         setTitle("Game Lobby");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,25 +65,40 @@ public class GameLobbyView extends JFrame {
     // Method to add action listener to the fast travel button
     public void addFastTravelButtonListener(ActionListener listener) {
         fastTravelButton.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("FAST_TRAVEL");
     }
 
     // Method to add action listener to the level up button
     public void addLevelUpButtonListener(ActionListener listener) {
         levelUpButton.addActionListener(listener);
+        setVisible(false);
+        controller.finishProcess("LEVEL_UP");
     }
 
     // Method to add action listener to the inventory button
     public void addInventoryButtonListener(ActionListener listener) {
         inventoryButton.addActionListener(listener);
+        setVisible(false);
+        controller.finishProcess("INVENTORY");
     }
 
     // Method to add action listener to the shop button
     public void addShopButtonListener(ActionListener listener) {
         shopButton.addActionListener(listener);
+        setVisible(false);
+        controller.finishProcess("SHOP");
     }
 
     // Method to add action listener to the exit button
     public void addExitButtonListener(ActionListener listener) {
         exitButton.addActionListener(listener);
+        setVisible(false);
+        controller.finishProcess("EXIT");
+    }
+
+    public void showView(Boolean state){
+        setVisible(state);
     }
 }

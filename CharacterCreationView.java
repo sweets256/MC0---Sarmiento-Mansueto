@@ -10,7 +10,10 @@ public class CharacterCreationView extends JFrame {
     private JButton confirmCharacterButton;
     private CharacterCreationController controller;
 
-    public CharacterCreationView() {
+    public CharacterCreationView(CharacterCreationController characterCreationController) {
+
+        this.controller = controller;
+
         setTitle("Character Creation");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,10 +61,15 @@ public class CharacterCreationView extends JFrame {
     // Method to add listener for confirm character button
     public void addConfirmCharacterButtonListener(ActionListener listener) {
         confirmCharacterButton.addActionListener(listener);
+
+        setVisible(false);
+        controller.finishProcess("GAME_LOBBY");
     }
 
     // Method to add listener for select job class button
     public void addSelectJobClassButtonListener(ActionListener listener) {
         selectJobClassButton.addActionListener(listener);
+        setVisible(false);
+        controller.finishProcess("JOB_CLASS");
     }
 }
