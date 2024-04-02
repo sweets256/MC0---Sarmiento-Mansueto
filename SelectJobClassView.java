@@ -4,7 +4,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SelectJobClassView extends JFrame implements ActionListener{
+public class SelectJobClassView extends JFrame implements ActionListener {
     private JLabel titleLabel;
     private JButton vagabondButton;
     private JButton samuraiButton;
@@ -21,14 +21,12 @@ public class SelectJobClassView extends JFrame implements ActionListener{
     private SelectJobClassController controller;
 
     public SelectJobClassView(SelectJobClassController controller) {
-
         this.controller = controller;
 
         setTitle("Select Job Class");
-        setSize(600, 400); // Adjusted size for better visibility of buttons
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        
 
         // Create and center the title label
         titleLabel = new JLabel("Select Job Class", SwingConstants.CENTER);
@@ -40,62 +38,46 @@ public class SelectJobClassView extends JFrame implements ActionListener{
         buttonPanel.setBorder(new EmptyBorder(50, 50, 50, 50)); // Add padding
         add(buttonPanel, BorderLayout.CENTER);
 
-        // Load and resize image icons
-        vagabondIcon = resizeImageIcon("vagabond.png", 150, 150);
-        samuraiIcon = resizeImageIcon("samurai.png", 150, 150);
-        warriorIcon = resizeImageIcon("warrior.png", 150, 150);
-        heroIcon = resizeImageIcon("hero.png", 150, 150);
-        astrologerIcon = resizeImageIcon("astrologer.png", 150, 150);
-        prophetIcon = resizeImageIcon("prophet.png", 150, 150);
+        // Load image icons
+        vagabondIcon = new ImageIcon("vagabond.png");
+        samuraiIcon = new ImageIcon("samurai.png");
+        warriorIcon = new ImageIcon("warrior.png");
+        heroIcon = new ImageIcon("hero.png");
+        astrologerIcon = new ImageIcon("astrologer.png");
+        prophetIcon = new ImageIcon("prophet.png");
 
         // Create and add buttons
-        JButton vagabondButton = createImageButton(vagabondIcon);
+        vagabondButton = createImageButton(vagabondIcon);
         buttonPanel.add(vagabondButton);
         
-        JButton samuraiButton = createImageButton(samuraiIcon);
+        samuraiButton = createImageButton(samuraiIcon);
         buttonPanel.add(samuraiButton);
         
-        JButton warriorButton = createImageButton(warriorIcon);
+        warriorButton = createImageButton(warriorIcon);
         buttonPanel.add(warriorButton);
         
-        JButton heroButton = createImageButton(heroIcon);
+        heroButton = createImageButton(heroIcon);
         buttonPanel.add(heroButton);
         
-        JButton astrologerButton = createImageButton(astrologerIcon);
+        astrologerButton = createImageButton(astrologerIcon);
         buttonPanel.add(astrologerButton);
         
-        JButton prophetButton = createImageButton(prophetIcon);
+        prophetButton = createImageButton(prophetIcon);
         buttonPanel.add(prophetButton);
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        showView(true);
         addButtonListener(); 
+        setVisible(true);
     }
 
     private JButton createImageButton(ImageIcon icon) {
         JButton button = new JButton(icon);
-        button.setText(null); // Set text to null to remove it
         button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
         button.setContentAreaFilled(false); // Make the button transparent
         button.setBorderPainted(false); // Remove the border
+        button.addActionListener(this); // Add ActionListener
         return button;
-    }
-
-    private ImageIcon resizeImageIcon(String imagePath, int width, int height) {
-        ImageIcon icon = new ImageIcon(imagePath);
-        Image img = icon.getImage();
-        Image resizedImg = img.getScaledInstance(200, 400, Image.SCALE_SMOOTH);
-        return new ImageIcon(resizedImg);
-    }
-
-    // Method to add listener for Vagabond button
-    public void addVagabondButtonListener(ActionListener listener) {
-        JButton vagabondButton = (JButton) getContentPane().getComponent(0);
-        vagabondButton.addActionListener(listener);
-
-        setVisible(false);
-        controller.finishProcess("CHAR_CREATION");
     }
 
     @Override
@@ -122,12 +104,7 @@ public class SelectJobClassView extends JFrame implements ActionListener{
     }
 
     public void addButtonListener(){
-        vagabondButton.addActionListener(this);
-        samuraiButton.addActionListener(this);
-        warriorButton.addActionListener(this);
-        heroButton.addActionListener(this);
-        astrologerButton.addActionListener(this);
-        prophetButton.addActionListener(this);
+        // No need to add listeners here as they are added in createImageButton method
     }
 
     public void showView(Boolean state){
