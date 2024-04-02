@@ -9,7 +9,7 @@ public class BattleView extends JFrame implements ActionListener{
     private JLabel playerSpriteLabel;
     private JLabel enemySpriteLabel;
     private JTextArea systemMessagesTextArea;
-    private JComboBox<String> attackTypeComboBox;
+    private JButton attackButton;
     private JButton dodgeButton;
     private BattleController controller;
 
@@ -51,10 +51,15 @@ public class BattleView extends JFrame implements ActionListener{
         JScrollPane scrollPane = new JScrollPane(systemMessagesTextArea);
         bottomPanel.add(scrollPane);
 
-        // Create and add attack type combo box
-        String[] attackTypes = {"Physical Damage", "Sorcery Damage", "Incantation Damage"};
-        attackTypeComboBox = new JComboBox<>(attackTypes);
-        bottomPanel.add(attackTypeComboBox);
+        // Create and add attack button
+        attackButton = new JButton("Select Attack Type");
+        attackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Open a new window with attack type options
+                openAttackTypeWindow();
+            }
+        });
+        bottomPanel.add(attackButton);
 
         // Create and add dodge button
         dodgeButton = new JButton("Dodge");
@@ -68,7 +73,45 @@ public class BattleView extends JFrame implements ActionListener{
         // Center the frame on the screen
         setLocationRelativeTo(null);
         showView(true);
-        addButtonListener();
+    }
+
+    private void openAttackTypeWindow() {
+        JFrame attackTypeWindow = new JFrame("Select Attack Type");
+        attackTypeWindow.setSize(300, 150);
+        attackTypeWindow.setLayout(new GridLayout(1, 3));
+
+        JButton physicalButton = new JButton("Physical Damage");
+        physicalButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Handle physical damage action
+                systemMessagesTextArea.append("Physical Damage selected.\n");
+                attackTypeWindow.dispose();
+            }
+        });
+        attackTypeWindow.add(physicalButton);
+
+        JButton sorceryButton = new JButton("Sorcery Damage");
+        sorceryButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Handle sorcery damage action
+                systemMessagesTextArea.append("Sorcery Damage selected.\n");
+                attackTypeWindow.dispose();
+            }
+        });
+        attackTypeWindow.add(sorceryButton);
+
+        JButton incantationButton = new JButton("Incantation Damage");
+        incantationButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Handle incantation damage action
+                systemMessagesTextArea.append("Incantation Damage selected.\n");
+                attackTypeWindow.dispose();
+            }
+        });
+        attackTypeWindow.add(incantationButton);
+
+        attackTypeWindow.setLocationRelativeTo(null);
+        attackTypeWindow.setVisible(true);
     }
 
     @Override
