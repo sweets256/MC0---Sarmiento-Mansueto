@@ -1,8 +1,8 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SelectJobClassView extends JFrame {
     private JLabel titleLabel;
@@ -30,72 +30,31 @@ public class SelectJobClassView extends JFrame {
         buttonPanel.setBorder(new EmptyBorder(50, 50, 50, 50)); // Add padding
         add(buttonPanel, BorderLayout.CENTER);
 
-        /* Make sure the images are in the directory which the program is being loaded 
-        from or just copy the direct path but make sure to use double back slashes "\\" when typing the path
-        example: "D:\\School Stuff\\CCPROG3\\Github\\MC01 - DUWAHUIDH\\vagabond.png" <- please use this exact formatting
-        "D:\\School Stuff\\CCPROG3\\Github\\MC01 - DUWAHUIDH" being the directory.
-        Cannot upload files directly to github repository as the directory which the program is being run from is the file containing
-        the repository but not the repository itself.
-        */
-
-        // Will include the images in submission
         // Load and resize image icons
-
         vagabondIcon = resizeImageIcon("vagabond.png", 150, 150);
         samuraiIcon = resizeImageIcon("samurai.png", 150, 150);
         warriorIcon = resizeImageIcon("warrior.png", 150, 150);
         heroIcon = resizeImageIcon("hero.png", 150, 150);
         astrologerIcon = resizeImageIcon("astrologer.png", 150, 150);
         prophetIcon = resizeImageIcon("prophet.png", 150, 150);
-        
 
         // Create and add buttons
         JButton vagabondButton = createImageButton(vagabondIcon);
-        vagabondButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for vagabond button here
-            }
-        });
         buttonPanel.add(vagabondButton);
         
         JButton samuraiButton = createImageButton(samuraiIcon);
-        samuraiButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for samurai button here
-            }
-        });
         buttonPanel.add(samuraiButton);
         
         JButton warriorButton = createImageButton(warriorIcon);
-        warriorButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for warrior button here
-            }
-        });
         buttonPanel.add(warriorButton);
         
         JButton heroButton = createImageButton(heroIcon);
-        heroButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for hero button here
-            }
-        });
         buttonPanel.add(heroButton);
         
         JButton astrologerButton = createImageButton(astrologerIcon);
-        astrologerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for astrologer button here
-            }
-        });
         buttonPanel.add(astrologerButton);
         
         JButton prophetButton = createImageButton(prophetIcon);
-        prophetButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Add your action for prophet button here
-            }
-        });
         buttonPanel.add(prophetButton);
 
         // Center the frame on the screen
@@ -117,5 +76,41 @@ public class SelectJobClassView extends JFrame {
         Image img = icon.getImage();
         Image resizedImg = img.getScaledInstance(200, 400, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImg);
+    }
+
+    // Method to add listener for Vagabond button
+    public void addVagabondButtonListener(ActionListener listener) {
+        JButton vagabondButton = (JButton) getContentPane().getComponent(0);
+        vagabondButton.addActionListener(listener);
+    }
+
+    // Method to add listener for Samurai button
+    public void addSamuraiButtonListener(ActionListener listener) {
+        JButton samuraiButton = (JButton) getContentPane().getComponent(1);
+        samuraiButton.addActionListener(listener);
+    }
+
+    // Method to add listener for Warrior button
+    public void addWarriorButtonListener(ActionListener listener) {
+        JButton warriorButton = (JButton) getContentPane().getComponent(2);
+        warriorButton.addActionListener(listener);
+    }
+
+    // Method to add listener for Hero button
+    public void addHeroButtonListener(ActionListener listener) {
+        JButton heroButton = (JButton) getContentPane().getComponent(3);
+        heroButton.addActionListener(listener);
+    }
+
+    // Method to add listener for Astrologer button
+    public void addAstrologerButtonListener(ActionListener listener) {
+        JButton astrologerButton = (JButton) getContentPane().getComponent(4);
+        astrologerButton.addActionListener(listener);
+    }
+
+    // Method to add listener for Prophet button
+    public void addProphetButtonListener(ActionListener listener) {
+        JButton prophetButton = (JButton) getContentPane().getComponent(5);
+        prophetButton.addActionListener(listener);
     }
 }

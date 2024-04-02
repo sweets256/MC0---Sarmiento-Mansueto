@@ -1,11 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
+import java.awt.event.ActionEvent;
 
 public class ShopView extends JFrame {
     private JLabel titleLabel;
@@ -142,5 +139,15 @@ public class ShopView extends JFrame {
         // Refresh the frame
         revalidate();
         repaint();
+    }
+
+    // Method to add listener for next page button
+    public void addNextPageButtonListener(ActionListener listener) {
+        nextPageButton.addActionListener(listener);
+    }
+
+    // Method to add listener for previous page button
+    public void addPrevPageButtonListener(ActionListener listener) {
+        prevPageButton.addActionListener(listener);
     }
 }
