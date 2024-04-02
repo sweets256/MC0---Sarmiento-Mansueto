@@ -4,17 +4,22 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ShopView extends JFrame {
+public class ShopView extends JFrame implements ActionListener{
     private JLabel titleLabel;
     private JLabel playerRunesLabel;
     private JButton[] shopButtons;
     private JButton nextPageButton;
     private JButton prevPageButton;
+    private JButton exitButton;
     private int currentPage = 0; // Current page index
     private int itemsPerPage = 4; // Number of items per page
     private int totalButtons = 24; // Total number of buttons
+    private ShopController controller;
 
-    public ShopView() {
+    public ShopView(ShopController controller) {
+
+        this.controller = controller;
+
         setTitle("Shop");
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,11 +101,7 @@ public class ShopView extends JFrame {
 
         // Exit button
         JButton exitButton = new JButton("Exit");
-        exitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the frame
-            }
-        });
+
 
         // Add next and previous page buttons to bottom panel based on current page
         JPanel bottomPanel = new JPanel();
@@ -139,6 +140,9 @@ public class ShopView extends JFrame {
         // Refresh the frame
         revalidate();
         repaint();
+
+        showView(true);
+        addButtonListener();
     }
 
     // Method to add listener for next page button
@@ -149,5 +153,22 @@ public class ShopView extends JFrame {
     // Method to add listener for previous page button
     public void addPrevPageButtonListener(ActionListener listener) {
         prevPageButton.addActionListener(listener);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == exitButton){
+            showView(false);
+            controller.finishProcess("GAME_LOBBY");
+        } 
+    }
+
+    public void addButtonListener(){
+        exitButton.addActionListener(this);
+    }
+
+
+    public void showView(Boolean state){
+        setVisible(state);
     }
 }

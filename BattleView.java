@@ -4,15 +4,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BattleView extends JFrame {
+public class BattleView extends JFrame implements ActionListener{
     private JLabel titleLabel;
     private JLabel playerSpriteLabel;
     private JLabel enemySpriteLabel;
     private JTextArea systemMessagesTextArea;
     private JComboBox<String> attackTypeComboBox;
     private JButton dodgeButton;
+    private BattleController controller;
 
-    public BattleView() {
+    public BattleView(BattleController controller) {
+
+        this.controller = controller;
+
         setTitle("Battle");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +67,26 @@ public class BattleView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        setVisible(true);
+        showView(true);
+        addButtonListener();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == attackButton){
+            showView(false);
+            
+        } else if (e.getSource() == dodgeButton){
+            System.out.println("Exit Button Pressed");
+        }
+    }
+
+    public void addButtonListener(){
+        attackButton.addActionListener(this);
+        dodgeButton.addActionListener(this);
+    }
+
+    public void showView(Boolean state){
+        setVisible(state);
     }
 }

@@ -18,6 +18,7 @@ public class MainController {
     public FastTravelController fastTravelController;
     public SelectJobClassController selectJobClassController; 
     public LevelUpController levelUpController;
+    public ShopController shopController;
 
     public MainController(){
         this.titleController = new TitleController(this);
@@ -26,6 +27,7 @@ public class MainController {
         this.fastTravelController = new FastTravelController(this);
         this.selectJobClassController = new SelectJobClassController(this);
         this.levelUpController = new LevelUpController(this);
+        this.shopController = new ShopController(this);
     }
 
 
@@ -37,7 +39,7 @@ public class MainController {
             case "FAST_TRAVEL" -> fastTravelController.showView(true); //ok na
             case "JOB_SELECT" -> selectJobClassController.showView(true); //ok na
             case "LEVEL_UP" -> levelUpController.showView(true); //ok na
-            //case "SHOP" -> ShopController.showView(true);
+            case "SHOP" -> shopController.showView(true); //ok na
             //case "BACK" -> titleController.showView(true); //ok na
             //case "AREA_1" -> Area1Controller.showView(true);
             //case "AREA_2" -> Area2Controller.showView(true);
