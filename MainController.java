@@ -22,10 +22,10 @@ public class MainController {
     public MainController(){
         this.titleController = new TitleController(this);
         this.characterCreationController = new CharacterCreationController(this);
-        this.gameLobbyController = new GameLobbyController(this);
-        this.fastTravelController = new FastTravelController(this);
-        this.levelUpController = new LevelUpController(this);
-        this.shopController = new ShopController(this);
+        // this.gameLobbyController = new GameLobbyController(this);
+        // this.fastTravelController = new FastTravelController(this);
+        // this.levelUpController = new LevelUpController(this);
+        // this.shopController = new ShopController(this);
     }
 
 
@@ -33,15 +33,15 @@ public class MainController {
         switch(controller){
             case "EXIT" -> titleController.showView(true); //ok na
             case "CHAR_CREATION" -> characterCreationController.showView(true); //ok na
-            case "GAME_LOBBY" -> gameLobbyController.showView(true); //ok na
-            case "FAST_TRAVEL" -> fastTravelController.showView(true); //ok na
-            case "LEVEL_UP" -> levelUpController.showView(true); //ok na
-            case "SHOP" -> shopController.showView(true); //ok na
-            //case "BACK" -> titleController.showView(true); //ok na
-            //case "AREA_1" -> Area1Controller.showView(true);
-            //case "AREA_2" -> Area2Controller.showView(true);
-            //case "AREA_3" -> Area3Controller.showView(true);
-            //case "BATTLE" -> BattleController.showView(true);
+            // case "GAME_LOBBY" -> gameLobbyController.showView(true); //ok na
+            // case "FAST_TRAVEL" -> fastTravelController.showView(true); //ok na
+            // case "LEVEL_UP" -> levelUpController.showView(true); //ok na
+            // case "SHOP" -> shopController.showView(true); //ok na
+            // case "BACK" -> titleController.showView(true); //ok na
+            // case "AREA_1" -> Area1Controller.showView(true);
+            // case "AREA_2" -> Area2Controller.showView(true);
+            // case "AREA_3" -> Area3Controller.showView(true);
+            // case "BATTLE" -> BattleController.showView(true);
 
         }
     }
