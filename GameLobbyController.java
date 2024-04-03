@@ -2,9 +2,11 @@ public class GameLobbyController {
     private MainController mainController;
     private GameLobbyView view;
     private GameLobby gameLobby;
+    private Character character;
 
-    public GameLobbyController(MainController mainController) {
+    public GameLobbyController(MainController mainController, Character character) {
         this.mainController = mainController;
+        this.character = character;
         this.view = new GameLobbyView(this);
         this.gameLobby = new GameLobby(this);
     }
@@ -17,6 +19,4 @@ public class GameLobbyController {
         mainController.navTo(controller);
         
     }
-
-    // public void
 }

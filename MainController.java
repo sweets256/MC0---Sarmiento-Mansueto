@@ -33,7 +33,7 @@ public class MainController {
         switch(controller){
             case "EXIT" -> titleController.showView(true); //ok na
             case "CHAR_CREATION" -> characterCreationController.showView(true); //ok na
-            // case "GAME_LOBBY" -> gameLobbyController.showView(true); //ok na
+            case "GAME_LOBBY" -> gameLobbyController.showView(true); //ok na
             // case "FAST_TRAVEL" -> fastTravelController.showView(true); //ok na
             // case "LEVEL_UP" -> levelUpController.showView(true); //ok na
             // case "SHOP" -> shopController.showView(true); //ok na
@@ -44,5 +44,9 @@ public class MainController {
             // case "BATTLE" -> BattleController.showView(true);
 
         }
+    }
+    public void createGameLobby(Character character){
+        this.gameLobbyController = new GameLobbyController(this, character);
+        navTo("GAME_LOBBY");
     }
 }
