@@ -64,6 +64,7 @@ public class CharacterCreationView extends JFrame implements ActionListener {
         // Create and center confirm character button
         confirmCharacterButton = new JButton("Confirm Character Created");
         confirmCharacterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        confirmCharacterButton.setEnabled(false);
         charCreationPanel.add(confirmCharacterButton, BorderLayout.SOUTH);
 
         // Create panel for job class buttons
@@ -107,7 +108,7 @@ public class CharacterCreationView extends JFrame implements ActionListener {
 
     private JButton createImageButton(ImageIcon icon, String buttonText) {
         JButton button = new JButton(icon);
-        button.setText(buttonText);
+        button.setText("");
         button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
         button.setContentAreaFilled(false); // Make the button transparent
         button.setBorderPainted(false); // Remove the border
