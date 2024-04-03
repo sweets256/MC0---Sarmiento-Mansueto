@@ -463,6 +463,8 @@ public class Character {
     public void setCharacter(String characterName, String selectedClass) {
         this.characterName = characterName;
         this.jobClass = selectedClass;
+        System.out.println(characterName);
+        System.out.println(jobClass);
     }
 
 }

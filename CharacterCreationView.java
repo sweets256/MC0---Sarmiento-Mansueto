@@ -82,22 +82,22 @@ public class CharacterCreationView extends JFrame implements ActionListener {
         prophetIcon = new ImageIcon("prophet.png");
 
         // Create and add buttons
-        vagabondButton = createImageButton(vagabondIcon, "Vagabond");
+        vagabondButton = createImageButton(vagabondIcon, "Vagabond", "1");
         jobClassPanel.add(vagabondButton);
         
-        samuraiButton = createImageButton(samuraiIcon, "Samurai");
+        samuraiButton = createImageButton(samuraiIcon, "Samurai", "2");
         jobClassPanel.add(samuraiButton);
         
-        warriorButton = createImageButton(warriorIcon, "Warrior");
+        warriorButton = createImageButton(warriorIcon, "Warrior", "3");
         jobClassPanel.add(warriorButton);
         
-        heroButton = createImageButton(heroIcon, "Hero");
+        heroButton = createImageButton(heroIcon, "Hero", "4");
         jobClassPanel.add(heroButton);
         
-        astrologerButton = createImageButton(astrologerIcon, "Astrologer");
+        astrologerButton = createImageButton(astrologerIcon, "Astrologer", "5");
         jobClassPanel.add(astrologerButton);
         
-        prophetButton = createImageButton(prophetIcon, "Prophet");
+        prophetButton = createImageButton(prophetIcon, "Prophet", "6");
         jobClassPanel.add(prophetButton);
 
         // Center the frame on the screen
@@ -106,12 +106,13 @@ public class CharacterCreationView extends JFrame implements ActionListener {
         setVisible(false);
     }
 
-    private JButton createImageButton(ImageIcon icon, String buttonText) {
+    private JButton createImageButton(ImageIcon icon, String buttonText, String actionCommand) {
         JButton button = new JButton(icon);
         button.setText("");
         button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
         button.setContentAreaFilled(false); // Make the button transparent
         button.setBorderPainted(false); // Remove the border
+        button.setActionCommand(actionCommand); // Set action command
         button.addActionListener(this); // Add ActionListener
         return button;
     }
@@ -128,30 +129,7 @@ public class CharacterCreationView extends JFrame implements ActionListener {
                    e.getSource() == warriorButton || e.getSource() == heroButton ||
                    e.getSource() == astrologerButton || e.getSource() == prophetButton) {
             JButton clickedButton = (JButton)e.getSource();
-            String buttonText = clickedButton.getText();
-            switch (buttonText){
-                case "Vagabond":
-                    selectedClass = "1";
-                    break;
-                case "Samurai":
-                    selectedClass = "2";
-                    break;
-                case "Warrior":
-                    selectedClass = "3";
-                    break;
-                case "Hero":
-                    selectedClass = "4";
-                    break;
-                case "Astrologer":
-                    selectedClass = "5";
-                    break;
-                case "Prophet":
-                    selectedClass = "6";
-                    break;
-                default:
-                    selectedClass = "0";
-                    break;
-            }
+            selectedClass = clickedButton.getActionCommand();
             showJobClassPanel(false);
             controller.finishProcess("CHAR_CREATION");
             checkFields();
