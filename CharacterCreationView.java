@@ -4,6 +4,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 public class CharacterCreationView extends JFrame implements ActionListener {
     private JLabel titleLabel;
     private JTextField nameTextField;
@@ -120,9 +121,27 @@ public class CharacterCreationView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == confirmCharacterButton){
-            controller.retrieveAndSend(nameTextField.getText(), selectedClass);
-            showView(false);
-            controller.finishProcess("GAME_LOBBY");
+            controller.retrieveAndSend(nameTextField.getText(), Integer.parseInt(selectedClass));
+    
+            String Name = controller.getCharacterName();
+            int [] CharDesc = controller.getStats();
+            String message = "Character Summary\n" +
+                             "Name: " + Name + "\n" +
+                             "Level: " + CharDesc[0] + "\n" +
+                             "Health: " + CharDesc[1] + "\n" +
+                             "Dexterity: " + CharDesc[2] + "\n" +
+                             "Intelligence: " + CharDesc[3] + "\n" +
+                             "Endurance: " + CharDesc[4] + "\n" +
+                             "Strength: " + CharDesc[5] + "\n" +
+                             "Faith:" + CharDesc[6];
+
+            int option = JOptionPane.showConfirmDialog(this, message, "Confirm Character", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (option == JOptionPane.OK_OPTION){
+                showView(false);
+                controller.finishProcess("GAME_LOBBY");
+            } else {
+                JOptionPane.showMessageDialog(this, "Character not confirmed!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else if (e.getSource() == selectJobClassButton){
             showJobClassPanel(true); // Show job class panel
         } else if (e.getSource() == vagabondButton || e.getSource() == samuraiButton ||

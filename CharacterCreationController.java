@@ -17,20 +17,16 @@ public class CharacterCreationController {
         mainController.navTo(controller);
     }
 
-    public void retrieveAndSend(String playerName, String selectedClass){
+    public void retrieveAndSend(String playerName, int selectedClass){
         character.setCharacter(playerName, selectedClass);
         mainController.createGameLobby(character);
     }
+
+    public int[] getStats(){
+        return character.getStats();
+    }
+
+    public String getCharacterName(){
+        return character.getCharacterName();
+    }
 }
-
-
-// public class CharacterCreationController{
-//     //ALL of the other shit na nilagay, included contstructor tamad ako
-
-
-//     public void showView(Boolean state){
-//         view.showView(state);
-//     }
-
-    
-// }

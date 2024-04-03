@@ -9,11 +9,11 @@ import java.util.Scanner;
 public class Character {
     private CharacterCreationController controller;
     private String characterName;
-    private String jobClass;
+    private int jobClass;
     private int origHealth = 0;
     private int level = 1;
     private int runes = 100000;
-    private int[] stats = new int[6];
+    private int[] stats = new int[7];
     private int effectiveHealth = 0;
     private static final String[][] characterClasses = {
         {"Vagabond", "9", "15", "13", "9", "11", "14", "9"},
@@ -76,7 +76,7 @@ public class Character {
                     break;
                 case "2":
                     selectJobClass(input);
-                    classSet = this.jobClass != null && !this.jobClass.isEmpty();
+                    // classSet = this.jobClass != null && !this.jobClass.isEmpty();
                     break;
                 default:
                     System.out.println("Invalid choice. Please select 1 or 2.");
@@ -156,7 +156,7 @@ public class Character {
             try {
                 int classChoice = Integer.parseInt(classInput) - 1;
                 if (classChoice >= 0 && classChoice < characterClasses.length) {
-                    this.jobClass = characterClasses[classChoice][0];
+                    //this.jobClass = characterClasses[classChoice][0];
                     setInitialStats(classChoice);
                     return;
                 } else {
@@ -460,11 +460,19 @@ public class Character {
         }
     }
 
-    public void setCharacter(String characterName, String selectedClass) {
+    public void setCharacter(String characterName, int selectedClass) {
         this.characterName = characterName;
         this.jobClass = selectedClass;
-        System.out.println(characterName);
-        System.out.println(jobClass);
+        this.stats[0] = Integer.parseInt(characterClasses[selectedClass - 1][1]);
+        this.stats[1] = Integer.parseInt(characterClasses[selectedClass - 1][2]);
+        this.stats[2] = Integer.parseInt(characterClasses[selectedClass - 1][3]);
+        this.stats[3] = Integer.parseInt(characterClasses[selectedClass - 1][4]);
+        this.stats[4] = Integer.parseInt(characterClasses[selectedClass - 1][5]);
+        this.stats[5] = Integer.parseInt(characterClasses[selectedClass - 1][6]);
+        this.stats[6] = Integer.parseInt(characterClasses[selectedClass - 1][7]);
     }
 
+    public int[] getStats(){
+        return stats;
+    }
 }
