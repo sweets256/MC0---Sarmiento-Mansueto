@@ -6,7 +6,7 @@ public class CharacterCreationController {
     public CharacterCreationController(MainController mainController) {
         this.mainController = mainController;
         this.view = new CharacterCreationView(this);
-        //this.character = new Character(this);
+        this.character = new Character(this);
     }
 
     public void showView(Boolean state){
@@ -15,6 +15,10 @@ public class CharacterCreationController {
 
     public void finishProcess(String controller){
         mainController.navTo(controller);
+    }
+
+    public void retrieveAndSend(String playerName, String selectedClass){
+        character.setCharacter(playerName, selectedClass);
     }
 }
 

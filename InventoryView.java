@@ -67,7 +67,7 @@ public class InventoryView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        //setVisible(true);
+        showView(false);
 
         // Add action listeners
         addListeners();
@@ -85,5 +85,9 @@ public class InventoryView extends JFrame {
     private void onBackButtonClicked() {
         // Add your action for back button here
         dispose(); // Close the frame
+    }
+
+    public void showView(Boolean state){
+        setVisible(state);
     }
 }

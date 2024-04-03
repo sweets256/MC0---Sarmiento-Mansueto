@@ -15,8 +15,7 @@ public class MainController {
     public TitleController titleController;
     public CharacterCreationController characterCreationController;
     public GameLobbyController gameLobbyController;
-    public FastTravelController fastTravelController;
-    public SelectJobClassController selectJobClassController; 
+    public FastTravelController fastTravelController; 
     public LevelUpController levelUpController;
     public ShopController shopController;
 
@@ -25,7 +24,6 @@ public class MainController {
         this.characterCreationController = new CharacterCreationController(this);
         this.gameLobbyController = new GameLobbyController(this);
         this.fastTravelController = new FastTravelController(this);
-        this.selectJobClassController = new SelectJobClassController(this);
         this.levelUpController = new LevelUpController(this);
         this.shopController = new ShopController(this);
     }
@@ -37,7 +35,6 @@ public class MainController {
             case "CHAR_CREATION" -> characterCreationController.showView(true); //ok na
             case "GAME_LOBBY" -> gameLobbyController.showView(true); //ok na
             case "FAST_TRAVEL" -> fastTravelController.showView(true); //ok na
-            case "JOB_SELECT" -> selectJobClassController.showView(true); //ok na
             case "LEVEL_UP" -> levelUpController.showView(true); //ok na
             case "SHOP" -> shopController.showView(true); //ok na
             //case "BACK" -> titleController.showView(true); //ok na

@@ -44,7 +44,7 @@ public class Navigation implements AreaInteractionListener {
                     currentState = GameState.GAME_LOBBY;
                     break;
                 case EXIT:
-                    System.out.println("You have exited the game.");
+                    // System.out.println("You have exited the game.");
                     break;
             }
         }
@@ -55,14 +55,14 @@ public class Navigation implements AreaInteractionListener {
      * Displays the title screen and prompts the player for input.
      */
     public void titleScreen() {
-        System.out.println(" _______  _        ______   _______  _          _______  _______  _______           _______ ");
-        System.out.println("(  ____ \\( \\      (  __  \\ (  ____ \\( (    /|  (  ____ )(  ___  )(  ____ \\|\\     /|(  ____ \\");
-        System.out.println("| (    \\/| (      | (  \\  )| (    \\/|  \\  ( |  | (    )|| (   ) || (    \\/| )   ( || (    \\/");
-        System.out.println("| (__    | |      | |   ) || (__    |   \\ | |  | (____)|| |   | || |      | |   | || (__    ");
-        System.out.println("|  __)   | |      | |   | ||  __)   | (\\ \\) |  |     __)| |   | || | ____ | |   | ||  __)   ");
-        System.out.println("| (      | |      | |   ) || (      | | \\   |  | (\\ (   | |   | || | \\_  )| |   | || (      ");
-        System.out.println("| (____/\\| (____/\\| (__/  )| (____/\\| )  \\  |  | ) \\ \\__| (___) || (___) || (___) || (____/\\");
-        System.out.println("(_______/(_______/(______/ (_______/|/    )_)  |/   \\__/(_______)(_______)(_______)(_______/");
+        // System.out.println(" _______  _        ______   _______  _          _______  _______  _______           _______ ");
+        // System.out.println("(  ____ \\( \\      (  __  \\ (  ____ \\( (    /|  (  ____ )(  ___  )(  ____ \\|\\     /|(  ____ \\");
+        // System.out.println("| (    \\/| (      | (  \\  )| (    \\/|  \\  ( |  | (    )|| (   ) || (    \\/| )   ( || (    \\/");
+        // System.out.println("| (__    | |      | |   ) || (__    |   \\ | |  | (____)|| |   | || |      | |   | || (__    ");
+        // System.out.println("|  __)   | |      | |   | ||  __)   | (\\ \\) |  |     __)| |   | || | ____ | |   | ||  __)   ");
+        // System.out.println("| (      | |      | |   ) || (      | | \\   |  | (\\ (   | |   | || | \\_  )| |   | || (      ");
+        // System.out.println("| (____/\\| (____/\\| (__/  )| (____/\\| )  \\  |  | ) \\ \\__| (___) || (___) || (___) || (____/\\");
+        // System.out.println("(_______/(_______/(______/ (_______/|/    )_)  |/   \\__/(_______)(_______)(_______)(_______/");
         
         
         System.out.println("\n\t\t\t\t[Please choose your option]");
@@ -74,9 +74,9 @@ public class Navigation implements AreaInteractionListener {
         obj.nextLine();
 
         if (choice == 1) {
-            player = new Character();
+            // player = new Character();
             if (player.createCharacter(obj)) {
-                gameLobby = new GameLobby(this, player);
+                // gameLobby = new GameLobby(this, player);
                 currentState = GameState.GAME_LOBBY;
             }
         } else if (choice == 2) {

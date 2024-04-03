@@ -53,7 +53,7 @@ public class FastTravelView extends JFrame implements ActionListener{
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        showView(true);
+        showView(false);
         addButtonListener();
     }
 

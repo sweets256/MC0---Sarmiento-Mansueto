@@ -55,7 +55,7 @@ public class ShopView extends JFrame implements ActionListener{
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-        setVisible(true);
+        showView(false);
     }
 
     // Method to resize image icon
@@ -141,7 +141,7 @@ public class ShopView extends JFrame implements ActionListener{
         revalidate();
         repaint();
 
-        showView(true);
+        showView(false);
         addButtonListener();
     }
 

@@ -64,6 +64,7 @@ public class GameLobbyView extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
+        showView(false);
     }
 
     // Method to add action listener to the fast travel button

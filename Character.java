@@ -7,6 +7,7 @@ import java.util.Scanner;
  * such as name, job class, level, stats, and runes.
  */
 public class Character {
+    private CharacterCreationController controller;
     private String characterName;
     private String jobClass;
     private int origHealth = 0;
@@ -24,6 +25,11 @@ public class Character {
     };
     private List<Weapon> inventory = new ArrayList<>();
     private Weapon equippedWeapon;
+
+
+    public Character(CharacterCreationController controller){
+        this.controller = controller;
+    }
 
     /**
      * Pauses the execution for a specified duration.
@@ -453,4 +459,10 @@ public class Character {
             Thread.currentThread().interrupt();
         }
     }
+
+    public void setCharacter(String characterName, String selectedClass) {
+        this.characterName = characterName;
+        this.jobClass = selectedClass;
+    }
+
 }
