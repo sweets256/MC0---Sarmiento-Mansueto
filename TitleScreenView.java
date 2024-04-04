@@ -55,7 +55,8 @@ public class TitleScreenView extends JFrame implements ActionListener {
             showView(false);
             controller.finishProcess("CHAR_CREATION");
         } else if (e.getSource() == exitButton){
-            System.out.println("Exit Button Pressed");
+            showView(false);
+            System.exit(0);
         }
     }
 

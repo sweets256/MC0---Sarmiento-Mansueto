@@ -127,6 +127,7 @@ public class CharacterCreationView extends JFrame implements ActionListener {
             int [] CharDesc = controller.getStats();
             String message = "Character Summary\n" +
                              "Name: " + Name + "\n" +
+                             //"Job Class: " + (CharDesc[0]) + "\n" +
                              "Level: " + CharDesc[0] + "\n" +
                              "Health: " + CharDesc[1] + "\n" +
                              "Dexterity: " + CharDesc[2] + "\n" +
@@ -139,8 +140,9 @@ public class CharacterCreationView extends JFrame implements ActionListener {
             if (option == JOptionPane.OK_OPTION){
                 showView(false);
                 controller.finishProcess("GAME_LOBBY");
-            } else {
+            } else if (option == JOptionPane.OK_CANCEL_OPTION){
                 JOptionPane.showMessageDialog(this, "Character not confirmed!", "Error", JOptionPane.ERROR_MESSAGE);
+                controller.finishProcess("CHAR_CREATION");
             }
         } else if (e.getSource() == selectJobClassButton){
             showJobClassPanel(true); // Show job class panel
@@ -150,7 +152,6 @@ public class CharacterCreationView extends JFrame implements ActionListener {
             JButton clickedButton = (JButton)e.getSource();
             selectedClass = clickedButton.getActionCommand();
             showJobClassPanel(false);
-            controller.finishProcess("CHAR_CREATION");
             checkFields();
         }
     }
