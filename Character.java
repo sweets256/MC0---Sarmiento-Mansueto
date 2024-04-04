@@ -358,6 +358,10 @@ public class Character {
         return characterName;
     }
 
+    public int getJobClass(){
+        return jobClass;
+    }
+
     /**
      * Gets the dexterity of the equipped weapon.
      * 

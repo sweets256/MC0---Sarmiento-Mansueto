@@ -120,22 +120,35 @@ public class CharacterCreationView extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String jobClassName = "";
         if (e.getSource() == confirmCharacterButton){
             controller.retrieveAndSend(nameTextField.getText(), Integer.parseInt(selectedClass));
-    
+            int jobClass = controller.getJobClass();
             String Name = controller.getCharacterName();
+            if (jobClass == 1){
+                jobClassName = "Vagabond";
+            } else if (jobClass == 2){
+                jobClassName = "Samurai";
+            } else if (jobClass == 3){
+                jobClassName = "Warrior";
+            } else if (jobClass == 4){
+                jobClassName = "Hero";
+            } else if (jobClass == 5){
+                jobClassName = "Astrologer";
+            } else if (jobClass == 6){
+                jobClassName = "Prophet";
+            }
             int [] CharDesc = controller.getStats();
             String message = "Character Summary\n" +
                              "Name: " + Name + "\n" +
-                             //"Job Class: " + (CharDesc[0]) + "\n" +
-                             "Level: " + CharDesc[0] + "\n" +
+                             "Job Class: " + jobClassName + "\n" +
+                             "Starting Level: " + CharDesc[0] + "\n" +
                              "Health: " + CharDesc[1] + "\n" +
                              "Dexterity: " + CharDesc[2] + "\n" +
                              "Intelligence: " + CharDesc[3] + "\n" +
                              "Endurance: " + CharDesc[4] + "\n" +
                              "Strength: " + CharDesc[5] + "\n" +
                              "Faith:" + CharDesc[6];
-
             int option = JOptionPane.showConfirmDialog(this, message, "Confirm Character", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (option == JOptionPane.OK_OPTION){
                 showView(false);
@@ -145,7 +158,7 @@ public class CharacterCreationView extends JFrame implements ActionListener {
                 controller.finishProcess("CHAR_CREATION");
             }
         } else if (e.getSource() == selectJobClassButton){
-            showJobClassPanel(true); // Show job class panel
+            showJobClassPanel(true);
         } else if (e.getSource() == vagabondButton || e.getSource() == samuraiButton ||
                    e.getSource() == warriorButton || e.getSource() == heroButton ||
                    e.getSource() == astrologerButton || e.getSource() == prophetButton) {

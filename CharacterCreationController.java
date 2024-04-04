@@ -29,4 +29,8 @@ public class CharacterCreationController {
     public String getCharacterName(){
         return character.getCharacterName();
     }
+
+    public int getJobClass(){
+        return character.getJobClass();
+    }
 }
