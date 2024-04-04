@@ -206,8 +206,27 @@ public class Character {
         info.add("Class: " + characterClasses[jobClass -1][0]); // job Name
         info.add("Level: " +characterClasses[jobClass - 1][1]); // level
         info.add("Runes: " + Integer.toString(runes));
-        info.add("Health: " + Integer.toString(maxHealth() + 200));
-
+        info.add("Health: " + maxHealth());
+        // [BACK UP PLAN]
+        // if (jobClass == 1){
+        //     origHealth = 700;
+        //     info.add("Health: " + origHealth);
+        // } else if (jobClass == 2){
+        //     origHealth = 600;
+        //     info.add("Health: " + origHealth);
+        // } else if (jobClass == 3){
+        //     origHealth = 500;
+        //     info.add("Health: " + origHealth);
+        // } else if (jobClass == 4){
+        //     origHealth = 700;
+        //     info.add("Health: " + origHealth);
+        // } else if (jobClass == 5){
+        //     origHealth = 400;
+        //     info.add("Health: " + origHealth);;
+        // } else if (jobClass == 6){
+        //     origHealth = 500;
+        //     info.add("Health: " + origHealth);
+        // }
         return info;
     }
 
