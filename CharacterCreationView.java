@@ -152,6 +152,7 @@ public class CharacterCreationView extends JFrame implements ActionListener {
             int option = JOptionPane.showConfirmDialog(this, message, "Confirm Character", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (option == JOptionPane.OK_OPTION){
                 showView(false);
+                controller.createGameLobby();
                 controller.finishProcess("GAME_LOBBY");
             } else if (option == JOptionPane.OK_CANCEL_OPTION){
                 JOptionPane.showMessageDialog(this, "Character not confirmed!", "Error", JOptionPane.ERROR_MESSAGE);

@@ -19,6 +19,9 @@ public class CharacterCreationController {
 
     public void retrieveAndSend(String playerName, int selectedClass){
         character.setCharacter(playerName, selectedClass);
+    }
+
+    public void createGameLobby(){
         mainController.createGameLobby(character);
     }
 
