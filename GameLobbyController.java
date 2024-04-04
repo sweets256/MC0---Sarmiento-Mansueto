@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class GameLobbyController {
     private MainController mainController;
     private GameLobbyView view;
@@ -16,7 +18,12 @@ public class GameLobbyController {
     }
 
     public void finishProcess(String controller){
-        mainController.navTo(controller);
-        
+        mainController.navTo(controller);   
     }
+
+    public ArrayList<String> getCharInfo(){
+        return character.getCharacterInfo();
+    }
+
+
 }

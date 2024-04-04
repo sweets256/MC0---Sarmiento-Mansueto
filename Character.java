@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * The Character class represents a game character with various attributes 
@@ -196,6 +197,18 @@ public class Character {
         System.out.println("Runes: " + runes);
         System.out.println("Health: " + maxHealth()); // Add current health display
         System.out.println("=====================================");
+    }
+
+    public ArrayList<String> getCharacterInfo(){
+        ArrayList<String> info = new ArrayList<String>();
+
+        info.add(characterName);
+        info.add(characterClasses[jobClass -1][0]); // job Name
+        info.add(characterClasses[jobClass - 1][1]); // level
+        info.add(Integer.toString(runes));
+        info.add(Integer.toString(maxHealth()));
+
+        return info;
     }
 
     public int maxHealth(){

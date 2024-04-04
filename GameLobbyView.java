@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class GameLobbyView extends JFrame {
     private JLabel titleLabel;
@@ -60,6 +61,12 @@ public class GameLobbyView extends JFrame {
         JPanel sidePanel = new JPanel();
         sidePanel.setPreferredSize(new Dimension(200, getHeight()));
         sidePanel.setBackground(Color.LIGHT_GRAY);
+        sidePanel.setLayout(new GridLayout(0, 1));
+        ArrayList<String> CharInfo = controller.getCharInfo();
+        for (String info : CharInfo){
+            JLabel label = new JLabel(info);
+            sidePanel.add(label);
+        }
         add(sidePanel, BorderLayout.WEST);
 
         // Center the frame on the screen
