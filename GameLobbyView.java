@@ -65,6 +65,7 @@ public class GameLobbyView extends JFrame {
         ArrayList<String> CharInfo = controller.getCharInfo();
         for (String info : CharInfo){
             JLabel label = new JLabel(info);
+            label.setHorizontalAlignment(JLabel.CENTER);
             sidePanel.add(label);
         }
         add(sidePanel, BorderLayout.WEST);

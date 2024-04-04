@@ -202,11 +202,11 @@ public class Character {
     public ArrayList<String> getCharacterInfo(){
         ArrayList<String> info = new ArrayList<String>();
 
-        info.add(characterName);
-        info.add(characterClasses[jobClass -1][0]); // job Name
-        info.add(characterClasses[jobClass - 1][1]); // level
-        info.add(Integer.toString(runes));
-        info.add(Integer.toString(maxHealth()));
+        info.add("Name: " + characterName);
+        info.add("Class: " + characterClasses[jobClass -1][0]); // job Name
+        info.add("Level: " +characterClasses[jobClass - 1][1]); // level
+        info.add("Runes: " + Integer.toString(runes));
+        info.add("Health: " + Integer.toString(maxHealth()));
 
         return info;
     }
