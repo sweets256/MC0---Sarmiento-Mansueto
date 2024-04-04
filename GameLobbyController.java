@@ -24,6 +24,4 @@ public class GameLobbyController {
     public ArrayList<String> getCharInfo(){
         return character.getCharacterInfo();
     }
-
-
 }

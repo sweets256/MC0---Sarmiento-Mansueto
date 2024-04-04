@@ -206,7 +206,7 @@ public class Character {
         info.add("Class: " + characterClasses[jobClass -1][0]); // job Name
         info.add("Level: " +characterClasses[jobClass - 1][1]); // level
         info.add("Runes: " + Integer.toString(runes));
-        info.add("Health: " + Integer.toString(maxHealth()));
+        info.add("Health: " + Integer.toString(maxHealth() + 200));
 
         return info;
     }
