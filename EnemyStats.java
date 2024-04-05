@@ -1,8 +1,14 @@
 import java.util.Random;
 
+/**
+ * The EnemyStats class contains all of the the stats and methods for generating enemy types and bosses for all areas.
+ */
 public class EnemyStats {
+
     /**
      * Stats for enemy type 1 in area 1 and 2
+     * 
+     * @return returns the enemy with its name, health, attack, physical defense, sorcery defense and incantation defense
      */
     public static Enemy generateEnemyType1(int areaIndex) {
         Random rand = new Random();
@@ -23,6 +29,8 @@ public class EnemyStats {
 
     /**
      * Stats for enemy type 2 in area 1 and 2
+     * 
+     * @return returns the enemy with its name, health, attack, physical defense, sorcery defense and incantation defense
      */
     public static Enemy generateEnemyType2(int areaIndex) {
         Random rand = new Random();
@@ -43,6 +51,8 @@ public class EnemyStats {
 
     /**
      * Stats for enemy type 3 in area 1 and 2
+     * 
+     * @return returns the enemy with its name, health, attack, physical defense, sorcery defense and incantation defense
      */
     public static Enemy generateEnemyType3(int areaIndex) {
         Random rand = new Random();
@@ -62,7 +72,9 @@ public class EnemyStats {
     }
 
     /**
-     * Stats for boss in area 1
+     * Stats for boss in area 1.
+     * 
+     * @return returns the boss with its name, health, attack, physical defense, sorcery defense and incantation defense
      */
     public static Enemy generateGodrickBoss() {
         int health = 200;
@@ -77,7 +89,9 @@ public class EnemyStats {
     }
 
     /**
-     * Stats for boss in area 2
+     * Stats for boss in area 2.
+     * 
+     * @return returns the boss with its name, health, attack, physical defense, sorcery defense and incantation defense
      */
     public static Enemy generateNalaBoss() {
         int health = 400;
@@ -92,7 +106,9 @@ public class EnemyStats {
     }
 
     /**
-     * Stats for boss in area 3
+     * Stats for boss in area 3.
+     * 
+     * @return returns the boss with its name, health, attack, physical defense, sorcery defense and incantation defense
      */
     public static Enemy generateEldenBeast() {
         int health = 800;

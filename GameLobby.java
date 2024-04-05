@@ -26,6 +26,10 @@ public class GameLobby {
         initializeWeapons(); // Initialize weapons available for sale
     }
 
+    /**
+     * Checks if areas 1 and 2 are cleared
+     * 
+     */
     private boolean isArea1and2Clear(){
         if (Area1Grid.isAreaDone == true && Area2Grid.isAreaDone == true){
             return areasCleared = true;
