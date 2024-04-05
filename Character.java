@@ -199,6 +199,11 @@ public class Character {
         System.out.println("=====================================");
     }
 
+    /**
+     * Creates an ArrayList<String> called info
+     *
+     * @return arraylist info
+     */
     public ArrayList<String> getCharacterInfo(){
         ArrayList<String> info = new ArrayList<String>();
 
@@ -230,6 +235,11 @@ public class Character {
         return info;
     }
 
+    /**
+     * Checks if a player has a weapon equipped and uses the appropriate calculation to get the origHealth and equates effectiveHealth to it
+     *
+     * @return origHealth
+     */
     public int maxHealth(){
         if (equippedWeapon != null){
             origHealth = (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
@@ -240,6 +250,11 @@ public class Character {
         return origHealth;
     }
 
+    /**
+     * Equates this.effective health to origHealh.
+     *
+     * @param origHealth the calculated value of a player's health based on weapon and player health stat
+     */
     public void setEffectiveHealth(int origHealth){
         this.effectiveHealth = origHealth;
     }
@@ -270,6 +285,11 @@ public class Character {
         System.out.println("Current Health: " + effectiveHealth);
     }
 
+    /**
+     * Gets the effective health of a player.
+     *
+     * @return the effective health
+     */
     public int getEffectiveHealth() {
         return effectiveHealth;
     }
@@ -390,6 +410,11 @@ public class Character {
         return characterName;
     }
 
+    /**
+     * Gets the job class.
+     *
+     * @return the job class
+     */
     public int getJobClass(){
         return jobClass;
     }
@@ -496,6 +521,12 @@ public class Character {
         }
     }
 
+    /**
+     * Sets the character info based on the character name and selected class.
+     *
+     * @param characterName
+     * @param selectedClass
+     */
     public void setCharacter(String characterName, int selectedClass) {
         this.characterName = characterName;
         this.jobClass = selectedClass;
@@ -508,6 +539,11 @@ public class Character {
         this.stats[6] = Integer.parseInt(characterClasses[selectedClass - 1][7]);
     }
 
+    /**
+     * Gets the stats of a player.
+     *
+     * @return stats
+     */
     public int[] getStats(){
         return stats;
     }

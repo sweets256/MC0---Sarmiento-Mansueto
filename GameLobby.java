@@ -17,15 +17,18 @@ public class GameLobby {
     /**
      * Constructs a GameLobby object with the provided Navigation and Character instances.
      *
-     * @param navigation the navigation system of the game
-     * @param player the player character
+     * @param controller instance of the GameLobbyController class
      */
     public GameLobby(GameLobbyController controller) {
         this.controller = controller;
-        this.weaponsForSale = new ArrayList<>(); // Initialize weapons only once
-        initializeWeapons(); // Initialize weapons available for sale
+        this.weaponsForSale = new ArrayList<>();
+        initializeWeapons();
     }
 
+    /**
+     * Checks if areas 1 and 2 are cleared
+     * 
+     */
     private boolean isArea1and2Clear(){
         if (Area1Grid.isAreaDone == true && Area2Grid.isAreaDone == true){
             return areasCleared = true;
@@ -194,7 +197,6 @@ public class GameLobby {
                 System.out.println("None\n");
             }
             
-            // Display inventory
             System.out.println("Weapons in Inventory:");
             List<Weapon> inventory = player.getInventory();
             int i;
@@ -210,39 +212,36 @@ public class GameLobby {
                         ", Cost: " + weapon.getCost() + " runes");
             }
             
-
-            // Pick 1 for weapon select, 2 to go back to GameLobby
             System.out.println("\n[1] Select Weapon");
             System.out.println("[2] Back");
             System.out.print("Enter your choice: ");
             String inputChoice = input.nextLine().trim();
 
 
-            if ("2".equals(inputChoice)) { // Go back to GameLobby
+            if ("2".equals(inputChoice)) {
                 System.out.print("\033\143");
                 return;
-            } else if ("1".equals(inputChoice)) { // Prompts user to pick a weapon to equip
+            } else if ("1".equals(inputChoice)) {
                 System.out.print("\nEnter the index of the weapon to equip: ");
                 int index = Integer.parseInt(input.nextLine().trim()) - 1;
 
-                if (index >= 0 && index < inventory.size()) { // Checks if input is a valid weapon index
+                if (index >= 0 && index < inventory.size()) {
                     Weapon selectedWeapon = inventory.get(index);
-                    if (player.getStatValue(2) >= selectedWeapon.getDexterity()) { // If player dex is >= weapon dex
+                    if (player.getStatValue(2) >= selectedWeapon.getDexterity()) {
                         player.setEquippedWeapon(selectedWeapon);
                         System.out.println("You equipped the " + selectedWeapon.getName() + ".");
                         pauseForMessage();
                         System.out.print("\033\143");
                         continue;
                     } else {
-                        System.out.println("\nYou don't have enough dexterity to equip this weapon."); // If player dex is < weapon dex
+                        System.out.println("\nYou don't have enough dexterity to equip this weapon.");
                     }
                 } else {
-                    System.out.println("\nInvalid weapon index."); // Invalid weapon index
+                    System.out.println("\nInvalid weapon index.");
                 }
             } else {
-                System.out.println("\nInvalid choice."); // Choice is not [1] Select Weapon or [2] Back
+                System.out.println("\nInvalid choice.");
             }
-            // Pause and clear per system message
             pauseForMessage(); 
             System.out.print("\033\143");
         }
@@ -285,22 +284,17 @@ public class GameLobby {
     private void displayAvailableWeapons() {
         System.out.println("===== Weapons Available in the Shop =====");
         System.out.println("\nYou have " + player.getRunes() + " runes");
-    
-        // Define weapon categories and their sizes
+       
         String[] categories = {"Swords", "Katanas", "Whips", "Greatswords", "Staves", "Seals"};
         int[] categorySizes = {4, 4, 4, 4, 4, 4};
-    
-        // Counter for tracking the index in the weapons list
         int weaponIndex = 0;
     
-        // Iterate through categories
         for (int i = 0; i < categories.length; i++) {
             System.out.println("\n---------- " + categories[i] + " ----------");
-    
-            // Iterate through weapons in the category
+
             for (int j = 0; j < categorySizes[i]; j++) {
                 if (weaponIndex >= weaponsForSale.size()) {
-                    break; // Exit loop if all weapons are displayed
+                    break;
                 }
                 Weapon weapon = weaponsForSale.get(weaponIndex++);
                 System.out.println("[" + (weaponIndex) + "] " + weapon.getName() +
@@ -315,7 +309,6 @@ public class GameLobby {
         }
     }
     
-
     /**
      * Allows the player to buy weapons from the shop using their runes.
      * 
@@ -324,7 +317,6 @@ public class GameLobby {
         while (true) {
             displayAvailableWeapons(); 
             
-            // Prompt the player to buy a weapon
             System.out.println("\nEnter the number of the weapon you want to buy, or type 'exit' to leave the shop:");
             String inputChoice = input.nextLine().trim();
     
@@ -340,33 +332,29 @@ public class GameLobby {
                 int weaponChoice = Integer.parseInt(inputChoice);
                 if (weaponChoice >= 1 && weaponChoice <= weaponsForSale.size()) {
                     Weapon selectedWeapon = weaponsForSale.get(weaponChoice - 1);
-                    if (player.getRunes() >= selectedWeapon.getCost()) { // Checker to see if player has enough money
-                        // Player has enough runes to buy the weapon, subtract cost from player runes
+                    if (player.getRunes() >= selectedWeapon.getCost()) {
                         player.setRunes(player.getRunes() - selectedWeapon.getCost());
 
                         System.out.print("\033\143");
-                        System.out.println("You bought the " + selectedWeapon.getName() + "!"); // Weapon bought print
-                        player.addToInventory(selectedWeapon); // Add the weapon to player's inventory
+                        System.out.println("You bought the " + selectedWeapon.getName() + "!");
+                        player.addToInventory(selectedWeapon);
                         pauseForMessage();
                         System.out.print("\033\143");
-    
-                        continue; // Continue shopping, don't go back to game lobby till exit
+                        continue;
                     } else {
                         System.out.print("\033\143");
-                        System.out.println("You don't have enough runes to buy this weapon.\n"); // Player not enough runes
+                        System.out.println("You don't have enough runes to buy this weapon.\n");
                     }
                 } else {
                     System.out.print("\033\143");
-                    System.out.println("Invalid choice. Please select a valid weapon number.\n"); // Invalid weapon index input
+                    System.out.println("Invalid choice. Please select a valid weapon number.\n");
                 }
             } catch (NumberFormatException e) {
                 System.out.print("\033\143");
-                System.out.println("Invalid input. Please enter a valid weapon number or 'exit'.\n"); // Error handling
+                System.out.println("Invalid input. Please enter a valid weapon number or 'exit'.\n");
             }
         }
     }
-
-
 
     /**
      * Displays the current stats of the player character.

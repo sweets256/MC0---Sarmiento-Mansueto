@@ -1,17 +1,5 @@
 public class MainController {
-    //TitleScreenView
-    //Shopview
-    //SelectJobClasView /ok
-    //CharacterCreationView
-    //FastTravelView /ok
-    //GameLobbyView
-    //InventoryView
-    //LevelUpView
-    //Area1View
-    //Area2View
-    //Area3View
-    //BattleView
-
+    
     public TitleController titleController;
     public CharacterCreationController characterCreationController;
     public GameLobbyController gameLobbyController;
@@ -31,9 +19,9 @@ public class MainController {
 
     public void navTo(String controller){   
         switch(controller){
-            case "EXIT" -> titleController.showView(true); //ok na
-            case "CHAR_CREATION" -> characterCreationController.showView(true); //ok na
-            case "GAME_LOBBY" -> gameLobbyController.showView(true); //ok na
+            case "EXIT" -> titleController.showView(true);
+            case "CHAR_CREATION" -> characterCreationController.showView(true);
+            case "GAME_LOBBY" -> gameLobbyController.showView(true);
             // case "FAST_TRAVEL" -> fastTravelController.showView(true); //ok na
             // case "LEVEL_UP" -> levelUpController.showView(true); //ok na
             // case "SHOP" -> shopController.showView(true); //ok na

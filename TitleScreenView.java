@@ -69,8 +69,4 @@ public class TitleScreenView extends JFrame implements ActionListener {
     public void showView(Boolean state){
         setVisible(state);
     }
-   
-
-
-    // view tester
 }
