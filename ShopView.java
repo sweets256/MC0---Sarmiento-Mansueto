@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 /**
  * The ShopView class represents the graphical user interface for the shop screen.
  */
@@ -25,7 +26,6 @@ public class ShopView extends JFrame implements ActionListener {
      * @param controller the shop controller instance
      */
     public ShopView(ShopController controller) {
-
         this.controller = controller;
 
         setTitle("Shop");
@@ -99,22 +99,12 @@ public class ShopView extends JFrame implements ActionListener {
      */
     private void createPageButtons() {
         nextPageButton = new JButton("Next Page");
-        nextPageButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                currentPage++;
-                refreshButtons();
-            }
-        });
-
         prevPageButton = new JButton("Previous Page");
-        prevPageButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                currentPage--;
-                refreshButtons();
-            }
-        });
+        exitButton = new JButton("Exit");
 
-        JButton exitButton = new JButton("Exit");
+        nextPageButton.addActionListener(this);
+        prevPageButton.addActionListener(this);
+        exitButton.addActionListener(this);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -150,27 +140,6 @@ public class ShopView extends JFrame implements ActionListener {
 
         revalidate();
         repaint();
-
-        showView(false);
-        addButtonListener();
-    }
-
-    /**
-     * Adds a listener for the next page button.
-     *
-     * @param listener the ActionListener for the next page button
-     */
-    public void addNextPageButtonListener(ActionListener listener) {
-        nextPageButton.addActionListener(listener);
-    }
-
-    /**
-     * Adds a listener for the previous page button.
-     *
-     * @param listener the ActionListener for the previous page button
-     */
-    public void addPrevPageButtonListener(ActionListener listener) {
-        prevPageButton.addActionListener(listener);
     }
 
     /**
@@ -180,17 +149,16 @@ public class ShopView extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == exitButton) {
+        if (e.getSource() == nextPageButton) {
+            currentPage++;
+            refreshButtons();
+        } else if (e.getSource() == prevPageButton) {
+            currentPage--;
+            refreshButtons();
+        } else if (e.getSource() == exitButton) {
             showView(false);
             controller.finishProcess("GAME_LOBBY");
         }
-    }
-
-    /**
-     * Adds a listener for the exit button.
-     */
-    public void addButtonListener() {
-        exitButton.addActionListener(this);
     }
 
     /**

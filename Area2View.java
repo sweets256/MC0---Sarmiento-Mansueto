@@ -36,7 +36,7 @@ public class Area2View extends JFrame implements ActionListener{
 
         pack();
         setLocationRelativeTo(null);
-        setVisible(true);
+        showView(false);
         addButtonListener();
     }
 
