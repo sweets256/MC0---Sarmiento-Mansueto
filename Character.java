@@ -192,6 +192,11 @@ public class Character {
         System.out.println("=====================================");
     }
 
+    /**
+     * Checks if a player has a weapon equipped and uses the appropriate calculation to get the origHealth and equates effectiveHealth to it
+     *
+     * @return origHealth
+     */
     public int maxHealth(){
         if (equippedWeapon != null){
             origHealth = (100 * (int)Math.floor((stats[0] + getEquippedWeaponHp()) / 2));
