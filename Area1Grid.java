@@ -3,7 +3,7 @@ import java.util.Random;
 
 /**
  * The Area1Grid class represents the grid-based game area in Stormveil Castle.
- * It allows players to navigate through floors, interact with objects, and encounter enemies.
+ * It allows players to navigate through floors, interact with objects, and battle with the mobs and boss.
  */
 public class Area1Grid {
     private static int areaIndex = 1;
@@ -15,7 +15,6 @@ public class Area1Grid {
     private static String[][] currentFloor;
     private static int playerRow = 6;
     private static int playerCol = 2;
-    //private static final Scanner scanner = new Scanner(System.in);
     private static boolean shouldExitArea = false;
     private static String[][] floor1Data = {
         {"|     |", "|  D  |", "|     |"},
@@ -81,7 +80,9 @@ public class Area1Grid {
         {6, 2}
     };
 
-    // Method to reset floor data to its initial state
+    /**
+     * Resets tiles to their original state.
+     */
     private static void resetFloorData() {
         for (int i = 0; i < floor1Data.length; i++) {
             floor1Data[i] = initialfloor1Data[i].clone();
@@ -96,6 +97,8 @@ public class Area1Grid {
 
      /**
      * Starts the area by initializing the floor, player position, and processing player actions.
+     * 
+     * @param input the player's choice
      */
     public static void startArea(Scanner input) {
         character.getEffectiveHealth();
@@ -264,7 +267,7 @@ public class Area1Grid {
             if (encounterChance < 0.75) {
                 System.out.print("\033\143");
                 System.out.println("You encounter an enemy!");
-                // Start battle sequence
+
                 Battle battle = new Battle(character, enemy, areaIndex);
                 battle.startBattle();
                 pauseForMessage();

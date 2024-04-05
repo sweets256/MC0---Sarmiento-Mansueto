@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.util.Random;
 
 /**
- * The Area1Grid class represents the grid-based game area in The Elden Throne.
- * It allows players to navigate through floors, interact with objects, and encounter enemies.
+ * The Area3Grid class represents the grid-based game area in The Elden Throne.
+ * It allows players to navigate through floors, interact with objects, and battle with boss.
  */
 public class Area3Grid {
     private static int areaIndex = 3;
@@ -86,6 +86,9 @@ public class Area3Grid {
         {8, 1}
     };
 
+    /**
+     * Resets tiles to their original state.
+     */
     private static void resetFloorData() {
         for (int i = 0; i < floor1Data.length; i++) {
             floor1Data[i] = initialfloor1Data[i].clone();
@@ -101,6 +104,8 @@ public class Area3Grid {
 
      /**
      * Starts the area by initializing the floor, player position, and processing player actions.
+     * 
+     * @param input the player's choice
      */
     public static void startArea(Scanner input) {
         character.getEffectiveHealth();

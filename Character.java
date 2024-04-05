@@ -242,7 +242,11 @@ public class Character {
         System.out.println("Current Health: " + effectiveHealth);
     }
 
-    
+    /**
+     * Gets the effective health of a player.
+     *
+     * @return the effective health
+     */
     public int getEffectiveHealth() {
         return effectiveHealth;
     }

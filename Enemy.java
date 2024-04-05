@@ -1,3 +1,7 @@
+/**
+ * The Area3Grid class represents the grid-based game area in The Elden Throne.
+ * It allows players to navigate through floors, interact with objects, and battle with boss.
+ */
 public class Enemy {
     private String name;
     private int health;
