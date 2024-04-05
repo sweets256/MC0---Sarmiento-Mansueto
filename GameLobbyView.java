@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * The GameLobbyView class represents the graphical user interface for the game lobby.
  * It displays buttons for various game functions and information about the character.
  */
-public class GameLobbyView extends JFrame {
+public class GameLobbyView extends JFrame implements ActionListener {
     private JLabel titleLabel;
     private JButton fastTravelButton;
     private JButton levelUpButton;
@@ -73,46 +74,35 @@ public class GameLobbyView extends JFrame {
 
         setLocationRelativeTo(null);
         showView(false);
+        addButtonListener();
     }
 
-    /**
-     * Method to add action listener to the fast travel button
-     *
-     */
-    public void addFastTravelButtonListener(ActionListener listener) {
-        fastTravelButton.addActionListener(listener);
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == fastTravelButton){
+            showView(false);
+            controller.finishProcess("FAST_TRAVEL");
+        } else if(e.getSource() == levelUpButton){
+            showView(false);
+            controller.finishProcess("LEVEL_UP");
+        } else if(e.getSource() == inventoryButton){
+            showView(false);
+            controller.finishProcess("INVENTORY");
+        } else if(e.getSource() == shopButton){
+            showView(false);
+            controller.finishProcess("SHOP");
+        } else if(e.getSource() == exitButton){
+            showView(false);
+            controller.finishProcess("TITLE_SCREEN");
+        }
     }
 
-    /**
-     * Method to add action listener to the level up button
-     *
-     */
-    public void addLevelUpButtonListener(ActionListener listener) {
-        levelUpButton.addActionListener(listener);
-    }
-
-    /**
-     * Method to add action listener to the inventory button
-     *
-     */
-    public void addInventoryButtonListener(ActionListener listener) {
-        inventoryButton.addActionListener(listener);
-    }
-
-    /**
-     * Method to add action listener to the shop button
-     *
-     */
-    public void addShopButtonListener(ActionListener listener) {
-        shopButton.addActionListener(listener);
-    }
-
-    /**
-     * Method to add action listener to the exit button
-     *
-     */
-    public void addExitButtonListener(ActionListener listener) {
-        exitButton.addActionListener(listener);
+    public void addButtonListener(){
+        fastTravelButton.addActionListener(this);
+        levelUpButton.addActionListener(this);
+        inventoryButton.addActionListener(this);
+        shopButton.addActionListener(this);
+        exitButton.addActionListener(this);
     }
 
     /**

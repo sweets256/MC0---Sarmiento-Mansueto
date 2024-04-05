@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
  * The InventoryView class represents the graphical user interface
  * for the inventory screen.
  */
-public class InventoryView extends JFrame {
+public class InventoryView extends JFrame implements ActionListener{
     private JLabel titleLabel;
     private JLabel weaponLabel;
     private JTextField chooseWeaponTextField;
@@ -16,11 +16,16 @@ public class InventoryView extends JFrame {
     private JTextArea characterWeaponsArea;
     private JButton backButton;
     private JLabel currentWeaponText;
+    private InventoryController controller;
+
 
     /**
      * Constructs an InventoryView object.
      */
-    public InventoryView() {
+    public InventoryView(InventoryController controller) {
+
+        this.controller = controller;
+        
         setTitle("Inventory");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,7 +42,7 @@ public class InventoryView extends JFrame {
         weaponLabel = new JLabel("Current Weapon: ");
         fieldPanel.add(weaponLabel);
 
-        currentWeaponText = new JLabel("pweter!");
+        currentWeaponText = new JLabel("<Current weapon here>");
         fieldPanel.add(currentWeaponText);
 
         JPanel chooseWeaponPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -64,34 +69,32 @@ public class InventoryView extends JFrame {
 
         setLocationRelativeTo(null);
         showView(false);
-
-        addListeners();
+        addButtonListener();
     }
 
     /**
-     * Adds action listeners to the buttons.
+     * Handles actionPerformed event for the buttons.
+     *
+     * @param e The ActionEvent generated.
      */
-    private void addListeners() {
-        confirmButton.addActionListener(e -> onConfirmButtonClicked());
-        backButton.addActionListener(e -> onBackButtonClicked());
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == confirmButton){
+            showView(false);
+            controller.finishProcess("GAME_LOBBY");
+        } else if (e.getSource() == backButton){
+            showView(false);
+            controller.finishProcess("GAME_LOBBY");
+        }
     }
 
     /**
-     * Handles when the confrim button is clicked.
+     * Adds ActionListener to the buttons.
      */
-    private void onConfirmButtonClicked() {
-        // Add ction for confirm button
-        dispose();
+    public void addButtonListener(){
+        confirmButton.addActionListener(this);
+        backButton.addActionListener(this);
     }
-
-    /**
-     * Handles when the back button is clicked.
-     */
-    private void onBackButtonClicked() {
-        // Add action for back button
-        dispose();
-    }
-
     /**
      * Shows or hides the view.
      *

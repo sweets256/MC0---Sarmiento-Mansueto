@@ -5,12 +5,14 @@
  */
 public class MainController {
     
+    private Character character;
     public TitleController titleController;
     public CharacterCreationController characterCreationController;
     public GameLobbyController gameLobbyController;
     public FastTravelController fastTravelController;
     public LevelUpController levelUpController;
     public ShopController shopController;
+    public InventoryController inventoryController;
 
     /**
      * Constructs a new MainController and initializes the controllers.
@@ -18,10 +20,11 @@ public class MainController {
     public MainController(){
         this.titleController = new TitleController(this);
         this.characterCreationController = new CharacterCreationController(this);
-        // this.gameLobbyController = new GameLobbyController(this);
-        // this.fastTravelController = new FastTravelController(this);
-        // this.levelUpController = new LevelUpController(this);
-        // this.shopController = new ShopController(this);
+        //this.gameLobbyController = new GameLobbyController(this, character);
+        this.fastTravelController = new FastTravelController(this);
+        this.levelUpController = new LevelUpController(this);
+        this.inventoryController = new InventoryController(this);
+        this.shopController = new ShopController(this);
     }
 
     /**
@@ -34,12 +37,13 @@ public class MainController {
             case "EXIT" -> titleController.showView(true);
             case "CHAR_CREATION" -> characterCreationController.showView(true);
             case "GAME_LOBBY" -> gameLobbyController.showView(true);
-            // case "FAST_TRAVEL" -> fastTravelController.showView(true);
-            // case "LEVEL_UP" -> levelUpController.showView(true);
-            // case "SHOP" -> shopController.showView(true);
-            // case "BACK" -> titleController.showView(true);
+            case "FAST_TRAVEL" -> fastTravelController.showView(true);
+            case "LEVEL_UP" -> levelUpController.showView(true);
+            case "INVENTORY" -> inventoryController.showView(true);
+            case "SHOP" -> shopController.showView(true);
+            case "BACK" -> titleController.showView(true);
             // case "AREA_1" -> Area1Controller.showView(true);
-            // case "AREA_2" -> Area2Controller.showView(true);
+            // case "AREA_2" -> Area2Controller.showView(true); 
             // case "AREA_3" -> Area3Controller.showView(true);
             // case "BATTLE" -> BattleController.showView(true);
 

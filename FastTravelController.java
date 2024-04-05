@@ -4,7 +4,7 @@
 public class FastTravelController {
     private MainController mainController;
     private FastTravelView view;
-
+    
     /**
      * Constructs a FastTravelController with the specified main controller.
      * 
