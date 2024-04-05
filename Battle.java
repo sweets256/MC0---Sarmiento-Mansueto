@@ -197,7 +197,7 @@ public class Battle {
      */
     private static void pauseForMessage() {
         try {
-            Thread.sleep(0500);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
