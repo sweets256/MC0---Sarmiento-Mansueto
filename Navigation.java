@@ -22,7 +22,6 @@ public class Navigation implements AreaInteractionListener {
         currentState = GameState.TITLE_SCREEN;
         runGameLoop();
     }
-    
 
     /**
      * Starts the game loop, managing transitions between different game states.
@@ -40,7 +39,6 @@ public class Navigation implements AreaInteractionListener {
                     Area1Grid.setCharacter(player);
                     Area1Grid.setAreaInteractionListener(this);
                     Area1Grid.startArea(obj);
-                    //obj.close();
                     currentState = GameState.GAME_LOBBY;
                     break;
                 case EXIT:
@@ -48,7 +46,6 @@ public class Navigation implements AreaInteractionListener {
                     break;
             }
         }
-        //obj.close();
     }
 
     /**
@@ -101,6 +98,8 @@ public class Navigation implements AreaInteractionListener {
  
     /**
      * Displays the game lobby menu and handles player input.
+     * 
+     * @param player the player
      */
     public void gameLobby(Character player) {
         boolean inGameLobby = true;
@@ -172,7 +171,12 @@ public class Navigation implements AreaInteractionListener {
     public String getCurrentArea() {
         return this.currentArea;
     }
-        
+
+    /**
+     * Handles the player's entrance into an area upon fast travel.
+     *
+     * @param areaName the name of the current area
+     */
     public void enterArea(String areaName) {
         if ("Stormveil Castle".equals(areaName)) {
             Area1Grid.setCharacter(player);
@@ -184,7 +188,6 @@ public class Navigation implements AreaInteractionListener {
             Area3Grid.setCharacter(player);
             Area3Grid.startArea(obj);
         }
-        // Handle other areas similarly
     }
     
     /**
