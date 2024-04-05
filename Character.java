@@ -207,6 +207,11 @@ public class Character {
         return origHealth;
     }
 
+    /**
+     * Equates this.effective health to origHealh.
+     *
+     * @param origHealth the calculated value of a player's health based on weapon and player health stat
+     */
     public void setEffectiveHealth(int origHealth){
         this.effectiveHealth = origHealth;
     }
@@ -237,6 +242,7 @@ public class Character {
         System.out.println("Current Health: " + effectiveHealth);
     }
 
+    
     public int getEffectiveHealth() {
         return effectiveHealth;
     }
