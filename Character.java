@@ -11,7 +11,7 @@ public class Character {
     private String jobClass;
     private int origHealth = 0;
     private int level = 1;
-    private int runes = 100000;
+    private int runes = 0;
     private int[] stats = new int[6];
     private int effectiveHealth = 0;
     private static final String[][] characterClasses = {
