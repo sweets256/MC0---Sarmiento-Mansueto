@@ -5,7 +5,8 @@
  * selecting options in the game lobby to either fast travel, level up, check their inventory, or buy weapons from the
  * Shop. All areas are accesible for this phase of the project via fast travel, in these areas the player will be able to 
  * encounter mobs and battle them as well as find runes whilst exploring and interacting with the map. 
- * However, for the GUI (general user interface) version of the game, the game will only function until the game lobby.
+ * However, for the GUI (general user interface) version of the game, the game will only function until the game lobby 
+ * and it's subsequent screens such as level up, inventory and shop.
  * We will include both the completed 2-D text based version and the incomplete GUI version of the game in the package.
  * 
  * author               MANSUETO, Maria Alyssa S.
