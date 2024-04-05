@@ -1,18 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The view class for Area 1.
  */
-public class Area1View extends JFrame {
+public class Area1View extends JFrame implements ActionListener{
     private JLabel healthLabel;
     private JLabel levelLabel;
     private JLabel runesLabel;
+    private JButton backButton;
+    private AreaController controller;
 
     /**
      * Constructs an Area1View.
      */
-    public Area1View() {
+    public Area1View(AreaController controller) {
+
+        this.controller = controller;
+
         setTitle("Area 1 View");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -31,6 +38,7 @@ public class Area1View extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+        addButtonListener();
     }
 
     /**
@@ -72,6 +80,9 @@ public class Area1View extends JFrame {
         playerStatsPanel.add(levelLabel);
         playerStatsPanel.add(runesLabel);
 
+        backButton = new JButton("Back");
+        playerStatsPanel.add(backButton);
+
         return playerStatsPanel;
     }
 
@@ -104,4 +115,33 @@ public class Area1View extends JFrame {
         {"|     |", "|     |", "|     |", "|     |", "|     |"},
         {"|     |", "|     |", "|  D  |", "|     |", "|     |"}
     };
+
+    /**
+     * Handles actionPerformed event for the buttons.
+     *
+     * @param e The ActionEvent generated.
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == backButton){
+            showView(false);
+            controller.finishProcess("GAME_LOBBY");
+        } 
+    }
+
+    /**
+     * Adds ActionListener to the buttons.
+     */
+    public void addButtonListener(){
+        backButton.addActionListener(this);
+    }
+
+    /**
+     * Shows or hides the view.
+     *
+     * @param state If true, the view is visible; otherwise, it is hidden.
+     */
+    public void showView(Boolean state){
+        setVisible(state);
+    }
 }

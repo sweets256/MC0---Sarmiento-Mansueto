@@ -1,15 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The view class for Area 3.
  */
-public class Area3View extends JFrame {
+public class Area3View extends JFrame implements ActionListener{
+    private JButton backButton;
+    private AreaController controller;
 
     /**
      * Constructs an Area3View.
      */
-    public Area3View() {
+    public Area3View(AreaController controller) {
+
+        this.controller = controller;
+
         setTitle("Map View");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -28,6 +35,7 @@ public class Area3View extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+        addButtonListener();
     }
 
     /**
@@ -69,6 +77,9 @@ public class Area3View extends JFrame {
             playerStatsPanel.add(statLabel);
         }
 
+        backButton = new JButton("Back");
+        playerStatsPanel.add(backButton);
+
         return playerStatsPanel;
     }
 
@@ -105,4 +116,33 @@ public class Area3View extends JFrame {
             {"|  ?  |", "|     |", "|  ?  |",},
             {"|     |", "|  D  |", "|     |",}
     };
+
+    /**
+     * Handles actionPerformed event for the buttons.
+     *
+     * @param e The ActionEvent generated.
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == backButton){
+            showView(false);
+            controller.finishProcess("GAME_LOBBY");
+        } 
+    }
+
+    /**
+     * Adds ActionListener to the buttons.
+     */
+    public void addButtonListener(){
+        backButton.addActionListener(this);
+    }
+
+    /**
+     * Shows or hides the view.
+     *
+     * @param state If true, the view is visible; otherwise, it is hidden.
+     */
+    public void showView(Boolean state){
+        setVisible(state);
+    }
 }

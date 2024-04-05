@@ -13,6 +13,7 @@ public class MainController {
     public LevelUpController levelUpController;
     public ShopController shopController;
     public InventoryController inventoryController;
+    public AreaController areaController;
 
     /**
      * Constructs a new MainController and initializes the controllers.
@@ -25,6 +26,7 @@ public class MainController {
         this.levelUpController = new LevelUpController(this);
         this.inventoryController = new InventoryController(this);
         this.shopController = new ShopController(this);
+        this.areaController = new AreaController(this);
     }
 
     /**
@@ -42,9 +44,9 @@ public class MainController {
             case "INVENTORY" -> inventoryController.showView(true);
             case "SHOP" -> shopController.showView(true);
             case "BACK" -> titleController.showView(true);
-            // case "AREA_1" -> Area1Controller.showView(true);
-            // case "AREA_2" -> Area2Controller.showView(true); 
-            // case "AREA_3" -> Area3Controller.showView(true);
+            case "AREA_1" -> areaController.showView(true);
+            case "AREA_2" -> areaController.showView(true); 
+            case "AREA_3" -> areaController.showView(true);
             // case "BATTLE" -> BattleController.showView(true);
 
         }
