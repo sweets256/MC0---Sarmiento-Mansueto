@@ -3,7 +3,6 @@
  * getters and setters stats of a weapon such as the name, cost and different stats, 
  * namely the hp, endurance, dexterity, strength, intelligence and faith of a weapon.
  */
-
 public class Weapon {
     private String name;
     private int dexterity;
