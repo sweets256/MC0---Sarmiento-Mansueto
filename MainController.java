@@ -44,9 +44,9 @@ public class MainController {
             case "INVENTORY" -> inventoryController.showView(true);
             case "SHOP" -> shopController.showView(true);
             case "BACK" -> titleController.showView(true);
-            case "AREA_1" -> areaController.showView(true);
-            case "AREA_2" -> areaController.showView(true); 
-            case "AREA_3" -> areaController.showView(true);
+            case "AREA_1" -> areaController.showView1(true);
+            case "AREA_2" -> areaController.showView2(true); 
+            case "AREA_3" -> areaController.showView3(true);
             // case "BATTLE" -> BattleController.showView(true);
 
         }

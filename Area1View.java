@@ -37,7 +37,7 @@ public class Area1View extends JFrame implements ActionListener{
 
         pack();
         setLocationRelativeTo(null);
-        showView(false);
+        showView1(false);
         addButtonListener();
     }
 
@@ -124,7 +124,7 @@ public class Area1View extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backButton){
-            showView(false);
+            showView1(false);
             controller.finishProcess("GAME_LOBBY");
         } 
     }
@@ -141,7 +141,7 @@ public class Area1View extends JFrame implements ActionListener{
      *
      * @param state If true, the view is visible; otherwise, it is hidden.
      */
-    public void showView(Boolean state){
+    public void showView1(Boolean state){
         setVisible(state);
     }
 }

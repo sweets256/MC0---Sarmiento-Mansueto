@@ -34,7 +34,7 @@ public class AreaController {
      * @param state true to show the view, false to hide it
      */
     public void showView1(Boolean state) {
-        view1.showView(state);
+        view1.showView1(state);
     }
 
     /**
@@ -43,7 +43,7 @@ public class AreaController {
      * @param state true to show the view, false to hide it
      */
     public void showView2(Boolean state) {
-        view2.showView(state);
+        view2.showView2(state);
     }
 
     /**
@@ -52,6 +52,6 @@ public class AreaController {
      * @param state true to show the view, false to hide it
      */
     public void showView3(Boolean state) {
-        view3.showView(state);
+        view3.showView3(state);
     }
 }
