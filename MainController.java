@@ -1,12 +1,20 @@
+/**
+ * The MainController class manages navigation between different screens
+ * and controllers in the application. It serves as the central hub for
+ * controlling the flow of the program.
+ */
 public class MainController {
     
     public TitleController titleController;
     public CharacterCreationController characterCreationController;
     public GameLobbyController gameLobbyController;
-    public FastTravelController fastTravelController; 
+    public FastTravelController fastTravelController;
     public LevelUpController levelUpController;
     public ShopController shopController;
 
+    /**
+     * Constructs a new MainController and initializes the controllers.
+     */
     public MainController(){
         this.titleController = new TitleController(this);
         this.characterCreationController = new CharacterCreationController(this);
@@ -16,16 +24,20 @@ public class MainController {
         // this.shopController = new ShopController(this);
     }
 
-
+    /**
+     * Navigates to the specified controller.
+     *
+     * @param controller the controller to navigate to
+     */
     public void navTo(String controller){   
         switch(controller){
             case "EXIT" -> titleController.showView(true);
             case "CHAR_CREATION" -> characterCreationController.showView(true);
             case "GAME_LOBBY" -> gameLobbyController.showView(true);
-            // case "FAST_TRAVEL" -> fastTravelController.showView(true); //ok na
-            // case "LEVEL_UP" -> levelUpController.showView(true); //ok na
-            // case "SHOP" -> shopController.showView(true); //ok na
-            // case "BACK" -> titleController.showView(true); //ok na
+            // case "FAST_TRAVEL" -> fastTravelController.showView(true);
+            // case "LEVEL_UP" -> levelUpController.showView(true);
+            // case "SHOP" -> shopController.showView(true);
+            // case "BACK" -> titleController.showView(true);
             // case "AREA_1" -> Area1Controller.showView(true);
             // case "AREA_2" -> Area2Controller.showView(true);
             // case "AREA_3" -> Area3Controller.showView(true);
@@ -33,6 +45,12 @@ public class MainController {
 
         }
     }
+
+    /**
+     * Creates a game lobby with the specified character and navigates to it.
+     *
+     * @param character the character for the game lobby
+     */
     public void createGameLobby(Character character){
         this.gameLobbyController = new GameLobbyController(this, character);
         navTo("GAME_LOBBY");

@@ -1,13 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The view class for Area 2.
+ */
 public class Area2View extends JFrame {
 
+    /**
+     * Constructs an Area2View.
+     */
     public Area2View() {
         setTitle("Map View");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Create tabbed pane for floors
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Floor 1", createMapPanel(floor1Data));
         tabbedPane.addTab("Floor 2", createMapPanel(floor2Data));
@@ -15,12 +20,10 @@ public class Area2View extends JFrame {
         tabbedPane.addTab("Floor 4", createMapPanel(floor4Data));
         tabbedPane.addTab("Floor 5", createMapPanel(floor5Data));
 
-        // Create panel for player stats
         JPanel playerStatsPanel = createPlayerStatsPanel();
 
-        // Create split pane to divide frame into map view and player stats panel
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tabbedPane, playerStatsPanel);
-        splitPane.setResizeWeight(0.875); // Map view occupies 7/8 of the width
+        splitPane.setResizeWeight(0.875);
         splitPane.setContinuousLayout(true);
         getContentPane().add(splitPane);
 
@@ -29,7 +32,12 @@ public class Area2View extends JFrame {
         setVisible(true);
     }
 
-    // Method to create a panel for a floor with given map data
+    /**
+     * Creates a panel displaying the map.
+     * 
+     * @param mapData The data representing the map.
+     * @return A panel displaying the map.
+     */
     private JPanel createMapPanel(String[][] mapData) {
         JPanel mapPanel = new JPanel(new GridLayout(mapData.length, mapData[0].length));
         mapPanel.setPreferredSize(new Dimension(50 * mapData[0].length, 50 * mapData.length));
@@ -45,15 +53,18 @@ public class Area2View extends JFrame {
         return mapPanel;
     }
 
-    // Method to create player stats panel
+    /**
+     * Creates a panel displaying player stats.
+     * 
+     * @return A panel displaying player stats.
+     */
     private JPanel createPlayerStatsPanel() {
         JPanel playerStatsPanel = new JPanel(new GridLayout(4, 1));
-        playerStatsPanel.setPreferredSize(new Dimension(200, getHeight())); // Adjust width as needed
+        playerStatsPanel.setPreferredSize(new Dimension(200, getHeight()));
 
         JLabel titleLabel = new JLabel("Player Stats", SwingConstants.CENTER);
         playerStatsPanel.add(titleLabel);
 
-        // Create and add player stats labels
         String[] statLabels = {"Health:", "Level:", "Runes:"};
         for (String label : statLabels) {
             JLabel statLabel = new JLabel(label, SwingConstants.CENTER);
@@ -63,7 +74,6 @@ public class Area2View extends JFrame {
         return playerStatsPanel;
     }
 
-    // Sample map data
     private static String[][] floor1Data = {
             {"|     |", "|     |", "|  F  |", "|     |", "|     |"},
             {"|     |", "|     |", "|     |", "|     |", "|     |"},

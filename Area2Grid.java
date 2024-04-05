@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 /**
- * The Area1Grid class represents the grid-based game area in Raya Lucaria Academy.
+ * The Area2Grid class represents the grid-based game area in Raya Lucaria Academy.
  * It allows players to navigate through floors, interact with objects, and encounter enemies.
  */
 public class Area2Grid {
@@ -15,7 +15,6 @@ public class Area2Grid {
     private static String[][] currentFloor;
     private static int playerRow = 0;
     private static int playerCol = 2;
-    //private static final Scanner scanner = new Scanner(System.in);
     private static boolean shouldExitArea = false;
     private static String[][] floor1Data = {
         {"|     |", "|     |", "|  F  |", "|     |", "|     |"},
@@ -108,7 +107,10 @@ public class Area2Grid {
         {0, 1},
         {7, 3}
     };
-
+    
+    /**
+     * Resets the floor data to its initial state by copying the initial floor data arrays to the current floor data arrays.
+     */
     private static void resetFloorData() {
         for (int i = 0; i < floor1Data.length; i++) {
             floor1Data[i] = initialfloor1Data[i].clone();

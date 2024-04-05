@@ -4,18 +4,26 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ShopView extends JFrame implements ActionListener{
+/**
+ * The ShopView class represents the graphical user interface for the shop screen.
+ */
+public class ShopView extends JFrame implements ActionListener {
     private JLabel titleLabel;
     private JLabel playerRunesLabel;
     private JButton[] shopButtons;
     private JButton nextPageButton;
     private JButton prevPageButton;
     private JButton exitButton;
-    private int currentPage = 0; // Current page index
-    private int itemsPerPage = 4; // Number of items per page
-    private int totalButtons = 24; // Total number of buttons
+    private int currentPage = 0;
+    private int itemsPerPage = 4;
+    private int totalButtons = 24;
     private ShopController controller;
 
+    /**
+     * Constructs a new ShopView with a reference to the shop controller.
+     *
+     * @param controller the shop controller instance
+     */
     public ShopView(ShopController controller) {
 
         this.controller = controller;
@@ -25,40 +33,40 @@ public class ShopView extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Create and center the title label
         titleLabel = new JLabel("Shop", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         add(titleLabel, BorderLayout.NORTH);
 
-        // Create panel for buttons with padding
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 10)); // 1 row, 4 columns, with 10px horizontal and vertical gap
-        buttonPanel.setBorder(new EmptyBorder(20, 50, 20, 50)); // Add padding
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 10));
+        buttonPanel.setBorder(new EmptyBorder(20, 50, 20, 50));
         add(buttonPanel, BorderLayout.CENTER);
 
-        // Load and resize image icons
         shopButtons = new JButton[itemsPerPage];
         for (int i = 0; i < itemsPerPage; i++) {
-            // Create button with image icon
             ImageIcon icon = resizeImageIcon("image_" + (i + 1) + ".png", 200, 500);
             if (icon != null) {
                 shopButtons[i] = createImageButton(icon);
-                buttonPanel.add(shopButtons[i]); // Add button to panel
+                buttonPanel.add(shopButtons[i]);
             }
         }
 
-        // Create and add player runes label
         playerRunesLabel = new JLabel("Player Runes: ", SwingConstants.CENTER);
         add(playerRunesLabel, BorderLayout.SOUTH);
 
-        // Create next and previous page buttons
         createPageButtons();
 
-        // Center the frame on the screen
         setLocationRelativeTo(null);
         showView(false);
     }
 
-    // Method to resize image icon
+    /**
+     * Resizes the specified image icon to the given dimensions.
+     *
+     * @param imagePath the path of the image
+     * @param width     the desired width
+     * @param height    the desired height
+     * @return the resized image icon
+     */
     private ImageIcon resizeImageIcon(String imagePath, int width, int height) {
         try {
             ImageIcon icon = new ImageIcon(imagePath);
@@ -71,17 +79,24 @@ public class ShopView extends JFrame implements ActionListener{
         }
     }
 
-    // Method to create image button
+    /**
+     * Creates a button with the specified image icon.
+     *
+     * @param icon the image icon for the button
+     * @return the created button
+     */
     private JButton createImageButton(ImageIcon icon) {
         JButton button = new JButton(icon);
-        button.setText(null); // Set text to null to remove it
-        button.setContentAreaFilled(false); // Make the button transparent
-        button.setBorderPainted(false); // Remove the border
-        button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight())); // Set preferred size to match image dimensions
+        button.setText(null);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
         return button;
     }
 
-    // Create next and previous page buttons along with an exit button
+    /**
+     * Creates next and previous page buttons along with an exit button.
+     */
     private void createPageButtons() {
         nextPageButton = new JButton("Next Page");
         nextPageButton.addActionListener(new ActionListener() {
@@ -99,14 +114,11 @@ public class ShopView extends JFrame implements ActionListener{
             }
         });
 
-        // Exit button
         JButton exitButton = new JButton("Exit");
 
-
-        // Add next and previous page buttons to bottom panel based on current page
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Align buttons to the left
-        bottomPanel.add(exitButton); // Add exit button
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        bottomPanel.add(exitButton);
         if (currentPage > 0) {
             bottomPanel.add(prevPageButton);
         }
@@ -116,13 +128,12 @@ public class ShopView extends JFrame implements ActionListener{
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
-
-    // Refresh buttons based on current page
+    /**
+     * Refreshes the buttons based on the current page.
+     */
     private void refreshButtons() {
-        // Remove existing buttons
         getContentPane().removeAll();
 
-        // Add components again
         add(titleLabel, BorderLayout.NORTH);
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 10));
         buttonPanel.setBorder(new EmptyBorder(20, 50, 20, 50));
@@ -137,7 +148,6 @@ public class ShopView extends JFrame implements ActionListener{
         add(playerRunesLabel, BorderLayout.SOUTH);
         createPageButtons();
 
-        // Refresh the frame
         revalidate();
         repaint();
 
@@ -145,30 +155,50 @@ public class ShopView extends JFrame implements ActionListener{
         addButtonListener();
     }
 
-    // Method to add listener for next page button
+    /**
+     * Adds a listener for the next page button.
+     *
+     * @param listener the ActionListener for the next page button
+     */
     public void addNextPageButtonListener(ActionListener listener) {
         nextPageButton.addActionListener(listener);
     }
 
-    // Method to add listener for previous page button
+    /**
+     * Adds a listener for the previous page button.
+     *
+     * @param listener the ActionListener for the previous page button
+     */
     public void addPrevPageButtonListener(ActionListener listener) {
         prevPageButton.addActionListener(listener);
     }
 
+    /**
+     * Handles actions performed on buttons.
+     *
+     * @param e the ActionEvent object
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == exitButton){
+        if (e.getSource() == exitButton) {
             showView(false);
             controller.finishProcess("GAME_LOBBY");
-        } 
+        }
     }
 
-    public void addButtonListener(){
+    /**
+     * Adds a listener for the exit button.
+     */
+    public void addButtonListener() {
         exitButton.addActionListener(this);
     }
 
-
-    public void showView(Boolean state){
+    /**
+     * Displays or hides the shop view.
+     *
+     * @param state true to show the view, false to hide it
+     */
+    public void showView(Boolean state) {
         setVisible(state);
     }
 }

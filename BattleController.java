@@ -1,23 +1,35 @@
+/**
+ * Controller class for managing battles.
+ */
 public class BattleController {
     private MainController mainController;
     private BattleView view;
-    private Battle battle;
-    private Character character;
-    private Area1Grid area1;
-    private Area2Grid area2;
-    private Area3Grid area3;
 
+    /**
+     * Constructs a BattleController with the specified main controller.
+     * 
+     * @param mainController The main controller of the application.
+     */
     public BattleController(MainController mainController) {
         this.mainController = mainController;
         this.view = new BattleView(this);
     }
 
-    public void showView(Boolean state){
+    /**
+     * Displays or hides the battle view.
+     * 
+     * @param state The state indicating whether to show or hide the view.
+     */
+    public void showView(Boolean state) {
         view.showView(state);
     }
 
-    public void finishProcess(String controller){
+    /**
+     * Signals the completion of a process to the main controller.
+     * 
+     * @param controller The controller to navigate to after finishing the process.
+     */
+    public void finishProcess(String controller) {
         mainController.navTo(controller);
-        
     }
 }

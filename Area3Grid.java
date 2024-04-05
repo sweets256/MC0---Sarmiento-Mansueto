@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 /**
- * The Area1Grid class represents the grid-based game area in The Elden Throne.
+ * The Area3Grid class represents the grid-based game area in The Elden Throne.
  * It allows players to navigate through floors, interact with objects, and encounter enemies.
  */
 public class Area3Grid {
@@ -86,6 +86,9 @@ public class Area3Grid {
         {8, 1}
     };
 
+    /**
+     * Resets the floor data to its initial state by copying the initial floor data arrays to the current floor data arrays.
+     */
     private static void resetFloorData() {
         for (int i = 0; i < floor1Data.length; i++) {
             floor1Data[i] = initialfloor1Data[i].clone();

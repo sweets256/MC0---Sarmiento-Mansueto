@@ -2,7 +2,10 @@ import java.util.Random;
 
 public class EnemyStats {
     /**
-     * Stats for enemy type 1 in area 1 and 2
+     * Generates stats for enemy type 1 in area 1 and 2.
+     *
+     * @param areaIndex The index of the area.
+     * @return An Enemy object with generated stats.
      */
     public static Enemy generateEnemyType1(int areaIndex) {
         Random rand = new Random();
@@ -22,7 +25,10 @@ public class EnemyStats {
     }
 
     /**
-     * Stats for enemy type 2 in area 1 and 2
+     * Generates stats for enemy type 2 in area 1 and 2.
+     *
+     * @param areaIndex The index of the area.
+     * @return An Enemy object with generated stats.
      */
     public static Enemy generateEnemyType2(int areaIndex) {
         Random rand = new Random();
@@ -42,7 +48,10 @@ public class EnemyStats {
     }
 
     /**
-     * Stats for enemy type 3 in area 1 and 2
+     * Generates stats for enemy type 3 in area 1 and 2.
+     *
+     * @param areaIndex The index of the area.
+     * @return An Enemy object with generated stats.
      */
     public static Enemy generateEnemyType3(int areaIndex) {
         Random rand = new Random();
@@ -62,7 +71,9 @@ public class EnemyStats {
     }
 
     /**
-     * Stats for boss in area 1
+     * Generates stats for the boss in area 1.
+     *
+     * @return An Enemy object with generated stats.
      */
     public static Enemy generateGodrickBoss() {
         int health = 200;
@@ -77,7 +88,9 @@ public class EnemyStats {
     }
 
     /**
-     * Stats for boss in area 2
+     * Generates stats for the boss in area 2.
+     *
+     * @return An Enemy object with generated stats.
      */
     public static Enemy generateNalaBoss() {
         int health = 400;
@@ -92,7 +105,9 @@ public class EnemyStats {
     }
 
     /**
-     * Stats for boss in area 3
+     * Generates stats for the boss in area 3.
+     *
+     * @return An Enemy object with generated stats.
      */
     public static Enemy generateEldenBeast() {
         int health = 800;

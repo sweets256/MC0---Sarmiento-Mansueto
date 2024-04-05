@@ -4,12 +4,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The TitleScreenView class formats the GUI of the title screen 
+ * and contains all of the java swing functions, it also serves as
+ * the View portion as part of the MVC (model, view, controller)
+ * architecture for GUI
+ */
 public class TitleScreenView extends JFrame implements ActionListener {
     private JLabel titleLabel;
     private JButton startButton;
     private JButton exitButton;
     private TitleController controller;
 
+    /**
+     * Constructs a new TitleScreenView with a reference to the title controller.
+     *
+     * @param controller the title controller instance
+     */
     public TitleScreenView(TitleController controller) {
 
         this.controller = controller;
@@ -19,36 +30,35 @@ public class TitleScreenView extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // center title
         titleLabel = new JLabel("Elden Rogue", SwingConstants.CENTER);
         titleLabel.setBorder(new EmptyBorder(70, 170, 0, 170));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 50));
         add(titleLabel, BorderLayout.NORTH);
 
-        // button panel with padding
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 0, 20));
-        buttonPanel.setBorder(new EmptyBorder(30, 200, 100, 200)); // Add padding
+        buttonPanel.setBorder(new EmptyBorder(30, 200, 100, 200));
         add(buttonPanel, BorderLayout.CENTER);
 
-        // start button
         startButton = new JButton("Start");
         startButton.setFont(new Font("Arial", Font.BOLD, 30));
-        startButton.setPreferredSize(new Dimension(80, 30)); // Set preferred size
+        startButton.setPreferredSize(new Dimension(80, 30));
         buttonPanel.add(startButton);
 
-        // exit button
         exitButton = new JButton("Exit");
         exitButton.setFont(new Font("Arial", Font.BOLD, 30));
-        exitButton.setPreferredSize(new Dimension(80, 30)); // Set preferred size
+        exitButton.setPreferredSize(new Dimension(80, 30));
         buttonPanel.add(exitButton);
 
-
-        // center frame
         setLocationRelativeTo(null);
         showView(true);
         addButtonListener();
     }
 
+    /**
+     * Handles actionPerformed event for the buttons.
+     *
+     * @param e The ActionEvent generated.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startButton){
@@ -60,12 +70,19 @@ public class TitleScreenView extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Adds ActionListener to the buttons.
+     */
     public void addButtonListener(){
         startButton.addActionListener(this);
         exitButton.addActionListener(this);
     }
 
-
+    /**
+     * Shows or hides the view.
+     *
+     * @param state If true, the view is visible; otherwise, it is hidden.
+     */
     public void showView(Boolean state){
         setVisible(state);
     }

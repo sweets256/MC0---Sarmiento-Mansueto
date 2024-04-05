@@ -4,7 +4,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FastTravelView extends JFrame implements ActionListener{
+/**
+ * The view class for fast travel functionality.
+ */
+public class FastTravelView extends JFrame implements ActionListener {
     private JLabel titleLabel;
     private JButton area1Button;
     private JButton area2Button;
@@ -12,6 +15,11 @@ public class FastTravelView extends JFrame implements ActionListener{
     private JButton backButton;
     private FastTravelController controller;
 
+    /**
+     * Constructs a FastTravelView with the specified controller.
+     * 
+     * @param controller The controller associated with this view.
+     */
     public FastTravelView(FastTravelController controller) {
 
         this.controller = controller;
@@ -21,37 +29,30 @@ public class FastTravelView extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Create and center the title label
         titleLabel = new JLabel("Fast Travel", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         add(titleLabel, BorderLayout.NORTH);
 
-        // Create panel for buttons with padding
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1, 0, 10));
-        buttonPanel.setBorder(new EmptyBorder(20, 200, 20, 200)); // Add padding
+        buttonPanel.setBorder(new EmptyBorder(20, 200, 20, 200));
         add(buttonPanel, BorderLayout.CENTER);
 
-        // Create and center area 1 button
         area1Button = new JButton("Area 1");
-        area1Button.setPreferredSize(new Dimension(150, 30)); // Set preferred size
+        area1Button.setPreferredSize(new Dimension(150, 30));
         buttonPanel.add(area1Button);
 
-        // Create and center area 2 button
         area2Button = new JButton("Area 2");
-        area2Button.setPreferredSize(new Dimension(150, 30)); // Set preferred size
+        area2Button.setPreferredSize(new Dimension(150, 30));
         buttonPanel.add(area2Button);
 
-        // Create and center area 3 button
         area3Button = new JButton("Area 3");
-        area3Button.setPreferredSize(new Dimension(150, 30)); // Set preferred size
+        area3Button.setPreferredSize(new Dimension(150, 30));
         buttonPanel.add(area3Button);
 
-        // Create and back button
         backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(150, 30)); // Set preferred size
+        backButton.setPreferredSize(new Dimension(150, 30));
         buttonPanel.add(backButton);
 
-        // Center the frame on the screen
         setLocationRelativeTo(null);
         showView(false);
         addButtonListener();
@@ -74,6 +75,9 @@ public class FastTravelView extends JFrame implements ActionListener{
         }
     }
 
+    /**
+     * Adds action listeners to the buttons.
+     */
     public void addButtonListener(){
         area1Button.addActionListener(this);
         area2Button.addActionListener(this);
@@ -81,8 +85,12 @@ public class FastTravelView extends JFrame implements ActionListener{
         backButton.addActionListener(this);
     }
 
+    /**
+     * Displays or hides the view.
+     * 
+     * @param state The state indicating whether to show or hide the view.
+     */
     public void showView(Boolean state){
         setVisible(state);
     }
-
 }
