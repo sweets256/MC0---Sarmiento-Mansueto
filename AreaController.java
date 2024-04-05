@@ -33,9 +33,25 @@ public class AreaController {
      *
      * @param state true to show the view, false to hide it
      */
-    public void showView(Boolean state) {
+    public void showView1(Boolean state) {
         view1.showView(state);
+    }
+
+    /**
+     * Shows or hides the title screen view based on the provided state.
+     *
+     * @param state true to show the view, false to hide it
+     */
+    public void showView2(Boolean state) {
         view2.showView(state);
+    }
+
+    /**
+     * Shows or hides the title screen view based on the provided state.
+     *
+     * @param state true to show the view, false to hide it
+     */
+    public void showView3(Boolean state) {
         view3.showView(state);
     }
 }
